@@ -6,6 +6,10 @@ export const cssObj = {
   wrapper: css`
     padding: 2rem 0;
     border-bottom: 1px solid ${COLOR.GRAY200};
+    :last-of-type {
+      padding: 2rem 0 0 0;
+      border-bottom: none;
+    }
   `,
 
   headerWrapper: css`

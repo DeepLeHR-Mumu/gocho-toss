@@ -92,7 +92,9 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
     }
 
     if (e.key === "ArrowDown") {
-      setFocusedIndex(focusedIndex < certificationList.data.length - 1 ? focusedIndex + 1 : 0);
+      setFocusedIndex(
+        focusedIndex < certificationList.data.length - 1 ? focusedIndex + 1 : certificationList.data.length - 1
+      );
     }
 
     if (e.key === "Enter") {
@@ -134,7 +136,7 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
           onFocus={() => setIsFocusing(true)}
           value={keyword}
         />
-        {isChanged && isFocusing && debouncedKeyward.length > 0 && (
+        {isChanged && isFocusing && certificationList?.data.length && debouncedKeyward.length > 0 && (
           <div css={cssObj.keywordWrapper} ref={searchRef}>
             {certificationList?.data.map((certi, index) => (
               <button
