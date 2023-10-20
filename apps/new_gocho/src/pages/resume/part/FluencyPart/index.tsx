@@ -5,13 +5,9 @@ import { useResumeFluencyArr } from "@/apis/resume";
 import { ListCard } from "../../component";
 import { FluencyForm, FluencyList } from "./component";
 import { SelectorResumeFluency } from "@/apis/resume/fluency/useResumeFluency/type";
+import { FluencyPartProps } from "./type";
 
-interface FluencyPartProps {
-  userId: number;
-  resumeId: number;
-}
-
-export const FluencyPart: FC<FluencyPartProps> = ({ userId, resumeId }) => {
+export const FluencyPart: FC<FluencyPartProps> = ({ resumeId }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [currentFluency, setCurrentFluency] = useState<SelectorResumeFluency>();
 
@@ -29,7 +25,7 @@ export const FluencyPart: FC<FluencyPartProps> = ({ userId, resumeId }) => {
 
   return (
     <div>
-      <ListCard title="어학" userId={userId} iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+      <ListCard title="어학" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
         {editMode ? (
           <FluencyForm resumeId={resumeId} handleEditMode={handleEditMode} currentFluency={currentFluency} />
         ) : (

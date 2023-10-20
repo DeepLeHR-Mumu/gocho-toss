@@ -7,7 +7,7 @@ import { ListCard } from "../../component";
 import { ActivityList, ActivityForm } from "./component";
 import { ActivityPartProps } from "./type";
 
-export const ActivityPart: FC<ActivityPartProps> = ({ userId, resumeId }) => {
+export const ActivityPart: FC<ActivityPartProps> = ({ resumeId }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [currentActivity, setCurrentActivity] = useState<SelectorResumeActivity>();
 
@@ -25,7 +25,7 @@ export const ActivityPart: FC<ActivityPartProps> = ({ userId, resumeId }) => {
 
   return (
     <div>
-      <ListCard title="대외활동" userId={userId} iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+      <ListCard title="대외활동" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
         {editMode ? (
           <ActivityForm handleEditMode={handleEditMode} resumeId={resumeId} currentActivity={currentActivity} />
         ) : (

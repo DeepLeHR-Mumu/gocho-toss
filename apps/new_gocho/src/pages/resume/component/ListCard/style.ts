@@ -5,7 +5,6 @@ import { TEXT } from "shared-style/text";
 export const cssObj = {
   wrapper: css`
     padding: 2rem;
-    width: 100%;
     background-color: ${COLOR.WHITE};
     border: 1px solid ${COLOR.GRAY200};
     border-radius: 1rem;

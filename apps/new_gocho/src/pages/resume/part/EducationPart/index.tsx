@@ -1,37 +1,25 @@
-import { ListCard, ListItem } from "../../component";
+import { FC, useState } from "react";
 
-const itemProps = [
-  {
-    title: "짱치바고등학교",
-    titleDes: "고등학교",
-    desciption: "기계공학부",
-    date: ["2018.09", "2021.02"],
-  },
-  {
-    title: "디플에이치알공업대학교",
-    titleDes: "대학교(2년제)",
-    desciption: "얼마나 다녔겠어요~",
-    date: ["2020.09", "2022.03"],
-  },
-  {
-    title: "서울대학교",
-    titleDes: "대학교(4년제)",
-    isUturn: true,
-    desciption: "얼마나 다녔겠어요~",
-    date: ["2020.09"],
-  },
-];
+// import { useResumeEducationArr } from "@/apis/resume/education/useResumeEducationArr";
 
-export const EducationPart = () => {
-  // TODO: 유저아이디 가져오기
-  const userId = 12;
+import { ListCard } from "../../component";
+import { EducationForm, EducationList } from "./component";
+
+interface EducationPartProps {
+  resumeId: number;
+}
+
+export const EducationPart: FC<EducationPartProps> = ({ resumeId }) => {
+  // const { data: myEducationList } = useResumeEducationArr(resumeId);
+
+  const [editMode, setEditMode] = useState(false);
+
+  const handleEditMode = () => setEditMode(!editMode);
 
   return (
     <div>
-      <ListCard title="학력" isRequired userId={userId}>
-        {itemProps.map((obj) => (
-          <ListItem key={obj.title} {...obj} />
-        ))}
+      <ListCard title="학력" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+        {editMode ? <EducationForm resumeId={resumeId} handleEditMode={handleEditMode} /> : <EducationList />}
       </ListCard>
     </div>
   );

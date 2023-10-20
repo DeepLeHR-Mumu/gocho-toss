@@ -12,7 +12,7 @@ import {
 } from "./type";
 
 export const postResumeHighSchool: PostResumeHighSchoolDef = async ({ resumeId, ...requestObj }) => {
-  const { data } = await axiosInstance.post(`/resumes/${resumeId}/educations/highschools`, { ...requestObj });
+  const { data } = await axiosInstance.post(`/resumes/${resumeId}/educations/highschools`, requestObj);
   return data;
 };
 

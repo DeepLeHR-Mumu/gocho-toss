@@ -1,5 +1,4 @@
 export interface ListCardProps {
-  userId: number;
   title: string;
   children: React.ReactNode;
   iconType?: "add" | "edit" | "none";

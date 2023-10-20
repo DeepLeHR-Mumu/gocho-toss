@@ -25,11 +25,11 @@ const ResumePage: NextPage = () => {
         <div css={cssObj.contentsWrapper}>
           <div css={cssObj.mainContentsWrapper}>
             <ProfilePart userId={userData.id} />
-            <EducationPart />
+            <EducationPart resumeId={resumeId} />
             <CareerPart />
-            <CertificationPart resumeId={resumeId} userId={userData.id} />
-            <FluencyPart resumeId={resumeId} userId={userData.id} />
-            <ActivityPart userId={userData.id} resumeId={resumeId} />
+            <CertificationPart resumeId={resumeId} />
+            <FluencyPart resumeId={resumeId} />
+            <ActivityPart resumeId={resumeId} />
           </div>
           <div css={cssObj.sideContentsWrapper}>
             <SidePart />

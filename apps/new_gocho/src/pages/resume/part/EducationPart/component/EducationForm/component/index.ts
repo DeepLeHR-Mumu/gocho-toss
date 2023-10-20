@@ -1,0 +1,1 @@
+export { HighSchoolForm } from "./HighSchoolForm";

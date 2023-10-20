@@ -7,7 +7,7 @@ import { ListCard } from "../../component";
 import { CertificationForm, CertificationList } from "./component";
 import { CertificationPartProps } from "./type";
 
-export const CertificationPart: FC<CertificationPartProps> = ({ userId, resumeId }) => {
+export const CertificationPart: FC<CertificationPartProps> = ({ resumeId }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [currentCertification, setCurrentCertification] = useState<SelectorResumeCertification>();
 
@@ -25,7 +25,7 @@ export const CertificationPart: FC<CertificationPartProps> = ({ userId, resumeId
 
   return (
     <div>
-      <ListCard title="자격증" userId={userId} iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+      <ListCard title="자격증" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
         {editMode ? (
           <CertificationForm
             handleEditMode={handleEditMode}
