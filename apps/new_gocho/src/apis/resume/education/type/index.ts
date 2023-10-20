@@ -27,10 +27,10 @@ export interface ResumeCollegeDef extends ResumeEducationBase {
 }
 
 export interface PostCollegeDef extends PostEducationBase {
-  end_date: string;
-  graduate_type: string;
-  grade: number;
-  max_grade: number;
+  end_date: string | null;
+  graduate_type: string | null;
+  grade: number | null;
+  max_grade: number | null;
   etc?: string;
 }
 

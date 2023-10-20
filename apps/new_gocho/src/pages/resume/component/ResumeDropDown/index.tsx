@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 import { DropDown } from "shared-ui/deeple-ds";
@@ -6,17 +5,17 @@ import { DropDown } from "shared-ui/deeple-ds";
 import { cssObj } from "./style";
 import { ResumeDropDownProps } from "./type";
 
-export const ResumeDropDown: FC<ResumeDropDownProps> = ({
+export const ResumeDropDown = <T extends string | number>({
   placeholder,
-  value = "",
+  value,
   setValue,
   menuArr,
   onClickCallback,
-}) => (
+}: ResumeDropDownProps<T>) => (
   <DropDown
     customTitle={
       <div css={cssObj.wrapper}>
-        <p css={value.length === 0 ? cssObj.placeholder : cssObj.item}>{value.length === 0 ? placeholder : value}</p>
+        <p css={!value ? cssObj.placeholder : cssObj.item}>{!value ? placeholder : value}</p>
         <FiChevronDown />
       </div>
     }

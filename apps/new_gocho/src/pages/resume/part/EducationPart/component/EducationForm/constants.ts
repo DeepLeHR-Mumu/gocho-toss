@@ -13,6 +13,18 @@ export const educationTypeArr = [
   },
 ];
 
+export const graduateTypeArr = [
+  {
+    content: "졸업",
+  },
+  {
+    content: "졸업예정",
+  },
+  {
+    content: "재학",
+  },
+];
+
 export const highSchoolDefaultValue = {
   name: "",
   graduate_type: "",

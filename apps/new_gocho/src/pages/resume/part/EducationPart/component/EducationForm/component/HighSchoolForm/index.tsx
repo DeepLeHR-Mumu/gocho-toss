@@ -8,7 +8,7 @@ import { AttendanceForm } from "../AttendanceForm";
 
 import { cssObj } from "./style";
 import { HighSchoolFormProps } from "./type";
-import { graduateTypeArr } from "./contants";
+import { graduateTypeArr } from "../../constants";
 
 export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>("");
@@ -97,7 +97,7 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
           <div css={cssObj.inputFlexbox}>
             <div css={cssObj.inputWrapper}>
               <p>전공/학과</p>
-              <Input placeholder="패션디자인과" {...register("major")} />
+              <Input placeholder="전공 또는 학과 입력" {...register("major")} />
             </div>
             <div css={cssObj.inputWrapper}>
               <p>내신 등급</p>

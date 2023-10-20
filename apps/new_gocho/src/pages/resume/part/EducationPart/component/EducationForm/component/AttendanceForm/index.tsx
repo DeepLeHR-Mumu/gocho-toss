@@ -3,6 +3,8 @@ import { FC } from "react";
 import { cssObj } from "./style";
 import { AttendanceFormProps } from "./type";
 
+// TODO: 리팩토링 하기
+
 export const AttendanceForm: FC<AttendanceFormProps> = ({ register }) => (
   <div>
     <div css={cssObj.wrapper}>

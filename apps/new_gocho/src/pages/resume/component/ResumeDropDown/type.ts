@@ -1,7 +1,7 @@
-export interface ResumeDropDownProps {
-  placeholder?: string;
-  menuArr: { content: string }[];
-  value?: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+export interface ResumeDropDownProps<T extends string | number> {
+  placeholder: string;
+  value: T | null;
+  setValue: (value: T) => void;
+  menuArr: { content: T }[];
   onClickCallback?: () => void;
 }
