@@ -38,7 +38,6 @@ function interceptStdout(text) {
 }
 intercept(interceptStdout);
 
-
 // Injected content via Sentry wizard below
 
 const { withSentryConfig } = require("@sentry/nextjs");
@@ -52,7 +51,7 @@ module.exports = withSentryConfig(
     // Suppresses source map uploading logs during build
     silent: true,
     org: "deeplehr",
-    project: "react_gocho",
+    project: "react",
   },
   {
     // For all available options, see:
