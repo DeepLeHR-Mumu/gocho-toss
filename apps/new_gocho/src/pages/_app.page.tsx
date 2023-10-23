@@ -34,6 +34,7 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
     trackResources: true,
     trackLongTasks: true,
     defaultPrivacyLevel: "mask-user-input",
+    trackUserInteractions: true,
   });
   datadogRum.startSessionReplayRecording();
 }
