@@ -5,10 +5,10 @@ import { Input } from "shared-ui/deeple-ds";
 import { ResumeDropDown } from "@/pages/resume/component";
 
 import { cssObj } from "./style";
-import { CollegeFormProps } from "./type";
 import { graduateTypeArr, gradeArr } from "../../constants";
+import { ExtraFormProps } from "./type";
 
-export const CollegeForm: FC<CollegeFormProps> = ({ register, setValue, getValues }) => {
+export const ExtraForm: FC<ExtraFormProps> = ({ register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [maxGrade, setMaxGrade] = useState<number | null>(getValues("max_grade"));
 
@@ -16,9 +16,9 @@ export const CollegeForm: FC<CollegeFormProps> = ({ register, setValue, getValue
     <>
       <div css={cssObj.inputWrapper}>
         <p>
-          학교명 <strong css={cssObj.required}> *</strong>
+          소속/기관 <strong css={cssObj.required}> *</strong>
         </p>
-        <Input placeholder="학교명을 입력해 주세요" css={cssObj.schoolInput} {...register("name")} />
+        <Input placeholder="소속 또는 기관명을 입력해 주세요" css={cssObj.schoolInput} {...register("name")} />
       </div>
       <div css={cssObj.inputWrapper}>
         <p>

@@ -16,25 +16,6 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
 
   return (
     <>
-      {!isAlternativeTest && (
-        <div css={cssObj.inputWrapper}>
-          <p>
-            졸업 구분 <strong css={cssObj.required}> *</strong>
-          </p>
-          <ResumeDropDown
-            menuArr={graduateTypeArr}
-            setValue={setGraduateType}
-            value={graduateType}
-            placeholder="선택"
-            onClickCallback={() => {
-              setValue("graduate_type", graduateType);
-              if (graduateType === "재학") {
-                setValue("end_date", null);
-              }
-            }}
-          />
-        </div>
-      )}
       <div css={cssObj.inputWrapper}>
         <p>
           학교명 <strong css={cssObj.required}> *</strong>
@@ -63,6 +44,25 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
           <span>검정고시</span>
         </div>
       </div>
+      {!isAlternativeTest && (
+        <div css={cssObj.inputWrapper}>
+          <p>
+            졸업 구분 <strong css={cssObj.required}> *</strong>
+          </p>
+          <ResumeDropDown
+            menuArr={graduateTypeArr}
+            setValue={setGraduateType}
+            value={graduateType}
+            placeholder="선택"
+            onClickCallback={() => {
+              setValue("graduate_type", graduateType);
+              if (graduateType === "재학") {
+                setValue("end_date", null);
+              }
+            }}
+          />
+        </div>
+      )}
       {isAlternativeTest ? (
         <>
           <div css={cssObj.inputWrapper}>
@@ -85,7 +85,7 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
               </p>
               <Input placeholder="예)200101" {...register("start_date")} />
             </div>
-            {graduateType !== "재학" && (
+            {!["재학", "중퇴"].includes(graduateType) && (
               <div css={cssObj.inputWrapper}>
                 <p>
                   졸업 연월 <strong css={cssObj.required}> *</strong>

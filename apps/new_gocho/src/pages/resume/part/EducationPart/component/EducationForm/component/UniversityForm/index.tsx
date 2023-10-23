@@ -1,16 +1,17 @@
 import { FC, useState } from "react";
 
-import { Input } from "shared-ui/deeple-ds";
+import { Checkbox, Input } from "shared-ui/deeple-ds";
 
 import { ResumeDropDown } from "@/pages/resume/component";
 
 import { cssObj } from "./style";
-import { CollegeFormProps } from "./type";
-import { graduateTypeArr, gradeArr } from "../../constants";
+import { gradeArr, graduateTypeArr } from "../../constants";
+import { UniversityFormProps } from "./type";
 
-export const CollegeForm: FC<CollegeFormProps> = ({ register, setValue, getValues }) => {
+export const UniversityForm: FC<UniversityFormProps> = ({ register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [maxGrade, setMaxGrade] = useState<number | null>(getValues("max_grade"));
+  const [isUturn, setIsUturn] = useState(getValues("is_uturn"));
 
   return (
     <>
@@ -36,6 +37,15 @@ export const CollegeForm: FC<CollegeFormProps> = ({ register, setValue, getValue
             }
           }}
         />
+        <div css={cssObj.checkbox}>
+          <Checkbox
+            checked={isUturn}
+            onChange={() => {
+              setIsUturn(!isUturn);
+            }}
+          />
+          <span>유턴</span>
+        </div>
       </div>
       <div css={cssObj.inputFlexbox}>
         <div css={cssObj.inputWrapper}>

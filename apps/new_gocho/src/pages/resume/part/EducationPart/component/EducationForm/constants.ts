@@ -15,13 +15,28 @@ export const educationTypeArr = [
 
 export const graduateTypeArr = [
   {
+    content: "재학",
+  },
+  {
+    content: "중퇴",
+  },
+  {
     content: "졸업",
   },
   {
     content: "졸업예정",
   },
+];
+
+export const gradeArr = [
   {
-    content: "재학",
+    content: 4.0,
+  },
+  {
+    content: 4.3,
+  },
+  {
+    content: 4.5,
   },
 ];
 
@@ -36,5 +51,39 @@ export const highSchoolDefaultValue = {
   third_attendance: null,
   major: null,
   grade: null,
+  etc: null,
+};
+
+export const collegeDefaultValue = {
+  name: "",
+  graduate_type: "",
+  start_date: "",
+  end_date: null,
+  major: null,
+  grade: null,
+  max_grade: null,
+  etc: null,
+};
+
+export const universityDefaultValue = {
+  name: "",
+  graduate_type: "",
+  is_uturn: false,
+  start_date: "",
+  end_date: null,
+  major: null,
+  grade: null,
+  max_grade: null,
+  etc: null,
+};
+
+export const extraDefaultValue = {
+  name: "",
+  graduate_type: "",
+  start_date: "",
+  end_date: null,
+  major: null,
+  grade: null,
+  max_grade: null,
   etc: null,
 };

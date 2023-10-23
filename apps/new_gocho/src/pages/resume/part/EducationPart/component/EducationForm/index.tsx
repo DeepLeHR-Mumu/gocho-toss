@@ -1,47 +1,50 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, UseFormGetValues, UseFormRegister, UseFormSetValue, useForm } from "react-hook-form";
 
 import { Button } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
-import { usePostResumeHighSchool } from "@/apis/resume/education/usePostResumeHighSchool";
 import { PostCollegeDef, PostExtraDef, PostHighSchoolDef, PostUniversityDef } from "@/apis/resume/education/type";
+
 import { usePostResumeCollege } from "@/apis/resume/education/usePostResumeCollege";
+import { usePostResumeExtra } from "@/apis/resume/education/usePostResumeExtra";
+import { usePostResumeHighSchool } from "@/apis/resume/education/usePostResumeHighSchool";
+import { usePostResumeUniversity } from "@/apis/resume/education/usePostResumeUniversity";
 
 import { ResumeDropDown } from "@/pages/resume/component";
 
 import { YYMMToDate } from "@/utils";
 
 import { cssObj } from "./style";
-import { CollegeForm, HighSchoolForm } from "./component";
-import { educationTypeArr, highSchoolDefaultValue } from "./constants";
+import { CollegeForm, HighSchoolForm, UniversityForm } from "./component";
+import { educationTypeArr } from "./constants";
 import { EducationFormProps, EducationSubmitDef } from "./type";
-
-const isPostCollegeDef = (data: EducationSubmitDef): data is PostCollegeDef => "grade" in data;
-
-export const isPostUniversityDef = (data: EducationSubmitDef): data is PostUniversityDef => "is_uturn" in data;
-
-export const isPostExtraDef = (data: EducationSubmitDef): data is PostExtraDef => "education_type" in data;
-
-const isHighSchoolDef = (data: EducationSubmitDef): data is PostHighSchoolDef => "is_alternative_test" in data;
+import { isHighSchoolDef, isPostCollegeDef, isPostExtraDef, isPostUniversityDef, typeOfDefaultValues } from "./utils";
+import { ExtraForm } from "./component/ExtraForm";
 
 export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode, currentEducation }) => {
-  const [educationType, setEducationType] = useState<string>(
-    currentEducation ? currentEducation.educationType : "고등학교"
-  );
+  const { setToastMessage } = useToast();
 
-  const { register, handleSubmit, setValue, getValues } = useForm<EducationSubmitDef>(
+  const [educationType, setEducationType] = useState<string>(currentEducation?.educationType || "고등학교");
+
+  const { register, reset, handleSubmit, setValue, getValues } = useForm<EducationSubmitDef>(
     currentEducation
       ? {}
       : {
-          defaultValues: highSchoolDefaultValue,
+          defaultValues: typeOfDefaultValues(educationType),
         }
   );
 
   const { mutate: postHighSchool } = usePostResumeHighSchool();
   const { mutate: postCollege } = usePostResumeCollege();
+  const { mutate: postUniversity } = usePostResumeUniversity();
+  const { mutate: postExtra } = usePostResumeExtra();
 
-  const { setToastMessage } = useToast();
+  useEffect(() => {
+    if (!currentEducation) {
+      reset(typeOfDefaultValues(educationType));
+    }
+  }, [educationType, reset, currentEducation]);
 
   const onSubmitResumeEductaion: SubmitHandler<EducationSubmitDef> = async (data) => {
     const onSuccess = () => {
@@ -49,7 +52,23 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       handleEditMode();
     };
 
-    if (isPostCollegeDef(data)) {
+    if (educationType === "대학교 (4년제)" && isPostUniversityDef(data)) {
+      postUniversity(
+        {
+          resumeId,
+          ...data,
+          start_date: YYMMToDate(data.start_date),
+          end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+        },
+        {
+          onSuccess,
+        }
+      );
+
+      return;
+    }
+
+    if (educationType === "대학교 (2,3 년제)" && isPostCollegeDef(data)) {
       postCollege(
         {
           resumeId,
@@ -65,7 +84,23 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       return;
     }
 
-    if (isHighSchoolDef(data)) {
+    if (educationType === "기타" && isPostExtraDef(data)) {
+      postExtra(
+        {
+          resumeId,
+          ...data,
+          start_date: YYMMToDate(data.start_date),
+          end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+        },
+        {
+          onSuccess,
+        }
+      );
+
+      return;
+    }
+
+    if (educationType === "고등학교" && isHighSchoolDef(data)) {
       // setValue("first_attendance.is_perfect", false);
       // setValue("second_attendance.is_perfect", false);
       // setValue("third_attendance.is_perfect", false);
@@ -127,10 +162,6 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
           setValue={setEducationType}
           value={educationType}
           placeholder="선택"
-          onClickCallback={() => {
-            // setLanguageTest("");
-            // setValue("acquisition_date", "");
-          }}
         />
       </div>
       {educationType === "고등학교" && isHighSchoolDef(getValues()) && (
@@ -145,6 +176,20 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
           setValue={setValue as UseFormSetValue<PostCollegeDef>}
           getValues={getValues as UseFormGetValues<PostCollegeDef>}
           register={register as UseFormRegister<PostCollegeDef>}
+        />
+      )}
+      {educationType === "대학교 (4년제)" && isPostUniversityDef(getValues()) && (
+        <UniversityForm
+          setValue={setValue as UseFormSetValue<PostUniversityDef>}
+          getValues={getValues as UseFormGetValues<PostUniversityDef>}
+          register={register as UseFormRegister<PostUniversityDef>}
+        />
+      )}
+      {educationType === "기타" && isPostExtraDef(getValues()) && (
+        <ExtraForm
+          setValue={setValue as UseFormSetValue<PostExtraDef>}
+          getValues={getValues as UseFormGetValues<PostExtraDef>}
+          register={register as UseFormRegister<PostExtraDef>}
         />
       )}
 

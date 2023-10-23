@@ -10,7 +10,7 @@ interface PostEducationBase {
   name: string;
   start_date: string;
   end_date: string | null;
-  major: string | null;
+  major: string;
 }
 
 export interface PostEducationDef extends PostEducationBase {
@@ -44,11 +44,11 @@ export interface ResumeUniversityDef extends ResumeEducationBase {
 }
 
 export interface PostUniversityDef extends PostEducationBase {
-  end_date: string;
+  end_date: string | null;
   graduate_type: string;
   is_uturn: boolean;
-  grade: number;
-  max_grade: number;
+  grade: number | null;
+  max_grade: number | null;
   etc?: string;
 }
 export interface ResumeExtraDef extends ResumeEducationBase {
@@ -60,11 +60,11 @@ export interface ResumeExtraDef extends ResumeEducationBase {
 }
 
 export interface PostExtraDef extends PostEducationBase {
-  end_date: string;
+  end_date: string | null;
   graduate_type: string;
-  grade: number;
-  max_grade: number;
-  etc?: string;
+  grade: number | null;
+  max_grade: number | null;
+  etc: number | null;
 }
 
 export interface HighSchoolAttendance {
