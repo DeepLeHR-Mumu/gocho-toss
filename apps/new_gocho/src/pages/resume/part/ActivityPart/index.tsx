@@ -24,16 +24,14 @@ export const ActivityPart: FC<ActivityPartProps> = ({ resumeId }) => {
   const { data: myActivityList } = useResumeActivityArr(resumeId);
 
   return (
-    <div>
-      <ListCard title="대외활동" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
-        {editMode ? (
-          <ActivityForm handleEditMode={handleEditMode} resumeId={resumeId} currentActivity={currentActivity} />
-        ) : (
-          myActivityList && (
-            <ActivityList resumeId={resumeId} myActivityList={myActivityList} selectActivity={selectActivity} />
-          )
-        )}
-      </ListCard>
-    </div>
+    <ListCard title="대외활동" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+      {editMode ? (
+        <ActivityForm handleEditMode={handleEditMode} resumeId={resumeId} currentActivity={currentActivity} />
+      ) : (
+        myActivityList && (
+          <ActivityList resumeId={resumeId} myActivityList={myActivityList} selectActivity={selectActivity} />
+        )
+      )}
+    </ListCard>
   );
 };

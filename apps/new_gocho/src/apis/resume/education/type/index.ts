@@ -3,7 +3,7 @@ interface ResumeEducationBase {
   name: string;
   start_date: string;
   end_date: string | null;
-  major: string | null;
+  major: string;
 }
 
 interface PostEducationBase {
@@ -19,11 +19,11 @@ export interface PostEducationDef extends PostEducationBase {
 }
 
 export interface ResumeCollegeDef extends ResumeEducationBase {
-  end_date: string;
-  graduate_type: string;
-  grade: number;
-  max_grade: number;
-  etc?: string;
+  end_date: string | null;
+  graduate_type: string | null;
+  grade: number | null;
+  max_grade: number | null;
+  etc: string | null;
 }
 
 export interface PostCollegeDef extends PostEducationBase {
@@ -38,9 +38,9 @@ export interface ResumeUniversityDef extends ResumeEducationBase {
   end_date: string;
   graduate_type: string;
   is_uturn: boolean;
-  grade: number;
-  max_grade: number;
-  etc?: string;
+  grade: number | null;
+  max_grade: number | null;
+  etc: string | null;
 }
 
 export interface PostUniversityDef extends PostEducationBase {
@@ -49,14 +49,14 @@ export interface PostUniversityDef extends PostEducationBase {
   is_uturn: boolean;
   grade: number | null;
   max_grade: number | null;
-  etc?: string;
+  etc: string | null;
 }
 export interface ResumeExtraDef extends ResumeEducationBase {
   end_date: string;
   graduate_type: string;
-  grade: number;
-  max_grade: number;
-  etc?: string;
+  grade: number | null;
+  max_grade: number | null;
+  etc: string | null;
 }
 
 export interface PostExtraDef extends PostEducationBase {
@@ -86,14 +86,14 @@ export interface HighSchoolAttendance {
 }
 
 export interface ResumeHighSchoolDef extends ResumeEducationBase {
-  end_date: string;
+  end_date: string | null;
   graduate_type: string;
-  is_alternative_test: boolean;
-  first_attendance: HighSchoolAttendance;
-  second_attendance: HighSchoolAttendance;
-  third_attendance: HighSchoolAttendance;
-  grade?: number;
-  etc?: string;
+  is_alternative_test: boolean | null;
+  first_attendance: HighSchoolAttendance | null;
+  second_attendance: HighSchoolAttendance | null;
+  third_attendance: HighSchoolAttendance | null;
+  grade: number | null;
+  etc: string | null;
 }
 
 export interface PostHighSchoolDef extends PostEducationBase {
@@ -101,20 +101,20 @@ export interface PostHighSchoolDef extends PostEducationBase {
   graduate_type: string;
   is_alternative_test: boolean;
   first_attendance: HighSchoolAttendance | null;
-  second_attendance?: HighSchoolAttendance | null;
-  third_attendance?: HighSchoolAttendance | null;
-  grade?: number | null;
-  etc?: string | null;
+  second_attendance: HighSchoolAttendance | null;
+  third_attendance: HighSchoolAttendance | null;
+  grade: number | null;
+  etc: string | null;
 }
 export interface ResumeEducationDef extends ResumeEducationBase {
   education_type: string;
   graduate_type: string;
-  is_alternative_test: boolean;
-  is_uturn: string;
-  first_attendance?: HighSchoolAttendance;
-  second_attendance?: HighSchoolAttendance;
-  third_attendance?: HighSchoolAttendance;
-  grade?: string;
-  max_grade?: string;
-  etc?: string;
+  is_alternative_test: boolean | null;
+  is_uturn: boolean;
+  first_attendance: HighSchoolAttendance | null;
+  second_attendance: HighSchoolAttendance | null;
+  third_attendance: HighSchoolAttendance | null;
+  grade: string | null;
+  max_grade: string | null;
+  etc: string | null;
 }

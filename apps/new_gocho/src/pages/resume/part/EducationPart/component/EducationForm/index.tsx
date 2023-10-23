@@ -11,6 +11,11 @@ import { usePostResumeExtra } from "@/apis/resume/education/usePostResumeExtra";
 import { usePostResumeHighSchool } from "@/apis/resume/education/usePostResumeHighSchool";
 import { usePostResumeUniversity } from "@/apis/resume/education/usePostResumeUniversity";
 
+import { usePutResumeHighSchool } from "@/apis/resume/education/usePutResumeHighSchool";
+import { usePutResumeCollege } from "@/apis/resume/education/usePutResumeCollege";
+import { usePutResumeUniversity } from "@/apis/resume/education/usePutResumeUniversity";
+import { usePutResumeExtra } from "@/apis/resume/education/usePutResumeExtra";
+
 import { ResumeDropDown } from "@/pages/resume/component";
 
 import { YYMMToDate } from "@/utils";
@@ -19,26 +24,44 @@ import { cssObj } from "./style";
 import { CollegeForm, HighSchoolForm, UniversityForm } from "./component";
 import { educationTypeArr } from "./constants";
 import { EducationFormProps, EducationSubmitDef } from "./type";
-import { isHighSchoolDef, isPostCollegeDef, isPostExtraDef, isPostUniversityDef, typeOfDefaultValues } from "./utils";
+import {
+  isPostHighSchoolDef,
+  isPostCollegeDef,
+  isPostExtraDef,
+  isPostUniversityDef,
+  typeOfDefaultValues,
+  educationOfDefaultValues,
+} from "./utils";
 import { ExtraForm } from "./component/ExtraForm";
 
 export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode, currentEducation }) => {
   const { setToastMessage } = useToast();
 
-  const [educationType, setEducationType] = useState<string>(currentEducation?.educationType || "고등학교");
+  const [educationType, setEducationType] = useState<string>(currentEducation?.educationType || "");
 
   const { register, reset, handleSubmit, setValue, getValues } = useForm<EducationSubmitDef>(
     currentEducation
-      ? {}
+      ? {
+          defaultValues: educationOfDefaultValues(currentEducation),
+        }
       : {
           defaultValues: typeOfDefaultValues(educationType),
         }
   );
 
-  const { mutate: postHighSchool } = usePostResumeHighSchool();
-  const { mutate: postCollege } = usePostResumeCollege();
-  const { mutate: postUniversity } = usePostResumeUniversity();
-  const { mutate: postExtra } = usePostResumeExtra();
+  const [{ mutate: postHighSchool }, { mutate: postCollege }, { mutate: postUniversity }, { mutate: postExtra }] = [
+    usePostResumeHighSchool(),
+    usePostResumeCollege(),
+    usePostResumeUniversity(),
+    usePostResumeExtra(),
+  ];
+
+  const [{ mutate: putHighSchool }, { mutate: putCollege }, { mutate: putUniversity }, { mutate: putExtra }] = [
+    usePutResumeHighSchool(),
+    usePutResumeCollege(),
+    usePutResumeUniversity(),
+    usePutResumeExtra(),
+  ];
 
   useEffect(() => {
     if (!currentEducation) {
@@ -52,103 +75,141 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       handleEditMode();
     };
 
-    if (educationType === "대학교 (4년제)" && isPostUniversityDef(data)) {
-      postUniversity(
-        {
-          resumeId,
-          ...data,
-          start_date: YYMMToDate(data.start_date),
-          end_date: data.end_date ? YYMMToDate(data.end_date) : null,
-        },
-        {
-          onSuccess,
-        }
-      );
+    if (educationType === "대학교(4년제)" && isPostUniversityDef(data)) {
+      if (currentEducation) {
+        const { id } = currentEducation;
+
+        putUniversity(
+          {
+            resumeId,
+            universityId: id,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      } else {
+        postUniversity(
+          {
+            resumeId,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      }
 
       return;
     }
 
-    if (educationType === "대학교 (2,3 년제)" && isPostCollegeDef(data)) {
-      postCollege(
-        {
-          resumeId,
-          ...data,
-          start_date: YYMMToDate(data.start_date),
-          end_date: data.end_date ? YYMMToDate(data.end_date) : null,
-        },
-        {
-          onSuccess,
-        }
-      );
+    if (educationType === "대학교(2,3년제)" && isPostCollegeDef(data)) {
+      if (currentEducation) {
+        const { id } = currentEducation;
+
+        putCollege(
+          {
+            resumeId,
+            collegeId: id,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      } else {
+        postCollege(
+          {
+            resumeId,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      }
+
+      return;
 
       return;
     }
 
     if (educationType === "기타" && isPostExtraDef(data)) {
-      postExtra(
-        {
-          resumeId,
-          ...data,
-          start_date: YYMMToDate(data.start_date),
-          end_date: data.end_date ? YYMMToDate(data.end_date) : null,
-        },
-        {
-          onSuccess,
-        }
-      );
+      if (currentEducation) {
+        const { id } = currentEducation;
+
+        putExtra(
+          {
+            resumeId,
+            extraId: id,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      } else {
+        postExtra(
+          {
+            resumeId,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      }
 
       return;
     }
 
-    if (educationType === "고등학교" && isHighSchoolDef(data)) {
+    if (educationType === "고등학교" && isPostHighSchoolDef(data)) {
       // setValue("first_attendance.is_perfect", false);
       // setValue("second_attendance.is_perfect", false);
       // setValue("third_attendance.is_perfect", false);
 
-      postHighSchool(
-        {
-          resumeId,
-          ...data,
-          start_date: YYMMToDate(data.start_date),
-          end_date: data.end_date ? YYMMToDate(data.end_date) : null,
-        },
-        {
-          onSuccess,
-        }
-      );
+      if (currentEducation) {
+        const { id } = currentEducation;
 
-      // if (currentEducation) {
-      //   const { id } = currentFluency;
-
-      //   putFluency(
-      //     {
-      //       resumeId,
-      //       fluencyId: id,
-      //       grade,
-      //       acquisition_date: YYMMToDate(acquisition_date),
-      //       language_type: languageType,
-      //       name: languageTest,
-      //     },
-      //     {
-      //       onSuccess,
-      //     }
-      //   );
-      // } else {
-      //   postHighSchool(
-      //     {
-      //       resumeId,
-      //     },
-      //     {
-      //       onSuccess,
-      //     }
-      //   );
-      // }
-      // return;
+        putHighSchool(
+          {
+            resumeId,
+            highschoolId: id,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      } else {
+        postHighSchool(
+          {
+            resumeId,
+            ...data,
+            start_date: YYMMToDate(data.start_date),
+            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          },
+          {
+            onSuccess,
+          }
+        );
+      }
     }
-
-    // if(isPostUniversityDef()){
-
-    // }
   };
 
   return (
@@ -164,21 +225,21 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
           placeholder="선택"
         />
       </div>
-      {educationType === "고등학교" && isHighSchoolDef(getValues()) && (
+      {educationType === "고등학교" && isPostHighSchoolDef(getValues()) && (
         <HighSchoolForm
           setValue={setValue as UseFormSetValue<PostHighSchoolDef>}
           getValues={getValues as UseFormGetValues<PostHighSchoolDef>}
           register={register as UseFormRegister<PostHighSchoolDef>}
         />
       )}
-      {educationType === "대학교 (2,3년제)" && isPostCollegeDef(getValues()) && (
+      {educationType === "대학교(2,3년제)" && isPostCollegeDef(getValues()) && (
         <CollegeForm
           setValue={setValue as UseFormSetValue<PostCollegeDef>}
           getValues={getValues as UseFormGetValues<PostCollegeDef>}
           register={register as UseFormRegister<PostCollegeDef>}
         />
       )}
-      {educationType === "대학교 (4년제)" && isPostUniversityDef(getValues()) && (
+      {educationType === "대학교(4년제)" && isPostUniversityDef(getValues()) && (
         <UniversityForm
           setValue={setValue as UseFormSetValue<PostUniversityDef>}
           getValues={getValues as UseFormGetValues<PostUniversityDef>}

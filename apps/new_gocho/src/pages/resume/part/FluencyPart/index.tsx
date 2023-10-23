@@ -24,16 +24,12 @@ export const FluencyPart: FC<FluencyPartProps> = ({ resumeId }) => {
   };
 
   return (
-    <div>
-      <ListCard title="어학" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
-        {editMode ? (
-          <FluencyForm resumeId={resumeId} handleEditMode={handleEditMode} currentFluency={currentFluency} />
-        ) : (
-          myFluencyList && (
-            <FluencyList resumeId={resumeId} myFluencyList={myFluencyList} selectFluency={selectFluency} />
-          )
-        )}
-      </ListCard>
-    </div>
+    <ListCard title="어학" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+      {editMode ? (
+        <FluencyForm resumeId={resumeId} handleEditMode={handleEditMode} currentFluency={currentFluency} />
+      ) : (
+        myFluencyList && <FluencyList resumeId={resumeId} myFluencyList={myFluencyList} selectFluency={selectFluency} />
+      )}
+    </ListCard>
   );
 };

@@ -2,7 +2,7 @@ import { ResumeExtraDef } from "../type";
 import { selector } from "./util";
 
 export interface ResponseObjDef {
-  data: ResumeExtraDef[];
+  data: ResumeExtraDef;
 }
 
 export interface GetResumeExtraDef {

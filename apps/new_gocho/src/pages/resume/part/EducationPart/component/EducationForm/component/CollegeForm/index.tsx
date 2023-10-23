@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import { Input } from "shared-ui/deeple-ds";
 
@@ -12,6 +12,24 @@ export const CollegeForm: FC<CollegeFormProps> = ({ register, setValue, getValue
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [maxGrade, setMaxGrade] = useState<number | null>(getValues("max_grade"));
 
+  useEffect(() => {
+    if (graduateType !== null) {
+      setValue("graduate_type", graduateType, {
+        shouldValidate: true,
+        shouldDirty: true,
+      });
+
+      if (graduateType === "재학") {
+        setValue("end_date", null);
+      }
+    }
+
+    setValue("max_grade", maxGrade, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
+  }, [maxGrade, graduateType, setValue]);
+
   return (
     <>
       <div css={cssObj.inputWrapper}>
@@ -24,18 +42,7 @@ export const CollegeForm: FC<CollegeFormProps> = ({ register, setValue, getValue
         <p>
           졸업 구분 <strong css={cssObj.required}> *</strong>
         </p>
-        <ResumeDropDown
-          menuArr={graduateTypeArr}
-          setValue={setGraduateType}
-          value={graduateType}
-          placeholder="선택"
-          onClickCallback={() => {
-            setValue("graduate_type", graduateType);
-            if (graduateType === "재학") {
-              setValue("end_date", null);
-            }
-          }}
-        />
+        <ResumeDropDown menuArr={graduateTypeArr} setValue={setGraduateType} value={graduateType} placeholder="선택" />
       </div>
       <div css={cssObj.inputFlexbox}>
         <div css={cssObj.inputWrapper}>
@@ -66,15 +73,7 @@ export const CollegeForm: FC<CollegeFormProps> = ({ register, setValue, getValue
           <Input placeholder="학점" {...register("grade")} />
         </div>
         <div css={cssObj.inputWrapper}>
-          <ResumeDropDown
-            menuArr={gradeArr}
-            setValue={setMaxGrade}
-            value={maxGrade}
-            placeholder="선택"
-            onClickCallback={() => {
-              setValue("max_grade", maxGrade);
-            }}
-          />
+          <ResumeDropDown menuArr={gradeArr} setValue={setMaxGrade} value={maxGrade} placeholder="선택" />
         </div>
       </div>
       <div css={cssObj.inputWrapper}>

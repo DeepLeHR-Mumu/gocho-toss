@@ -9,11 +9,11 @@ export const selector = (educationArr: ResumeEducationDef[]) =>
     isAlternativeTest: education.is_alternative_test,
 
     isUturn: education.is_uturn,
-    startData: education.start_date,
-    endData: education.end_date,
+    startDate: education.start_date,
+    endDate: education.end_date,
 
     grade: education.grade,
-    maxGrage: education.max_grade,
+    maxGrade: education.max_grade,
     major: education?.major,
     etc: education?.etc,
 
@@ -80,11 +80,11 @@ export const selectEducation = (education: ResumeEducationDef) => ({
   isAlternativeTest: education.is_alternative_test,
 
   isUturn: education.is_uturn,
-  startData: education.start_date,
-  endData: education.end_date,
+  startDate: education.start_date,
+  endDate: education.end_date,
 
   grade: education.grade,
-  maxGrage: education.max_grade,
+  maxGrade: education.max_grade,
   major: education?.major,
   etc: education?.etc,
 

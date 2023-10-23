@@ -24,24 +24,22 @@ export const CertificationPart: FC<CertificationPartProps> = ({ resumeId }) => {
   };
 
   return (
-    <div>
-      <ListCard title="자격증" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
-        {editMode ? (
-          <CertificationForm
-            handleEditMode={handleEditMode}
+    <ListCard title="자격증" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+      {editMode ? (
+        <CertificationForm
+          handleEditMode={handleEditMode}
+          resumeId={resumeId}
+          currentCertification={currentCertification}
+        />
+      ) : (
+        myCertificationList && (
+          <CertificationList
             resumeId={resumeId}
-            currentCertification={currentCertification}
+            myCertificationList={myCertificationList}
+            selectCertification={selectCertification}
           />
-        ) : (
-          myCertificationList && (
-            <CertificationList
-              resumeId={resumeId}
-              myCertificationList={myCertificationList}
-              selectCertification={selectCertification}
-            />
-          )
-        )}
-      </ListCard>
-    </div>
+        )
+      )}
+    </ListCard>
   );
 };

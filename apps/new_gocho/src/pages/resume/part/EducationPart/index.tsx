@@ -1,26 +1,38 @@
 import { FC, useState } from "react";
 
-// import { useResumeEducationArr } from "@/apis/resume/education/useResumeEducationArr";
+import { useResumeEducationArr } from "@/apis/resume/education/useResumeEducationArr";
 
+import { SelectorResumeEducation } from "@/apis/resume/education/useResumeEducationArr/type";
+
+import { EducationPartProps } from "./type";
 import { ListCard } from "../../component";
 import { EducationForm, EducationList } from "./component";
 
-interface EducationPartProps {
-  resumeId: number;
-}
-
 export const EducationPart: FC<EducationPartProps> = ({ resumeId }) => {
-  // const { data: myEducationList } = useResumeEducationArr(resumeId);
+  const { data: myEducationList } = useResumeEducationArr(resumeId);
 
+  const [currentEducation, setCurrentEducation] = useState<SelectorResumeEducation>();
   const [editMode, setEditMode] = useState(false);
 
-  const handleEditMode = () => setEditMode(!editMode);
+  const selectEducation = (education: SelectorResumeEducation) => {
+    setCurrentEducation(education);
+    setEditMode(!editMode);
+  };
+
+  const handleEditMode = () => {
+    setEditMode(!editMode);
+    setCurrentEducation(undefined);
+  };
 
   return (
-    <div>
-      <ListCard title="학력" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
-        {editMode ? <EducationForm resumeId={resumeId} handleEditMode={handleEditMode} /> : <EducationList />}
-      </ListCard>
-    </div>
+    <ListCard title="학력" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+      {editMode ? (
+        <EducationForm resumeId={resumeId} handleEditMode={handleEditMode} currentEducation={currentEducation} />
+      ) : (
+        myEducationList && (
+          <EducationList resumeId={resumeId} myEducationList={myEducationList} selectEducation={selectEducation} />
+        )
+      )}
+    </ListCard>
   );
 };

@@ -10,5 +10,5 @@ export const selector = (university: ResumeUniversityDef) => ({
   grade: university.grade,
   maxGrade: university.max_grade,
   etc: university.etc,
-  isUTurn: university.is_uturn,
+  isUturn: university.is_uturn,
 });

@@ -1,31 +1,122 @@
+import { FC } from "react";
+
+import { useDeleteResumeEducation } from "@/apis/resume/education/useDeleteResumeEducation";
+
+import { SelectorResumeEducatioArr, SelectorResumeEducation } from "@/apis/resume/education/useResumeEducationArr/type";
+
+import { SelectorResumeExtra } from "@/apis/resume/education/useResumeExtra/type";
+import { SelectorResumeHighSchool } from "@/apis/resume/education/useResumeHighschool/type";
+import { SelectorResumeUniversity } from "@/apis/resume/education/useResumeUniversity/type";
+import { SelectorResumeCollege } from "@/apis/resume/education/useResumeCollege/type";
+
 import { ListItem } from "@/pages/resume/component";
 
-const itemProps = [
-  {
-    title: "짱치바고등학교",
-    titleDes: "고등학교",
-    desciption: "기계공학부",
-    date: ["2018.09", "2021.02"],
-  },
-  {
-    title: "디플에이치알공업대학교",
-    titleDes: "대학교(2년제)",
-    desciption: "얼마나 다녔겠어요~",
-    date: ["2020.09", "2022.03"],
-  },
-  {
-    title: "서울대학교",
-    titleDes: "대학교(4년제)",
-    isUturn: true,
-    desciption: "얼마나 다녔겠어요~",
-    date: ["2020.09"],
-  },
-];
+interface EducationListProps {
+  resumeId: number;
+  myEducationList: SelectorResumeEducatioArr;
+  selectEducation: (education: SelectorResumeEducation) => void;
+}
 
-export const EducationList = () => (
-  <>
-    {itemProps.map((obj) => (
-      <ListItem key={obj.title} {...obj} />
-    ))}
-  </>
-);
+export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationList, selectEducation }) => {
+  const { mutate: deleteEducation } = useDeleteResumeEducation();
+
+  return (
+    <>
+      {myEducationList.map((education) => {
+        if (education.educationType === "기타") {
+          const extra = education as SelectorResumeExtra;
+
+          return (
+            <ListItem
+              key={extra.id}
+              title={extra.name}
+              titleDes={education.educationType + extra.graduateType}
+              desciption={[extra.grade, extra.maxGrade, extra.etc].join("/")}
+              date={[extra.startDate]}
+              editHadnler={() => {
+                selectEducation(education);
+              }}
+              deleteHandler={() => {
+                deleteEducation({
+                  resumeId,
+                  educationId: extra.id,
+                });
+              }}
+            />
+          );
+        }
+
+        if (education.educationType === "고등학교") {
+          const highSchool = education as SelectorResumeHighSchool;
+
+          return (
+            <ListItem
+              key={highSchool.id}
+              title={highSchool.name}
+              titleDes={education.educationType + highSchool.graduateType}
+              desciption={[highSchool.etc].join("/")}
+              date={[highSchool.startDate]}
+              editHadnler={() => {
+                selectEducation(education);
+              }}
+              deleteHandler={() => {
+                deleteEducation({
+                  resumeId,
+                  educationId: education.id,
+                });
+              }}
+            />
+          );
+        }
+
+        if (education.educationType === "대학교(2,3년제)") {
+          const college = education as SelectorResumeCollege;
+
+          return (
+            <ListItem
+              key={college.id}
+              title={college.name}
+              titleDes={education.educationType + college.graduateType}
+              desciption={[college.etc].join("/")}
+              date={[college.startDate]}
+              editHadnler={() => {
+                selectEducation(education);
+              }}
+              deleteHandler={() => {
+                deleteEducation({
+                  resumeId,
+                  educationId: college.id,
+                });
+              }}
+            />
+          );
+        }
+
+        if (education.educationType === "대학교(4년제)") {
+          const university = education as SelectorResumeUniversity;
+
+          return (
+            <ListItem
+              key={university.id}
+              title={university.name}
+              titleDes={education.educationType + university.graduateType}
+              desciption={[university.etc].join("/")}
+              date={[university.startDate]}
+              editHadnler={() => {
+                selectEducation(education);
+              }}
+              deleteHandler={() => {
+                deleteEducation({
+                  resumeId,
+                  educationId: university.id,
+                });
+              }}
+            />
+          );
+        }
+
+        return <> </>;
+      })}
+    </>
+  );
+};

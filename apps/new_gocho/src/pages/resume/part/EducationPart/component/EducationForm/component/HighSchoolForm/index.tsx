@@ -11,7 +11,7 @@ import { HighSchoolFormProps } from "./type";
 import { graduateTypeArr } from "../../constants";
 
 export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, getValues }) => {
-  const [graduateType, setGraduateType] = useState<string>("");
+  const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [isAlternativeTest, setIsAlternativeTest] = useState(getValues("is_alternative_test"));
 
   return (
