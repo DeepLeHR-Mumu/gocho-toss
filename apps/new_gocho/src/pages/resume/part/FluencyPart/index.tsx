@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 
 import { useResumeFluencyArr } from "@/apis/resume";
+import { SelectorResumeFluency } from "@/apis/resume/fluency/useResumeFluency/type";
 
 import { ListCard } from "../../component";
 import { FluencyForm, FluencyList } from "./component";
-import { SelectorResumeFluency } from "@/apis/resume/fluency/useResumeFluency/type";
 import { FluencyPartProps } from "./type";
 
 export const FluencyPart: FC<FluencyPartProps> = ({ resumeId }) => {
