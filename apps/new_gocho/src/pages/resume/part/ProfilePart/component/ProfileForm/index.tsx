@@ -9,7 +9,7 @@ import { Button, Input } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
 
-import { usePutUserResumeProfile } from "@/apis/users/resume/usePutUserResumeProfile";
+import { usePutUserResumeProfile } from "@/apis/users";
 import { PutResumeProfileDef } from "@/apis/users/resume/usePutUserResumeProfile/type";
 import { fileEncording } from "@/pages/mypage/part/ProfilePart/utils";
 import basicProfile from "@/public/image/resume/BasicProfile.svg";

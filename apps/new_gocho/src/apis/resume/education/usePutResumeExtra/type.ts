@@ -19,5 +19,5 @@ export interface PutResumeExtraDef {
 }
 
 export interface UsePutResumeExtraProps {
-  (): UseMutationResult<PutResumeExtraResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumId: number): UseMutationResult<PutResumeExtraResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

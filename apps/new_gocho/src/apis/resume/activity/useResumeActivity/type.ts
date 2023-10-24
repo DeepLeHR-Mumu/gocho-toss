@@ -6,7 +6,7 @@ export interface ResponseObjDef {
 }
 
 export interface GetResumeActivityDef {
-  (resumeId: number, activityId: number): Promise<ResponseObjDef>;
+  (resumeId: number, activityId?: number): Promise<ResponseObjDef>;
 }
 
 export type SelectorResumeActivity = ReturnType<typeof selector>;

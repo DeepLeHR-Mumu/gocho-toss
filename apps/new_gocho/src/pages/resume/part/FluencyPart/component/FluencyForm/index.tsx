@@ -5,8 +5,7 @@ import { Button, Input } from "shared-ui/deeple-ds";
 import { PostFluencyDef } from "@/apis/resume/fluency/type";
 import { ResumeDropDown } from "@/pages/resume/component";
 
-import { usePostResumeFluency } from "@/apis/resume/fluency/usePostResumeFluency";
-import { usePutResumeFluency } from "@/apis/resume/fluency/usePutResumeFluency";
+import { usePostResumeFluency, usePutResumeFluency } from "@/apis/resume";
 
 import { useToast } from "@/globalStates";
 import { YYMMToDate, dateToYYMM } from "@/utils";

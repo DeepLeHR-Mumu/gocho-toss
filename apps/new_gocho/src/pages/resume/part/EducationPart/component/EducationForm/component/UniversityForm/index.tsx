@@ -26,11 +26,13 @@ export const UniversityForm: FC<UniversityFormProps> = ({ register, setValue, ge
       }
     }
 
+    setValue("is_uturn", isUturn);
+
     setValue("max_grade", maxGrade, {
       shouldValidate: true,
       shouldDirty: true,
     });
-  }, [maxGrade, graduateType, setValue]);
+  }, [isUturn, maxGrade, graduateType, setValue]);
 
   return (
     <>

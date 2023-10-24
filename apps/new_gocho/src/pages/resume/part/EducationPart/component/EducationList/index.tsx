@@ -5,11 +5,12 @@ import { useDeleteResumeEducation } from "@/apis/resume/education/useDeleteResum
 import { SelectorResumeEducatioArr, SelectorResumeEducation } from "@/apis/resume/education/useResumeEducationArr/type";
 
 import { SelectorResumeExtra } from "@/apis/resume/education/useResumeExtra/type";
-import { SelectorResumeHighSchool } from "@/apis/resume/education/useResumeHighschool/type";
+import { SelectorResumeHighSchool } from "@/apis/resume/education/useResumeHighSchool/type";
 import { SelectorResumeUniversity } from "@/apis/resume/education/useResumeUniversity/type";
 import { SelectorResumeCollege } from "@/apis/resume/education/useResumeCollege/type";
 
 import { ListItem } from "@/pages/resume/component";
+import { useToast } from "@/globalStates";
 
 interface EducationListProps {
   resumeId: number;
@@ -18,7 +19,14 @@ interface EducationListProps {
 }
 
 export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationList, selectEducation }) => {
-  const { mutate: deleteEducation } = useDeleteResumeEducation();
+  const { mutate: deleteEducation } = useDeleteResumeEducation(resumeId);
+  const { setToastMessage } = useToast();
+
+  const onDeleteSuccess = {
+    onSuccess: () => {
+      setToastMessage("학력 정보가 삭제되었습니다.");
+    },
+  };
 
   return (
     <>
@@ -37,10 +45,13 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                 selectEducation(education);
               }}
               deleteHandler={() => {
-                deleteEducation({
-                  resumeId,
-                  educationId: extra.id,
-                });
+                deleteEducation(
+                  {
+                    resumeId,
+                    educationId: extra.id,
+                  },
+                  onDeleteSuccess
+                );
               }}
             />
           );
@@ -60,10 +71,13 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                 selectEducation(education);
               }}
               deleteHandler={() => {
-                deleteEducation({
-                  resumeId,
-                  educationId: education.id,
-                });
+                deleteEducation(
+                  {
+                    resumeId,
+                    educationId: education.id,
+                  },
+                  onDeleteSuccess
+                );
               }}
             />
           );
@@ -83,10 +97,13 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                 selectEducation(education);
               }}
               deleteHandler={() => {
-                deleteEducation({
-                  resumeId,
-                  educationId: college.id,
-                });
+                deleteEducation(
+                  {
+                    resumeId,
+                    educationId: college.id,
+                  },
+                  onDeleteSuccess
+                );
               }}
             />
           );
@@ -102,14 +119,18 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
               titleDes={education.educationType + university.graduateType}
               desciption={[university.etc].join("/")}
               date={[university.startDate]}
+              isUturn={university.isUturn}
               editHadnler={() => {
                 selectEducation(education);
               }}
               deleteHandler={() => {
-                deleteEducation({
-                  resumeId,
-                  educationId: university.id,
-                });
+                deleteEducation(
+                  {
+                    resumeId,
+                    educationId: university.id,
+                  },
+                  onDeleteSuccess
+                );
               }}
             />
           );

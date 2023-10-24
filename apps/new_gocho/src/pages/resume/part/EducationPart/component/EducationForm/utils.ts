@@ -1,10 +1,11 @@
 import { PostCollegeDef, PostExtraDef, PostHighSchoolDef, PostUniversityDef } from "@/apis/resume/education/type";
 
 import { SelectorResumeEducation } from "@/apis/resume/education/useResumeEducationArr/type";
-import { SelectorResumeHighSchool } from "@/apis/resume/education/useResumeHighschool/type";
+import { SelectorResumeHighSchool } from "@/apis/resume/education/useResumeHighSchool/type";
 import { SelectorResumeCollege } from "@/apis/resume/education/useResumeCollege/type";
 import { SelectorResumeUniversity } from "@/apis/resume/education/useResumeUniversity/type";
 import { SelectorResumeExtra } from "@/apis/resume/education/useResumeExtra/type";
+import { dateToYYMM } from "@/utils";
 
 import { collegeDefaultValue, highSchoolDefaultValue, universityDefaultValue, extraDefaultValue } from "./constants";
 import { EducationSubmitDef } from "./type";
@@ -55,8 +56,8 @@ export const educationOfDefaultValues = (education: SelectorResumeEducation) => 
       name,
       graduate_type: graduateType,
       is_alternative_test: isAlternativeTest,
-      start_date: startDate,
-      end_date: endDate,
+      start_date: dateToYYMM(startDate),
+      end_date: endDate ? dateToYYMM(endDate) : endDate,
       first_attendance: {
         disease_school_absent: firstAttendance.diseaseSchoolAbsent,
         disease_tardy: firstAttendance.diseaseTardy,
@@ -120,8 +121,8 @@ export const educationOfDefaultValues = (education: SelectorResumeEducation) => 
     return {
       name,
       graduate_type: graduateType,
-      start_date: startDate,
-      end_date: endDate,
+      start_date: dateToYYMM(startDate),
+      end_date: endDate ? dateToYYMM(endDate) : endDate,
       major,
       grade,
       max_grade: maxGrade,
@@ -136,8 +137,8 @@ export const educationOfDefaultValues = (education: SelectorResumeEducation) => 
     return {
       name,
       graduate_type: graduateType,
-      start_date: startDate,
-      end_date: endDate,
+      start_date: dateToYYMM(startDate),
+      end_date: endDate ? dateToYYMM(endDate) : endDate,
       major,
       is_uturn: isUturn,
       grade,
@@ -152,8 +153,8 @@ export const educationOfDefaultValues = (education: SelectorResumeEducation) => 
     return {
       name,
       graduate_type: graduateType,
-      start_date: startDate,
-      end_date: endDate,
+      start_date: dateToYYMM(startDate),
+      end_date: endDate ? dateToYYMM(endDate) : endDate,
       major,
       grade,
       max_grade: maxGrade,

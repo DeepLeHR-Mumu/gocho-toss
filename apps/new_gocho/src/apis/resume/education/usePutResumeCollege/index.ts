@@ -1,8 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { ErrorResponseDef } from "shared-type/api";
 
 import { axiosInstance } from "@/apis/axiosInstance";
+import { resumeEducationKeyObj } from "@/constants/queryKeyFactory/resume/resumeEducationKeyObj";
 
 import { PutResumeCollegeDef, PutResumeCollegeResponse, RequestObjDef, UsePutResumeCollegeProps } from "./type";
 
@@ -11,7 +12,13 @@ export const putResumeCollege: PutResumeCollegeDef = async ({ resumeId, collegeI
   return data;
 };
 
-export const usePutResumeCollege: UsePutResumeCollegeProps = () =>
-  useMutation<PutResumeCollegeResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const usePutResumeCollege: UsePutResumeCollegeProps = (resumeId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation<PutResumeCollegeResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: putResumeCollege,
+    onSuccess: () => {
+      queryClient.invalidateQueries(resumeEducationKeyObj.educationArr(resumeId));
+    },
   });
+};

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 
 import { useUserInfo } from "@/apis/auth";
-import { useResumeArr } from "@/apis/users/resume/useResumeArr";
+import { useResumeArr } from "@/apis/users";
 
 import { Layout } from "@/components";
 

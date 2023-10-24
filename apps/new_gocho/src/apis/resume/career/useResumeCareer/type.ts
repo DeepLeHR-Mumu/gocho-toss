@@ -6,7 +6,7 @@ export interface ResponseObjDef {
 }
 
 export interface GetResumeCareerDef {
-  (resumeId: number, careerId: number): Promise<ResponseObjDef>;
+  (resumeId: number, careerId?: number): Promise<ResponseObjDef>;
 }
 
 export type SelectorResumeCareer = ReturnType<typeof selector>;

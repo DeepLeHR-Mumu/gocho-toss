@@ -17,5 +17,5 @@ export interface PostResumeHighSchoolDef {
 }
 
 export interface UsePostResumeHighSchoolProps {
-  (): UseMutationResult<PostResumeHighSchoolResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PostResumeHighSchoolResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

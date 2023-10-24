@@ -5,21 +5,6 @@ import { ListCardProps } from "./type";
 
 import { cssObj } from "./style";
 
-// const menuArr = [
-//   {
-//     content: "고등학교",
-//   },
-//   {
-//     content: "대학교 (2,3년제)",
-//   },
-//   {
-//     content: "대학교 ( 4년제 )",
-//   },
-//   {
-//     content: "기타",
-//   },
-// ];
-
 export const ListCard: FC<ListCardProps> = ({
   title,
   children,

@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { useUserResumeProfile } from "@/apis/users/resume/useUserResumeProfile";
+import { useUserResumeProfile } from "@/apis/users";
 
 import { ListCard } from "../../component";
 import { ProfileForm, ResumeProfile } from "./component";

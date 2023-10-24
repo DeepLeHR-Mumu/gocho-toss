@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 
-import { useResumeEducationArr } from "@/apis/resume/education/useResumeEducationArr";
-
+import { useResumeEducationArr } from "@/apis/resume";
 import { SelectorResumeEducation } from "@/apis/resume/education/useResumeEducationArr/type";
 
 import { EducationPartProps } from "./type";

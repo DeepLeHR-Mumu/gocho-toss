@@ -4,21 +4,20 @@ import { SubmitHandler, UseFormGetValues, UseFormRegister, UseFormSetValue, useF
 import { Button } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
-import { PostCollegeDef, PostExtraDef, PostHighSchoolDef, PostUniversityDef } from "@/apis/resume/education/type";
-
-import { usePostResumeCollege } from "@/apis/resume/education/usePostResumeCollege";
-import { usePostResumeExtra } from "@/apis/resume/education/usePostResumeExtra";
-import { usePostResumeHighSchool } from "@/apis/resume/education/usePostResumeHighSchool";
-import { usePostResumeUniversity } from "@/apis/resume/education/usePostResumeUniversity";
-
-import { usePutResumeHighSchool } from "@/apis/resume/education/usePutResumeHighSchool";
-import { usePutResumeCollege } from "@/apis/resume/education/usePutResumeCollege";
-import { usePutResumeUniversity } from "@/apis/resume/education/usePutResumeUniversity";
-import { usePutResumeExtra } from "@/apis/resume/education/usePutResumeExtra";
-
 import { ResumeDropDown } from "@/pages/resume/component";
-
 import { YYMMToDate } from "@/utils";
+
+import { PostCollegeDef, PostExtraDef, PostHighSchoolDef, PostUniversityDef } from "@/apis/resume/education/type";
+import {
+  usePostResumeCollege,
+  usePostResumeExtra,
+  usePostResumeHighSchool,
+  usePostResumeUniversity,
+  usePutResumeHighSchool,
+  usePutResumeCollege,
+  usePutResumeUniversity,
+  usePutResumeExtra,
+} from "@/apis/resume";
 
 import { cssObj } from "./style";
 import { CollegeForm, HighSchoolForm, UniversityForm } from "./component";
@@ -50,17 +49,17 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
   );
 
   const [{ mutate: postHighSchool }, { mutate: postCollege }, { mutate: postUniversity }, { mutate: postExtra }] = [
-    usePostResumeHighSchool(),
-    usePostResumeCollege(),
-    usePostResumeUniversity(),
-    usePostResumeExtra(),
+    usePostResumeHighSchool(resumeId),
+    usePostResumeCollege(resumeId),
+    usePostResumeUniversity(resumeId),
+    usePostResumeExtra(resumeId),
   ];
 
   const [{ mutate: putHighSchool }, { mutate: putCollege }, { mutate: putUniversity }, { mutate: putExtra }] = [
-    usePutResumeHighSchool(),
-    usePutResumeCollege(),
-    usePutResumeUniversity(),
-    usePutResumeExtra(),
+    usePutResumeHighSchool(resumeId),
+    usePutResumeCollege(resumeId),
+    usePutResumeUniversity(resumeId),
+    usePutResumeExtra(resumeId),
   ];
 
   useEffect(() => {
@@ -137,8 +136,6 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
           }
         );
       }
-
-      return;
 
       return;
     }

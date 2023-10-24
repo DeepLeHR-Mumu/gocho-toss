@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { useDeleteResumeFluency } from "@/apis/resume/fluency/useDeleteResumeFluency";
+import { useDeleteResumeFluency } from "@/apis/resume";
 import { useToast } from "@/globalStates";
 import { ListItem } from "@/pages/resume/component";
 

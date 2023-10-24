@@ -17,5 +17,5 @@ export interface PostResumeExtraDef {
 }
 
 export interface UsePostResumeExtraProps {
-  (): UseMutationResult<PostResumeExtraResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PostResumeExtraResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }
