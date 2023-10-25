@@ -25,7 +25,7 @@ export const TitlePart = ({ jd }: TitlePartProps) => {
       return;
     }
     const newWindow = window.open(url, "_blank", "noopener, noreferrer");
-    if (newWindow) newWindow.opener = null;
+    if (newWindow !== null) newWindow.opener = null;
   };
 
   const isExpired = dDayCalculator(jd.endTime) === "만료";
