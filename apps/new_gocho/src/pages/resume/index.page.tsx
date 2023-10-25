@@ -26,7 +26,7 @@ const ResumePage: NextPage = () => {
           <div css={cssObj.mainContentsWrapper}>
             <ProfilePart userId={userData.id} />
             <EducationPart resumeId={resumeId} />
-            <CareerPart />
+            <CareerPart resumeId={resumeId} />
             <CertificationPart resumeId={resumeId} />
             <FluencyPart resumeId={resumeId} />
             <ActivityPart resumeId={resumeId} />

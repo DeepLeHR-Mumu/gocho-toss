@@ -2,6 +2,7 @@ export { useResumeFluency } from "./fluency/useResumeFluency";
 export { useResumeFluencyArr } from "./fluency/useResumeFluencyArr";
 export { usePostResumeFluency } from "./fluency/usePostResumeFluency";
 export { usePutResumeFluency } from "./fluency/usePutResumeFluency";
+
 export { useDeleteResumeFluency } from "./fluency/useDeleteResumeFluency";
 
 export { useResumeCollege } from "./education/useResumeCollege";
@@ -23,3 +24,8 @@ export { usePutResumeExtra } from "./education/usePutResumeExtra";
 export { useResumeEducationArr } from "./education/useResumeEducationArr";
 
 export { useDeleteResumeEducation } from "./education/useDeleteResumeEducation";
+
+export { useDeleteResumeCareer } from "./career/useDeleteResumeCareer";
+export { usePostResumeCareer } from "./career/usePostResumeCareer";
+export { usePutResumeCareer } from "./career/usePutResumeCareer";
+export { useResumeCareerArr } from "./career/useResumeCareerArr";

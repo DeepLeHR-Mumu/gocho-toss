@@ -17,5 +17,5 @@ export interface PostResumeCareerDef {
 }
 
 export interface UsePostResumeCareerProps {
-  (): UseMutationResult<PostResumeCareerResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PostResumeCareerResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

@@ -1,9 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
 
 import { ErrorResponseDef } from "shared-type/api";
 
 import { axiosInstance } from "@/apis/axiosInstance";
+import { resumeCareerKeyObj } from "@/constants/queryKeyFactory/resume/resumeCareerKeyObj";
 
 import { DeleteResumeCareerDef, RequestObjDef, UseDeleteResumeCareerProps } from "./type";
 
@@ -13,8 +14,13 @@ export const deleteResumeCareer: DeleteResumeCareerDef = async ({ resumeId, care
   return data;
 };
 
-// TODO: 삭제된 후 로직 생각하기
-export const useDeleteResumeCareer: UseDeleteResumeCareerProps = () =>
-  useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
+export const useDeleteResumeCareer: UseDeleteResumeCareerProps = (resumeId) => {
+  const queryClient = useQueryClient();
+
+  return useMutation<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: deleteResumeCareer,
+    onSuccess: () => {
+      queryClient.invalidateQueries(resumeCareerKeyObj.careerArr(resumeId));
+    },
   });
+};

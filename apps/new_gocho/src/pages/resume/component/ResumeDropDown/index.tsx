@@ -15,7 +15,7 @@ export const ResumeDropDown = <T extends string | number>({
 }: ResumeDropDownProps<T>) => (
   <DropDown
     customTitle={
-      <div>
+      <div css={cssObj.wrapper}>
         <Input placeholder={placeholder} required={isReqired} value={value || ""} suffix={<FiChevronDown />} />
       </div>
     }

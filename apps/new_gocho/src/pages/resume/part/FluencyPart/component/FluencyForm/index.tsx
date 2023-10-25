@@ -126,7 +126,12 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
               <p>
                 취득 연월 <strong css={cssObj.required}> *</strong>
               </p>
-              <Input placeholder="예) 200101" maxLength={6} {...register("acquisition_date", { required: true })} />
+              <Input
+                placeholder="예) 200101"
+                width={200}
+                maxLength={6}
+                {...register("acquisition_date", { required: true })}
+              />
             </div>
           </div>
         </>

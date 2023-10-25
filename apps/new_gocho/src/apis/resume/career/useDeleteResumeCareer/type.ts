@@ -13,5 +13,5 @@ export interface DeleteResumeCareerDef {
 }
 
 export interface UseDeleteResumeCareerProps {
-  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

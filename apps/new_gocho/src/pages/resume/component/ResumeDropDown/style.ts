@@ -9,12 +9,20 @@ export const cssObj = {
     align-items: center;
     width: 12.5rem;
     height: 3.5rem;
-    padding: 1rem;
-
-    border: 1px solid ${COLOR.GRAY200};
-    border-radius: 0.75rem;
 
     ${TEXT.BODY2_R1624};
+
+    & > div {
+      width: 12.5rem;
+
+      & > div {
+        width: 12.8rem;
+
+        & > input {
+          width: 8rem;
+        }
+      }
+    }
   `,
 
   placeholder: css`
