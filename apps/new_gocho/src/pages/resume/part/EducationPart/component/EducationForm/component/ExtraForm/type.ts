@@ -1,7 +1,8 @@
-import { UseFormGetValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { FieldErrors, UseFormGetValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { PostExtraDef } from "@/apis/resume/education/type";
 
 export interface ExtraFormProps {
+  errors: FieldErrors<PostExtraDef>;
   register: UseFormRegister<PostExtraDef>;
   setValue: UseFormSetValue<PostExtraDef>;
   getValues: UseFormGetValues<PostExtraDef>;

@@ -1,5 +1,12 @@
 import { FC, useEffect, useState } from "react";
-import { SubmitHandler, UseFormGetValues, UseFormRegister, UseFormSetValue, useForm } from "react-hook-form";
+import {
+  FieldErrors,
+  SubmitHandler,
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+  useForm,
+} from "react-hook-form";
 
 import { Button } from "shared-ui/deeple-ds";
 
@@ -38,15 +45,17 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
 
   const [educationType, setEducationType] = useState<string>(currentEducation?.educationType || "");
 
-  const { register, reset, handleSubmit, setValue, getValues } = useForm<EducationSubmitDef>(
-    currentEducation
-      ? {
-          defaultValues: educationOfDefaultValues(currentEducation),
-        }
-      : {
-          defaultValues: typeOfDefaultValues(educationType),
-        }
-  );
+  const {
+    register,
+    reset,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm<EducationSubmitDef>({
+    defaultValues: currentEducation ? educationOfDefaultValues(currentEducation) : typeOfDefaultValues(educationType),
+    mode: "onSubmit",
+  });
 
   const [{ mutate: postHighSchool }, { mutate: postCollege }, { mutate: postUniversity }, { mutate: postExtra }] = [
     usePostResumeHighSchool(resumeId),
@@ -227,6 +236,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
           setValue={setValue as UseFormSetValue<PostHighSchoolDef>}
           getValues={getValues as UseFormGetValues<PostHighSchoolDef>}
           register={register as UseFormRegister<PostHighSchoolDef>}
+          errors={errors as FieldErrors<PostHighSchoolDef>}
         />
       )}
       {educationType === "대학교(2,3년제)" && isPostCollegeDef(getValues()) && (
@@ -234,10 +244,12 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
           setValue={setValue as UseFormSetValue<PostCollegeDef>}
           getValues={getValues as UseFormGetValues<PostCollegeDef>}
           register={register as UseFormRegister<PostCollegeDef>}
+          errors={errors as FieldErrors<PostCollegeDef>}
         />
       )}
       {educationType === "대학교(4년제)" && isPostUniversityDef(getValues()) && (
         <UniversityForm
+          errors={errors as FieldErrors<PostUniversityDef>}
           setValue={setValue as UseFormSetValue<PostUniversityDef>}
           getValues={getValues as UseFormGetValues<PostUniversityDef>}
           register={register as UseFormRegister<PostUniversityDef>}
@@ -245,6 +257,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       )}
       {educationType === "기타" && isPostExtraDef(getValues()) && (
         <ExtraForm
+          errors={errors as FieldErrors<PostExtraDef>}
           setValue={setValue as UseFormSetValue<PostExtraDef>}
           getValues={getValues as UseFormGetValues<PostExtraDef>}
           register={register as UseFormRegister<PostExtraDef>}

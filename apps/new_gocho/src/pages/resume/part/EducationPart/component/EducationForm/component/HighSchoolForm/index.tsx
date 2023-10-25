@@ -9,8 +9,9 @@ import { AttendanceForm } from "../AttendanceForm";
 import { cssObj } from "./style";
 import { HighSchoolFormProps } from "./type";
 import { graduateTypeArr } from "../../constants";
+import { isErrorAlternativeTest } from "./util";
 
-export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, getValues }) => {
+export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [isAlternativeTest, setIsAlternativeTest] = useState(getValues("is_alternative_test"));
 
@@ -24,9 +25,17 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
           placeholder="학교명을 입력해 주세요"
           css={cssObj.schoolInput}
           state={{
-            state: isAlternativeTest ? "disabled" : "default",
+            state: isErrorAlternativeTest(errors, isAlternativeTest),
+            message: errors.name ? errors.name.message : "",
           }}
-          {...register("name")}
+          maxLength={20}
+          {...register("name", {
+            required: {
+              value: true,
+              message: "해당 항목을 입력해주세요",
+            },
+            maxLength: 20,
+          })}
         />
         <div css={cssObj.checkbox}>
           <Checkbox
@@ -35,6 +44,7 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
               if (!isAlternativeTest) {
                 setValue("name", "검정고시");
                 setValue("graduate_type", "졸업");
+                setValue("end_date", null);
               }
               if (isAlternativeTest) setValue("name", "");
 
@@ -49,11 +59,19 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
           <p>
             졸업 구분 <strong css={cssObj.required}> *</strong>
           </p>
+
+          {/* TODO: 드롭 다운에서 의 Validation과 Errormessage 처리 하기  */}
           <ResumeDropDown
             menuArr={graduateTypeArr}
             setValue={setGraduateType}
             value={graduateType}
             placeholder="선택"
+            // register={register("graduate_type", {
+            //   required: {
+            //     value: true,
+            //     message: "해당 항목을 입력해주세요",
+            //   },
+            // })}
             onClickCallback={() => {
               setValue("graduate_type", graduateType);
               if (graduateType === "재학") {
@@ -69,11 +87,34 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
             <p>
               합격 연월 <strong css={cssObj.required}> *</strong>
             </p>
-            <Input placeholder="예)200101" {...register("start_date")} />
+            <Input
+              placeholder="예)200101"
+              state={{
+                state: errors.start_date ? "error" : "default",
+                message: errors.start_date ? errors.start_date.message : "",
+              }}
+              maxLength={6}
+              {...register("start_date", {
+                required: {
+                  value: true,
+                  message: "해당 항목을 입력해주세요",
+                },
+                maxLength: 6,
+                pattern: {
+                  value: /^\d{4}(0[1-9]|1[0-2])$/i,
+                  message: "올바른 합격 연월을 입력해 주세요",
+                },
+              })}
+            />
           </div>
           <div css={cssObj.inputWrapper}>
             <p>기타 사항</p>
-            <Input placeholder="기타 참고 정보를 입력해 주세요." css={cssObj.etcInput} {...register("etc")} />
+            <Input
+              placeholder="기타 참고 정보를 입력해 주세요."
+              css={cssObj.etcInput}
+              maxLength={50}
+              {...register("etc")}
+            />
           </div>
         </>
       ) : (
@@ -83,36 +124,96 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ register, setValue, ge
               <p>
                 입학 연월 <strong css={cssObj.required}> *</strong>
               </p>
-              <Input placeholder="예)200101" {...register("start_date")} />
+              <Input
+                placeholder="예)200101"
+                state={{
+                  state: errors.start_date ? "error" : "default",
+                  message: errors.start_date ? errors.start_date.message : "",
+                }}
+                maxLength={6}
+                {...register("start_date", {
+                  required: {
+                    value: true,
+                    message: "해당 항목을 입력해주세요",
+                  },
+                  pattern: {
+                    value: /^\d{4}(0[1-9]|1[0-2])$/i,
+                    message: "올바른 입학 연월을 입력해 주세요",
+                  },
+                })}
+              />
             </div>
             {!["재학", "중퇴"].includes(graduateType) && (
               <div css={cssObj.inputWrapper}>
                 <p>
                   졸업 연월 <strong css={cssObj.required}> *</strong>
                 </p>
-                <Input placeholder="예)200101" {...register("end_date")} />
+                <Input
+                  placeholder="예)200101"
+                  {...register("end_date")}
+                  state={{
+                    state: errors.end_date ? "error" : "default",
+                    message: errors.end_date ? errors.end_date.message : "",
+                  }}
+                  maxLength={6}
+                  {...register("end_date", {
+                    min: getValues("start_date"),
+                    required: {
+                      value: true,
+                      message: "해당 항목을 입력해주세요",
+                    },
+                    pattern: {
+                      value: /^\d{4}(0[1-9]|1[0-2])$/i,
+                      message: "올바른 입학 연월을 입력해 주세요",
+                    },
+                  })}
+                />
               </div>
             )}
           </div>
           <div css={cssObj.inputFlexbox}>
             <div css={cssObj.inputWrapper}>
               <p>전공/학과</p>
-              <Input placeholder="전공 또는 학과 입력" {...register("major")} />
+              <Input placeholder="전공 또는 학과 입력" maxLength={15} {...register("major")} />
             </div>
             <div css={cssObj.inputWrapper}>
               <p>내신 등급</p>
-              <Input placeholder="평균 내신 등급 입력" {...register("grade")} />
+              <Input
+                placeholder="평균 내신 등급 입력"
+                min={1.0}
+                max={9.0}
+                step={0.01}
+                state={{
+                  state: errors.grade ? "error" : "default",
+                  message: errors.grade ? errors.grade.message : "",
+                }}
+                {...register("grade", {
+                  min: {
+                    value: 1.0,
+                    message: "1.00~9.00사이의 값을 입력해 주세요.",
+                  },
+                  max: {
+                    value: 9.0,
+                    message: "1.00~9.00사이의 값을 입력해 주세요.",
+                  },
+                })}
+              />
             </div>
           </div>
 
           <div css={cssObj.inputWrapper}>
             <p>기타 사항</p>
-            <Input placeholder="기타 참고 정보를 입력해 주세요." css={cssObj.etcInput} {...register("etc")} />
+            <Input
+              placeholder="기타 참고 정보를 입력해 주세요."
+              css={cssObj.etcInput}
+              maxLength={50}
+              {...register("etc")}
+            />
           </div>
 
           <div css={cssObj.inputWrapper}>
             <p css={cssObj.attendanceLabel}>출결 사항</p>
-            <AttendanceForm register={register} />
+            <AttendanceForm register={register} setValue={setValue} />
           </div>
         </>
       )}

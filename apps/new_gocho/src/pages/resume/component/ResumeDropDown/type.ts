@@ -3,5 +3,6 @@ export interface ResumeDropDownProps<T extends string | number> {
   value: T | null;
   setValue: (value: T) => void;
   menuArr: { content: T }[];
+  isReqired?: boolean;
   onClickCallback?: () => void;
 }
