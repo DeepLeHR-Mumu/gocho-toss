@@ -35,42 +35,47 @@ export const useAxiosInterceptor = () => {
   const getNewAccessToken = async (): Promise<string> => {
     if (!isRefreshing) {
       isRefreshing = true;
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (!refreshToken) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        throw new axios.Cancel("getNewAccessToken - No refreshToken");
-      }
+      try {
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (!refreshToken) {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          throw new axios.Cancel("getNewAccessToken - No refreshToken");
+        }
 
-      axios
-        .get(`${BACKEND_URL}/auth/refresh`, {
-          headers: { "x-refresh-token": refreshToken },
-        })
-        .then(({ data }) => {
-          isRefreshing = false;
-          localStorage.setItem("accessToken", data.data.access_token);
-          localStorage.setItem("refreshToken", data.data.refresh_token);
-          onRefreshed();
-        })
-        .catch((error) => {
-          isRefreshing = false;
-          const { error_code } = error.response.data;
+        const response = await axios.get<{ data: { access_token: string; refresh_token: string } }>(
+          `${BACKEND_URL}/auth/refresh`,
+          {
+            headers: { "x-refresh-token": refreshToken },
+          }
+        );
+        const { access_token, refresh_token } = response.data.data;
+        localStorage.setItem("accessToken", access_token);
+        localStorage.setItem("refreshToken", refresh_token);
+        onRefreshed();
+        return access_token;
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          const { error_code } = error.response.data as { error_code: string };
           if (error_code === "EMPTY_JWT_REDIS" || error_code === "UNAUTHORIZED") {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
+            onRefreshed();
             throw new axios.Cancel("getNewAccessToken - No Token");
           }
-
-          throw error;
+        }
+        throw error;
+      } finally {
+        isRefreshing = false;
+      }
+    } else {
+      return new Promise<string>((resolve) => {
+        subscribeTokenRefresh(() => {
+          const newToken = localStorage.getItem("accessToken");
+          resolve(newToken || "");
         });
-    }
-
-    return new Promise<string>((resolve) => {
-      subscribeTokenRefresh(() => {
-        const newToken = localStorage.getItem("accessToken");
-        resolve(newToken || "");
       });
-    });
+    }
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
