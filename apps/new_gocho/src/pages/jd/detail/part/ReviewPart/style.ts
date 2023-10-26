@@ -85,26 +85,6 @@ export const cssObj = {
     flex-direction: column;
     gap: 1.25rem;
     ${blurred && "-webkit-filter: blur(10px); filter: blur(10px);"}
-
-    // Add CSS for the hover effect
-    .content {
-      position: relative;
-    }
-
-    .content::before {
-      content: "Hover Text Here"; // Replace with your desired text
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: none; // Initially hidden
-      background-color: rgba(0, 0, 0, 0.8); // Background color for the text
-      color: white; // Text color
-      padding: 10px; // Adjust padding as needed
-    }
-
-    .content:hover::before {
-      display: block; // Show the text on hover
-    }
   `,
 
   noComment: css`
