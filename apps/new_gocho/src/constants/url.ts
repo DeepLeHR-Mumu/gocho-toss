@@ -10,4 +10,5 @@ export const INTERNAL_URL = {
   JD_LIST: "/jd/list",
   JD_DETAIL: "/jd/detail",
   MYPAGE: "/mypage",
+  RESUME: "/resume",
 };

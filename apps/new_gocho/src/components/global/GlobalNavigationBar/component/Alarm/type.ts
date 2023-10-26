@@ -1,4 +1,4 @@
 export interface AlarmProps {
-  className?: string;
+  isThemeWhite: boolean;
   userId: number;
 }

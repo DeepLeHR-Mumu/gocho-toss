@@ -3,8 +3,17 @@ import { COLOR } from "shared-style/color";
 import { TEXT } from "shared-style/text";
 
 export const cssObj = {
-  alarmIcon: css`
+  alarmIcon: (isThemeWhite: boolean) => css`
     position: relative;
+    color: ${isThemeWhite ? COLOR.BLUE300 : COLOR.WHITE};
+    margin-right: 0.5rem;
+    ${TEXT.TITLE5_M1620}
+
+    > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 0.25rem;
+    }
 
     > span {
       position: absolute;

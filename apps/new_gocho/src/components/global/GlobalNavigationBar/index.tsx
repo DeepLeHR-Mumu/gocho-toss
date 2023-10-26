@@ -4,13 +4,16 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
+import { SearchBar, DropDown, Profile, Popup } from "shared-ui/deeple-ds";
 
 import { useUserInfo, useDoLogout } from "@/apis/auth";
 import { searchFunnelEvent } from "@/ga/search";
 import logoWhite from "@/public/image/logo/gocho/white.svg";
 import logoBlue from "@/public/image/logo/gocho/blue.svg";
+import resumeIconBlue from "@/public/image/resume/myResumeBlue.svg";
+import resumeIconWhite from "@/public/image/resume/myResumeWhite.svg";
 import { INTERNAL_URL } from "@/constants";
+import { useToast } from "@/globalStates";
 
 import { SearchModal } from "../../modal/SearchModal";
 import { LoginModal } from "../../modal/LoginModal";
@@ -36,14 +39,17 @@ export const GlobalNavigationBar = () => {
     etcWrapper,
     businessServiceButton,
     loginButton,
+    resumeLink,
     alarmIcon,
   } = getCssObj(isThemeWhite);
 
   const [loginModal, setLoginModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
+  const [resumeModal, setResumeModal] = useState(false);
 
   const { data: userData, isSuccess } = useUserInfo();
   const { mutate: postLogout } = useDoLogout();
+  const { setToastMessage } = useToast();
 
   const openSearchModal = () => {
     router.push(INTERNAL_URL.SEARCH);
@@ -53,6 +59,14 @@ export const GlobalNavigationBar = () => {
 
   const openLoginModal = () => {
     setLoginModal(true);
+  };
+
+  const clickResumeLink = () => {
+    if (userData?.isPass) {
+      router.push(INTERNAL_URL.RESUME);
+      return;
+    }
+    setResumeModal(true);
   };
 
   const doLogout = () => {
@@ -121,7 +135,10 @@ export const GlobalNavigationBar = () => {
               </a>
               {isSuccess ? (
                 <>
-                  <Alarm userId={userData.id} css={alarmIcon} />
+                  <button type="button" onClick={clickResumeLink} css={resumeLink}>
+                    <Image src={isThemeWhite ? resumeIconBlue : resumeIconWhite} alt="이력서 아이콘" /> 나의 이력서
+                  </button>
+                  <Alarm userId={userData.id} isThemeWhite={isThemeWhite} />
                   <DropDown
                     customTitle={<Profile src={userData.image} size={40} altText={`${userData.nickname} 유저 로고`} />}
                     menu={{
@@ -209,6 +226,26 @@ export const GlobalNavigationBar = () => {
         <SearchModal
           close={() => {
             setSearchModal(false);
+          }}
+        />
+      )}
+      {resumeModal && (
+        <Popup
+          title="본인 인증 후 이력서를 작성해 보세요!"
+          description="PASS 인증을 통해 간편하게 이력서를 작성하고, 인증된 이력서로 지원하고 싶은 공고에 바로 지원해 보세요."
+          cancel={{
+            text: "취소",
+            handler: () => {
+              setResumeModal(false);
+            },
+          }}
+          confirm={{
+            text: "인증하기",
+            handler: () => {
+              // TODO: PASS 인증 링크 or 로직 추가
+              setResumeModal(false);
+              setToastMessage("PASS 인증 링크 or 로직 추가");
+            },
           }}
         />
       )}
