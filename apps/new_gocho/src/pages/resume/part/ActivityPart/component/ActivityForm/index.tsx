@@ -26,13 +26,16 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
   } = useForm<PostActivityDef>({
     mode: "onChange",
 
-    defaultValues: currentActivity && {
-      name: currentActivity.name,
-      organizer: currentActivity.organizer,
-      activity_date: dateToYYMM(currentActivity.activityDate),
-      activity_description: currentActivity.activityDescription,
-      activity_type: currentActivity.activityType,
-    },
+    defaultValues:
+      currentActivity !== null
+        ? {
+            name: currentActivity.name,
+            organizer: currentActivity.organizer,
+            activity_date: dateToYYMM(currentActivity.activityDate),
+            activity_description: currentActivity.activityDescription,
+            activity_type: currentActivity.activityType,
+          }
+        : {},
   });
 
   const { mutate: postActivity } = usePostResumeActivity(resumeId);

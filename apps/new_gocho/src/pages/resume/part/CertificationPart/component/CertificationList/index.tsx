@@ -23,8 +23,8 @@ export const CertificationList: FC<CertificationListProps> = ({
           <ListItem
             key={id}
             title={name}
+            titleDes={issuingAuthority}
             date={[acquisitionDate]}
-            desciption={issuingAuthority}
             editHadnler={() => {
               selectCertification({ id, name, issuingAuthority, acquisitionDate });
             }}

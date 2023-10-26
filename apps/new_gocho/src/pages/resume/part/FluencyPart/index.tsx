@@ -9,7 +9,7 @@ import { FluencyPartProps } from "./type";
 
 export const FluencyPart: FC<FluencyPartProps> = ({ resumeId }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [currentFluency, setCurrentFluency] = useState<SelectorResumeFluency>();
+  const [currentFluency, setCurrentFluency] = useState<SelectorResumeFluency | null>(null);
 
   const { data: myFluencyList } = useResumeFluencyArr(resumeId);
 
@@ -19,7 +19,7 @@ export const FluencyPart: FC<FluencyPartProps> = ({ resumeId }) => {
   };
 
   const handleEditMode = () => {
-    setCurrentFluency(undefined);
+    setCurrentFluency(null);
     setEditMode(!editMode);
   };
 

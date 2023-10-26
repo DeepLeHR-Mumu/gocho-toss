@@ -25,7 +25,7 @@ export { useResumeEducationArr } from "./education/useResumeEducationArr";
 
 export { useDeleteResumeEducation } from "./education/useDeleteResumeEducation";
 
-export { useDeleteResumeCareer } from "./career/useDeleteResumeCareer";
+export { useResumeCareerArr } from "./career/useResumeCareerArr";
 export { usePostResumeCareer } from "./career/usePostResumeCareer";
 export { usePutResumeCareer } from "./career/usePutResumeCareer";
-export { useResumeCareerArr } from "./career/useResumeCareerArr";
+export { useDeleteResumeCareer } from "./career/useDeleteResumeCareer";

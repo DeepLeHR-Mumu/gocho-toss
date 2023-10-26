@@ -15,6 +15,7 @@ export const cssObj = {
   headerWrapper: css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding-bottom: 0.75rem;
   `,
 
@@ -40,13 +41,11 @@ export const cssObj = {
 
   title: css`
     ${TEXT.TITLE4_B1822};
-    line-height: 1.375rem;
     margin-right: 1rem;
   `,
   titelDes: css`
     ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY500};
-    line-height: 1.25rem;
     margin-right: 0.5rem;
   `,
 

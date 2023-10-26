@@ -3,5 +3,5 @@ import { SelectorResumeFluency } from "@/apis/resume/fluency/useResumeFluency/ty
 export interface FluencyFormProps {
   resumeId: number;
   handleEditMode: () => void;
-  currentFluency?: SelectorResumeFluency;
+  currentFluency: SelectorResumeFluency | null;
 }

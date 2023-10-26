@@ -5,6 +5,7 @@ import { useDeleteResumeCareer } from "@/apis/resume";
 import { useToast } from "@/globalStates";
 
 import { CarrerListProps } from "./type";
+import { cssObj } from "./style";
 
 export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarrerList }) => {
   const { mutate: deleteCarrer } = useDeleteResumeCareer(resumeId);
@@ -15,7 +16,7 @@ export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarr
         const {
           id,
           name,
-          // isWorking,
+          isWorking,
           startDate,
           endDate,
           contractType,
@@ -30,8 +31,7 @@ export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarr
             key={id}
             title={name}
             titleDes={contractType || ""}
-            desciption={[department || "", position || "", jobDescription, retireDescription, pay].join("/")}
-            date={[startDate, endDate || ""]}
+            date={isWorking ? [startDate] : [startDate, endDate || ""]}
             editHadnler={() => {
               selectCarrer(carrer);
             }}
@@ -48,7 +48,29 @@ export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarr
                 }
               );
             }}
-          />
+          >
+            <div css={cssObj.wrapper}>
+              {(department || position) && (
+                <div css={cssObj.infoWrapper}>
+                  <p>{department || ""}</p>
+                  <p>{position || ""}</p>
+                </div>
+              )}
+              {jobDescription && <p css={cssObj.infoDes}>{jobDescription}</p>}
+              {retireDescription && (
+                <div>
+                  <h3 css={cssObj.retireHead}>퇴사사유</h3>
+                  <p css={cssObj.infoDes}>{retireDescription}</p>
+                </div>
+              )}
+              {pay && (
+                <div css={cssObj.payWrapper}>
+                  <h3>연봉</h3>
+                  <p>{pay.toLocaleString("ko-KR")} 만원</p>
+                </div>
+              )}
+            </div>
+          </ListItem>
         );
       })}
     </>

@@ -9,10 +9,10 @@ import { ActivityPartProps } from "./type";
 
 export const ActivityPart: FC<ActivityPartProps> = ({ resumeId }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [currentActivity, setCurrentActivity] = useState<SelectorResumeActivity>();
+  const [currentActivity, setCurrentActivity] = useState<SelectorResumeActivity | null>(null);
 
   const handleEditMode = () => {
-    setCurrentActivity(undefined);
+    setCurrentActivity(null);
     setEditMode(!editMode);
   };
 

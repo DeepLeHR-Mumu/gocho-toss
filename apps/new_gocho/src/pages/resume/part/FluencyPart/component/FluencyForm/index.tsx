@@ -29,10 +29,14 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
   } = useForm<PostFluencyDef>({
     mode: "onChange",
 
-    defaultValues: currentFluency && {
-      grade: currentFluency.grade,
-      acquisition_date: dateToYYMM(currentFluency.acquisitionDate),
-    },
+    defaultValues:
+      currentFluency !== null
+        ? {
+            grade: currentFluency.grade,
+            name: currentFluency.name,
+            acquisition_date: dateToYYMM(currentFluency.acquisitionDate),
+          }
+        : {},
   });
 
   const { mutate: postFluency } = usePostResumeFluency(resumeId);
@@ -40,16 +44,6 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
 
   const onSubmitResumeFluency: SubmitHandler<PostFluencyDef> = async (data) => {
     const { acquisition_date, grade } = data;
-
-    if (!languageType.length) {
-      setToastMessage("언어를 선택해주세요.");
-      return;
-    }
-
-    if (!languageTest.length) {
-      setToastMessage("시험 유형을 선택해주세요.");
-      return;
-    }
 
     const onSuccess = () => {
       setToastMessage("어학 항목 업로드가 완료되었습니다.");
@@ -116,7 +110,7 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
             </p>
 
             <Controller
-              name="language_type"
+              name="name"
               control={control}
               rules={{ required: "해당 항목을 선택해주세요" }}
               render={({ field, fieldState }) => (

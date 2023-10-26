@@ -8,7 +8,7 @@ import { CareerPartProps } from "./type";
 
 export const CareerPart: FC<CareerPartProps> = ({ resumeId }) => {
   const [editMode, setEditMode] = useState(false);
-  const [currentCarrer, setCurrentCarrer] = useState<SelectorResumeCareer>();
+  const [currentCarrer, setCurrentCarrer] = useState<SelectorResumeCareer | null>(null);
 
   const { data: myCarrerList } = useResumeCareerArr(resumeId);
 
@@ -18,7 +18,7 @@ export const CareerPart: FC<CareerPartProps> = ({ resumeId }) => {
   };
 
   const handleEditMode = () => {
-    setCurrentCarrer(undefined);
+    setCurrentCarrer(null);
     setEditMode(!editMode);
   };
 

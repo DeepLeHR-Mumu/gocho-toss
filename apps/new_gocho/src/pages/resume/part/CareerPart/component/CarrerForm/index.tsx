@@ -7,6 +7,7 @@ import { useToast } from "@/globalStates";
 import { ResumeDropDown } from "@/pages/resume/component";
 
 import { PostCareerDef } from "@/apis/resume/career/type";
+
 import { usePostResumeCareer, usePutResumeCareer } from "@/apis/resume";
 import { YYMMToDate } from "@/utils";
 
@@ -34,8 +35,8 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
     defaultValues: currentCarrer ? carrerToDefaultValue(currentCarrer) : carrerDefaultValue,
   });
 
-  const { mutate: postCarrer } = usePostResumeCareer(resumeId);
-  const { mutate: putCarrer } = usePutResumeCareer(resumeId);
+  const { mutate: postCareer } = usePostResumeCareer(resumeId);
+  const { mutate: putCareer } = usePutResumeCareer(resumeId);
 
   const onSubmitResumeCarrer: SubmitHandler<PostCareerDef> = async (data) => {
     // TODO: length가 0 인경우 null 처리 하기 (부서, 회사)
@@ -49,7 +50,7 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
     if (currentCarrer) {
       const { id } = currentCarrer;
 
-      putCarrer(
+      putCareer(
         {
           resumeId,
           careerId: id,
@@ -63,7 +64,7 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
         }
       );
     } else {
-      postCarrer(
+      postCareer(
         {
           resumeId,
           ...data,
@@ -111,7 +112,7 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
       <div css={cssObj.inputFlexbox}>
         <div css={cssObj.inputWrapper}>
           <p>
-            입학 연월 <strong css={cssObj.required}> *</strong>
+            입사 연월 <strong css={cssObj.required}> *</strong>
           </p>
           <Input
             placeholder="예)200101"
