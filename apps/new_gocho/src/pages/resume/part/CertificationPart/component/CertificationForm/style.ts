@@ -65,4 +65,9 @@ export const cssObj = {
     padding: 1rem;
     ${TEXT.BODY2_R1624};
   `,
+
+  required: css`
+    color: ${COLOR.BLUE300};
+    ${TEXT.TITLE5_M1620};
+  `,
 };

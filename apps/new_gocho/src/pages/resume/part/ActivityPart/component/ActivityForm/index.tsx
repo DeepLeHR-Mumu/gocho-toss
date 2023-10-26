@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FC } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Button, Input } from "shared-ui/deeple-ds";
 
 import { PostActivityDef } from "@/apis/resume/activity/type";
@@ -16,11 +16,14 @@ import { cssObj } from "./style";
 import { ActivityFormProps } from "./type";
 
 export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, currentActivity }) => {
-  const [activityType, setActivityType] = useState<string>(currentActivity?.activityType || "");
-
   const { setToastMessage } = useToast();
 
-  const { register, handleSubmit } = useForm<PostActivityDef>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<PostActivityDef>({
     mode: "onChange",
 
     defaultValues: currentActivity && {
@@ -36,14 +39,9 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
   const { mutate: putActivity } = usePutResumeActivity(resumeId);
 
   const onSubmitResumeActivity: SubmitHandler<PostActivityDef> = async (data) => {
-    const { activity_date, activity_description, organizer, name } = data;
+    const { activity_date } = data;
 
-    if (!activityType) {
-      setToastMessage("대외활동 유형을 선택해주세요.");
-      return;
-    }
-
-    const onSuccess = () => {
+    const onActivitySuccess = () => {
       setToastMessage("대외활동 업로드가 완료되었습니다.");
 
       handleEditMode();
@@ -54,30 +52,24 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
 
       putActivity(
         {
-          activityId: id,
           resumeId,
-          name,
-          activity_description,
-          organizer,
+          activityId: id,
+          ...data,
           activity_date: YYMMToDate(activity_date),
-          activity_type: activityType,
         },
         {
-          onSuccess,
+          onSuccess: onActivitySuccess,
         }
       );
     } else {
       postActivity(
         {
-          name,
           resumeId,
-          activity_description,
-          organizer,
+          ...data,
           activity_date: YYMMToDate(activity_date),
-          activity_type: activityType,
         },
         {
-          onSuccess,
+          onSuccess: onActivitySuccess,
         }
       );
     }
@@ -89,13 +81,26 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
         <p>
           유형 <strong css={cssObj.required}> *</strong>
         </p>
-        <ResumeDropDown
-          menuArr={menuArr}
-          setValue={setActivityType}
-          value={activityType}
-          placeholder="활동 유형 선택"
+
+        <Controller
+          name="activity_type"
+          control={control}
+          rules={{ required: "해당 항목을 선택해주세요" }}
+          render={({ field, fieldState }) => (
+            <ResumeDropDown
+              menuArr={menuArr}
+              setValue={field.onChange}
+              value={field.value}
+              placeholder="활동 유형 선택"
+              state={{
+                state: fieldState.invalid ? "error" : "default",
+                message: fieldState.error?.message,
+              }}
+            />
+          )}
         />
       </div>
+
       <div css={cssObj.inputWrapper}>
         <p>
           활동명 <strong css={cssObj.required}> *</strong>
@@ -104,9 +109,19 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
           placeholder="참여한 활동명을 입력해 주세요"
           maxLength={40}
           css={cssObj.inputWidth}
-          {...register("name", { required: true })}
+          state={{
+            state: errors.name ? "error" : "default",
+            message: errors.name?.message,
+          }}
+          {...register("name", {
+            required: {
+              value: true,
+              message: "해당 항목을 입력해 주세요.",
+            },
+          })}
         />
       </div>
+
       <div css={cssObj.inputWrapper}>
         <p>
           주최 기관 <strong css={cssObj.required}> *</strong>
@@ -114,16 +129,44 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
         <Input
           placeholder="참여한 활동의 기관을 입력해 주세요"
           css={cssObj.inputWidth}
+          state={{
+            state: errors.name ? "error" : "default",
+            message: errors.name?.message,
+          }}
+          {...register("organizer", {
+            required: {
+              value: true,
+              message: "해당 항목을 입력해 주세요.",
+            },
+          })}
           maxLength={40}
-          {...register("organizer", { required: true })}
         />
       </div>
+
       <div css={cssObj.inputWrapper}>
         <p>
           활동 연월 <strong css={cssObj.required}> *</strong>
         </p>
-        <Input placeholder="예) 200101" maxLength={6} {...register("activity_date", { required: true })} />
+        <Input
+          placeholder="예) 200101"
+          maxLength={6}
+          state={{
+            state: errors.activity_date ? "error" : "default",
+            message: errors.activity_date?.message,
+          }}
+          {...register("activity_date", {
+            required: {
+              value: true,
+              message: "해당 항목을 입력해주세요",
+            },
+            pattern: {
+              value: /^\d{4}(0[1-9]|1[0-2])$/i,
+              message: "올바른 활동 연월을 입력해 주세요",
+            },
+          })}
+        />
       </div>
+
       <div css={cssObj.inputWrapper}>
         <p>
           활동 내용 <strong css={cssObj.required}> *</strong>
@@ -131,8 +174,17 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
         <Input
           placeholder="활동 상세 내용을 입력해 주세요"
           css={cssObj.desWidth}
+          state={{
+            state: errors.activity_description ? "error" : "default",
+            message: errors.activity_description?.message,
+          }}
           maxLength={300}
-          {...register("activity_description", { required: true })}
+          {...register("activity_description", {
+            required: {
+              value: true,
+              message: "해당 항목을 입력해 주세요",
+            },
+          })}
         />
       </div>
 

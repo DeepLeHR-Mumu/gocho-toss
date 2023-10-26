@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { Controller } from "react-hook-form";
 
 import { Input } from "shared-ui/deeple-ds";
 
@@ -8,7 +9,7 @@ import { cssObj } from "./style";
 import { etcGraduateTypeArr, gradeArr } from "../../constants";
 import { ExtraFormProps } from "./type";
 
-export const ExtraForm: FC<ExtraFormProps> = ({ errors, register, setValue, getValues }) => {
+export const ExtraForm: FC<ExtraFormProps> = ({ control, errors, register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [maxGrade, setMaxGrade] = useState<number | null>(getValues("max_grade"));
 
@@ -60,11 +61,25 @@ export const ExtraForm: FC<ExtraFormProps> = ({ errors, register, setValue, getV
         <p>
           졸업 구분 <strong css={cssObj.required}> *</strong>
         </p>
-        <ResumeDropDown
-          menuArr={etcGraduateTypeArr}
-          setValue={setGraduateType}
-          value={graduateType}
-          placeholder="선택"
+        <Controller
+          name="graduate_type"
+          control={control}
+          rules={{ required: "해당 항목을 선택해주세요" }}
+          render={({ field, fieldState }) => (
+            <ResumeDropDown
+              menuArr={etcGraduateTypeArr}
+              setValue={(value) => {
+                field.onChange(value);
+                setGraduateType(value);
+              }}
+              value={field.value}
+              placeholder="선택"
+              state={{
+                state: fieldState.invalid ? "error" : "default",
+                message: fieldState.error?.message,
+              }}
+            />
+          )}
         />
       </div>
       <div css={cssObj.inputFlexbox}>

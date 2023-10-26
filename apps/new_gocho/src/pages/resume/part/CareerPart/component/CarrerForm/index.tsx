@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { Button, Input, Switch } from "shared-ui/deeple-ds";
 
@@ -16,13 +16,13 @@ import { carrerToDefaultValue } from "./util";
 import { CarrerFormProps } from "./type";
 
 export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, currentCarrer }) => {
-  const [contractType, setContractType] = useState<string>(currentCarrer?.contractType || "");
   const [isWorking, setIsWorking] = useState(currentCarrer?.isWorking || false);
 
   const { setToastMessage } = useToast();
 
   const {
     register,
+    control,
     setValue,
     getValues,
     handleSubmit,
@@ -38,7 +38,9 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
   const { mutate: putCarrer } = usePutResumeCareer(resumeId);
 
   const onSubmitResumeCarrer: SubmitHandler<PostCareerDef> = async (data) => {
-    const onSuccess = () => {
+    // TODO: length가 0 인경우 null 처리 하기 (부서, 회사)
+
+    const onCarrerSuccess = () => {
       setToastMessage("경력 항목 업로드가 완료되었습니다.");
 
       handleEditMode();
@@ -54,9 +56,10 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
           ...data,
           start_date: YYMMToDate(data.start_date),
           end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          is_working: isWorking,
         },
         {
-          onSuccess,
+          onSuccess: onCarrerSuccess,
         }
       );
     } else {
@@ -66,9 +69,10 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
           ...data,
           start_date: YYMMToDate(data.start_date),
           end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          is_working: isWorking,
         },
         {
-          onSuccess,
+          onSuccess: onCarrerSuccess,
         }
       );
     }
@@ -76,12 +80,10 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
 
   useEffect(() => {
     if (isWorking) {
-      setValue("end_date", "");
+      setValue("end_date", null);
       clearErrors("end_date");
     }
-
-    setValue("contract_type", contractType);
-  }, [setValue, clearErrors, isWorking, contractType]);
+  }, [setValue, clearErrors, isWorking]);
 
   return (
     <form onSubmit={handleSubmit(onSubmitResumeCarrer)} css={cssObj.wrapper}>
@@ -175,11 +177,22 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
           <p>
             고용 형태 <strong css={cssObj.required}> *</strong>
           </p>
-          <ResumeDropDown
-            menuArr={contractTypeArr}
-            setValue={setContractType}
-            value={contractType}
-            placeholder="선택"
+          <Controller
+            name="contract_type"
+            control={control}
+            rules={{ required: "해당 항목을 선택해주세요" }}
+            render={({ field, fieldState }) => (
+              <ResumeDropDown
+                menuArr={contractTypeArr}
+                setValue={field.onChange}
+                value={field.value}
+                placeholder="선택"
+                state={{
+                  state: fieldState.invalid ? "error" : "default",
+                  message: fieldState.error?.message,
+                }}
+              />
+            )}
           />
         </div>
         <div css={cssObj.inputWrapper}>
