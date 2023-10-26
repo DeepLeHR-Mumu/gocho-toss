@@ -66,6 +66,16 @@ export const cssObj = {
     ${TEXT.BODY3_R1422}
   `,
 
+  loginDesc: css`
+    position: absolute;
+    text-align: center;
+    top: 45%;
+    left: 3rem;
+    z-index: 20;
+    color: ${COLOR.BLACK};
+    ${TEXT.BODY2_R1624}
+  `,
+
   contentsWrapper: (blurred: boolean) => css`
     padding: 1.125rem 1rem 1rem;
     background-color: ${COLOR.GRAY100};
@@ -74,7 +84,27 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    ${blurred && "-webkit-filter: blur(3px); filter: blur(3px);"}
+    ${blurred && "-webkit-filter: blur(10px); filter: blur(10px);"}
+
+    // Add CSS for the hover effect
+    .content {
+      position: relative;
+    }
+
+    .content::before {
+      content: "Hover Text Here"; // Replace with your desired text
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none; // Initially hidden
+      background-color: rgba(0, 0, 0, 0.8); // Background color for the text
+      color: white; // Text color
+      padding: 10px; // Adjust padding as needed
+    }
+
+    .content:hover::before {
+      display: block; // Show the text on hover
+    }
   `,
 
   noComment: css`
