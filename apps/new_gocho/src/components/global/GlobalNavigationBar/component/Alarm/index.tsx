@@ -13,7 +13,7 @@ import { AlarmDef } from "@/apis/users/alarm/type";
 import { AlarmProps } from "./type";
 import { cssObj } from "./style";
 
-export const Alarm = ({ className, userId }: AlarmProps) => {
+export const Alarm = ({ isThemeWhite, userId }: AlarmProps) => {
   const queryClient = useQueryClient();
   const { data: alarmData, fetchNextPage } = useInfiniteAlarmArr({ userId, size: 5 });
   const { mutate: readAlarmAll } = useReadAlarmAll();
@@ -48,8 +48,8 @@ export const Alarm = ({ className, userId }: AlarmProps) => {
   return (
     <DropDown
       customTitle={
-        <button type="button" css={cssObj.alarmIcon}>
-          <FiBell className={className} />
+        <button type="button" css={cssObj.alarmIcon(isThemeWhite)}>
+          <FiBell /> 알림
           {!isAlarmAllRead && <span css={cssObj.redDot} />}
         </button>
       }

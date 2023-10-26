@@ -10,9 +10,11 @@ import { useUserInfo, useDoLogout } from "@/apis/auth";
 import { searchFunnelEvent } from "@/ga/search";
 import logoWhite from "@/public/image/logo/gocho/white.svg";
 import logoBlue from "@/public/image/logo/gocho/blue.svg";
+import resumeIconBlue from "@/public/image/resume/myResumeBlue.svg";
+import resumeIconWhite from "@/public/image/resume/myResumeWhite.svg";
 import { INTERNAL_URL } from "@/constants";
-
 import { useToast } from "@/globalStates";
+
 import { SearchModal } from "../../modal/SearchModal";
 import { LoginModal } from "../../modal/LoginModal";
 import { Layout } from "../../Layout";
@@ -134,9 +136,9 @@ export const GlobalNavigationBar = () => {
               {isSuccess ? (
                 <>
                   <button type="button" onClick={clickResumeLink} css={resumeLink}>
-                    나의 이력서
+                    <Image src={isThemeWhite ? resumeIconBlue : resumeIconWhite} alt="이력서 아이콘" /> 나의 이력서
                   </button>
-                  <Alarm userId={userData.id} css={alarmIcon} />
+                  <Alarm userId={userData.id} isThemeWhite={isThemeWhite} />
                   <DropDown
                     customTitle={<Profile src={userData.image} size={40} altText={`${userData.nickname} 유저 로고`} />}
                     menu={{

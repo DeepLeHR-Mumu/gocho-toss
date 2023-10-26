@@ -99,16 +99,12 @@ export const getCssObj = (themeWhite: boolean) => ({
   `,
 
   resumeLink: css`
-    color: ${themeWhite ? COLOR.BLUE250 : COLOR.WHITE};
-    ${TEXT.TITLE4_B1822}
+    color: ${themeWhite ? COLOR.BLUE300 : COLOR.WHITE};
+    gap: 0.25rem;
+    ${TEXT.TITLE5_M1620}
   `,
 
-  alarmIcon: css`
-    width: 1.5rem;
-    height: 1.5rem;
-    color: ${themeWhite ? COLOR.BLACK : COLOR.WHITE};
-    margin-right: 0.5rem;
-  `,
+  alarmIcon: css``,
 
   profileDropDownMenu: css`
     display: block;
