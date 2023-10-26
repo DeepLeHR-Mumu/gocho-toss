@@ -7,18 +7,18 @@ export interface ResumeDef {
 
 export interface UserResumeProfileDef {
   id: string;
-  image: string;
+  image: string | null;
   name: string;
   phone_number: string;
-  email: string;
+  email: string | null;
   birth_date: string;
   location: {
-    address: string;
-    x: string;
-    y: string;
+    address: string | null;
+    x: string | null;
+    y: string | null;
   } | null;
-  hobby: string;
-  specialty: string;
+  hobby: string | null;
+  specialty: string | null;
 }
 
 export interface UserPassAuthUpdateDef {

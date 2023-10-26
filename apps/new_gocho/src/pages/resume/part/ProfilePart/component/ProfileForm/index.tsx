@@ -102,22 +102,41 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
   };
 
   const onSubmitResumeProfile: SubmitHandler<PutResumeProfileDef> = async (data) => {
+    const onProfileSuccess = () => {
+      setToastMessage("기본정보가 업로드 완료되었습니다.");
+
+      handleEditMode();
+    };
+
+    const profileRequestObj = {
+      ...data,
+      email: data.email?.trim().length === 0 ? null : data.email,
+      hobby: data.hobby?.trim().length === 0 ? null : data.hobby,
+      specialty: data.specialty?.trim().length === 0 ? null : data.specialty,
+    };
+
     if (!profileFile) {
-      await putResumeProfile({
-        userId,
-        requestObj: data,
-      });
+      await putResumeProfile(
+        {
+          userId,
+          requestObj: profileRequestObj,
+        },
+        {
+          onSuccess: onProfileSuccess,
+        }
+      );
     } else {
-      await putResumeProfile({
-        userId,
-        image: profileFile,
-        requestObj: data,
-      });
+      await putResumeProfile(
+        {
+          userId,
+          image: profileFile,
+          requestObj: profileRequestObj,
+        },
+        {
+          onSuccess: onProfileSuccess,
+        }
+      );
     }
-
-    setToastMessage("기본정보가 업로드 완료되었습니다.");
-
-    handleEditMode();
   };
 
   return (

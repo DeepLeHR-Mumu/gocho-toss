@@ -3,14 +3,14 @@ import { AxiosError, AxiosResponse } from "axios";
 import { ErrorResponseDef } from "shared-type/api";
 
 export interface PutResumeProfileDef {
-  email: string;
+  email: string | null;
   location: {
-    address: string;
-    x: string;
-    y: string;
-  };
-  hobby: string;
-  specialty: string;
+    address: string | null;
+    x: string | null;
+    y: string | null;
+  } | null;
+  hobby: string | null;
+  specialty: string | null;
 }
 
 export interface RequestObjDef {
