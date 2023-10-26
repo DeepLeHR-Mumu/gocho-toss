@@ -13,12 +13,13 @@ export const FluencyList: FC<FluencyListProps> = ({ resumeId, selectFluency, myF
   return (
     <>
       {myFluencyList.map((fluency) => {
-        const { id, name, grade, acquisitionDate } = fluency;
+        const { id, name, grade, acquisitionDate, languageType } = fluency;
         return (
           <ListItem
             key={id}
             title={name}
-            desciption={`${grade}점`}
+            titleDes={languageType}
+            desciption={`${grade}점(등급)`}
             date={[acquisitionDate]}
             editHadnler={() => {
               selectFluency(fluency);

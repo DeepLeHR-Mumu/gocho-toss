@@ -9,11 +9,11 @@ import { CertificationPartProps } from "./type";
 
 export const CertificationPart: FC<CertificationPartProps> = ({ resumeId }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [currentCertification, setCurrentCertification] = useState<SelectorResumeCertification>();
+  const [currentCertification, setCurrentCertification] = useState<SelectorResumeCertification | null>(null);
 
   const handleEditMode = () => {
     setEditMode(!editMode);
-    setCurrentCertification(undefined);
+    setCurrentCertification(null);
   };
 
   const { data: myCertificationList } = useResumeCertificationArr(resumeId);

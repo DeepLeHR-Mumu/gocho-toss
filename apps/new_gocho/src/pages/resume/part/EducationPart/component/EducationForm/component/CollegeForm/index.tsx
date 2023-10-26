@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { Controller } from "react-hook-form";
 
 import { Input } from "shared-ui/deeple-ds";
 
@@ -8,8 +9,9 @@ import { cssObj } from "./style";
 import { CollegeFormProps } from "./type";
 import { graduateTypeArr, gradeArr } from "../../constants";
 
-export const CollegeForm: FC<CollegeFormProps> = ({ errors, register, setValue, getValues }) => {
+export const CollegeForm: FC<CollegeFormProps> = ({ errors, register, setValue, getValues, control }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
+
   const [maxGrade, setMaxGrade] = useState<number | null>(getValues("max_grade"));
 
   useEffect(() => {
@@ -59,7 +61,26 @@ export const CollegeForm: FC<CollegeFormProps> = ({ errors, register, setValue, 
         <p>
           졸업 구분 <strong css={cssObj.required}> *</strong>
         </p>
-        <ResumeDropDown menuArr={graduateTypeArr} setValue={setGraduateType} value={graduateType} placeholder="선택" />
+        <Controller
+          name="graduate_type"
+          control={control}
+          rules={{ required: "해당 항목을 선택해주세요" }}
+          render={({ field, fieldState }) => (
+            <ResumeDropDown
+              menuArr={graduateTypeArr}
+              setValue={(value) => {
+                field.onChange(value);
+                setGraduateType(value);
+              }}
+              value={field.value}
+              placeholder="선택"
+              state={{
+                state: fieldState.invalid ? "error" : "default",
+                message: fieldState.error?.message,
+              }}
+            />
+          )}
+        />
       </div>
       <div css={cssObj.inputFlexbox}>
         <div css={cssObj.inputWrapper}>

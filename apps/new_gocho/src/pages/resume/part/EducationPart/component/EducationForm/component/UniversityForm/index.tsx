@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { Controller } from "react-hook-form";
 
 import { Checkbox, Input } from "shared-ui/deeple-ds";
 
@@ -8,7 +9,7 @@ import { cssObj } from "./style";
 import { gradeArr, graduateTypeArr } from "../../constants";
 import { UniversityFormProps } from "./type";
 
-export const UniversityForm: FC<UniversityFormProps> = ({ errors, register, setValue, getValues }) => {
+export const UniversityForm: FC<UniversityFormProps> = ({ control, errors, register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [maxGrade, setMaxGrade] = useState<number | null>(getValues("max_grade"));
 
@@ -63,7 +64,26 @@ export const UniversityForm: FC<UniversityFormProps> = ({ errors, register, setV
         <p>
           졸업 구분 <strong css={cssObj.required}> *</strong>
         </p>
-        <ResumeDropDown menuArr={graduateTypeArr} setValue={setGraduateType} value={graduateType} placeholder="선택" />
+        <Controller
+          name="graduate_type"
+          control={control}
+          rules={{ required: "해당 항목을 선택해주세요" }}
+          render={({ field, fieldState }) => (
+            <ResumeDropDown
+              menuArr={graduateTypeArr}
+              setValue={(value) => {
+                field.onChange(value);
+                setGraduateType(value);
+              }}
+              value={field.value}
+              placeholder="선택"
+              state={{
+                state: fieldState.invalid ? "error" : "default",
+                message: fieldState.error?.message,
+              }}
+            />
+          )}
+        />
         <div css={cssObj.checkbox}>
           <Checkbox
             checked={isUturn}
@@ -170,7 +190,7 @@ export const UniversityForm: FC<UniversityFormProps> = ({ errors, register, setV
           />
         </div>
         <div css={cssObj.inputWrapper}>
-          <ResumeDropDown menuArr={gradeArr} setValue={setMaxGrade} value={maxGrade} placeholder="선택" />
+          <ResumeDropDown menuArr={gradeArr} setValue={setMaxGrade} value={maxGrade} placeholder="기준 학점" />
         </div>
       </div>
       <div css={cssObj.inputWrapper}>

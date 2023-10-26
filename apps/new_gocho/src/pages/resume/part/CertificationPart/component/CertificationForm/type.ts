@@ -3,5 +3,5 @@ import { SelectorResumeCertification } from "@/apis/resume/certification/useResu
 export interface CertificationFormProps {
   resumeId: number;
   handleEditMode: () => void;
-  currentCertification?: SelectorResumeCertification;
+  currentCertification: SelectorResumeCertification | null;
 }

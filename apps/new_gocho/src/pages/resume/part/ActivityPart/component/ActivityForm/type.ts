@@ -3,5 +3,5 @@ import { SelectorResumeActivity } from "@/apis/resume/activity/useResumeActivity
 export interface ActivityFormProps {
   resumeId: number;
   handleEditMode: () => void;
-  currentActivity?: SelectorResumeActivity;
+  currentActivity: SelectorResumeActivity | null;
 }

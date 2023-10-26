@@ -5,4 +5,8 @@ export interface ResumeDropDownProps<T extends string | number> {
   menuArr: { content: T }[];
   isReqired?: boolean;
   onClickCallback?: () => void;
+  state?: {
+    state: "default" | "error";
+    message?: string;
+  };
 }

@@ -31,8 +31,12 @@ export const ListActivityItem: FC<ListActivityItemProps> = ({
         </p>
       </div>
       <div css={cssObj.iconWrapper}>
-        <FiEdit2 css={cssObj.icon} onClick={editHadnler} />
-        <FiTrash2 css={cssObj.icon} onClick={deleteHandler} />
+        <button type="button" onClick={editHadnler}>
+          <FiEdit2 css={cssObj.icon} />
+        </button>
+        <button type="button" onClick={deleteHandler}>
+          <FiTrash2 css={cssObj.icon} />
+        </button>
       </div>
     </div>
     <div css={cssObj.titleWrapper}>

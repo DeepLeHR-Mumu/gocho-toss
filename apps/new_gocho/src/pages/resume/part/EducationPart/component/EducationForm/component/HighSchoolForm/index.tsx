@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { Controller } from "react-hook-form";
 
 import { Checkbox, Input } from "shared-ui/deeple-ds";
 
@@ -11,9 +12,15 @@ import { HighSchoolFormProps } from "./type";
 import { graduateTypeArr } from "../../constants";
 import { isErrorAlternativeTest } from "./util";
 
-export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, register, setValue, getValues }) => {
+export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
   const [isAlternativeTest, setIsAlternativeTest] = useState(getValues("is_alternative_test"));
+
+  useEffect(() => {
+    if (graduateType === "재학" || graduateType === "중퇴") {
+      setValue("end_date", null);
+    }
+  }, [setValue, graduateType]);
 
   return (
     <>
@@ -60,24 +67,25 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, register, setV
             졸업 구분 <strong css={cssObj.required}> *</strong>
           </p>
 
-          {/* TODO: 드롭 다운에서 의 Validation과 Errormessage 처리 하기  */}
-          <ResumeDropDown
-            menuArr={graduateTypeArr}
-            setValue={setGraduateType}
-            value={graduateType}
-            placeholder="선택"
-            // register={register("graduate_type", {
-            //   required: {
-            //     value: true,
-            //     message: "해당 항목을 입력해주세요",
-            //   },
-            // })}
-            onClickCallback={() => {
-              setValue("graduate_type", graduateType);
-              if (graduateType === "재학") {
-                setValue("end_date", null);
-              }
-            }}
+          <Controller
+            name="graduate_type"
+            control={control}
+            rules={{ required: "해당 항목을 선택해주세요" }}
+            render={({ field, fieldState }) => (
+              <ResumeDropDown
+                menuArr={graduateTypeArr}
+                setValue={(value) => {
+                  field.onChange(value);
+                  setGraduateType(value);
+                }}
+                value={field.value}
+                placeholder="선택"
+                state={{
+                  state: fieldState.invalid ? "error" : "default",
+                  message: fieldState.error?.message,
+                }}
+              />
+            )}
           />
         </div>
       )}

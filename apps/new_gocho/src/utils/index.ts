@@ -36,3 +36,12 @@ export const dateToYYDOTMM = (date: string) => {
   const a = dayjs(date);
   return [a.year(), a.month() + 1 < 10 ? `0${a.month() + 1}` : a.month() + 1].join(".");
 };
+
+export const dateToYYMMDD = (date: string) => {
+  const a = dayjs(date);
+  return [
+    a.year(),
+    a.month() + 1 < 10 ? `0${a.month() + 1}` : a.month() + 1,
+    a.date() < 10 ? `0${a.date() + 1}` : a.date(),
+  ].join("");
+};

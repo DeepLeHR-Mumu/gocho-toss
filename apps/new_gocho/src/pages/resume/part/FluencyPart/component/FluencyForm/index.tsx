@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Button, Input } from "shared-ui/deeple-ds";
 
 import { PostFluencyDef } from "@/apis/resume/fluency/type";
@@ -20,13 +20,23 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
 
   const { setToastMessage } = useToast();
 
-  const { register, handleSubmit, setValue } = useForm<PostFluencyDef>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm<PostFluencyDef>({
     mode: "onChange",
 
-    defaultValues: currentFluency && {
-      grade: currentFluency.grade,
-      acquisition_date: dateToYYMM(currentFluency.acquisitionDate),
-    },
+    defaultValues:
+      currentFluency !== null
+        ? {
+            grade: currentFluency.grade,
+            name: currentFluency.name,
+            acquisition_date: dateToYYMM(currentFluency.acquisitionDate),
+          }
+        : {},
   });
 
   const { mutate: postFluency } = usePostResumeFluency(resumeId);
@@ -34,16 +44,6 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
 
   const onSubmitResumeFluency: SubmitHandler<PostFluencyDef> = async (data) => {
     const { acquisition_date, grade } = data;
-
-    if (!languageType.length) {
-      setToastMessage("언어를 선택해주세요.");
-      return;
-    }
-
-    if (!languageTest.length) {
-      setToastMessage("시험 유형을 선택해주세요.");
-      return;
-    }
 
     const onSuccess = () => {
       setToastMessage("어학 항목 업로드가 완료되었습니다.");
@@ -108,11 +108,26 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
             <p>
               시험 유형 <strong css={cssObj.required}> *</strong>
             </p>
-            <ResumeDropDown
-              menuArr={testArr(languageType)}
-              setValue={setLanguageTest}
-              value={languageTest}
-              placeholder="선택"
+
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: "해당 항목을 선택해주세요" }}
+              render={({ field, fieldState }) => (
+                <ResumeDropDown
+                  menuArr={testArr(languageType)}
+                  setValue={(value) => {
+                    field.onChange(value);
+                    setLanguageTest(value);
+                  }}
+                  value={field.value}
+                  placeholder="선택"
+                  state={{
+                    state: fieldState.invalid ? "error" : "default",
+                    message: fieldState.error?.message,
+                  }}
+                />
+              )}
             />
           </div>
           <div css={cssObj.inputBox}>
@@ -120,7 +135,20 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
               <p>
                 점수/등급 <strong css={cssObj.required}> *</strong>
               </p>
-              <Input placeholder="점수 입력" maxLength={6} {...register("grade", { required: true })} />
+              <Input
+                placeholder="점수 입력"
+                maxLength={6}
+                state={{
+                  state: errors.grade ? "error" : "default",
+                  message: errors.grade?.message,
+                }}
+                {...register("grade", {
+                  required: {
+                    value: true,
+                    message: "해당 항목을 입력해 주세요.",
+                  },
+                })}
+              />
             </div>
             <div css={cssObj.inputWrapper}>
               <p>
@@ -130,7 +158,20 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
                 placeholder="예) 200101"
                 width={200}
                 maxLength={6}
-                {...register("acquisition_date", { required: true })}
+                state={{
+                  state: errors.acquisition_date ? "error" : "default",
+                  message: errors.acquisition_date?.message,
+                }}
+                {...register("acquisition_date", {
+                  required: {
+                    value: true,
+                    message: "해당 항목을 입력해주세요",
+                  },
+                  pattern: {
+                    value: /^\d{4}(0[1-9]|1[0-2])$/i,
+                    message: "올바른 활동 연월을 입력해 주세요",
+                  },
+                })}
               />
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import {
+  Control,
   FieldErrors,
   SubmitHandler,
   UseFormGetValues,
@@ -49,6 +50,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
     register,
     reset,
     handleSubmit,
+    control,
     setValue,
     getValues,
     formState: { errors },
@@ -233,6 +235,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       </div>
       {educationType === "고등학교" && isPostHighSchoolDef(getValues()) && (
         <HighSchoolForm
+          control={control as Control<PostHighSchoolDef>}
           setValue={setValue as UseFormSetValue<PostHighSchoolDef>}
           getValues={getValues as UseFormGetValues<PostHighSchoolDef>}
           register={register as UseFormRegister<PostHighSchoolDef>}
@@ -241,6 +244,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       )}
       {educationType === "대학교(2,3년제)" && isPostCollegeDef(getValues()) && (
         <CollegeForm
+          control={control as Control<PostCollegeDef>}
           setValue={setValue as UseFormSetValue<PostCollegeDef>}
           getValues={getValues as UseFormGetValues<PostCollegeDef>}
           register={register as UseFormRegister<PostCollegeDef>}
@@ -249,6 +253,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       )}
       {educationType === "대학교(4년제)" && isPostUniversityDef(getValues()) && (
         <UniversityForm
+          control={control as Control<PostUniversityDef>}
           errors={errors as FieldErrors<PostUniversityDef>}
           setValue={setValue as UseFormSetValue<PostUniversityDef>}
           getValues={getValues as UseFormGetValues<PostUniversityDef>}
@@ -257,6 +262,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       )}
       {educationType === "기타" && isPostExtraDef(getValues()) && (
         <ExtraForm
+          control={control as Control<PostExtraDef>}
           errors={errors as FieldErrors<PostExtraDef>}
           setValue={setValue as UseFormSetValue<PostExtraDef>}
           getValues={getValues as UseFormGetValues<PostExtraDef>}

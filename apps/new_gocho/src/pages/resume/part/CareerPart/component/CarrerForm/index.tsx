@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { Button, Input, Switch } from "shared-ui/deeple-ds";
 
@@ -7,6 +7,7 @@ import { useToast } from "@/globalStates";
 import { ResumeDropDown } from "@/pages/resume/component";
 
 import { PostCareerDef } from "@/apis/resume/career/type";
+
 import { usePostResumeCareer, usePutResumeCareer } from "@/apis/resume";
 import { YYMMToDate } from "@/utils";
 
@@ -16,13 +17,13 @@ import { carrerToDefaultValue } from "./util";
 import { CarrerFormProps } from "./type";
 
 export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, currentCarrer }) => {
-  const [contractType, setContractType] = useState<string>(currentCarrer?.contractType || "");
   const [isWorking, setIsWorking] = useState(currentCarrer?.isWorking || false);
 
   const { setToastMessage } = useToast();
 
   const {
     register,
+    control,
     setValue,
     getValues,
     handleSubmit,
@@ -34,11 +35,13 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
     defaultValues: currentCarrer ? carrerToDefaultValue(currentCarrer) : carrerDefaultValue,
   });
 
-  const { mutate: postCarrer } = usePostResumeCareer(resumeId);
-  const { mutate: putCarrer } = usePutResumeCareer(resumeId);
+  const { mutate: postCareer } = usePostResumeCareer(resumeId);
+  const { mutate: putCareer } = usePutResumeCareer(resumeId);
 
   const onSubmitResumeCarrer: SubmitHandler<PostCareerDef> = async (data) => {
-    const onSuccess = () => {
+    // TODO: length가 0 인경우 null 처리 하기 (부서, 회사)
+
+    const onCarrerSuccess = () => {
       setToastMessage("경력 항목 업로드가 완료되었습니다.");
 
       handleEditMode();
@@ -47,28 +50,30 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
     if (currentCarrer) {
       const { id } = currentCarrer;
 
-      putCarrer(
+      putCareer(
         {
           resumeId,
           careerId: id,
           ...data,
           start_date: YYMMToDate(data.start_date),
           end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          is_working: isWorking,
         },
         {
-          onSuccess,
+          onSuccess: onCarrerSuccess,
         }
       );
     } else {
-      postCarrer(
+      postCareer(
         {
           resumeId,
           ...data,
           start_date: YYMMToDate(data.start_date),
           end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+          is_working: isWorking,
         },
         {
-          onSuccess,
+          onSuccess: onCarrerSuccess,
         }
       );
     }
@@ -76,12 +81,10 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
 
   useEffect(() => {
     if (isWorking) {
-      setValue("end_date", "");
+      setValue("end_date", null);
       clearErrors("end_date");
     }
-
-    setValue("contract_type", contractType);
-  }, [setValue, clearErrors, isWorking, contractType]);
+  }, [setValue, clearErrors, isWorking]);
 
   return (
     <form onSubmit={handleSubmit(onSubmitResumeCarrer)} css={cssObj.wrapper}>
@@ -109,7 +112,7 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
       <div css={cssObj.inputFlexbox}>
         <div css={cssObj.inputWrapper}>
           <p>
-            입학 연월 <strong css={cssObj.required}> *</strong>
+            입사 연월 <strong css={cssObj.required}> *</strong>
           </p>
           <Input
             placeholder="예)200101"
@@ -175,11 +178,22 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
           <p>
             고용 형태 <strong css={cssObj.required}> *</strong>
           </p>
-          <ResumeDropDown
-            menuArr={contractTypeArr}
-            setValue={setContractType}
-            value={contractType}
-            placeholder="선택"
+          <Controller
+            name="contract_type"
+            control={control}
+            rules={{ required: "해당 항목을 선택해주세요" }}
+            render={({ field, fieldState }) => (
+              <ResumeDropDown
+                menuArr={contractTypeArr}
+                setValue={field.onChange}
+                value={field.value}
+                placeholder="선택"
+                state={{
+                  state: fieldState.invalid ? "error" : "default",
+                  message: fieldState.error?.message,
+                }}
+              />
+            )}
           />
         </div>
         <div css={cssObj.inputWrapper}>

@@ -19,8 +19,17 @@ export const ListCard: FC<ListCardProps> = ({
         <h2>{title}</h2>
         <p css={cssObj.require}>{isRequired && "*"}</p>
       </div>
-      {iconType === "add" && <FiPlus onClick={iconHandler} css={cssObj.icon} />}
-      {iconType === "edit" && <FiEdit2 onClick={iconHandler} css={cssObj.icon} />}
+      {iconType === "add" && (
+        <button type="button" onClick={iconHandler}>
+          <FiPlus css={cssObj.icon} />
+        </button>
+      )}
+      {iconType === "edit" && (
+        <button type="button" onClick={iconHandler}>
+          <FiEdit2 onClick={iconHandler} css={cssObj.icon} />
+        </button>
+      )}
+
       {iconType === "none" && editMessage}
     </div>
     {children}

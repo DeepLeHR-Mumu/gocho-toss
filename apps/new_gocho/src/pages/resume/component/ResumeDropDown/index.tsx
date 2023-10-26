@@ -12,11 +12,18 @@ export const ResumeDropDown = <T extends string | number>({
   menuArr,
   isReqired = false,
   onClickCallback,
+  state,
 }: ResumeDropDownProps<T>) => (
   <DropDown
     customTitle={
       <div css={cssObj.wrapper}>
-        <Input placeholder={placeholder} required={isReqired} value={value || ""} suffix={<FiChevronDown />} />
+        <Input
+          placeholder={placeholder}
+          required={isReqired}
+          value={value || ""}
+          suffix={<FiChevronDown />}
+          state={state}
+        />
       </div>
     }
     menuConfig={{ direction: "top-left", closeAfterClickEvent: true, flexibleHeight: true }}
