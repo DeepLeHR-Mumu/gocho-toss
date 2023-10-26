@@ -1,5 +1,4 @@
 export interface UserInfoObjDef {
-  is_logined: boolean;
   id: number;
   email: string;
   nickname: string;
@@ -10,10 +9,6 @@ export interface UserInfoObjDef {
     community_new_comment: boolean;
     benefit_event: boolean;
   };
-  isKakao: boolean;
-  iat: number;
-  exp: number;
-  iss: string;
-  sub: string;
   image: string;
+  is_pass: boolean;
 }
