@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   titleWrapper: css`
@@ -10,7 +10,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.TITLE1_B2832}
+    ${TEXT.TITLE1_B2832}
   `,
 
   radioWrapper: css`
@@ -31,7 +31,7 @@ export const cssObj = {
 
   errorMessage: css`
     color: ${COLOR.RED200};
-    ${NEWTEXTS.BODY3_R1422}
+    ${TEXT.BODY3_R1422}
   `,
 
   checkboxWrapper: (disabled: boolean) => css`
@@ -145,22 +145,22 @@ export const cssObj = {
 
     > h2 {
       margin-right: 0.5rem;
-      ${NEWTEXTS.TITLE6_M1418}
+      ${TEXT.TITLE6_M1418}
     }
 
     > span {
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.BODY3_R1422}
+      ${TEXT.BODY3_R1422}
     }
   `,
 
   placeholder: css`
     color: ${COLOR.GRAY450};
-    ${NEWTEXTS.BODY2_R1624}
+    ${TEXT.BODY2_R1624}
   `,
 
   specific: css`
-    ${NEWTEXTS.BODY2_R1624}
+    ${TEXT.BODY2_R1624}
   `,
 
   editButton: css`

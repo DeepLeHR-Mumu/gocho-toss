@@ -4,16 +4,17 @@ import { useRouter } from "next/router";
 import { css } from "@emotion/react";
 import { FiChevronLeft } from "react-icons/fi";
 
+import { HiddenH1 } from "shared-ui/deeple-ds";
+
 import { useJdArr } from "@/apis/jd";
 import { useCompanyArr } from "@/apis/company";
-
 import { Layout, SearchModal, Pagination, JdRow, CompanyRow } from "@/components";
 import { SearchDropDown } from "@/components/modal/SearchModal/components/SearchDropDown";
 import { useGetDeviceType } from "@/globalStates";
-import { DEFAULT_PAGE_SIZE } from "@/pages/constants";
 import { isQueryString } from "@/utils";
-
 import { searchFunnelEvent } from "@/ga/search";
+import { DEFAULT_PAGE_SIZE } from "@/constants";
+
 import { Tab } from "./type";
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";
@@ -60,6 +61,8 @@ const Search: NextPage = () => {
   return (
     <main>
       <PageHead />
+      <HiddenH1 title="고초대졸닷컴 | 생산직 취업의 새로운 기준" />
+
       <Layout>
         <div css={cssObj.wrapper}>
           <div css={cssObj.searchWrapper}>

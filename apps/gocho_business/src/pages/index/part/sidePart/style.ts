@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -30,7 +30,7 @@ export const cssObj = {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ${TEXTS.TITLE11};
+    ${TEXT.TITLE1_B2832};
 
     > svg {
       color: ${COLOR.GRAY450};
@@ -54,13 +54,13 @@ export const cssObj = {
   `,
 
   infoTitle: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
     flex-grow: 1;
   `,
 
   info: css`
-    ${TEXTS.TITLE5};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.GRAY600};
   `,
 
@@ -88,12 +88,12 @@ export const cssObj = {
   `,
 
   countInfo: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     margin-bottom: 1rem;
   `,
 
   countNumber: (isAuth: boolean) => css`
-    ${TEXTS.TITLE10};
+    ${TEXT.TITLE2_B2428};
     color: ${isAuth ? COLOR.BLACK : COLOR.GRAY400};
   `,
 

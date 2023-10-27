@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { AuthName } from "@/apis/manager/useManagerProfile/type";
 
@@ -36,7 +36,7 @@ export const cssObj = {
   contentTitle: (giveMarginTop?: boolean) => css`
     width: fit-content;
     margin-bottom: 1.5rem;
-    ${TEXTS.TITLE14};
+    ${TEXT.TITLE1_B2832};
     ${giveMarginTop ? "margin-top: 3rem;" : ""}
   `,
 
@@ -50,12 +50,12 @@ export const cssObj = {
 
       h4 {
         margin-bottom: 8px;
-        ${TEXTS.TITLE8};
+        ${TEXT.TITLE4_M1822};
         color: ${COLOR.BLACK};
       }
 
       p {
-        ${TEXTS.BODY7}
+        ${TEXT.BODY3_R1422}
         color: ${COLOR.BLACK};
       }
     `;
@@ -103,19 +103,19 @@ export const cssObj = {
       }
 
       h5 {
-        ${TEXTS.TITLE6}
+        ${TEXT.TITLE5_M1620}
         color: ${COLOR.RED300};
       }
 
       span {
-        ${TEXTS.BODY7}
+        ${TEXT.BODY3_R1422}
         color: ${COLOR.GRAY450};
         margin-left: 1rem;
       }
 
       ul {
         margin-top: 1.25rem;
-        ${TEXTS.TITLE5}
+        ${TEXT.TITLE5_M1620}
 
         li::before {
           content: " · ";
@@ -198,12 +198,12 @@ export const cssObj = {
     p:nth-of-type(1) {
       margin-top: 16px;
       margin-bottom: 8px;
-      ${TEXTS.TITLE6}
+      ${TEXT.TITLE5_M1620}
     }
 
     p:nth-of-type(2),
     p:nth-of-type(3) {
-      ${TEXTS.BODY2}
+      ${TEXT.BODY3_R1422}
       color: ${COLOR.GRAY600};
     }
   `,
@@ -230,7 +230,7 @@ export const cssObj = {
     padding: 0.75rem 1rem;
     background-color: ${COLOR.BLUE300};
     border-radius: 0.5rem;
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     color: ${COLOR.WHITE};
     margin-top: 3rem;
     margin-bottom: 1.25rem;

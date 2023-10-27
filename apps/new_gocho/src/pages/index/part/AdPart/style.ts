@@ -1,14 +1,16 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
 
 export const cssObj = {
   sectionContainer: css`
     position: relative;
+    min-height: 27rem;
     background: linear-gradient(to bottom, ${COLOR.BLUE300} 320px, white 320px);
 
-    ${TEMP} {
-      background: linear-gradient(to bottom, ${COLOR.BLUE300} 120px, white 120px);
+    .slick-track,
+    .slick-list {
+      -webkit-perspective: 2000px;
+      perspective: 2000px;
     }
 
     .slick-dots {
@@ -56,18 +58,10 @@ export const cssObj = {
 
   sliderContainer: css`
     padding-top: 2.5rem;
-
-    ${TEMP} {
-      padding-top: 1rem;
-    }
   `,
 
   banner: css`
     margin: 0 1rem;
-
-    ${TEMP} {
-      margin: 0 0.5rem;
-    }
   `,
 
   imageWrapper: css`

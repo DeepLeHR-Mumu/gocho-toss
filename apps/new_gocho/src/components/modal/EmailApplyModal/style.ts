@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -16,7 +16,7 @@ export const cssObj = {
     border: 1px solid ${COLOR.GRAY200};
     padding: 0.875rem 1.25rem 0.875rem 1.25rem;
     flex-grow: 1;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   button: (buttonType: string) => css`
@@ -35,7 +35,7 @@ export const cssObj = {
   `,
 
   desc: css`
-    ${NEWTEXTS.BODY3_R1422};
+    ${TEXT.BODY3_R1422};
     color: ${COLOR.GRAY600};
     margin-top: 0.5rem;
   `,

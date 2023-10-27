@@ -1,9 +1,7 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { AdminResponseDef } from "shared-type/api/responseType";
-
-import { ErrorResponseDef } from "@/types";
+import { ErrorResponseDef } from "shared-type/api";
 
 export interface RequestObjDef {
   token: string;
@@ -15,9 +13,9 @@ export interface RequestObjDef {
 }
 
 export interface PostPushDef {
-  ({ token, topic, notification }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ token, topic, notification }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useAddPushProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

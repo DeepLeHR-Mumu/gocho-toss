@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -9,19 +9,19 @@ export const cssObj = {
     margin-bottom: 2rem;
 
     > h3 {
-      ${NEWTEXTS.DISPLAY1_B4044}
+      ${TEXT.DISPLAY1_B4044}
     }
 
     > span {
       margin-left: 1.75rem;
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
     }
 
     > button {
       margin-left: auto;
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.TITLE4_M1822}
+      ${TEXT.TITLE4_M1822}
 
       :hover {
         color: ${COLOR.BLUE300};
@@ -54,7 +54,7 @@ export const cssObj = {
     > h5 {
       padding: 1.0625rem 1rem;
       background-color: ${COLOR.GRAY50};
-      ${NEWTEXTS.TITLE4_B1822}
+      ${TEXT.TITLE4_B1822}
     }
 
     ul {
@@ -64,7 +64,7 @@ export const cssObj = {
   `,
 
   title: css`
-    ${NEWTEXTS.DISPLAY1_B4044}
+    ${TEXT.DISPLAY1_B4044}
   `,
 
   filter: css`
@@ -72,18 +72,18 @@ export const cssObj = {
     text-align: left;
     padding: 0.625rem 1rem;
     width: 100%;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
 
     :hover {
       color: ${COLOR.BLUE300};
-      ${NEWTEXTS.TITLE5_M1620}
+      ${TEXT.TITLE5_M1620}
     }
   `,
 
   appliedFilter: css`
     color: ${COLOR.BLUE300};
     background-color: ${COLOR.BLUE50};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   filterStatus: css`
@@ -107,7 +107,7 @@ export const cssObj = {
     align-items: center;
     gap: 0.25rem;
     color: ${COLOR.BLUE300};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
 
     > svg {
       width: 1.25rem;
@@ -127,7 +127,7 @@ export const cssObj = {
     button:nth-child(1),
     button:nth-child(2) {
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.TITLE6_M1418}
+      ${TEXT.TITLE6_M1418}
 
       svg {
         margin-right: 0.25rem;

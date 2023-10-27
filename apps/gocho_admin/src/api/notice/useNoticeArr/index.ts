@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import { ErrorResponseDef } from "@/types";
+import { ErrorResponseDef } from "shared-type/api";
+
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { GetNoticeArrDef, noticeArrKeyObj, RequestObjDef, ResponseObjDef } from "./type";

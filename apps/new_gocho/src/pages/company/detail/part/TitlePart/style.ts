@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
@@ -48,7 +48,7 @@ export const cssObj = {
 
   title: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE1_B2832}
+    ${TEXT.TITLE1_B2832}
   `,
 
   eyeIcon: css`
@@ -62,7 +62,7 @@ export const cssObj = {
     align-self: flex-end;
     margin-left: 0.5rem;
     color: ${COLOR.GRAY450};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   introWrapper: css`
@@ -72,12 +72,12 @@ export const cssObj = {
 
   intro: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
   follower: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
 
     > span {
       color: ${COLOR.BLUE300};
@@ -106,7 +106,7 @@ export const cssObj = {
   `,
 
   menu: (isSelected: boolean) => css`
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
     width: 8.75rem;
     text-align: center;
     padding-bottom: 1.5rem;

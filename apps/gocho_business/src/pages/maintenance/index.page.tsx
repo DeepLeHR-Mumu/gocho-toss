@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { NextPage } from "next";
 
-import { InvisibleH2 } from "shared-ui/common/invisibleH2";
-import jobi_500 from "@/public/image/jobi_500.svg";
+import { HiddenH2 } from "shared-ui/deeple-ds";
 
+import jobi_500 from "@/public/image/jobi_500.svg";
 import { unknownPageErrorEvent } from "@/ga";
 
 import { PageHead } from "./pageHead";
@@ -20,7 +20,7 @@ const NoticePage: NextPage = () => {
     <>
       <PageHead />
       <main css={cssObj.container}>
-        <InvisibleH2 title="페이지 점검 중" />
+        <HiddenH2 title="페이지 점검 중" />
         <div css={cssObj.jobiImage}>
           <Image src={jobi_500} alt="" priority fill />
         </div>

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   background: css`
@@ -36,7 +36,7 @@ export const cssObj = {
 
   similarJdTitle: css`
     margin-bottom: 2.5rem;
-    ${NEWTEXTS.TITLE1_B2832}
+    ${TEXT.TITLE1_B2832}
   `,
 
   similarJdList: css`

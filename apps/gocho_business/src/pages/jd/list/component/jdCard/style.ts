@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
-import { NEWTEXTS, TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   cardContainer: css`
@@ -119,7 +119,7 @@ export const cssObj = {
   `,
 
   linkButton: css`
-    ${TEXTS.TITLE6}
+    ${TEXT.TITLE5_M1620}
     padding: 0.75rem 0;
     border-radius: 0.5rem;
     width: 5rem;
@@ -143,7 +143,7 @@ export const cssObj = {
 
   button: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE6_M1418}
+    ${TEXT.TITLE6_M1418}
   `,
 
   buttonIcon: css`

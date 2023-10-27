@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   container: css`
@@ -14,7 +14,7 @@ export const cssObj = {
     width: 18.75rem;
     padding: 0.5rem 1rem;
     background-color: ${COLOR.BLUE100};
-    ${TEXTS.BODY2}
+    ${TEXT.BODY3_R1422}
     color: ${COLOR.GRAY700};
     border-radius: 0.5rem;
   `,

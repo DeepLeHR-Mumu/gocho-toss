@@ -9,7 +9,7 @@ import { unknownErrorEvent, unknownErrorFunnelEvent } from "@/ga/error";
 import jobiError from "@/public/image/jobi/jobi_500.png";
 
 import { Layout } from "@/components";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { PageHead } from "./pageHead";
 import { cssObj } from "./style";

@@ -1,8 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
-
+import { AxiosResponse, AxiosError } from "axios";
 import { axiosInstance } from "@/api/useAxiosInterceptor";
 
 import { DeleteJdDef, RequestObjDef, useDeleteJdProps } from "./type";
@@ -13,4 +10,4 @@ export const deleteJd: DeleteJdDef = async (requestObj) => {
 };
 
 export const useDeleteJd: useDeleteJdProps = () =>
-  useMutation<AdminResponseDef, AxiosError, RequestObjDef>({ mutationFn: deleteJd });
+  useMutation<AxiosResponse, AxiosError, RequestObjDef>({ mutationFn: deleteJd });

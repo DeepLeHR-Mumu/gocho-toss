@@ -4,7 +4,8 @@ import dayjs from "dayjs";
 
 import { BACKEND_URL } from "shared-constant";
 import { tokenDecryptor } from "shared-util";
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
+import { datadogRum } from "@datadog/browser-rum";
 
 export const axiosNoTokenInstance = axios.create({
   timeout: 10000,
@@ -34,42 +35,47 @@ export const useAxiosInterceptor = () => {
   const getNewAccessToken = async (): Promise<string> => {
     if (!isRefreshing) {
       isRefreshing = true;
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (!refreshToken) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        throw new axios.Cancel("getNewAccessToken - No refreshToken");
-      }
+      try {
+        const refreshToken = localStorage.getItem("refreshToken");
+        if (!refreshToken) {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          throw new axios.Cancel("getNewAccessToken - No refreshToken");
+        }
 
-      axios
-        .get(`${BACKEND_URL}/auth/refresh`, {
-          headers: { "x-refresh-token": refreshToken },
-        })
-        .then(({ data }) => {
-          isRefreshing = false;
-          localStorage.setItem("accessToken", data.data.access_token);
-          localStorage.setItem("refreshToken", data.data.refresh_token);
-          onRefreshed();
-        })
-        .catch((error) => {
-          isRefreshing = false;
-          const { error_code } = error.response.data;
-          if (error_code === "EMPTY_JWT") {
+        const response = await axios.get<{ data: { access_token: string; refresh_token: string } }>(
+          `${BACKEND_URL}/auth/refresh`,
+          {
+            headers: { "x-refresh-token": refreshToken },
+          }
+        );
+        const { access_token, refresh_token } = response.data.data;
+        localStorage.setItem("accessToken", access_token);
+        localStorage.setItem("refreshToken", refresh_token);
+        onRefreshed();
+        return access_token;
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          const { error_code } = error.response.data as { error_code: string };
+          if (error_code === "EMPTY_JWT_REDIS" || error_code === "UNAUTHORIZED") {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
+            onRefreshed();
             throw new axios.Cancel("getNewAccessToken - No Token");
           }
-
-          throw error;
+        }
+        throw error;
+      } finally {
+        isRefreshing = false;
+      }
+    } else {
+      return new Promise<string>((resolve) => {
+        subscribeTokenRefresh(() => {
+          const newToken = localStorage.getItem("accessToken");
+          resolve(newToken || "");
         });
-    }
-
-    return new Promise<string>((resolve) => {
-      subscribeTokenRefresh(() => {
-        const newToken = localStorage.getItem("accessToken");
-        resolve(newToken || "");
       });
-    });
+    }
   };
 
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
@@ -116,15 +122,6 @@ export const useAxiosInterceptor = () => {
       };
     }
 
-    // if (config.url && config.url.includes("jds") && accessTokenData) {
-    //   return {
-    //     ...config,
-    //     headers: {
-    //       "x-access-token": accessTokenData,
-    //     },
-    //   };
-    // }
-
     return {
       ...config,
       headers: {
@@ -134,6 +131,10 @@ export const useAxiosInterceptor = () => {
   };
 
   const responseErrorHandler = async (error: AxiosError<ErrorResponseDef>) => {
+    datadogRum.addAction("http_request_failed", {
+      AxiosError: error,
+    });
+
     if (error.response?.data.error_code === "EXPIRED_JWT") {
       await getNewAccessToken();
     }
@@ -144,7 +145,7 @@ export const useAxiosInterceptor = () => {
       return Promise.resolve();
     }
 
-    if (error.response?.data.error_code === "EMPTY_JWT_REDIS") {
+    if (error.response?.data.error_code === "EMPTY_JWT_REDIS" || error.response?.data.error_code === "UNAUTHORIZED") {
       return Promise.resolve();
     }
 
@@ -153,7 +154,6 @@ export const useAxiosInterceptor = () => {
 
   const requestInterceptor = axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => requestConfigHandler(config),
-
     (error) => Promise.reject(error)
   );
 

@@ -4,8 +4,8 @@ import { FunctionComponent } from "react";
 import { FiChevronRight } from "react-icons/fi";
 import { Divider } from "shared-ui/deeple-ds";
 
-import { INTERNAL_URL } from "@/pages/constants";
 import { CompanyRow } from "@/components";
+import { INTERNAL_URL } from "@/constants";
 import { RankItemProps } from "./type";
 
 import { cssObj } from "./style";

@@ -1,5 +1,4 @@
-import { ResponseDef } from "shared-type/api/responseType";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
@@ -7,10 +6,10 @@ export interface RequestObjDef {
 }
 
 export interface DeleteUserInfoDef {
-  ({ id }: RequestObjDef): Promise<ResponseDef>;
+  ({ id }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface UseDeleteUserInfoDef {
   // TODO: 나중에 어떻게 하면 onSuccessAction을 없앨 수 있을지 or 깔끔하게 바꿀 수 있을지 고민해보기
-  (onSuccessAction: () => void): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
+  (onSuccessAction: () => void): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

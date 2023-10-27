@@ -9,7 +9,7 @@ import { dummyArrCreator } from "shared-util";
 import { useTopBannerArr } from "@/apis/ads";
 import jobiChatting from "@/public/image/jobi/chatting.png";
 import { JdCard } from "@/components/common/JdCard";
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 
 import { setCarouselSetting } from "./util";
 import { cssObj } from "./style";

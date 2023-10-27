@@ -8,7 +8,6 @@ import { Divider } from "shared-ui/deeple-ds";
 import { useJdArr } from "@/apis/jd";
 import { JdCard } from "@/components/common/JdCard";
 
-import { useGetDeviceType } from "@/globalStates";
 import { cssObj } from "./style";
 import { setCarouselSetting } from "./util";
 import { JD_ARR_SIZE, MAX_SLIDER_INDEX } from "./constant";
@@ -18,7 +17,6 @@ export const JdPart: FunctionComponent = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const { isMobile } = useGetDeviceType();
   const { data: jdDataObj } = useJdArr({
     order: "recent",
     filter: "valid",
@@ -69,31 +67,23 @@ export const JdPart: FunctionComponent = () => {
           </div>
         </div>
         <div css={cssObj.sliderContainer}>
-          {isMobile ? (
-            <div css={cssObj.cardContainer}>
-              {jdDataObj
-                ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} />)
-                : dummyArrCreator(4).map((dummy) => <JdCard key={`mainJobCard${dummy}`} />)}
-            </div>
-          ) : (
-            <Slider
-              {...setCarouselSetting}
-              ref={sliderRef}
-              beforeChange={(_oldIndex, newIndex) => {
-                setIsDragging(true);
-                if (newIndex <= MAX_SLIDER_INDEX) {
-                  setCurrentSlide(newIndex);
-                }
-              }}
-              afterChange={() => {
-                setIsDragging(false);
-              }}
-            >
-              {jdDataObj
-                ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} blockClick={isDragging} />)
-                : dummyArrCreator(4).map((dummy) => <JdCard key={`mainJobCard${dummy}`} />)}
-            </Slider>
-          )}
+          <Slider
+            {...setCarouselSetting}
+            ref={sliderRef}
+            beforeChange={(_oldIndex, newIndex) => {
+              setIsDragging(true);
+              if (newIndex <= MAX_SLIDER_INDEX) {
+                setCurrentSlide(newIndex);
+              }
+            }}
+            afterChange={() => {
+              setIsDragging(false);
+            }}
+          >
+            {jdDataObj
+              ? jdDataObj.jdDataArr.map((jd) => <JdCard key={jd.id} jd={jd} blockClick={isDragging} />)
+              : dummyArrCreator(4).map((dummy) => <JdCard key={`mainJobCard${dummy}`} />)}
+          </Slider>
         </div>
       </section>
       <Divider />

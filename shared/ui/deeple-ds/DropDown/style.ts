@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 import { MenuLocation } from "./type";
 
@@ -25,7 +25,7 @@ export const menuCssObj = {
     padding: 0.625rem 1rem;
     color: ${focused ? COLOR.BLUE300 : COLOR.BLACK};
     cursor: ${clickable ? "pointer" : "auto"};
-    ${focused ? NEWTEXTS.TITLE5_B1620 : NEWTEXTS.TITLE5_M1620};
+    ${focused ? TEXT.TITLE5_B1620 : TEXT.TITLE5_M1620};
   `,
 
   header: (clickable: boolean) => css`
@@ -39,7 +39,7 @@ export const menuCssObj = {
     border-radius: 0 0 0.75rem 0.75rem;
     cursor: ${clickable ? "pointer" : "auto"};
     background-color: ${COLOR.GRAY50};
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 };
 
@@ -53,20 +53,16 @@ export const dropDownCssObj = {
     display: flex;
     flex-direction: row;
     align-items: center;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
   `,
 
-  // ${directionTopOrBottom}: ${location.topOrBottom}rem;
-
-  menuWrapper: (location: MenuLocation, isRightDirection = true) => {
+  menuWrapper: (location: MenuLocation) => {
     const [directionTopOrBottom, directionLeftOrRight] = location.direction.split("-");
     return css`
       position: absolute;
       z-index: 50;
       ${directionTopOrBottom}: ${location.topOrBottom}rem;
-      ${isRightDirection
-        ? `${directionLeftOrRight}: ${location.leftOrRight}rem;`
-        : `${directionLeftOrRight}: 100vh - ${location.leftOrRight}rem;`}
+      ${directionLeftOrRight}: ${location.leftOrRight}rem;
     `;
   },
 };

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   alarmIcon: css`
@@ -30,7 +30,7 @@ export const cssObj = {
 
     > span {
       margin-left: 0.5rem;
-      ${NEWTEXTS.TITLE6_M1418}
+      ${TEXT.TITLE6_M1418}
     }
 
     :hover {
@@ -50,12 +50,12 @@ export const cssObj = {
     > p {
       word-break: break-all;
       text-align: left;
-      ${NEWTEXTS.BODY2_R1624}
+      ${TEXT.BODY2_R1624}
     }
 
     > span {
       color: ${COLOR.GRAY600};
-      ${NEWTEXTS.TITLE5_M1620}
+      ${TEXT.TITLE5_M1620}
     }
 
     > strong {
@@ -64,7 +64,7 @@ export const cssObj = {
       text-align: left;
       gap: 0.5rem;
       color: ${isRead ? COLOR.BLACK : COLOR.BLUE300};
-      ${NEWTEXTS.TITLE5_B1620}
+      ${TEXT.TITLE5_B1620}
 
       > svg {
         width: 1.5rem;
@@ -79,7 +79,7 @@ export const cssObj = {
     width: 22.5rem;
     height: 7.875rem;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE5_M1620};
+    ${TEXT.TITLE5_M1620};
     padding-bottom: 2rem;
   `,
 

@@ -1,6 +1,7 @@
-import { ResponseDef } from "shared-type/api/responseType";
 import { QueryFunctionContext } from "@tanstack/react-query";
+
 import { companyDetailKeyObj } from "@/constants/queryKeyFactory/company/companyDetailKeyObj";
+
 import { CompanyObjDef } from "../type/company";
 
 // export interface WelfareProps {
@@ -62,7 +63,7 @@ export interface RequestObjDef {
   companyId: number;
 }
 
-export interface CompanyDetailResponseDef extends ResponseDef {
+export interface CompanyDetailResponseDef {
   data: CompanyObjDef;
 }
 

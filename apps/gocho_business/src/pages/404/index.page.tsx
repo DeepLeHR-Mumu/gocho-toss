@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { NextPage } from "next";
 
-import { InvisibleH2 } from "shared-ui/common/invisibleH2";
+import { HiddenH2 } from "shared-ui/deeple-ds";
+
 import jobi_404 from "@/public/image/jobi_404.svg";
 import { notFoundPageErrorEvent } from "@/ga";
 
@@ -18,7 +19,7 @@ const NotFoundPage: NextPage = () => {
   return (
     <main css={cssObj.container}>
       <PageHead />
-      <InvisibleH2 title="없는 페이지" />
+      <HiddenH2 title="없는 페이지" />
       <div css={cssObj.jobiImage}>
         <Image src={jobi_404} alt="" fill priority />
       </div>

@@ -1,5 +1,4 @@
-import { ResponseDef } from "shared-type/api/responseType";
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
 export interface RequestObjDef {
@@ -16,9 +15,9 @@ export interface RequestObjDef {
 }
 
 export interface PostDoUserFilterDef {
-  ({ userId, q }: RequestObjDef): Promise<ResponseDef>;
+  ({ userId, q }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface useDoUserFilterProps {
-  (): UseMutationResult<ResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

@@ -1,13 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
 
-export const isInvalidDate = (date: Date) => Number.isNaN(date.getTime());
-
-export const isExpired = (date: Date) => {
-  const today = new Date();
-
-  return date.getTime() < today.getTime();
-};
-
 export const isStringArray = (param: unknown): param is string[] => {
   if (!Array.isArray(param)) {
     return false;

@@ -6,11 +6,11 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { SearchBar, DropDown, Profile } from "shared-ui/deeple-ds";
 
-import { useUserInfo } from "@/apis/auth";
+import { useUserInfo, useDoLogout } from "@/apis/auth";
 import { searchFunnelEvent } from "@/ga/search";
-import { INTERNAL_URL } from "@/pages/constants";
 import logoWhite from "@/public/image/logo/gocho/white.svg";
 import logoBlue from "@/public/image/logo/gocho/blue.svg";
+import { INTERNAL_URL } from "@/constants";
 
 import { SearchModal } from "../../modal/SearchModal";
 import { LoginModal } from "../../modal/LoginModal";
@@ -43,6 +43,7 @@ export const GlobalNavigationBar = () => {
   const [searchModal, setSearchModal] = useState(false);
 
   const { data: userData, isSuccess } = useUserInfo();
+  const { mutate: postLogout } = useDoLogout();
 
   const openSearchModal = () => {
     router.push(INTERNAL_URL.SEARCH);
@@ -55,9 +56,18 @@ export const GlobalNavigationBar = () => {
   };
 
   const doLogout = () => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    queryClient.resetQueries();
+    postLogout(null, {
+      onError: () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        queryClient.resetQueries();
+      },
+      onSuccess: () => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        queryClient.resetQueries();
+      },
+    });
   };
 
   return (

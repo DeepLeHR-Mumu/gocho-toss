@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   skeletonWrapper: css`
@@ -23,12 +23,12 @@ export const cssObj = {
 
   companyName: css`
     margin-right: 1.5rem;
-    ${NEWTEXTS.TITLE4_M1822}
+    ${TEXT.TITLE4_M1822}
   `,
 
   jdTitle: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE4_B1822}
+    ${TEXT.TITLE4_B1822}
   `,
 
   bookmarkWrapper: (isBookmarked: boolean) => css`

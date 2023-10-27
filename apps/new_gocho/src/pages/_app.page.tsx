@@ -8,9 +8,10 @@ import { Global } from "@emotion/react";
 import { QueryClient, QueryClientProvider, Hydrate } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { datadogRum } from "@datadog/browser-rum";
+import * as Sentry from "@sentry/nextjs";
 import ReactGA from "react-ga4";
 
-import { GA_KEY, FB_PIXEL_ID } from "@/constants/key";
+import { GA_KEY, FB_PIXEL_ID } from "@/constants";
 
 import { useAxiosInterceptor } from "@/apis/axiosInstance";
 import { useSetDeviceType } from "@/globalStates";
@@ -34,9 +35,18 @@ if (typeof window !== "undefined" && !window.location.href.includes("localhost")
     trackResources: true,
     trackLongTasks: true,
     defaultPrivacyLevel: "mask-user-input",
+    trackUserInteractions: true,
   });
   datadogRum.startSessionReplayRecording();
 }
+
+Sentry.init({
+  dsn: "https://2d6adc0b3c7c2b030b54d10e56c97a73@o4505287242678272.ingest.sentry.io/4506098281086976",
+  tracesSampleRate: 0.3,
+  replaysOnErrorSampleRate: 1.0,
+  replaysSessionSampleRate: 0.1,
+  integrations: [],
+});
 
 declare global {
   interface Window {
@@ -47,7 +57,7 @@ declare global {
   }
 }
 
-function App({ Component, pageProps }: AppProps) {
+function WebService({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const isFirstRender = useRef<boolean>(true);
   ReactGA.initialize(GA_KEY);
@@ -161,4 +171,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default App;
+export default WebService;

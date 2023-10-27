@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
-import { FB_PIXEL_ID } from "@/constants/key";
+import { FB_PIXEL_ID } from "@/constants";
 
 export default function Document() {
   return (
@@ -10,7 +10,7 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link
-          rel="stylesheet"
+          rel="stylesheet preload"
           as="style"
           crossOrigin="true"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css"
@@ -47,12 +47,12 @@ export default function Document() {
           </noscript>
         )}
         <Script id="googleTagManager" strategy="afterInteractive">
-          {`
+          {` 
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-T6WF546');
+            })(window,document,'script','dataLayer','GTM-M4DMN7LX');
          `}
         </Script>
       </Head>
@@ -62,7 +62,7 @@ export default function Document() {
           <noscript>
             <iframe
               title="googleTagManager"
-              src="https://www.googletagmanager.com/ns.html?id=GTM-T6WF546"
+              src="https://www.googletagmanager.com/ns.html?id=GTM-M4DMN7LX"
               height="0"
               width="0"
               style={{ display: "none", visibility: "hidden" }}

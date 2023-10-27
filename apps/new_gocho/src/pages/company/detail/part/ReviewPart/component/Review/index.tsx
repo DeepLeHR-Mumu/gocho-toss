@@ -6,7 +6,7 @@ import { getCommunityDateFormat } from "shared-util";
 
 import { CommentThumbs, BlockReportDropDown, DeleteComment } from "@/components";
 
-import { INTERNAL_URL } from "@/pages/constants";
+import { INTERNAL_URL } from "@/constants";
 import { ReviewProps } from "./type";
 import { cssObj } from "./style";
 

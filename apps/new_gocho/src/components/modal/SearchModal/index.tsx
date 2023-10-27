@@ -6,8 +6,8 @@ import { Divider, Chip, Modal } from "shared-ui/deeple-ds";
 import { useJdArr } from "@/apis/jd";
 import { useCompanyArr } from "@/apis/company";
 
-import { INTERNAL_URL } from "@/pages/constants";
 import { globalSearchEvent } from "@/ga/search";
+import { INTERNAL_URL } from "@/constants";
 
 import { Layout } from "../../Layout";
 import { CompanyCard } from "../../common/CompanyCard";

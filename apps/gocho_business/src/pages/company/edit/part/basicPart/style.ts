@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   spinnerBox: css`
@@ -41,7 +41,7 @@ export const cssObj = {
     height: 3.25rem;
     padding: 1rem 2rem;
     background-color: ${COLOR.WHITE};
-    ${TEXTS.TITLE4};
+    ${TEXT.TITLE6_M1418};
   `,
 
   hiddenInput: css`

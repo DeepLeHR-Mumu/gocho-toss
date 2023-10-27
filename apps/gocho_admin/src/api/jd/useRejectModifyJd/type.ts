@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
-
-import { AdminResponseDef } from "shared-type/api/responseType";
 
 export interface RequestObjDef {
   jdId: number;
@@ -9,9 +7,9 @@ export interface RequestObjDef {
 }
 
 export interface RejectModifyJdDef {
-  ({ jdId }: RequestObjDef): Promise<AdminResponseDef>;
+  ({ jdId }: RequestObjDef): Promise<AxiosResponse>;
 }
 
 export interface UseRejectModifyJdProps {
-  (): UseMutationResult<AdminResponseDef, AxiosError, RequestObjDef>;
+  (): UseMutationResult<AxiosResponse, AxiosError, RequestObjDef>;
 }

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   formWrapper: css`
@@ -17,7 +17,7 @@ export const cssObj = {
   `,
 
   authLink: css`
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
@@ -33,7 +33,7 @@ export const cssObj = {
 
   desc: css`
     color: ${COLOR.GRAY600};
-    ${TEXTS.BODY2};
+    ${TEXT.BODY3_R1422};
   `,
 
   inputWrapper: css`
@@ -42,13 +42,13 @@ export const cssObj = {
   `,
 
   inputTitle: css`
-    ${TEXTS.TITLE7};
+    ${TEXT.TITLE5_B1620};
     color: ${COLOR.GRAY600};
     margin-bottom: 0.75rem;
   `,
 
   termBox: css`
-    ${TEXTS.TITLE6};
+    ${TEXT.TITLE5_M1620};
     display: flex;
     align-items: center;
     gap: 0 0.5rem;
@@ -61,7 +61,7 @@ export const cssObj = {
   `,
 
   errorMessage: css`
-    ${TEXTS.BODY3};
+    ${TEXT.BODY3_R1422};
     color: ${COLOR.RED300};
     margin-top: 1.5rem;
     text-align: center;

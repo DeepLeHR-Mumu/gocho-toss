@@ -118,7 +118,6 @@ const EmailLogin = ({ toFindPassword, toSignUp, ...actionBarHandlers }: EmailLog
           </div>
           <div css={cssObj.mobileFooterWrapper}>
             <p css={cssObj.mobileDescription}>소셜 계정으로 간편하게 이용해 보세요</p>
-            {/** TODO 소셜로그인 */}
             <button type="button" css={cssObj.mobileKakaoButton}>
               <Image src={kakaoLogo} alt="kakao" css={cssObj.mobileKakaoLogo} />
             </button>

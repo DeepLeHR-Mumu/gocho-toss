@@ -3,13 +3,14 @@ import { css } from "@emotion/react";
 export const cssObj = {
   titleContainer: css`
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin: 3rem 0;
   `,
 
   titleFilterBox: css`
     display: flex;
-    padding-top: 0.25rem;
+    align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
   `,
@@ -21,14 +22,12 @@ export const cssObj = {
 
   filterBox: css`
     display: flex;
-    padding-top: 0.25rem;
     justify-content: space-between;
     gap: 0.5rem;
   `,
 
   filterText: css`
     font-weight: 400;
-    line-height: 1.25rem;
   `,
 
   filterIcon: css`

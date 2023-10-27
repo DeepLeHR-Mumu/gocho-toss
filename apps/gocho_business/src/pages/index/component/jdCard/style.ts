@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 import { COLOR } from "shared-style/color";
 import { shorten } from "shared-style/common";
-import { TEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   cardContainer: css`
@@ -18,7 +18,7 @@ export const cssObj = {
 
   title: css`
     width: 25rem;
-    ${TEXTS.TITLE9};
+    ${TEXT.TITLE4_B1822};
     margin-bottom: 1.5rem;
     word-break: break-all;
     ${shorten(3)};

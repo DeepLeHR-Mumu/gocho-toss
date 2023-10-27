@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css``,
@@ -13,14 +13,14 @@ export const cssObj = {
 
   name: css`
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.TITLE6_M1418}
+    ${TEXT.TITLE6_M1418}
   `,
 
   time: css`
     margin-left: 0.5rem;
     margin-right: auto;
     color: ${COLOR.GRAY500};
-    ${NEWTEXTS.TITLE7_M1218}
+    ${TEXT.TITLE7_M1218}
   `,
 
   submenuIcon: css`
@@ -37,7 +37,7 @@ export const cssObj = {
   comment: css`
     margin-bottom: 0.75rem;
     word-break: break-all;
-    ${NEWTEXTS.BODY3_R1422}
+    ${TEXT.BODY3_R1422}
   `,
 
   reactionWrapper: css`
@@ -58,7 +58,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE7_M1218}
+      ${TEXT.TITLE7_M1218}
     }
   `,
 
@@ -74,7 +74,7 @@ export const cssObj = {
     }
 
     span {
-      ${NEWTEXTS.TITLE7_M1218}
+      ${TEXT.TITLE7_M1218}
     }
   `,
 };

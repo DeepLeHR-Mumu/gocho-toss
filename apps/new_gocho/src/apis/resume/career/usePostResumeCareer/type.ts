@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { ErrorResponseDef } from "shared-type/api/errorResponseType";
+import { ErrorResponseDef } from "shared-type/api";
 import { PostCareerDef } from "../type";
 
 export interface RequestObjDef extends PostCareerDef {

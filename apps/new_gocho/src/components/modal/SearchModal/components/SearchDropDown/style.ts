@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { TEMP } from "shared-style/mediaQuery";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -27,10 +26,6 @@ export const cssObj = {
     position: absolute;
     margin-top: 1rem;
     width: 100%;
-
-    ${TEMP} {
-      width: calc(100% - 2rem);
-    }
   `,
 
   listItem: css`
@@ -46,7 +41,7 @@ export const cssObj = {
 
   word: css`
     margin-right: auto;
-    ${NEWTEXTS.TITLE5_M1620}
+    ${TEXT.TITLE5_M1620}
     overflow: hidden;
     white-space: nowrap;
     text-overflox: ellipsis;

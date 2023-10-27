@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-
-import { ResponseDef } from "shared-type/api/responseType";
+import { AxiosResponse, AxiosError } from "axios";
 
 import { axiosInstance } from "../../axiosInstance";
 
@@ -16,7 +14,7 @@ const postDoUserFilter: PostDoUserFilterDef = async (requestObj) => {
 
 export const useDoUserFilter: useDoUserFilterProps = () => {
   const queryClient = useQueryClient();
-  return useMutation<ResponseDef, AxiosError, RequestObjDef>({
+  return useMutation<AxiosResponse, AxiosError, RequestObjDef>({
     mutationFn: postDoUserFilter,
     onSuccess: () => {
       queryClient.invalidateQueries();
