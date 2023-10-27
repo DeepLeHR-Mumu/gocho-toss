@@ -16,86 +16,6 @@ import { JdCard, FilterCount } from "./component";
 import { OrderDef, FilterDef, SearchValues } from "./type";
 import { cssObj } from "./style";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const testData = [
-  {
-    id: 0,
-    applyUrl: "test url",
-    status: {
-      name: "등록대기" as const,
-      reason: "test reason",
-    },
-    uploader: { name: "test uploader", department: "test department", is_mine: true },
-    title: "test title",
-    cut: false,
-    view: 12,
-    bookmark: 134,
-    click: 52,
-    startTime: new Date().toString(),
-    endTime: "2023.10.30",
-    createdTime: new Date().toString(),
-    updatedTime: new Date().toString(),
-    task: "test task",
-  },
-  {
-    id: 1,
-    applyUrl: "test url",
-    status: {
-      name: "등록반려" as const,
-      reason: "test reason",
-    },
-    uploader: { name: "test uploader", department: "test department", is_mine: false },
-    title: "test title",
-    cut: false,
-    view: 12,
-    bookmark: 134,
-    click: 52,
-    startTime: new Date().toString(),
-    endTime: "2023.10.30",
-    createdTime: new Date().toString(),
-    updatedTime: new Date().toString(),
-    task: "test task",
-  },
-  {
-    id: 2,
-    applyUrl: "test url",
-    status: {
-      name: "진행중" as const,
-      reason: "test reason",
-    },
-    uploader: { name: "test uploader", department: "test department", is_mine: false },
-    title: "test title",
-    cut: false,
-    view: 12,
-    bookmark: 134,
-    click: 52,
-    startTime: new Date().toString(),
-    endTime: "2023.10.30",
-    createdTime: new Date().toString(),
-    updatedTime: new Date().toString(),
-    task: "test task",
-  },
-  {
-    id: 3,
-    applyUrl: "test url",
-    status: {
-      name: "등록대기" as const,
-      reason: "test reason",
-    },
-    uploader: { name: "test uploader", department: "test department", is_mine: true },
-    title: "test title",
-    cut: false,
-    view: 12,
-    bookmark: 134,
-    click: 52,
-    startTime: new Date().toString(),
-    endTime: "2023.10.1",
-    createdTime: new Date().toString(),
-    updatedTime: new Date().toString(),
-    task: "test task",
-  },
-];
-
 const JdListPage: NextPage = () => {
   const { setModal } = useModal();
 
@@ -107,7 +27,7 @@ const JdListPage: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
   const { data: userInfoData } = useManagerProfile();
-  const { data: jdDataObj } = useJdArr(Boolean(userInfoData), {
+  const { data: jdDataObj } = useJdArr(Boolean(userInfoData) && !Number.isNaN(Number(router.query.page)), {
     order: router.query.order as OrderDef,
     filter: selectedFilter,
     size: 10,

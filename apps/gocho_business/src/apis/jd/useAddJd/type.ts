@@ -11,17 +11,22 @@ export interface RequestObjDef {
     conversion_rate: number | null;
     hire_number: number | null;
     pay: string[];
-    rotation: string[];
+    shift: string[];
     place: {
-      type: string;
-      location: {
-        address: string;
-        x: number;
-        y: number;
-      };
-      factory_id: number;
-      etc: string;
-    }[];
+      is_undefined: boolean;
+      data: (
+        | {
+            type: "일반";
+            location: {
+              address: string;
+              x: number;
+              y: number;
+            };
+          }
+        | { type: "공장"; factory_id: number }
+      )[];
+      etc: "순환" | "해외" | null;
+    };
   };
   qualification: {
     highschool: boolean;
@@ -44,8 +49,8 @@ export interface RequestObjDef {
     route: {
       email: string | null;
       link: string | null;
-      type: "고초대졸닷컴으로 지원받기" | "외부 링크" | "이메일 지원";
-    }[];
+      is_direct: boolean;
+    };
   };
 }
 

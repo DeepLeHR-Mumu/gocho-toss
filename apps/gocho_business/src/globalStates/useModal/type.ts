@@ -1,6 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 
-import { JdFormValues } from "@/pages/jd/upload/type";
+import { AddJdFormValues } from "@/pages/jd/upload/type";
 import { CompanyFormValues } from "@/pages/company/edit/type";
 
 export interface factoryObjDef {
@@ -20,7 +20,7 @@ export interface factoryObjDef {
 }
 
 export interface certiModalDef {
-  jdForm: UseFormReturn<JdFormValues>;
+  jdForm: UseFormReturn<AddJdFormValues>;
 }
 
 export type contentModalDef = factoryObjDef | certiModalDef;

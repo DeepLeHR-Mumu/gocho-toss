@@ -33,6 +33,9 @@ export const ApplyAuthPart: FunctionComponent = () => {
   const companyAuthForm = useForm<CompanyAuthFormValues>({
     mode: "onTouched",
     reValidateMode: "onChange",
+    defaultValues: {
+      industry: [],
+    },
   });
 
   const {

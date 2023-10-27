@@ -17,8 +17,8 @@ export interface ResponseObjDef {
       route: {
         email: string | null;
         link: string | null;
-        type: "고초대졸닷컴으로 지원받기" | "외부 링크" | "이메일 지원";
-      }[];
+        is_direct: boolean;
+      };
     };
     status: {
       name: "진행중" | "등록대기" | "수정대기" | "등록반려" | "수정반려";
@@ -37,10 +37,12 @@ export interface ResponseObjDef {
       conversion_rate?: number;
       hire_number: number;
       pay: string[];
-      rotation: string[];
-      place: [
-        {
-          type: string;
+      shift: string[];
+      place: {
+        is_undefined: boolean;
+        data: {
+          id: number;
+          type: "일반" | "공장";
           location?: {
             address: string;
             x: number;
@@ -51,9 +53,9 @@ export interface ResponseObjDef {
             name: string;
             address: string;
           };
-          etc: string | null;
-        }
-      ];
+        }[];
+        etc: "순환" | "해외" | null;
+      };
     };
     qualification: {
       highschool: boolean;

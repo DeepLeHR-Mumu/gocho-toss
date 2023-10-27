@@ -22,5 +22,5 @@ export const ModalComponent: FunctionComponent<modalComponentProps> = ({ childre
     };
   }, []);
 
-  return createPortal(<div css={dimmed}>{children}</div>, document.getElementById("modalPortal") as HTMLElement);
+  return createPortal(<div css={dimmed}>{children}</div>, document.getElementById("portal") as HTMLElement);
 };

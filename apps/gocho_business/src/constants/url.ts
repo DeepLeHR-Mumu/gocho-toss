@@ -4,6 +4,8 @@ export const INTERNAL_URL = {
   JD_LIST: "/jd/list",
   JD_UPLOAD: "/jd/upload",
   JD_EDIT: (jdIndex: number) => `/jd/${jdIndex}/edit`,
+  JD_DETAIL: "/jd/[jdId]/detail",
+  JD_RESUME: "/jd/[jdId]/resume/[applicantId]",
   FACTORY_LIST: "/factory/list",
   COMPANY_EDIT: "/company/edit",
   MANAGER_LIST: "/manager/list",

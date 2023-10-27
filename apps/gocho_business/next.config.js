@@ -21,6 +21,24 @@ const nextConfig = {
     "shared-ui",
     "shared-hook",
   ],
+  webpack: (config) => {
+    const fileLoaderRule = config.module.rules.find((rule) => rule.test && rule.test.test?.(".svg"));
+
+    config.module.rules.push({
+      ...fileLoaderRule,
+      test: /\.svg$/,
+      issuer: /\.[jt]sx?$/,
+      resourceQuery: { not: [/svgr/] },
+    });
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: /\.[jt]sx?$/,
+      resourceQuery: /svgr/,
+      use: ["@svgr/webpack"],
+    });
+
+    return config;
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

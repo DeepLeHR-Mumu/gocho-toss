@@ -32,6 +32,7 @@ export interface ResponseObjDef {
         bookmark: number;
         total_applicant: number;
         unread_applicant: number;
+        view: number;
       }[]
     | [];
   page_result: PageResultDef;

@@ -32,10 +32,10 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
   const numberFormat = Intl.NumberFormat("ko-KR", { notation: "compact" });
   const isExpired = dayjs(jd.endTime).isBefore(dayjs());
   const isViewOn = isExpired || jd.status.name === "진행중";
-  const isEditOn = jd.uploader.is_mine && !isExpired;
-  const isEndOn = jd.uploader.is_mine && !isExpired && jd.status.name === "진행중";
-  const isCopyOn = jd.uploader.is_mine;
-  const isDeleteOn = jd.uploader.is_mine;
+  const isEditOn = jd.uploader.isMine && !isExpired;
+  const isEndOn = jd.uploader.isMine && !isExpired && jd.status.name === "진행중";
+  const isCopyOn = jd.uploader.isMine;
+  const isDeleteOn = jd.uploader.isMine;
 
   const endJdHandler = (id: number) => {
     if (isEndLoading.current) return;
@@ -124,14 +124,12 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd }) => {
           <div css={cssObj.verticalBorder} />
           <div css={cssObj.viewInfoBox}>
             <p css={cssObj.countName}>전체 지원자</p>
-            {/** TODO click 말고 다른 값으로 변경될 예정 */}
-            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.click)}</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.totalApplicant)}</p>
           </div>
           <div css={cssObj.verticalBorder} />
           <div css={cssObj.viewInfoBox}>
             <p css={cssObj.countName}>미열람</p>
-            {/** TODO view 말고 다른 값으로 변경될 예정 */}
-            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.view)}</p>
+            <p css={cssObj.count(isExpired)}>{numberFormat.format(jd.unreadApplicant)}</p>
           </div>
         </div>
       </div>

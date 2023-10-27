@@ -16,7 +16,7 @@ export const jdArrSelector = ({ data: jdArr, page_result }: ResponseObjDef) => {
       name: jd.status.name,
       reason: jd.status.reason,
     },
-    uploader: { name: jd.uploader.name, is_mine: jd.uploader.is_mine },
+    uploader: { name: jd.uploader.name, isMine: jd.uploader.is_mine },
     title: jd.title,
     cut: jd.cut,
     bookmark: jd.bookmark,
@@ -26,6 +26,7 @@ export const jdArrSelector = ({ data: jdArr, page_result }: ResponseObjDef) => {
     updatedTime: jd.updated_time,
     totalApplicant: jd.total_applicant,
     unreadApplicant: jd.unread_applicant,
+    view: jd.view,
   }));
   return { jdDataArr, pageResult };
 };

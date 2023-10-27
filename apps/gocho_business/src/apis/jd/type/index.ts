@@ -17,8 +17,8 @@ export interface JdApplicant {
       graduate_type: GraduateType;
     };
     career: {
-      name: string;
-      total_duration: YearMonthDuration; // "y년 mm개월"
+      name: string | null;
+      total_duration: YearMonthDuration | null; // "y년 mm개월"
     };
   };
   is_read: boolean;

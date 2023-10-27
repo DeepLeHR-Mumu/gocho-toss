@@ -1,5 +1,5 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 
-export interface GetJdApplicantPdfDef {
-  (jdId: number, applicantIdArr?: number[]): Promise<AxiosResponse<Blob>>;
+export interface GetApplicantFileDef {
+  (jdId: number, applicantIdArr?: number[]): Promise<AxiosResponse<Blob> | AxiosError>;
 }

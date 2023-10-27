@@ -15,6 +15,7 @@ export const Footer: FunctionComponent = () => (
       <div css={cssObj.infoContainer}>
         <strong css={cssObj.logoBox}>
           <Image src={gochoTextMono} alt="고초대졸닷컴" fill />
+          {/* <GochoTextMono /> */}
         </strong>
         <div css={cssObj.infoBox}>
           <p css={cssObj.info}>(주)디플에이치알</p>

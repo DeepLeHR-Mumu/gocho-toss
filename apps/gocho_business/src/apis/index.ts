@@ -27,6 +27,8 @@ export { useJdArr } from "./jd/useJdArr";
 export { useJdDetail } from "./jd/useJdDetail";
 export { useJdStatistics } from "./jd/useJdStatistics";
 export { useJdApplicantArr } from "./jd/useJdApplicantArr";
+export { useReadApplicant } from "./jd/useReadApplicant";
+export { useApplicantPdf } from "./jd/useApplicantPdf";
 export { jdArrKeyObj } from "./jd/useJdArr/type";
 
 export { useNoticeArr } from "./notice/useNoticeArr";

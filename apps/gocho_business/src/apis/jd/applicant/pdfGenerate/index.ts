@@ -1,11 +1,22 @@
-import { axiosInstance } from "@/apis/axiosInstance";
-import { GetJdApplicantPdfDef } from "./type";
+import axios, { AxiosError } from "axios";
 
-export const getJdApplicantPdf: GetJdApplicantPdfDef = async (jdId, applicantIdArr) => {
-  const { data } = await axiosInstance.get(
-    `/jds/${jdId}/applicants/pdf-generate${
-      applicantIdArr && applicantIdArr.length !== 0 ? `?applyIds=${applicantIdArr.join(",")}` : ""
-    }`
-  );
-  return data;
+import { axiosInstance } from "@/apis/axiosInstance";
+import { GetApplicantFileDef } from "./type";
+
+export const getApplicantsFile: GetApplicantFileDef = async (jdId, applicantIdArr) => {
+  try {
+    const response = await axiosInstance.get(
+      `/jds/${jdId}/applicants/pdf-generate${
+        applicantIdArr && applicantIdArr.length !== 0 ? `?applicantIds=${applicantIdArr.join(",")}` : ""
+      }`,
+      { responseType: "blob" }
+    );
+    return response;
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      return e;
+    }
+
+    return new AxiosError("Unknown Error occured");
+  }
 };

@@ -7,7 +7,7 @@ export interface RequestObjDef {
   logo?: File;
   backgroundImage?: File;
   dto?: {
-    industry: string;
+    industry: string[];
     employee_number: number;
     location: {
       address: string;

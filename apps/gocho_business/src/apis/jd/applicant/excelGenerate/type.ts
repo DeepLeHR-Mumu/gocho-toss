@@ -1,5 +1,5 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 export interface GetJdApplicantExcelDef {
-  (jdId: number, applicantIdArr?: number[]): Promise<AxiosResponse<Blob>>;
+  (jdId: number, applicantIdArr?: number[]): Promise<AxiosResponse<Blob> | AxiosError>;
 }

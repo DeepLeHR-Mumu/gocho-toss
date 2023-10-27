@@ -5,6 +5,7 @@ import { selector } from "./util";
 
 export interface RequestObjDef {
   jdId?: number;
+  order?: "recent" | "read" | "unread";
   page?: number;
   size?: number;
 }
