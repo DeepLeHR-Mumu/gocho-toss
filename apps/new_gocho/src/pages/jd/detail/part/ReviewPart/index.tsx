@@ -127,24 +127,30 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
           </div>
         </div>
         {!userData ? (
-          <div css={cssObj.contentsWrapper(true)} ref={scrollRef}>
-            <Review
-              uploader={{ nickname: "유저닉네임" }}
-              time="시간"
-              comment="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat assumenda excepturi autem officiis
+          <>
+            <div css={cssObj.loginDesc}>
+              로그인 후 기업의 <br />
+              생생한 리뷰를 확인해보세요!
+            </div>
+            <div css={cssObj.contentsWrapper(true)} ref={scrollRef}>
+              <Review
+                uploader={{ nickname: "유저닉네임" }}
+                time="시간"
+                comment="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat assumenda excepturi autem officiis
           dignissimos,"
-              thumbsUp={{ count: 0, isClicked: false }}
-              thumbsDown={{ count: 0, isClicked: false }}
-            />
-            <Review
-              uploader={{ nickname: "유저닉네임" }}
-              time="시간"
-              comment="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat assumenda excepturi autem officiis
+                thumbsUp={{ count: 0, isClicked: false }}
+                thumbsDown={{ count: 0, isClicked: false }}
+              />
+              <Review
+                uploader={{ nickname: "유저닉네임" }}
+                time="시간"
+                comment="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat assumenda excepturi autem officiis
           dignissimos,"
-              thumbsUp={{ count: 0, isClicked: false }}
-              thumbsDown={{ count: 0, isClicked: false }}
-            />
-          </div>
+                thumbsUp={{ count: 0, isClicked: false }}
+                thumbsDown={{ count: 0, isClicked: false }}
+              />
+            </div>
+          </>
         ) : (
           <div css={cssObj.contentsWrapper(false)} ref={scrollRef}>
             {companyCommentData?.comment_arr && companyCommentData.comment_arr.length !== 0 ? (
