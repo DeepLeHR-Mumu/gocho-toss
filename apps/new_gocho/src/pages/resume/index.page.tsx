@@ -17,7 +17,7 @@ const ResumePage: NextPage = () => {
   }
 
   // TODO: resume 하나만 사용하는것으로 판단 추후 변경
-  const resumeId = resumeArr.data[0].id;
+  const resumeId = resumeArr?.data[0].id;
 
   return (
     <main css={cssObj.background}>
@@ -32,7 +32,7 @@ const ResumePage: NextPage = () => {
             <ActivityPart resumeId={resumeId} />
           </div>
           <div css={cssObj.sideContentsWrapper}>
-            <SidePart />
+            <SidePart resumeId={resumeId} />
           </div>
         </div>
       </Layout>

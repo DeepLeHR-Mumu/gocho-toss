@@ -25,4 +25,12 @@ export const cssObj = {
     flex-basis: 10.5rem;
     flex-shrink: 0;
   `,
+
+  previewButtonWrapper: css`
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: 11.25rem;
+  `,
 };
