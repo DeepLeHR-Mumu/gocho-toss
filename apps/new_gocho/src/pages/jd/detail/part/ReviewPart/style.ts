@@ -66,6 +66,16 @@ export const cssObj = {
     ${TEXT.BODY3_R1422}
   `,
 
+  loginDesc: css`
+    position: absolute;
+    text-align: center;
+    top: 45%;
+    left: 3rem;
+    z-index: 20;
+    color: ${COLOR.BLACK};
+    ${TEXT.BODY2_R1624}
+  `,
+
   contentsWrapper: (blurred: boolean) => css`
     padding: 1.125rem 1rem 1rem;
     background-color: ${COLOR.GRAY100};
@@ -74,7 +84,7 @@ export const cssObj = {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    ${blurred && "-webkit-filter: blur(3px); filter: blur(3px);"}
+    ${blurred && "-webkit-filter: blur(10px); filter: blur(10px);"}
   `,
 
   noComment: css`
