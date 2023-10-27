@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   container: css`
@@ -23,7 +23,7 @@ export const cssObj = {
 
     > h3 {
       color: ${COLOR.BLACK};
-      ${NEWTEXTS.TITLE1_B2832}
+      ${TEXT.TITLE1_B2832}
     }
   `,
 
@@ -46,11 +46,11 @@ export const cssObj = {
     > span {
       flex-basis: 5.125rem;
       flex-shrink: 0;
-      ${NEWTEXTS.TITLE4_B1822}
+      ${TEXT.TITLE4_B1822}
     }
 
     > p {
-      ${NEWTEXTS.BODY2_R1624}
+      ${TEXT.BODY2_R1624}
 
       > span {
         color: ${COLOR.BLUE300};
@@ -77,7 +77,7 @@ export const cssObj = {
 
       > span {
         color: ${COLOR.BLUE300};
-        ${NEWTEXTS.BODY2_R1624}
+        ${TEXT.BODY2_R1624}
       }
     }
   `,
@@ -103,13 +103,13 @@ export const cssObj = {
 
     > p {
       text-align: center;
-      ${NEWTEXTS.TITLE5_M1620}
+      ${TEXT.TITLE5_M1620}
     }
   `,
 
   errorDescription: css`
     padding: 1.25rem 0;
-    ${NEWTEXTS.BODY2_R1624}
+    ${TEXT.BODY2_R1624}
   `,
 
   errorButtonWrapper: css`

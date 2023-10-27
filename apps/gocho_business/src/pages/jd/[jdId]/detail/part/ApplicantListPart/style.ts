@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 
 export const cssObj = {
   wrapper: css`
@@ -17,12 +17,12 @@ export const cssObj = {
   `,
 
   customButton: css`
-    ${NEWTEXTS.TITLE6_B1418}
+    ${TEXT.TITLE6_B1418}
   `,
 
   customOutlineButton: css`
     color: ${COLOR.BLUE300};
-    ${NEWTEXTS.TITLE6_B1418}
+    ${TEXT.TITLE6_B1418}
   `,
 
   top: css`
@@ -40,7 +40,7 @@ export const cssObj = {
       text-align: left;
       padding: 1rem;
       border-bottom: 2px solid ${COLOR.GRAY200};
-      ${NEWTEXTS.TITLE6_M1418}
+      ${TEXT.TITLE6_M1418}
 
       :first-of-type {
         padding-right: 0;
@@ -85,7 +85,7 @@ export const cssObj = {
       text-overflow: ellipsis;
       white-space: nowrap;
       border-bottom: 1px solid ${COLOR.GRAY200};
-      ${NEWTEXTS.BODY3_R1422}
+      ${TEXT.BODY3_R1422}
 
       :last-of-type {
         text-align: right;
@@ -110,7 +110,7 @@ export const cssObj = {
     padding: 2rem;
     height: 11.25rem;
     color: ${COLOR.GRAY600};
-    ${NEWTEXTS.BODY2_R1624}
+    ${TEXT.BODY2_R1624}
   `,
 
   checkResumeButton: css`

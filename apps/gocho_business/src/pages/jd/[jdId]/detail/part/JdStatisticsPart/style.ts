@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { NEWTEXTS } from "shared-style/text";
+import { TEXT } from "shared-style/text";
 import { COLOR } from "shared-style/color";
 
 export const cssObj = {
@@ -19,11 +19,11 @@ export const cssObj = {
     padding: 1rem;
 
     > span {
-      ${NEWTEXTS.TITLE5_M1620}
+      ${TEXT.TITLE5_M1620}
     }
 
     > p {
-      ${NEWTEXTS.TITLE2_B2428}
+      ${TEXT.TITLE2_B2428}
     }
   `,
 
