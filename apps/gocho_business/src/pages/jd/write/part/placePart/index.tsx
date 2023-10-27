@@ -6,12 +6,12 @@ import { BsDash } from "react-icons/bs";
 import { Checkbox, Radio, DropDown } from "shared-ui/deeple-ds";
 import { useFactoryArr, useAddFactory, useEditFactory } from "@/apis";
 import { commonCssObj } from "@/styles";
-
+import { FactoryModal } from "@/pages/company/edit/component";
 import { jdPlaceAddClickEvent } from "@/ga";
+
 import { PositionWorkInfoPartProps } from "./type";
 import { SPECIFIC_PLACE_ARR } from "./constant";
 import { cssObj } from "./style";
-import { FactoryModal } from "@/pages/company/edit/component";
 
 export const PlacePart: FunctionComponent<PositionWorkInfoPartProps> = ({ jdForm }) => {
   const [type, setType] = useState<"normal" | "specific">("normal");
