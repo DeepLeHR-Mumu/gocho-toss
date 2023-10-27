@@ -53,7 +53,7 @@ export const selector = (educationArr: ResumeEducationDef[]) =>
       description: education.second_attendance?.description,
     },
 
-    thirdAttendence: {
+    thirdAttendance: {
       diseaseSchoolAbsent: education.third_attendance?.disease_school_absent,
       diseaseTardy: education.third_attendance?.disease_tardy,
       diseaseLeave: education.third_attendance?.disease_leave,
@@ -124,7 +124,7 @@ export const selectEducation = (education: ResumeEducationDef) => ({
     description: education.second_attendance?.description,
   },
 
-  thirdAttendence: {
+  thirdAttendance: {
     diseaseSchoolAbsent: education.third_attendance?.disease_school_absent,
     diseaseTardy: education.third_attendance?.disease_tardy,
     diseaseLeave: education.third_attendance?.disease_leave,

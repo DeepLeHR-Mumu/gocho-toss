@@ -41,7 +41,7 @@ export const selector = (highSchool: ResumeHighSchoolDef) => ({
     isPerfect: highSchool.second_attendance?.is_perfect,
     description: highSchool.second_attendance?.description,
   },
-  thirdAttendence: {
+  thirdAttendance: {
     diseaseSchoolAbsent: highSchool.third_attendance?.disease_school_absent,
     diseaseTardy: highSchool.third_attendance?.disease_tardy,
     diseaseLeave: highSchool.third_attendance?.disease_leave,

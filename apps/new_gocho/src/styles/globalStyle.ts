@@ -153,6 +153,7 @@ export const globalStyle = css`
     word-break: keep-all;
   }
   input,
+  textarea,
   select,
   button {
     cursor: pointer;
@@ -198,8 +199,5 @@ export const globalStyle = css`
     -webkit-box-shadow: 0 0 0px 1000px #fff inset;
     box-shadow: 0 0 0px 1000px #fff inset;
     transition: background-color 5000s ease-in-out 0s;
-  }
-  textarea {
-    font-family: "Noto Sans KR", Verdana, sans-serif;
   }
 `;

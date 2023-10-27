@@ -13,7 +13,7 @@ import {
   UsePostResumeCertificationProps,
 } from "./type";
 
-export const postResumeCerification: PostResumeCertificationDef = async ({ resumeId, ...requestObj }) => {
+export const postResumeCertification: PostResumeCertificationDef = async ({ resumeId, ...requestObj }) => {
   const { data } = await axiosInstance.post(`/resumes/${resumeId}/certifications`, requestObj);
   return data;
 };
@@ -22,7 +22,7 @@ export const usePostResumeCertification: UsePostResumeCertificationProps = (resu
   const queryClient = useQueryClient();
 
   return useMutation<PostResumeCertificationResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
-    mutationFn: postResumeCerification,
+    mutationFn: postResumeCertification,
     onSuccess: () => {
       queryClient.invalidateQueries(resumeCertificationKeyObj.certificationArr(resumeId));
     },

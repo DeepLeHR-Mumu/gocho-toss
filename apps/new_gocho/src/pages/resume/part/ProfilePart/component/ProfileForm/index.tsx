@@ -11,7 +11,7 @@ import { useToast } from "@/globalStates";
 
 import { usePutUserResumeProfile } from "@/apis/users";
 import { PutResumeProfileDef } from "@/apis/users/resume/usePutUserResumeProfile/type";
-import { fileEncording } from "@/pages/mypage/part/ProfilePart/utils";
+import { fileEncoding } from "@/pages/mypage/part/ProfilePart/utils";
 import basicProfile from "@/public/image/resume/BasicProfile.svg";
 
 import { cssObj } from "./style";
@@ -61,7 +61,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
       setProfileFile(profile);
 
       try {
-        const result = await fileEncording(profile);
+        const result = await fileEncoding(profile);
 
         if (typeof result === "string") {
           setUserProfilePreview(result);

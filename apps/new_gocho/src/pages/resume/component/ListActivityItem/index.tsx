@@ -15,9 +15,9 @@ export const ListActivityItem: FC<ListActivityItemProps> = ({
   type,
   title,
   titleDes,
-  desciption,
+  description,
   date,
-  editHadnler,
+  editHandler,
   deleteHandler,
 }) => (
   <section css={cssObj.wrapper}>
@@ -31,7 +31,7 @@ export const ListActivityItem: FC<ListActivityItemProps> = ({
         </p>
       </div>
       <div css={cssObj.iconWrapper}>
-        <button type="button" onClick={editHadnler}>
+        <button type="button" onClick={editHandler}>
           <FiEdit2 css={cssObj.icon} />
         </button>
         <button type="button" onClick={deleteHandler}>
@@ -43,7 +43,7 @@ export const ListActivityItem: FC<ListActivityItemProps> = ({
       <h2 css={cssObj.title}>{title}</h2>
       <p css={cssObj.titelDes}>{titleDes}</p>
     </div>
-    <p css={cssObj.description}>{desciption}</p>
+    <p css={cssObj.description}>{description}</p>
     <p css={cssObj.date}>{date.map((d) => dateToYYDOTMM(d)).join(" - ")}</p>
   </section>
 );

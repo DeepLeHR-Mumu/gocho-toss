@@ -127,7 +127,7 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, regis
         </>
       ) : (
         <>
-          <div css={cssObj.inputFlexbox}>
+          <div css={cssObj.inputFlexBox}>
             <div css={cssObj.inputWrapper}>
               <p>
                 입학 연월 <strong css={cssObj.required}> *</strong>
@@ -179,7 +179,7 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, regis
               </div>
             )}
           </div>
-          <div css={cssObj.inputFlexbox}>
+          <div css={cssObj.inputFlexBox}>
             <div css={cssObj.inputWrapper}>
               <p>전공/학과</p>
               <Input placeholder="전공 또는 학과 입력" maxLength={15} {...register("major")} />
@@ -221,7 +221,7 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, regis
 
           <div css={cssObj.inputWrapper}>
             <p css={cssObj.attendanceLabel}>출결 사항</p>
-            <AttendanceForm register={register} setValue={setValue} />
+            <AttendanceForm register={register} />
           </div>
         </>
       )}

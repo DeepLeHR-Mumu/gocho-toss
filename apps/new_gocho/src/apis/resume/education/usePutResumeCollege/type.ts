@@ -19,5 +19,5 @@ export interface PutResumeCollegeDef {
 }
 
 export interface UsePutResumeCollegeProps {
-  (resumId: number): UseMutationResult<PutResumeCollegeResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<PutResumeCollegeResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

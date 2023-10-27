@@ -2,8 +2,8 @@ export interface ListActivityItemProps {
   type: string;
   title: string;
   titleDes?: string;
-  desciption?: string;
+  description?: string;
   date: string[];
-  editHadnler?: () => void;
+  editHandler?: () => void;
   deleteHandler?: () => void;
 }

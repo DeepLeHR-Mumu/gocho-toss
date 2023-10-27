@@ -19,13 +19,13 @@ export const putResumeUniversity: PutResumeUniversityDef = async ({ resumeId, un
   return data;
 };
 
-export const usePutResumeUniversity: UsePutResumeUniversityProps = (resumId) => {
+export const usePutResumeUniversity: UsePutResumeUniversityProps = (resumeId) => {
   const queryClient = useQueryClient();
 
   return useMutation<PutResumeUniversityResponse, AxiosError<ErrorResponseDef>, RequestObjDef>({
     mutationFn: putResumeUniversity,
     onSuccess: () => {
-      queryClient.invalidateQueries(resumeEducationKeyObj.educationArr(resumId));
+      queryClient.invalidateQueries(resumeEducationKeyObj.educationArr(resumeId));
     },
   });
 };

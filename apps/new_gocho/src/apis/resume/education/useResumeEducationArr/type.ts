@@ -9,6 +9,6 @@ export interface GetResumeEducationDef {
   (resumeId: number): Promise<ResponseObjDef>;
 }
 
-export type SelectorResumeEducatioArr = ReturnType<typeof selector>;
+export type SelectorResumeEducationArr = ReturnType<typeof selector>;
 
 export type SelectorResumeEducation = ReturnType<typeof selectEducation>;

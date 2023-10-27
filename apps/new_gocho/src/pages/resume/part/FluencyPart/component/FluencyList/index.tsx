@@ -19,9 +19,9 @@ export const FluencyList: FC<FluencyListProps> = ({ resumeId, selectFluency, myF
             key={id}
             title={name}
             titleDes={languageType}
-            desciption={`${grade}점(등급)`}
+            description={`${grade}점(등급)`}
             date={[acquisitionDate]}
-            editHadnler={() => {
+            editHandler={() => {
               selectFluency(fluency);
             }}
             deleteHandler={() => {

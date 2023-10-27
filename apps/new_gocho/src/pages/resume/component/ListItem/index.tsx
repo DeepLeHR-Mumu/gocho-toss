@@ -13,9 +13,9 @@ export const ListItem: FC<ListItemProps> = ({
   title,
   titleDes,
   isUturn = false,
-  desciption,
+  description,
   date,
-  editHadnler,
+  editHandler,
   deleteHandler,
   children,
 }) => (
@@ -23,11 +23,16 @@ export const ListItem: FC<ListItemProps> = ({
     <div css={cssObj.headerWrapper}>
       <div css={cssObj.titleWrapper}>
         <h2 css={cssObj.title}>{title}</h2>
-        <p css={cssObj.titelDes}>{titleDes}</p>
-        {isUturn && <Image src={IsUturn} alt="" css={cssObj.uTurnImage} />}
+        <p css={cssObj.titleDes}>{titleDes}</p>
+        {isUturn && (
+          <div css={cssObj.uTurnWrapper}>
+            <p css={cssObj.uTurnText}>유턴</p>
+            <Image src={IsUturn} alt="" />
+          </div>
+        )}
       </div>
       <div css={cssObj.iconWrapper}>
-        <button type="button" onClick={editHadnler}>
+        <button type="button" onClick={editHandler}>
           <FiEdit2 css={cssObj.icon} />
         </button>
         <button type="button" onClick={deleteHandler}>
@@ -35,8 +40,9 @@ export const ListItem: FC<ListItemProps> = ({
         </button>
       </div>
     </div>
+    {description && <p css={cssObj.description}>{description}</p>}
     {children}
-    {desciption && <p css={cssObj.description}>{desciption}</p>}
+
     <p css={cssObj.date}>{date.map((d) => dateToYYDOTMM(d)).join(" - ")}</p>
   </section>
 );

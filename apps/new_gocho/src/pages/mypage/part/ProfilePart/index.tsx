@@ -10,7 +10,7 @@ import { usePatchUserProfile, useUserInfo } from "@/apis/auth";
 import { cssObj } from "./style";
 import { NicknameInput } from "./type";
 import { profileImgObjArr } from "./constant";
-import { convertToBlob, fileEncording } from "./utils";
+import { convertToBlob, fileEncoding } from "./utils";
 
 export const ProfilePart: FC = () => {
   const [userProfilePreview, setUserProfilePreview] = useState<string>();
@@ -46,7 +46,7 @@ export const ProfilePart: FC = () => {
       trigger("nickName");
 
       try {
-        const result = await fileEncording(profile);
+        const result = await fileEncoding(profile);
 
         if (typeof result === "string") {
           setUserProfilePreview(result);
@@ -130,7 +130,7 @@ export const ProfilePart: FC = () => {
     const random = Math.floor(Math.random() * 5);
     const profileBlob = await convertToBlob(profileImgObjArr[random].image);
     const profileFile = new File([profileBlob], `${profileImgObjArr[random].key}.png`, { type: "image/png" });
-    const result = await fileEncording(profileFile);
+    const result = await fileEncoding(profileFile);
     if (typeof result === "string") {
       setUserProfile(profileFile);
       setUserProfilePreview(result);

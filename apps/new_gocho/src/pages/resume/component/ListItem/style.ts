@@ -43,7 +43,7 @@ export const cssObj = {
     ${TEXT.TITLE4_B1822};
     margin-right: 1rem;
   `,
-  titelDes: css`
+  titleDes: css`
     ${TEXT.BODY2_R1624};
     color: ${COLOR.GRAY500};
     margin-right: 0.5rem;
@@ -59,8 +59,20 @@ export const cssObj = {
     color: ${COLOR.GRAY700};
   `,
 
-  uTurnImage: css`
-    border-radius: 50%;
+  uTurnWrapper: css`
+    width: 3rem;
+    padding: 0 0.38rem;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 1rem;
     background-color: ${COLOR.BLUE100};
+  `,
+
+  uTurnText: css`
+    ${TEXT.TITLE7_M1218};
+    color: ${COLOR.BLUE300};
   `,
 };

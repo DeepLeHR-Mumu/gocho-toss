@@ -25,7 +25,7 @@ export const CertificationList: FC<CertificationListProps> = ({
             title={name}
             titleDes={issuingAuthority}
             date={[acquisitionDate]}
-            editHadnler={() => {
+            editHandler={() => {
               selectCertification({ id, name, issuingAuthority, acquisitionDate });
             }}
             deleteHandler={() => {

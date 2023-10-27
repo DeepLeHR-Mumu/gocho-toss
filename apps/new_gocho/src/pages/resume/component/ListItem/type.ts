@@ -2,9 +2,9 @@ export interface ListItemProps {
   title: string;
   titleDes?: string;
   isUturn?: boolean;
-  desciption?: string;
+  description?: string;
   date: string[];
   children?: React.ReactNode;
-  editHadnler?: () => void;
+  editHandler?: () => void;
   deleteHandler?: () => void;
 }

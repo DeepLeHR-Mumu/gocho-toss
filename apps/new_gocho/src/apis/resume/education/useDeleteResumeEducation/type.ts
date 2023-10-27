@@ -13,5 +13,5 @@ export interface DeleteResumeEducationDef {
 }
 
 export interface UseDeleteResumeEducationProps {
-  (resumId: number): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
+  (resumeId: number): UseMutationResult<AxiosResponse, AxiosError<ErrorResponseDef>, RequestObjDef>;
 }

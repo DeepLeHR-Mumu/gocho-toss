@@ -22,9 +22,9 @@ export const ActivityList: FC<ActivityListProps> = ({ resumeId, selectActivity, 
             type={activityType}
             title={name}
             titleDes={organizer}
-            desciption={activityDescription}
+            description={activityDescription}
             date={[activityDate]}
-            editHadnler={() => {
+            editHandler={() => {
               selectActivity(activity);
             }}
             deleteHandler={() => {

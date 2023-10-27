@@ -32,7 +32,7 @@ export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarr
             title={name}
             titleDes={contractType || ""}
             date={isWorking ? [startDate] : [startDate, endDate || ""]}
-            editHadnler={() => {
+            editHandler={() => {
               selectCarrer(carrer);
             }}
             deleteHandler={() => {

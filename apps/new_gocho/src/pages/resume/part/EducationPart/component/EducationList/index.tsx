@@ -2,21 +2,41 @@ import { FC } from "react";
 
 import { useDeleteResumeEducation } from "@/apis/resume/education/useDeleteResumeEducation";
 
-import { SelectorResumeEducatioArr, SelectorResumeEducation } from "@/apis/resume/education/useResumeEducationArr/type";
-
-import { SelectorResumeExtra } from "@/apis/resume/education/useResumeExtra/type";
-import { SelectorResumeHighSchool } from "@/apis/resume/education/useResumeHighSchool/type";
-import { SelectorResumeUniversity } from "@/apis/resume/education/useResumeUniversity/type";
-import { SelectorResumeCollege } from "@/apis/resume/education/useResumeCollege/type";
-
 import { ListItem } from "@/pages/resume/component";
 import { useToast } from "@/globalStates";
 
-interface EducationListProps {
-  resumeId: number;
-  myEducationList: SelectorResumeEducatioArr;
-  selectEducation: (education: SelectorResumeEducation) => void;
-}
+import { cssObj } from "./style";
+import { EducationListProps } from "./type";
+import { attendanceHeaderArr, attendanceHeaderItem } from "../EducationForm/component/AttendanceForm/constants";
+
+type SelectorAttendance =
+  | "diseaseSchoolAbsent"
+  | "diseaseTardy"
+  | "diseaseLeave"
+  | "diseaseSubjectAbsent"
+  | "unauthorizedSchoolAbsent"
+  | "unauthorizedTardy"
+  | "unauthorizedLeave"
+  | "unauthorizedSubjectAbsent"
+  | "extraSchoolAbsent"
+  | "extraTardy"
+  | "extraLeave"
+  | "extraSubjectAbsent";
+
+const attendanceArr: SelectorAttendance[] = [
+  "diseaseSchoolAbsent",
+  "diseaseTardy",
+  "diseaseLeave",
+  "diseaseSubjectAbsent",
+  "unauthorizedSchoolAbsent",
+  "unauthorizedTardy",
+  "unauthorizedLeave",
+  "unauthorizedSubjectAbsent",
+  "extraSchoolAbsent",
+  "extraTardy",
+  "extraLeave",
+  "extraSubjectAbsent",
+];
 
 export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationList, selectEducation }) => {
   const { mutate: deleteEducation } = useDeleteResumeEducation(resumeId);
@@ -31,112 +51,98 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
   return (
     <>
       {myEducationList.map((education) => {
-        if (education.educationType === "기타") {
-          const extra = education as SelectorResumeExtra;
+        const {
+          id,
+          name,
+          educationType,
+          graduateType,
+          etc,
+          major,
+          grade,
+          maxGrade,
+          startDate,
+          endDate,
+          isUturn,
+          firstAttendance,
+          secondAttendance,
+          thirdAttendance,
+        } = education;
 
-          return (
-            <ListItem
-              key={extra.id}
-              title={extra.name}
-              titleDes={education.educationType + extra.graduateType}
-              desciption={[extra.grade, extra.maxGrade, extra.etc].join("/")}
-              date={[extra.startDate]}
-              editHadnler={() => {
-                selectEducation(education);
-              }}
-              deleteHandler={() => {
-                deleteEducation(
-                  {
-                    resumeId,
-                    educationId: extra.id,
-                  },
-                  onDeleteSuccess
-                );
-              }}
-            />
-          );
-        }
+        const attendanceKeyArr = [firstAttendance, secondAttendance, thirdAttendance];
 
-        if (education.educationType === "고등학교") {
-          const highSchool = education as SelectorResumeHighSchool;
+        return (
+          <ListItem
+            key={id}
+            title={name}
+            titleDes={`${educationType} ${graduateType}`}
+            date={!["재학", "중퇴"].includes(graduateType) ? [startDate, endDate || ""] : [startDate]}
+            isUturn={education.educationType === "대학교(4년제)" || isUturn}
+            editHandler={() => {
+              selectEducation(education);
+            }}
+            deleteHandler={() => {
+              deleteEducation(
+                {
+                  resumeId,
+                  educationId: id,
+                },
+                onDeleteSuccess
+              );
+            }}
+          >
+            <div css={cssObj.wrapper}>
+              <div css={cssObj.titleWrapper}>
+                <p>{major}</p>
+                {grade && (
+                  <p>
+                    학점 {grade} {maxGrade ? ` / ${maxGrade}` : ""}
+                  </p>
+                )}
+              </div>
+              <p css={cssObj.describe}>{etc}</p>
+            </div>
 
-          return (
-            <ListItem
-              key={highSchool.id}
-              title={highSchool.name}
-              titleDes={education.educationType + highSchool.graduateType}
-              desciption={[highSchool.etc].join("/")}
-              date={[highSchool.startDate]}
-              editHadnler={() => {
-                selectEducation(education);
-              }}
-              deleteHandler={() => {
-                deleteEducation(
-                  {
-                    resumeId,
-                    educationId: education.id,
-                  },
-                  onDeleteSuccess
-                );
-              }}
-            />
-          );
-        }
+            {educationType === "고등학교" && (firstAttendance || secondAttendance || thirdAttendance) && (
+              <div css={cssObj.attendanceBox}>
+                <div css={cssObj.attendanceWrapper}>
+                  <div css={cssObj.gradeHeader}>학년</div>
+                  <div css={cssObj.dayHeader}>수업일수</div>
+                  {attendanceHeaderArr.map((attendanceHeader) => (
+                    <div key={attendanceHeader} css={cssObj.headerWrapper}>
+                      <div css={cssObj.header}>{attendanceHeader}</div>
+                      <div css={cssObj.headerFlexBox}>
+                        <p>{attendanceHeaderItem.disease}</p>
+                        <p>{attendanceHeaderItem.unauthorized}</p>
+                        <p>{attendanceHeaderItem.extra}</p>
+                      </div>
+                    </div>
+                  ))}
+                  <div css={cssObj.special}>특기사항</div>
+                </div>
 
-        if (education.educationType === "대학교(2,3년제)") {
-          const college = education as SelectorResumeCollege;
+                {attendanceKeyArr.map((gradeAttendance, index) => {
+                  const attendanceGrade = index + 1;
 
-          return (
-            <ListItem
-              key={college.id}
-              title={college.name}
-              titleDes={education.educationType + college.graduateType}
-              desciption={[college.etc].join("/")}
-              date={[college.startDate]}
-              editHadnler={() => {
-                selectEducation(education);
-              }}
-              deleteHandler={() => {
-                deleteEducation(
-                  {
-                    resumeId,
-                    educationId: college.id,
-                  },
-                  onDeleteSuccess
-                );
-              }}
-            />
-          );
-        }
+                  return (
+                    <div css={cssObj.inputWrapper} key={grade}>
+                      <div css={cssObj.grade}>{attendanceGrade}</div>
+                      <div css={cssObj.dayInput}>
+                        <p>{gradeAttendance.totalClassDays}</p>
+                      </div>
+                      {attendanceArr.map((attendance) => (
+                        <div key={attendance} css={cssObj.dataInput}>
+                          <p>{gradeAttendance[attendance] ? gradeAttendance[attendance] : "-"}</p>
+                        </div>
+                      ))}
 
-        if (education.educationType === "대학교(4년제)") {
-          const university = education as SelectorResumeUniversity;
-
-          return (
-            <ListItem
-              key={university.id}
-              title={university.name}
-              titleDes={education.educationType + university.graduateType}
-              desciption={[university.etc].join("/")}
-              date={[university.startDate]}
-              isUturn={university.isUturn}
-              editHadnler={() => {
-                selectEducation(education);
-              }}
-              deleteHandler={() => {
-                deleteEducation(
-                  {
-                    resumeId,
-                    educationId: university.id,
-                  },
-                  onDeleteSuccess
-                );
-              }}
-            />
-          );
-        }
-
-        return <> </>;
+                      <div css={cssObj.specialInput}>{gradeAttendance.description}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </ListItem>
+        );
       })}
     </>
   );

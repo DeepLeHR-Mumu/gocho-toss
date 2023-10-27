@@ -32,12 +32,13 @@ export const cssObj = {
     ${TEXT.TITLE5_M1620};
   `,
 
-  inputFlexbox: css`
+  inputFlexBox: css`
     display: flex;
     gap: 3.25rem;
   `,
 
   attendanceLabel: css`
-    align-items: start;
+    padding: 1rem 0;
+    align-self: flex-start; /* 이 아이템만 시작점으로 정렬 */
   `,
 };
