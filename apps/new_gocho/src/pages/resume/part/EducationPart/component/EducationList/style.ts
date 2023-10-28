@@ -35,6 +35,7 @@ export const cssObj = {
   `,
 
   attendanceBox: css`
+    width: 100%;
     margin-bottom: 0.75rem;
   `,
 
@@ -42,9 +43,6 @@ export const cssObj = {
     display: flex;
     align-items: center;
     height: 4.5rem;
-    width: 100%;
-
-    overflow: hidden;
 
     background-color: ${COLOR.GRAY50};
 
@@ -75,22 +73,24 @@ export const cssObj = {
 
   dayHeader: css`
     width: 4.5rem;
+    height: 4.5rem;
   `,
 
   headerWrapper: css`
     display: flex;
     flex-direction: column;
+    width: 6.75rem;
 
     align-items: center;
     justify-content: center;
 
     & > div {
       height: 50%;
+      width: 6.75rem;
     }
   `,
 
   header: css`
-    width: 6.75rem;
     border-bottom: 1px solid ${COLOR.GRAY200};
     justify-content: center;
 
@@ -102,17 +102,15 @@ export const cssObj = {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 6.75rem;
 
     ${TEXT.BODY3_R1422};
 
     & > p {
+      width: 2.25rem;
       display: flex;
       justify-content: center;
       align-items: center;
-
-      width: 2.25rem;
-      height: 2.25rem;
-      text-align: center;
     }
   `,
 
@@ -138,9 +136,14 @@ export const cssObj = {
     & > div {
       text-align: center;
       height: 3rem;
-
       ${TEXT.BODY3_R1422};
       border-right: 1px solid ${COLOR.GRAY200};
+
+      :last-of-type {
+        border: none;
+        text-align: left;
+        align-self: flex-start;
+      }
     }
   `,
 
@@ -148,19 +151,14 @@ export const cssObj = {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid ${COLOR.GRAY200};
-
-    height: 3rem;
     width: 2.25rem;
   `,
 
   dayInput: css`
     display: flex;
+    width: 4.5rem;
     align-items: center;
     justify-content: center;
-    & > p {
-      width: 4.5rem;
-    }
   `,
 
   dataInput: css`
@@ -168,9 +166,7 @@ export const cssObj = {
     align-items: center;
     justify-content: center;
 
-    & > p {
-      width: 2.25rem;
-    }
+    width: 2.26rem;
   `,
 
   specialInput: css`

@@ -8,35 +8,7 @@ import { useToast } from "@/globalStates";
 import { cssObj } from "./style";
 import { EducationListProps } from "./type";
 import { attendanceHeaderArr, attendanceHeaderItem } from "../EducationForm/component/AttendanceForm/constants";
-
-type SelectorAttendance =
-  | "diseaseSchoolAbsent"
-  | "diseaseTardy"
-  | "diseaseLeave"
-  | "diseaseSubjectAbsent"
-  | "unauthorizedSchoolAbsent"
-  | "unauthorizedTardy"
-  | "unauthorizedLeave"
-  | "unauthorizedSubjectAbsent"
-  | "extraSchoolAbsent"
-  | "extraTardy"
-  | "extraLeave"
-  | "extraSubjectAbsent";
-
-const attendanceArr: SelectorAttendance[] = [
-  "diseaseSchoolAbsent",
-  "diseaseTardy",
-  "diseaseLeave",
-  "diseaseSubjectAbsent",
-  "unauthorizedSchoolAbsent",
-  "unauthorizedTardy",
-  "unauthorizedLeave",
-  "unauthorizedSubjectAbsent",
-  "extraSchoolAbsent",
-  "extraTardy",
-  "extraLeave",
-  "extraSubjectAbsent",
-];
+import { attendanceArr } from "./constants";
 
 export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationList, selectEducation }) => {
   const { mutate: deleteEducation } = useDeleteResumeEducation(resumeId);
