@@ -1,31 +1,32 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { Button } from "shared-ui/deeple-ds";
 
-import { getResumeGenerate } from "@/apis/resume/generater";
+import { getResumeGenerate } from "@/apis/resume/generator";
 
 import { cssObj } from "./style";
 
 export const SidePart: FC<{ resumeId: number }> = ({ resumeId }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const onResumeGenerate = async () => {
-    const res = await getResumeGenerate(resumeId);
+    try {
+      setIsLoading(true);
 
-    // https://stackoverflow.com/questions/27120757/failed-to-execute-createobjecturl-on-url/33759534
-    const binaryString = res.data;
+      const res = await getResumeGenerate(resumeId);
 
-    const blob = new Blob([binaryString], { type: "application/pdf" });
+      const fileURL = URL.createObjectURL(res);
 
-    const link = document.createElement("a");
+      const pdfWindow = window.open();
 
-    link.href = window.URL.createObjectURL(blob);
-    link.download = "이력서";
+      if (pdfWindow) {
+        pdfWindow.location.href = fileURL;
+      }
 
-    link.click();
-
-    // const url = window.URL.createObjectURL(new Blob(res.data, { type: "application/pdf" })); // Blob Url 생성
-    // // window.open(url, "blob", "width=1200, height=600, resizeable, scrollbars, noopener");
-    // window.open(url, "blob");
-    // window.URL.revokeObjectURL(url); // 메모리 누수 방지
+      // TODO: 에러처리 어떻게 할지 질문하기
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -41,7 +42,7 @@ export const SidePart: FC<{ resumeId: number }> = ({ resumeId }) => {
         </ul>
       </div>
       <Button size="small" color="outline" css={cssObj.previewButton} onClick={onResumeGenerate}>
-        <p css={cssObj.previewText}>이력서 미리보기</p>
+        {isLoading ? <h1>로딩중,,,,</h1> : <p css={cssObj.previewText}>이력서 미리보기</p>}
       </Button>
     </section>
   );
