@@ -223,6 +223,9 @@ importers:
       react-icons:
         specifier: ^4.8.0
         version: 4.8.0(react@18.2.0)
+      react-intersection-observer:
+        specifier: ^9.5.2
+        version: 9.5.2(react@18.2.0)
       react-pdf:
         specifier: ^7.5.0
         version: 7.5.0(@types/react@18.0.17)(react-dom@18.2.0)(react@18.2.0)
@@ -3847,7 +3850,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.9
       '@babel/helper-plugin-utils': 7.22.5
-      '@babel/helper-skip-transparent-expression-wrappers': 7.20.0
+      '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
     dev: true
 
   /@babel/plugin-transform-spread@7.22.5(@babel/core@7.22.9):
@@ -4191,7 +4194,7 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/compat-data': 7.22.9
+      '@babel/compat-data': 7.21.7
       '@babel/core': 7.22.9
       '@babel/helper-compilation-targets': 7.22.9(@babel/core@7.22.9)
       '@babel/helper-plugin-utils': 7.22.5
@@ -12677,7 +12680,7 @@ packages:
       postcss-modules-scope: 3.0.0(postcss@8.4.24)
       postcss-modules-values: 4.0.0(postcss@8.4.24)
       postcss-value-parser: 4.2.0
-      semver: 7.5.4
+      semver: 7.5.1
       webpack: 5.83.1(esbuild@0.17.19)
     dev: true
 
