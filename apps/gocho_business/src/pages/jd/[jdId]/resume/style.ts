@@ -22,6 +22,11 @@ export const cssObj = {
     }
   `,
 
+  resumeMargin: css`
+    height: 1.5rem;
+    background-color: #f2f2f5;
+  `,
+
   resumeLoading: css`
     height: 20rem;
     display: grid;

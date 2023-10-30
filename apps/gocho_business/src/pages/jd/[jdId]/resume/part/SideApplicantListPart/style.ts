@@ -48,7 +48,7 @@ export const cssObj = {
     width: 0.375rem;
     height: 0.375rem;
     border-radius: 50%;
-    background-color: ${isRead ? COLOR.BLUE100 : COLOR.RED200};
+    background-color: ${isRead ? "transparent" : COLOR.RED200};
   `,
 
   paginationWrapper: css`

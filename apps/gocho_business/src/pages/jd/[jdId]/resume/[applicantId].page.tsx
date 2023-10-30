@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
+import { useInView } from "react-intersection-observer";
 
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -18,14 +19,25 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const JdResumePage: NextPage = () => {
   const router = useRouter();
+  const [pageArr, setPageArr] = useState<number[]>([]);
   const jdId = Number(router.query.jdId);
   const applicantId = Number(router.query.applicantId);
-  const pdfWrapperRef = useRef<HTMLDivElement | null>(null);
+  const [totalPdfPageNumber, setTotalPdfPageNumber] = useState(1);
+  const { ref } = useInView({
+    onChange: (inView) => {
+      if (inView) {
+        if (pageArr.length < totalPdfPageNumber) {
+          setPageArr((prev) => prev.concat(pageArr.length + 1));
+        }
+      }
+    },
+  });
 
   const {
     data: applicantPdf,
     isLoading,
     isError,
+    isSuccess,
   } = useApplicantPdf({
     jdId,
     applicantId,
@@ -44,7 +56,7 @@ const JdResumePage: NextPage = () => {
       <PageLayout>
         <div css={cssObj.wrapper}>
           <SideApplicantListPart />
-          <div css={cssObj.resumeWrapper} ref={pdfWrapperRef}>
+          <div css={cssObj.resumeWrapper}>
             {!applicantPdf || isLoading ? (
               <div css={cssObj.resumeLoading}>
                 <ThreeDots />
@@ -57,10 +69,27 @@ const JdResumePage: NextPage = () => {
                     <ThreeDots />
                   </div>
                 }
+                onLoadSuccess={({ _pdfInfo: pdfInfo }) => {
+                  if (!isLoading && isSuccess) {
+                    setTotalPdfPageNumber(pdfInfo.numPages);
+                  }
+                }}
               >
-                <Page width={748} pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+                {pageArr.map((eachPage) => (
+                  <>
+                    <Page
+                      key={eachPage}
+                      width={748}
+                      pageNumber={eachPage}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                    />
+                    <div css={cssObj.resumeMargin} />
+                  </>
+                ))}
               </Document>
             )}
+            <div ref={ref} />
           </div>
           <div css={cssObj.buttonWrapper}>
             <Button size="small" onClick={() => setSaveFileModal(true)}>
