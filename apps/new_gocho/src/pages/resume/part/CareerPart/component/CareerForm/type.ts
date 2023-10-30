@@ -1,7 +1,7 @@
 import { SelectorResumeCareer } from "@/apis/resume/career/useResumeCareer/type";
 
-export interface CarrerFormProps {
+export interface CareerFormProps {
   handleEditMode: () => void;
   resumeId: number;
-  currentCarrer?: SelectorResumeCareer | null;
+  currentCareer?: SelectorResumeCareer | null;
 }

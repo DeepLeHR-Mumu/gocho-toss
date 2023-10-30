@@ -36,7 +36,7 @@ export const cssObj = {
 
   attendanceBox: css`
     width: 100%;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.06rem;
   `,
 
   attendanceWrapper: css`
@@ -169,12 +169,16 @@ export const cssObj = {
     width: 2.26rem;
   `,
 
+  dayData: (isNull: boolean) => css`
+    color: ${!isNull ? COLOR.GRAY450 : COLOR.BLACK};
+  `,
+
   specialInput: css`
     width: 17.75rem;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 0 0.75rem;
     ${TEXT.BODY3_R1422};
   `,
 };

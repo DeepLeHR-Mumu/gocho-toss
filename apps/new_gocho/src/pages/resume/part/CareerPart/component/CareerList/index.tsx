@@ -4,15 +4,15 @@ import { ListItem } from "@/pages/resume/component";
 import { useDeleteResumeCareer } from "@/apis/resume";
 import { useToast } from "@/globalStates";
 
-import { CarrerListProps } from "./type";
+import { CareerListProps } from "./type";
 import { cssObj } from "./style";
 
-export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarrerList }) => {
-  const { mutate: deleteCarrer } = useDeleteResumeCareer(resumeId);
+export const CareerList: FC<CareerListProps> = ({ resumeId, selectCareer, myCareerList }) => {
+  const { mutate: deleteCareer } = useDeleteResumeCareer(resumeId);
   const { setToastMessage } = useToast();
   return (
     <>
-      {myCarrerList.map((carrer) => {
+      {myCareerList.map((career) => {
         const {
           id,
           name,
@@ -25,7 +25,7 @@ export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarr
           jobDescription,
           pay,
           retireDescription,
-        } = carrer;
+        } = career;
         return (
           <ListItem
             key={id}
@@ -33,10 +33,10 @@ export const CarrerList: FC<CarrerListProps> = ({ resumeId, selectCarrer, myCarr
             titleDes={contractType || ""}
             date={isWorking ? [startDate] : [startDate, endDate || ""]}
             editHandler={() => {
-              selectCarrer(carrer);
+              selectCareer(career);
             }}
             deleteHandler={() => {
-              deleteCarrer(
+              deleteCareer(
                 {
                   resumeId,
                   careerId: id,

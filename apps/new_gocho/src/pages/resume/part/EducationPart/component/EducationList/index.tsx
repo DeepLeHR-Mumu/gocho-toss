@@ -67,7 +67,9 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                 <p>{major}</p>
                 {grade && (
                   <p>
-                    학점 {grade} {maxGrade ? ` / ${maxGrade}` : ""}
+                    {educationType === "고등학교" ? "내신 등급 " : "학점 "}
+                    {grade}
+                    {maxGrade ? `/${maxGrade}` : ""}
                   </p>
                 )}
               </div>
@@ -102,8 +104,10 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                         <p>{gradeAttendance.totalClassDays}</p>
                       </div>
                       {attendanceArr.map((attendance) => (
-                        <div key={attendance} css={cssObj.dataInput}>
-                          <p>{gradeAttendance[attendance] ? gradeAttendance[attendance] : "-"}</p>
+                        <div key={attendanceGrade + attendance} css={cssObj.dataInput}>
+                          <p css={cssObj.dayData(!!gradeAttendance[attendance])}>
+                            {gradeAttendance[attendance] ? gradeAttendance[attendance] : "-"}
+                          </p>
                         </div>
                       ))}
 

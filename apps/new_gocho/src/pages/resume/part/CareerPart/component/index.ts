@@ -1,2 +1,2 @@
-export { CarrerForm } from "./CarrerForm";
-export { CarrerList } from "./CarrerList";
+export { CareerForm } from "./CareerForm";
+export { CareerList } from "./CareerList";

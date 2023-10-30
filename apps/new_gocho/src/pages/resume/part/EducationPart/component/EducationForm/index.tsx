@@ -40,6 +40,7 @@ import {
   educationOfDefaultValues,
 } from "./utils";
 import { ExtraForm } from "./component/ExtraForm";
+import { isPerfectCalculator } from "./component/HighSchoolForm/util";
 
 export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode, currentEducation }) => {
   const { setToastMessage } = useToast();
@@ -79,8 +80,8 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
     }
   }, [educationType, reset, currentEducation]);
 
-  const onSubmitResumeEductaion: SubmitHandler<EducationSubmitDef> = async (data) => {
-    const onSuccess = () => {
+  const onSubmitResumeEducation: SubmitHandler<EducationSubmitDef> = async (data) => {
+    const onEducationSuccess = () => {
       setToastMessage("학력 항목 업로드가 완료되었습니다.");
       handleEditMode();
     };
@@ -98,7 +99,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
             end_date: data.end_date ? YYMMToDate(data.end_date) : null,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       } else {
@@ -110,7 +111,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
             end_date: data.end_date ? YYMMToDate(data.end_date) : null,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       }
@@ -131,7 +132,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
             end_date: data.end_date ? YYMMToDate(data.end_date) : null,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       } else {
@@ -143,7 +144,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
             end_date: data.end_date ? YYMMToDate(data.end_date) : null,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       }
@@ -164,7 +165,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
             end_date: data.end_date ? YYMMToDate(data.end_date) : null,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       } else {
@@ -176,7 +177,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
             end_date: data.end_date ? YYMMToDate(data.end_date) : null,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       }
@@ -185,9 +186,29 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
     }
 
     if (educationType === "고등학교" && isPostHighSchoolDef(data)) {
-      // setValue("first_attendance.is_perfect", false);
-      // setValue("second_attendance.is_perfect", false);
-      // setValue("third_attendance.is_perfect", false);
+      const highSchoolData = {
+        ...data,
+        start_date: YYMMToDate(data.start_date),
+        end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+        first_attendance: data.first_attendance
+          ? {
+              ...data.first_attendance,
+              is_perfect: isPerfectCalculator(data.first_attendance, data.first_attendance.total_class_days),
+            }
+          : null,
+        second_attendance: data.second_attendance
+          ? {
+              ...data.second_attendance,
+              is_perfect: isPerfectCalculator(data.second_attendance, data.second_attendance.total_class_days),
+            }
+          : null,
+        third_attendance: data.third_attendance
+          ? {
+              ...data.third_attendance,
+              is_perfect: isPerfectCalculator(data.third_attendance, data.third_attendance.total_class_days),
+            }
+          : null,
+      };
 
       if (currentEducation) {
         const { id } = currentEducation;
@@ -196,24 +217,20 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
           {
             resumeId,
             highschoolId: id,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+            ...highSchoolData,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       } else {
         postHighSchool(
           {
             resumeId,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+            ...highSchoolData,
           },
           {
-            onSuccess,
+            onSuccess: onEducationSuccess,
           }
         );
       }
@@ -221,7 +238,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
   };
 
   return (
-    <form css={cssObj.wrapper} onSubmit={handleSubmit(onSubmitResumeEductaion)}>
+    <form css={cssObj.wrapper} onSubmit={handleSubmit(onSubmitResumeEducation)}>
       <div css={cssObj.inputWrapper}>
         <p>
           학력 구분 <strong css={cssObj.required}> *</strong>

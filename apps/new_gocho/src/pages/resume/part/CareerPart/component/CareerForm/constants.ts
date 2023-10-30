@@ -1,4 +1,4 @@
-export const carrerDefaultValue = {
+export const careerDefaultValue = {
   name: "",
   is_working: false,
   start_date: "",

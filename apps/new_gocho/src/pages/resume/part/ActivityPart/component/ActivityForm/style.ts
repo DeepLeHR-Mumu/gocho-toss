@@ -16,6 +16,8 @@ export const cssObj = {
 
   desWidth: css`
     width: 43.825rem;
+    height: 8rem;
+    ${TEXT.BODY2_R1624};
   `,
 
   inputWrapper: css`
@@ -26,6 +28,11 @@ export const cssObj = {
       width: 5.625rem;
       ${TEXT.TITLE5_M1620};
     }
+  `,
+
+  textareaLabel: css`
+    align-self: flex-start;
+    padding: 1rem 0;
   `,
 
   required: css`

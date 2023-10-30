@@ -46,6 +46,8 @@ export const AttendanceForm: FC<AttendanceFormProps> = ({ register }) => (
             <input
               key={attendance}
               css={cssObj.dataInput}
+              // min={0}
+              // max={250}
               type="number"
               placeholder="-"
               {...register(`${gradeAttendance}.${attendance}`, dayOption)}
@@ -53,8 +55,9 @@ export const AttendanceForm: FC<AttendanceFormProps> = ({ register }) => (
           ))}
           <textarea
             css={cssObj.specialInput}
-            rows={1}
+            rows={2}
             wrap="soft"
+            maxLength={20}
             placeholder="입력"
             {...register(`${gradeAttendance}.description`, specialOption)}
           />

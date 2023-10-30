@@ -20,12 +20,19 @@ export const cssObj = {
     }
   `,
 
+  textareaLabel: css`
+    align-self: flex-start;
+    padding: 1rem 0;
+  `,
+
   schoolInput: css`
     width: 32.3rem;
   `,
 
   etcInput: css`
     width: 43.5rem;
+    height: 5.62rem;
+    ${TEXT.BODY2_R1624};
   `,
 
   checkbox: css`

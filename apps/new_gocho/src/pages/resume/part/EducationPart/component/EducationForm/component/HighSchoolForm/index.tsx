@@ -10,7 +10,7 @@ import { AttendanceForm } from "../AttendanceForm";
 import { cssObj } from "./style";
 import { HighSchoolFormProps } from "./type";
 import { graduateTypeArr } from "../../constants";
-import { isErrorAlternativeTest } from "./util";
+import { getLatestAttendanceError, isErrorAlternativeTest } from "./util";
 
 export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, register, setValue, getValues }) => {
   const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
@@ -219,9 +219,10 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, regis
             />
           </div>
 
-          <div css={cssObj.inputWrapper}>
+          <div css={cssObj.attendanceInput}>
             <p css={cssObj.attendanceLabel}>출결 사항</p>
             <AttendanceForm register={register} />
+            <p css={cssObj.attendanceError}>{getLatestAttendanceError(errors)}</p>
           </div>
         </>
       )}

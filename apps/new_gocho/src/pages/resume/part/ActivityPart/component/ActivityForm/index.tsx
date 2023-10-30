@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { Button, Input } from "shared-ui/deeple-ds";
+import { Button, Input, Textarea } from "shared-ui/deeple-ds";
 
 import { PostActivityDef } from "@/apis/resume/activity/type";
 import { ResumeDropDown } from "@/pages/resume/component";
@@ -171,10 +171,10 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
       </div>
 
       <div css={cssObj.inputWrapper}>
-        <p>
+        <p css={cssObj.textareaLabel}>
           활동 내용 <strong css={cssObj.required}> *</strong>
         </p>
-        <Input
+        <Textarea
           placeholder="활동 상세 내용을 입력해 주세요"
           css={cssObj.desWidth}
           state={{

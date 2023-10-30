@@ -68,21 +68,21 @@ export interface PostExtraDef extends PostEducationBase {
 }
 
 export interface HighSchoolAttendance {
-  disease_school_absent: number;
-  disease_tardy: number;
-  disease_leave: number;
-  disease_subject_absent: number;
-  unauthorized_school_absent: number;
-  unauthorized_tardy: number;
-  unauthorized_leave: number;
-  unauthorized_subject_absent: number;
-  extra_school_absent: number;
-  extra_tardy: number;
-  extra_leave: number;
-  extra_subject_absent: number;
+  disease_school_absent: number | null;
+  disease_tardy: number | null;
+  disease_leave: number | null;
+  disease_subject_absent: number | null;
+  unauthorized_school_absent: number | null;
+  unauthorized_tardy: number | null;
+  unauthorized_leave: number | null;
+  unauthorized_subject_absent: number | null;
+  extra_school_absent: number | null;
+  extra_tardy: number | null;
+  extra_leave: number | null;
+  extra_subject_absent: number | null;
   total_class_days: number;
   is_perfect: boolean;
-  description: string;
+  description: string | null;
 }
 
 export interface ResumeHighSchoolDef extends ResumeEducationBase {

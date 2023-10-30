@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-import { Button, Input, Switch } from "shared-ui/deeple-ds";
+import { Button, Input, Switch, Textarea } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
 import { ResumeDropDown } from "@/pages/resume/component";
@@ -12,12 +12,12 @@ import { usePostResumeCareer, usePutResumeCareer } from "@/apis/resume";
 import { YYMMToDate } from "@/utils";
 
 import { cssObj } from "./style";
-import { carrerDefaultValue, contractTypeArr } from "./constants";
-import { carrerToDefaultValue } from "./util";
-import { CarrerFormProps } from "./type";
+import { careerDefaultValue, contractTypeArr } from "./constants";
+import { careerToDefaultValue } from "./util";
+import { CareerFormProps } from "./type";
 
-export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, currentCarrer }) => {
-  const [isWorking, setIsWorking] = useState(currentCarrer?.isWorking || false);
+export const CareerForm: FC<CareerFormProps> = ({ handleEditMode, resumeId, currentCareer }) => {
+  const [isWorking, setIsWorking] = useState(currentCareer?.isWorking || false);
 
   const { setToastMessage } = useToast();
 
@@ -32,23 +32,23 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
   } = useForm<PostCareerDef>({
     mode: "onSubmit",
 
-    defaultValues: currentCarrer ? carrerToDefaultValue(currentCarrer) : carrerDefaultValue,
+    defaultValues: currentCareer ? careerToDefaultValue(currentCareer) : careerDefaultValue,
   });
 
   const { mutate: postCareer } = usePostResumeCareer(resumeId);
   const { mutate: putCareer } = usePutResumeCareer(resumeId);
 
-  const onSubmitResumeCarrer: SubmitHandler<PostCareerDef> = async (data) => {
+  const onSubmitResumeCareer: SubmitHandler<PostCareerDef> = async (data) => {
     // TODO: length가 0 인경우 null 처리 하기 (부서, 회사)
 
-    const onCarrerSuccess = () => {
+    const onCareerSuccess = () => {
       setToastMessage("경력 항목 업로드가 완료되었습니다.");
 
       handleEditMode();
     };
 
-    if (currentCarrer) {
-      const { id } = currentCarrer;
+    if (currentCareer) {
+      const { id } = currentCareer;
 
       putCareer(
         {
@@ -60,7 +60,7 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
           is_working: isWorking,
         },
         {
-          onSuccess: onCarrerSuccess,
+          onSuccess: onCareerSuccess,
         }
       );
     } else {
@@ -73,7 +73,7 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
           is_working: isWorking,
         },
         {
-          onSuccess: onCarrerSuccess,
+          onSuccess: onCareerSuccess,
         }
       );
     }
@@ -87,7 +87,7 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
   }, [setValue, clearErrors, isWorking]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmitResumeCarrer)} css={cssObj.wrapper}>
+    <form onSubmit={handleSubmit(onSubmitResumeCareer)} css={cssObj.wrapper}>
       <div css={cssObj.inputWrapper}>
         <p>
           회사명 <strong css={cssObj.required}> *</strong>
@@ -249,8 +249,8 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
         </div>
       </div>
       <div css={cssObj.inputWrapper}>
-        <p>담당 업무</p>
-        <Input
+        <p css={cssObj.textareaLabel}>담당 업무</p>
+        <Textarea
           placeholder="담당했던 업무를 자세히 입력해 주세요"
           maxLength={200}
           css={cssObj.etcInput}
@@ -258,8 +258,8 @@ export const CarrerForm: FC<CarrerFormProps> = ({ handleEditMode, resumeId, curr
         />
       </div>
       <div css={cssObj.inputWrapper}>
-        <p>퇴사 사유</p>
-        <Input
+        <p css={cssObj.textareaLabel}>퇴사 사유</p>
+        <Textarea
           placeholder="퇴사 사유를 입력해 주세요."
           maxLength={200}
           css={cssObj.etcInput}

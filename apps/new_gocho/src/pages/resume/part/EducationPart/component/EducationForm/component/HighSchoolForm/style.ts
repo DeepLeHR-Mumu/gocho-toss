@@ -37,8 +37,29 @@ export const cssObj = {
     gap: 3.25rem;
   `,
 
+  attendanceInput: css`
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    margin-bottom: 1.94rem;
+  `,
+
   attendanceLabel: css`
     padding: 1rem 0;
-    align-self: flex-start; /* 이 아이템만 시작점으로 정렬 */
+    width: 5.625rem;
+    align-self: flex-start;
+    ${TEXT.TITLE5_M1620};
+  `,
+
+  attendanceError: css`
+    position: absolute;
+    top: 14rem;
+    left: 5.9rem;
+
+    width: 45rem;
+
+    color: ${COLOR.RED200};
+    ${TEXT.BODY3_R1422};
   `,
 };

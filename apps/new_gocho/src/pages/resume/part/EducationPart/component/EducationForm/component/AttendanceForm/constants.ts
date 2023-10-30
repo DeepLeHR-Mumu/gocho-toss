@@ -27,14 +27,23 @@ export const attendanceHeaderItem = {
 
 export const totalDayOption = {
   min: 190,
-  max: 250,
+  max: {
+    value: 250,
+    message: "수업일수의 최댓값은 250일이에요",
+  },
 };
 
 export const dayOption = {
   min: 1,
-  max: 250,
+  max: {
+    value: 250,
+    message: "수업일수의 최댓값은 250일이에요",
+  },
 };
 
 export const specialOption = {
-  maxLength: 20,
+  maxLength: {
+    value: 20,
+    message: "특기사항은 20자 이하로 작성해주세요",
+  },
 };
