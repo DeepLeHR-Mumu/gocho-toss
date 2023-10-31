@@ -8,11 +8,11 @@ import {
   UseFormSetValue,
   useForm,
 } from "react-hook-form";
-
+import { useDisabledKeydownSubmit } from "shared-hook";
 import { Button } from "shared-ui/deeple-ds";
 
 import { useToast } from "@/globalStates";
-import { ResumeDropDown } from "@/pages/resume/component";
+import { CancelModal, ResumeDropDown } from "@/pages/resume/component";
 import { YYMMToDate } from "@/utils";
 
 import { PostCollegeDef, PostExtraDef, PostHighSchoolDef, PostUniversityDef } from "@/apis/resume/education/type";
@@ -44,6 +44,9 @@ import { isPerfectCalculator } from "./component/HighSchoolForm/util";
 
 export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode, currentEducation }) => {
   const { setToastMessage } = useToast();
+  useDisabledKeydownSubmit();
+
+  const [cancelModal, setCancelModal] = useState(false);
 
   const [educationType, setEducationType] = useState<string>(currentEducation?.educationType || "");
 
@@ -238,63 +241,67 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
   };
 
   return (
-    <form css={cssObj.wrapper} onSubmit={handleSubmit(onSubmitResumeEducation)}>
-      <div css={cssObj.inputWrapper}>
-        <p>
-          학력 구분 <strong css={cssObj.required}> *</strong>
-        </p>
-        <ResumeDropDown
-          menuArr={educationTypeArr}
-          setValue={setEducationType}
-          value={educationType}
-          placeholder="선택"
-        />
-      </div>
-      {educationType === "고등학교" && isPostHighSchoolDef(getValues()) && (
-        <HighSchoolForm
-          control={control as Control<PostHighSchoolDef>}
-          setValue={setValue as UseFormSetValue<PostHighSchoolDef>}
-          getValues={getValues as UseFormGetValues<PostHighSchoolDef>}
-          register={register as UseFormRegister<PostHighSchoolDef>}
-          errors={errors as FieldErrors<PostHighSchoolDef>}
-        />
-      )}
-      {educationType === "대학교(2,3년제)" && isPostCollegeDef(getValues()) && (
-        <CollegeForm
-          control={control as Control<PostCollegeDef>}
-          setValue={setValue as UseFormSetValue<PostCollegeDef>}
-          getValues={getValues as UseFormGetValues<PostCollegeDef>}
-          register={register as UseFormRegister<PostCollegeDef>}
-          errors={errors as FieldErrors<PostCollegeDef>}
-        />
-      )}
-      {educationType === "대학교(4년제)" && isPostUniversityDef(getValues()) && (
-        <UniversityForm
-          control={control as Control<PostUniversityDef>}
-          errors={errors as FieldErrors<PostUniversityDef>}
-          setValue={setValue as UseFormSetValue<PostUniversityDef>}
-          getValues={getValues as UseFormGetValues<PostUniversityDef>}
-          register={register as UseFormRegister<PostUniversityDef>}
-        />
-      )}
-      {educationType === "기타" && isPostExtraDef(getValues()) && (
-        <ExtraForm
-          control={control as Control<PostExtraDef>}
-          errors={errors as FieldErrors<PostExtraDef>}
-          setValue={setValue as UseFormSetValue<PostExtraDef>}
-          getValues={getValues as UseFormGetValues<PostExtraDef>}
-          register={register as UseFormRegister<PostExtraDef>}
-        />
-      )}
+    <>
+      {cancelModal && <CancelModal setModal={setCancelModal} confirmHandler={handleEditMode} />}
 
-      <div css={cssObj.buttonWrapper}>
-        <Button size="small" type="submit">
-          저장
-        </Button>
-        <Button size="small" type="button" onClick={handleEditMode} color="outlineGray">
-          취소
-        </Button>
-      </div>
-    </form>
+      <form css={cssObj.wrapper} onSubmit={handleSubmit(onSubmitResumeEducation)}>
+        <div css={cssObj.inputWrapper}>
+          <p>
+            학력 구분 <strong css={cssObj.required}> *</strong>
+          </p>
+          <ResumeDropDown
+            menuArr={educationTypeArr}
+            setValue={setEducationType}
+            value={educationType}
+            placeholder="선택"
+          />
+        </div>
+        {educationType === "고등학교" && isPostHighSchoolDef(getValues()) && (
+          <HighSchoolForm
+            control={control as Control<PostHighSchoolDef>}
+            setValue={setValue as UseFormSetValue<PostHighSchoolDef>}
+            getValues={getValues as UseFormGetValues<PostHighSchoolDef>}
+            register={register as UseFormRegister<PostHighSchoolDef>}
+            errors={errors as FieldErrors<PostHighSchoolDef>}
+          />
+        )}
+        {educationType === "대학교(2,3년제)" && isPostCollegeDef(getValues()) && (
+          <CollegeForm
+            control={control as Control<PostCollegeDef>}
+            setValue={setValue as UseFormSetValue<PostCollegeDef>}
+            getValues={getValues as UseFormGetValues<PostCollegeDef>}
+            register={register as UseFormRegister<PostCollegeDef>}
+            errors={errors as FieldErrors<PostCollegeDef>}
+          />
+        )}
+        {educationType === "대학교(4년제)" && isPostUniversityDef(getValues()) && (
+          <UniversityForm
+            control={control as Control<PostUniversityDef>}
+            errors={errors as FieldErrors<PostUniversityDef>}
+            setValue={setValue as UseFormSetValue<PostUniversityDef>}
+            getValues={getValues as UseFormGetValues<PostUniversityDef>}
+            register={register as UseFormRegister<PostUniversityDef>}
+          />
+        )}
+        {educationType === "기타" && isPostExtraDef(getValues()) && (
+          <ExtraForm
+            control={control as Control<PostExtraDef>}
+            errors={errors as FieldErrors<PostExtraDef>}
+            setValue={setValue as UseFormSetValue<PostExtraDef>}
+            getValues={getValues as UseFormGetValues<PostExtraDef>}
+            register={register as UseFormRegister<PostExtraDef>}
+          />
+        )}
+
+        <div css={cssObj.buttonWrapper}>
+          <Button size="small" type="submit">
+            저장
+          </Button>
+          <Button size="small" type="button" onClick={() => setCancelModal(true)} color="outlineGray">
+            취소
+          </Button>
+        </div>
+      </form>
+    </>
   );
 };

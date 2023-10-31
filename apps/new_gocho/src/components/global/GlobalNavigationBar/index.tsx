@@ -40,7 +40,6 @@ export const GlobalNavigationBar = () => {
     businessServiceButton,
     loginButton,
     resumeLink,
-    alarmIcon,
   } = getCssObj(isThemeWhite);
 
   const [loginModal, setLoginModal] = useState(false);

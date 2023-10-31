@@ -19,12 +19,12 @@ export const EducationPart: FC<EducationPartProps> = ({ resumeId }) => {
   };
 
   const handleEditMode = () => {
-    setEditMode(!editMode);
+    setEditMode((prev) => !prev);
     setCurrentEducation(undefined);
   };
 
   return (
-    <ListCard title="학력" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+    <ListCard title="학력" iconHandler={handleEditMode} isRequired iconType={editMode ? "none" : "add"}>
       {editMode ? (
         <EducationForm resumeId={resumeId} handleEditMode={handleEditMode} currentEducation={currentEducation} />
       ) : (

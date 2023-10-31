@@ -68,8 +68,8 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                 {grade && (
                   <p>
                     {educationType === "고등학교" ? "내신 등급 " : "학점 "}
-                    {grade}
-                    {maxGrade ? `/${maxGrade}` : ""}
+                    {parseFloat(grade).toFixed(2)}
+                    {maxGrade ? `/${parseFloat(maxGrade).toFixed(2)}` : ""}
                   </p>
                 )}
               </div>
@@ -111,7 +111,9 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                         </div>
                       ))}
 
-                      <div css={cssObj.specialInput}>{gradeAttendance.description}</div>
+                      <div css={cssObj.specialInput}>
+                        <p>{gradeAttendance.description}</p>
+                      </div>
                     </div>
                   );
                 })}

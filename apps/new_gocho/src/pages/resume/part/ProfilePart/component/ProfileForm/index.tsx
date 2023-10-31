@@ -13,6 +13,7 @@ import { usePutUserResumeProfile } from "@/apis/users";
 import { PutResumeProfileDef } from "@/apis/users/resume/usePutUserResumeProfile/type";
 import { fileEncoding } from "@/pages/mypage/part/ProfilePart/utils";
 import basicProfile from "@/public/image/resume/BasicProfile.svg";
+import { CancelModal, ProfileAlertModal } from "@/pages/resume/component";
 
 import { cssObj } from "./style";
 import { ProfileFormProps } from "./type";
@@ -44,6 +45,8 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
 
   const [profileFile, setProfileFile] = useState<File | null>(null);
   const [userProfilePreview, setUserProfilePreview] = useState<string>();
+  const [profileModal, setProfileModal] = useState(false);
+  const [cancelModal, setCancelModal] = useState(false);
 
   const uploadRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +56,8 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
     if (profile && profile.size > MAX_PROFILE_SIZE) {
       setProfileFile(null);
 
-      setToastMessage("5MB 이하의 사진을 첨부해 주세요.");
+      setProfileModal(true);
+
       return;
     }
 
@@ -67,7 +71,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
           setUserProfilePreview(result);
         }
       } catch (error) {
-        setToastMessage("파일 업로드 중 오류가 발생했습니다. 파일 양식을 확인하거나 다시 시도해 주세요.");
+        // setToastMessage(error.message)
       }
     }
   };
@@ -140,123 +144,128 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitResumeProfile)} css={cssObj.formWrapper}>
-      <div css={cssObj.formBox}>
-        <section css={cssObj.infoWrapper}>
-          <div css={cssObj.basicInfoWrapper}>
-            <div>
-              <p>이름</p>
-              <Input
-                type="text"
-                aria-disabled
-                state={{
-                  state: "disabled",
-                }}
-                value={resumeProfile.name}
-                css={cssObj.rMargin}
-              />
-            </div>
-            <div>
-              <p>생년월일</p>
-              <Input
-                type="text"
-                aria-disabled
-                state={{
-                  state: "disabled",
-                }}
-                value={resumeProfile.birthDate}
-              />
-            </div>
-            <div>
-              <p>연락처</p>
-              <Input
-                type="text"
-                aria-disabled
-                state={{
-                  state: "disabled",
-                }}
-                value={resumeProfile.phoneNumber}
-              />
-            </div>
-          </div>
+    <>
+      {profileModal && <ProfileAlertModal setModal={setProfileModal} />}
+      {cancelModal && <CancelModal setModal={setCancelModal} confirmHandler={handleEditMode} />}
 
-          <div css={cssObj.etcInfoWrapper}>
-            <div>
-              <p>이메일</p>{" "}
-              <Input
-                type="text"
-                placeholder="이메일을 입력해 주세요"
-                maxLength={20}
-                state={{
-                  state: errors.email ? "error" : "default",
-                  message: errors.email ? errors.email.message : "",
-                }}
-                {...register("email", {
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+$/i,
-                    message: "올바른 이메일을 입력해 주세요.",
-                  },
-                })}
-              />
+      <form onSubmit={handleSubmit(onSubmitResumeProfile)} css={cssObj.formWrapper}>
+        <div css={cssObj.formBox}>
+          <section css={cssObj.infoWrapper}>
+            <div css={cssObj.basicInfoWrapper}>
+              <div>
+                <p>이름</p>
+                <Input
+                  type="text"
+                  aria-disabled
+                  state={{
+                    state: "disabled",
+                  }}
+                  value={resumeProfile.name}
+                  css={cssObj.rMargin}
+                />
+              </div>
+              <div>
+                <p>생년월일</p>
+                <Input
+                  type="text"
+                  aria-disabled
+                  state={{
+                    state: "disabled",
+                  }}
+                  value={resumeProfile.birthDate}
+                />
+              </div>
+              <div>
+                <p>연락처</p>
+                <Input
+                  type="text"
+                  aria-disabled
+                  state={{
+                    state: "disabled",
+                  }}
+                  value={resumeProfile.phoneNumber}
+                />
+              </div>
             </div>
-            <div>
-              <p>거주지</p>
-              <Input
-                type="text"
-                placeholder="거주지를 입력해 주세요"
-                onClick={onClickAddress}
-                aria-disabled
-                {...register("location.address")}
-                suffix={<FiSearch css={cssObj.searchIcon} />}
-              />
-            </div>
-            <div>
-              <p>취미</p>
-              <Input type="text" placeholder="취미를 입력해 주세요" maxLength={40} {...register("hobby")} />
-            </div>
-            <div>
-              <p>특기 </p>
-              <Input type="text" placeholder="특기를 입력해 주세요" maxLength={40} {...register("specialty")} />
-            </div>
-          </div>
-        </section>
 
-        <section css={cssObj.profileWrapper}>
-          <Image src={userProfilePreview ?? resumeProfile.image ?? basicProfile} alt="" width={168} height={200} />
+            <div css={cssObj.etcInfoWrapper}>
+              <div>
+                <p>이메일</p>{" "}
+                <Input
+                  type="text"
+                  placeholder="이메일을 입력해 주세요"
+                  maxLength={20}
+                  state={{
+                    state: errors.email ? "error" : "default",
+                    message: errors.email ? errors.email.message : "",
+                  }}
+                  {...register("email", {
+                    pattern: {
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+$/i,
+                      message: "올바른 이메일을 입력해 주세요.",
+                    },
+                  })}
+                />
+              </div>
+              <div>
+                <p>거주지</p>
+                <Input
+                  type="text"
+                  placeholder="거주지를 입력해 주세요"
+                  onClick={onClickAddress}
+                  aria-disabled
+                  {...register("location.address")}
+                  suffix={<FiSearch css={cssObj.searchIcon} />}
+                />
+              </div>
+              <div>
+                <p>취미</p>
+                <Input type="text" placeholder="취미를 입력해 주세요" maxLength={40} {...register("hobby")} />
+              </div>
+              <div>
+                <p>특기 </p>
+                <Input type="text" placeholder="특기를 입력해 주세요" maxLength={40} {...register("specialty")} />
+              </div>
+            </div>
+          </section>
 
-          <input
-            id="userProfile"
-            type="file"
-            accept="image/png, image/jpeg, image/jpg"
-            aria-label="프로필 업로드"
-            ref={uploadRef}
-            css={cssObj.upload}
-            onChange={handleProfileChange}
-          />
-          <Button
-            size="small"
-            type="button"
-            color="outlineGray"
-            onClick={() => {
-              if (uploadRef.current) {
-                uploadRef.current.click();
-              }
-            }}
-          >
-            프로필 사진 변경
+          <section css={cssObj.profileWrapper}>
+            <Image src={userProfilePreview ?? resumeProfile.image ?? basicProfile} alt="" width={168} height={200} />
+
+            <input
+              id="userProfile"
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              aria-label="프로필 업로드"
+              ref={uploadRef}
+              css={cssObj.upload}
+              onChange={handleProfileChange}
+            />
+            <Button
+              size="small"
+              type="button"
+              color="outlineGray"
+              onClick={() => {
+                if (uploadRef.current) {
+                  uploadRef.current.click();
+                }
+              }}
+            >
+              프로필 사진 변경
+            </Button>
+            <p>5MB이하 600x450픽셀의 jpg, png, jpeg 파일 권장</p>
+          </section>
+        </div>
+
+        <div css={cssObj.buttonWrapper}>
+          <Button size="small" type="submit">
+            저장
           </Button>
-          <p>5MB이하 600x450픽셀의 jpg, png, jpeg 파일 권장</p>
-        </section>
-      </div>
-
-      <div css={cssObj.buttonWrapper}>
-        <Button size="small" type="submit">
-          저장
-        </Button>
-        <Button size="small" type="button" onClick={handleEditMode} color="outlineGray">
-          취소
-        </Button>
-      </div>
-    </form>
+          <Button size="small" type="button" onClick={() => setCancelModal(true)} color="outlineGray">
+            취소
+          </Button>
+        </div>
+      </form>
+    </>
   );
 };

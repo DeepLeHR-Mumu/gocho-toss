@@ -177,8 +177,12 @@ export const cssObj = {
     width: 17.75rem;
 
     display: flex;
-    align-items: center;
-    padding: 0 0.75rem;
-    ${TEXT.BODY3_R1422};
+    align-items: flex-start;
+    padding: 0.12rem 0.75rem;
+
+    & > p {
+      white-space: break-spaces;
+      ${TEXT.BODY3_R1422};
+    }
   `,
 };

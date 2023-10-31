@@ -20,7 +20,19 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, regis
     if (graduateType === "재학" || graduateType === "중퇴") {
       setValue("end_date", null);
     }
-  }, [setValue, graduateType]);
+
+    if (!isAlternativeTest) {
+      setValue("is_alternative_test", isAlternativeTest);
+      setValue("name", getValues("name"));
+    }
+    if (isAlternativeTest) {
+      setValue("is_alternative_test", isAlternativeTest);
+      setValue("name", "검정고시");
+      setValue("major", "검정고시");
+      setValue("graduate_type", "졸업");
+      setValue("end_date", null);
+    }
+  }, [setValue, getValues, graduateType, isAlternativeTest]);
 
   return (
     <>
@@ -48,14 +60,7 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, regis
           <Checkbox
             checked={isAlternativeTest}
             onChange={() => {
-              if (!isAlternativeTest) {
-                setValue("name", "검정고시");
-                setValue("graduate_type", "졸업");
-                setValue("end_date", null);
-              }
-              if (isAlternativeTest) setValue("name", "");
-
-              setIsAlternativeTest(!isAlternativeTest);
+              setIsAlternativeTest((prev) => !prev);
             }}
           />
           <span>검정고시</span>

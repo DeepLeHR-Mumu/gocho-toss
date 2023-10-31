@@ -18,8 +18,8 @@ export const CertificationPart: FC<CertificationPartProps> = ({ resumeId }) => {
 
   const { data: myCertificationList } = useResumeCertificationArr(resumeId);
 
-  const selectCertification = (certi: SelectorResumeCertification) => {
-    setCurrentCertification(certi);
+  const selectCertification = (certification: SelectorResumeCertification) => {
+    setCurrentCertification(certification);
     setEditMode(!editMode);
   };
 

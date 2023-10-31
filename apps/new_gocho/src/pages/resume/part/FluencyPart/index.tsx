@@ -13,14 +13,14 @@ export const FluencyPart: FC<FluencyPartProps> = ({ resumeId }) => {
 
   const { data: myFluencyList } = useResumeFluencyArr(resumeId);
 
-  const selectFluency = (certi: SelectorResumeFluency) => {
-    setCurrentFluency(certi);
-    setEditMode(!editMode);
+  const selectFluency = (fluency: SelectorResumeFluency) => {
+    setCurrentFluency(fluency);
+    setEditMode((prev) => !prev);
   };
 
   const handleEditMode = () => {
     setCurrentFluency(null);
-    setEditMode(!editMode);
+    setEditMode((prev) => !prev);
   };
 
   return (
