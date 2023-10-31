@@ -57,7 +57,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad, blockClick }) =
       {/* </Link> */}
       <div css={cssObj.chipContainer}>
         <DDayChip endTime={jd.endTime} />
-        <div css={cssObj.eduChip(jd.high)}>고</div>
+        <div css={cssObj.eduChip(jd.highschool)}>고</div>
         <div css={cssObj.eduChip(jd.college)}>초</div>
       </div>
       <strong css={cssObj.title}>
@@ -74,7 +74,7 @@ export const JdCard: FunctionComponent<JdCardProps> = ({ jd, ad, blockClick }) =
       </strong>
       <div css={cssObj.descWrapper}>
         <p css={cssObj.desc}>{jd.company.name}</p>
-        <p css={cssObj.desc}>{jd.placeArr[0].split(" ").slice(0, 2).join(" ")}</p>
+        <p css={cssObj.desc}>{jd.place[0].split(" ").slice(0, 2).join(" ")}</p>
       </div>
     </div>
   );
