@@ -24,8 +24,6 @@ export const SearchDropDown = ({
     defaultValues: { search: "" },
   });
 
-  const registerObj = register("search");
-
   const submitHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
     if (searchHandler) {
       globalSearchEvent(searchObj.search);
@@ -61,7 +59,7 @@ export const SearchDropDown = ({
             )
           }
           autoComplete="off"
-          {...registerObj}
+          {...register("search")}
           onClick={onClick}
           onFocus={() => {
             setDropDownVisible(true);
