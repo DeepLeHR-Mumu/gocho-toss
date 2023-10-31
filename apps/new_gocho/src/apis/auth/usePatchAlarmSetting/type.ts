@@ -5,7 +5,7 @@ import { ErrorResponseDef } from "shared-type/api";
 export interface RequestObjDef {
   userId: number;
   alarmSetting: {
-    alarmText: "benefit_event" | "bookmark_company_new_jd" | "bookmark_jd_end_time" | "community_new_comment";
+    alarmText: "benefitEvent" | "bookmarkCompanyNewJd" | "bookmarkJdEndTime" | "communityNewComment";
     alarmReceive: boolean;
   };
 }
