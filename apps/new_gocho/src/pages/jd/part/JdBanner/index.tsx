@@ -6,7 +6,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { BsMegaphone } from "react-icons/bs";
 
 import { Layout } from "@/components";
-import { useJdBannerArr } from "@/apis/ads";
+import { useJdBannerArr } from "@/apis/banners";
 
 import { setCarouselSetting } from "./util";
 import { cssObj } from "./style";
