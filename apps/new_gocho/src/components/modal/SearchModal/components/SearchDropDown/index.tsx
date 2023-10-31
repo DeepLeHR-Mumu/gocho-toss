@@ -16,12 +16,15 @@ export const SearchDropDown = ({
   recentWordArr = [],
   searchHandler,
   onClick,
+  autoFocus,
 }: SearchDropDownProps) => {
   type SearchFormProps = { search: string };
   const [dropDownVisible, setDropDownVisible] = useState(false);
-  const { register, handleSubmit, reset, setValue, getValues } = useForm<SearchFormProps>({
+  const { register, handleSubmit, reset, setValue, getValues, setFocus } = useForm<SearchFormProps>({
     defaultValues: { search: "" },
   });
+
+  const registerObj = register("search");
 
   const submitHandler: SubmitHandler<SearchFormProps> = (searchObj) => {
     if (searchHandler) {
@@ -31,8 +34,11 @@ export const SearchDropDown = ({
   };
 
   useEffect(() => {
+    if (autoFocus) {
+      setFocus("search");
+    }
     setValue("search", defaultValue);
-  }, [setValue, defaultValue]);
+  }, [setValue, defaultValue, autoFocus, setFocus]);
 
   return (
     <div css={cssObj.wrapper}>
@@ -55,7 +61,7 @@ export const SearchDropDown = ({
             )
           }
           autoComplete="off"
-          {...register("search")}
+          {...registerObj}
           onClick={onClick}
           onFocus={() => {
             setDropDownVisible(true);

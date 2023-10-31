@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { FiX } from "react-icons/fi";
 
@@ -73,7 +73,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
               }
             }}
           />
-          <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
+          <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} autoFocus />
           <div css={cssObj.etcWrapper}>
             {recentSearchWordArr.length > 0 && (
               <div>
