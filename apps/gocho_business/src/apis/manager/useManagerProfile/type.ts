@@ -19,7 +19,7 @@ export interface ResponseObjDef {
       id: number;
       name: string;
       logo_url: string;
-      industry: string;
+      industry: string[];
       view: number;
       progress_jd_count: number;
       waiting_jd_count: number;

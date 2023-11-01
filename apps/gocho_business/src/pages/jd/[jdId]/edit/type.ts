@@ -1,36 +1,52 @@
-export interface JdFormValues {
-  company_id: number;
+import { RequestObjDef as EditJdRequestObjDef } from "@/apis/jd/useEditJd/type";
+
+type EditJdDetail = EditJdRequestObjDef["detail"];
+type EditJdQualification = EditJdRequestObjDef["qualification"];
+type EditJdApply = EditJdRequestObjDef["apply"];
+
+type EditJdDetailPlace = EditJdRequestObjDef["detail"]["place"];
+
+interface EditJdDetailPlaceWithFactory extends Omit<EditJdDetailPlace, "data"> {
+  data: (
+    | {
+        type: "일반";
+        location: {
+          address: string;
+          x: number;
+          y: number;
+        };
+      }
+    | {
+        type: "공장";
+        factory: {
+          id: number;
+          name: string;
+          address: string;
+        };
+      }
+  )[];
+}
+
+interface EditJdFormDetail extends Omit<EditJdDetail, "task_description" | "pay" | "place"> {
+  task_description: { value: string }[];
+  pay: { value: string }[];
+  place: EditJdDetailPlaceWithFactory;
+}
+
+interface EditJdFormQualification extends Omit<EditJdQualification, "required_etc" | "preferred_etc"> {
+  required_etc: { value: string }[];
+  preferred_etc: { value: string }[];
+}
+
+interface EditJdFormApply extends Omit<EditJdApply, "document" | "etc" | "process"> {
+  document: { value: string }[];
+  etc: { value: string }[];
+  process: { value: string }[];
+}
+
+export interface EditJdFormValues {
   title: string;
-  start_time: string;
-  end_time: string;
-  cut: boolean;
-  process_arr: { value: string }[];
-  apply_document_arr: { value: string }[];
-  apply_route_arr: { value: string }[];
-  apply_url: string;
-  etc_arr: { value: string }[];
-  middle: boolean;
-  high: boolean;
-  college: boolean;
-  four: boolean;
-  required_exp: string;
-  min_year: number | null;
-  max_year: number | null;
-  required_etc_arr: { value: string }[];
-  contract_type: string;
-  conversion_rate: number | null;
-  task_main: string;
-  task_sub_arr: string[] | null;
-  task_detail_arr: { value: string }[];
-  rotation_arr: string[];
-  place: {
-    type: string;
-    address_arr: string[] | null;
-    factory_arr: number[] | null;
-    etc: string | null;
-  };
-  hire_number: number | null;
-  pay_arr: { value: string }[];
-  preferred_certi_arr: string[] | null;
-  preferred_etc_arr: { value: string }[];
+  detail: EditJdFormDetail;
+  qualification: EditJdFormQualification;
+  apply: EditJdFormApply;
 }

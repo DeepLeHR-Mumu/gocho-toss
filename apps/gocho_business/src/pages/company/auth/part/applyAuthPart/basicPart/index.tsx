@@ -3,11 +3,12 @@ import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { NUMBER_REGEXP } from "shared-constant";
-
+import { Checkbox } from "shared-ui/deeple-ds";
 import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
-import { commonCssObj } from "@/styles";
 
+import { commonCssObj } from "@/styles";
 import { companyAuthUnionClickEvent } from "@/ga";
+
 import { ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
 import { AuthBasicPartProps } from "./type";
 import { cssObj } from "./style";
@@ -59,6 +60,16 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
     });
   };
 
+  const addIndustry = (targetIndustry: string) => {
+    const newIndustryArr = watch("industry").concat(targetIndustry);
+    setValue(`industry`, newIndustryArr);
+  };
+
+  const removeIndustry = (targetIndustry: string) => {
+    const newIndustryArr = watch("industry").filter((industry) => industry !== targetIndustry);
+    setValue(`industry`, newIndustryArr);
+  };
+
   return (
     <section css={commonCssObj.partContainer} data-testid="company/edit/BasicPart">
       <h3 css={commonCssObj.partTitle}>일반 정보</h3>
@@ -72,32 +83,39 @@ export const BasicPart: FunctionComponent<AuthBasicPartProps> = ({ companyAuthFo
         <strong css={commonCssObj.inputTitle(false)}>업종</strong>
         <div css={cssObj.inputWrapper}>
           <button
-            // eslint-disable-next-line no-unneeded-ternary
-            css={commonCssObj.select(17, errors.industry ? true : false)}
+            css={commonCssObj.select(17, Boolean(errors.industry))}
             type="button"
             onClick={() => {
               setIsIndustryOpen((prev) => !prev);
             }}
           >
-            {watch("industry")}
+            {watch("industry") && watch("industry").length !== 0 ? (
+              <span>{watch("industry").join(", ")}</span>
+            ) : (
+              <span css={cssObj.selectPlaceholder}>선택</span>
+            )}
             {isIndustryOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
           {errors.industry && <p css={cssObj.errorMessageRight}>{errors.industry.message}</p>}
           <div css={commonCssObj.optionList(isIndustryOpen, 26)}>
             {INDUSTRY_ARR.map((industry) => (
-              <button
-                type="button"
-                css={commonCssObj.option}
-                key={industry}
-                value={industry}
-                onMouseDown={() => {
-                  setValue(`industry`, industry);
-                  setIsIndustryOpen((prev) => !prev);
-                  clearErrors("industry");
-                }}
-              >
+              <div css={commonCssObj.option} key={industry}>
+                <Checkbox
+                  css={cssObj.checkbox}
+                  checked={watch("industry")?.includes(industry)}
+                  onClick={(e) => {
+                    if (e.currentTarget.checked) {
+                      if (watch("industry").length === 2) {
+                        return;
+                      }
+                      addIndustry(industry);
+                      return;
+                    }
+                    removeIndustry(industry);
+                  }}
+                />
                 {industry}
-              </button>
+              </div>
             ))}
           </div>
         </div>

@@ -3,7 +3,7 @@ import { INTERNAL_URL } from "@/constants";
 export const JD_LINK_ARR = [
   { name: "홈", url: INTERNAL_URL.HOME },
   { name: "공고등록", url: INTERNAL_URL.JD_UPLOAD },
-  { name: "공고관리", url: INTERNAL_URL.JD_LIST },
+  { name: "공고/지원자 관리", url: INTERNAL_URL.JD_LIST },
   { name: "고객센터", url: INTERNAL_URL.HELP },
 ] as const;
 

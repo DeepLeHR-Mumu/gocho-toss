@@ -7,10 +7,10 @@ import { commonCssObj } from "@/styles";
 import { jdRotationClickEvent } from "@/ga";
 
 import { AddFieldButton, DeleteInputButton } from "../../component";
-import { JdFormValues } from "../../../upload/type";
+import { AddJdFormValues } from "../../../upload/type";
 import { setFieldErrorIfEmpty } from "../../../upload/util";
 import { ConditionPartProps } from "./type";
-import { ROTATION_ARR } from "./constant";
+import { SHIFT_ARR } from "./constant";
 import { cssObj } from "./style";
 
 export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, payArr }) => {
@@ -28,44 +28,42 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
     setError,
   } = jdForm;
 
-  const rotationClickHandler = (rotation: string) => {
-    const isInList = watch("rotation_arr").includes(rotation);
-    clearErrors(`rotation_arr`);
+  const shiftClickHandler = (shift: string) => {
+    const isInList = watch("detail.shift").includes(shift);
+    clearErrors(`detail.shift`);
     if (isInList) {
-      setValue(`rotation_arr`, [...watch("rotation_arr").filter((element) => element !== rotation)]);
+      setValue(`detail.shift`, [...watch("detail.shift").filter((element) => element !== shift)]);
     } else {
-      setValue(`rotation_arr`, [...watch("rotation_arr"), rotation]);
+      setValue(`detail.shift`, [...watch("detail.shift"), shift]);
     }
   };
 
-  const rotationTextMaker = (selectedRotation: string[]) => {
-    if (!selectedRotation || selectedRotation.length === 0) return "교대 형태 선택";
-    return selectedRotation
-      .map((rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.data === rotation)?.name)
-      .join(", ");
+  const shiftTextMaker = (selectedShfit: string[]) => {
+    if (!selectedShfit || selectedShfit.length === 0) return "교대 형태 선택";
+    return selectedShfit.map((shift) => SHIFT_ARR.find((shiftObj) => shiftObj.data === shift)?.name).join(", ");
   };
 
   const payArrCheckboxClickHandler = (
     currentCheck: boolean,
     anotherCheck: boolean,
     setCurrentCheck: (value: ((prevState: boolean) => boolean) | boolean) => void,
-    arr: UseFieldArrayReturn<JdFormValues, "pay_arr", "id">,
+    arr: UseFieldArrayReturn<AddJdFormValues, "detail.pay", "id">,
     text: string
   ) => {
     if (currentCheck) {
       const index = arr.fields.findIndex((item) => item.value === text);
       if (index !== -1) {
         if (arr.fields.length !== 1) arr.remove(index);
-        else setValue("pay_arr", [{ value: "" }]);
+        else setValue("detail.pay", [{ value: "" }]);
       }
     } else if (anotherCheck) {
       arr.append({ value: text });
     } else {
-      setValue("pay_arr", [{ value: text }]);
+      setValue("detail.pay", [{ value: text }]);
     }
 
     setCurrentCheck((prev) => !prev);
-    clearErrors("pay_arr");
+    clearErrors("detail.pay");
   };
 
   const isPayArrDisabled = companyDepend || afterPass;
@@ -102,7 +100,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
                 <CheckBox isChecked={afterPass} />
                 면접 후 결정
               </label>
-              <p css={commonCssObj.errorMessage}>{errors.pay_arr?.message}</p>
+              <p css={commonCssObj.errorMessage}>{errors.detail?.pay?.message}</p>
             </div>
           </div>
           <div css={commonCssObj.arrayInputContainer}>
@@ -111,16 +109,16 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
                 <label css={commonCssObj.inputLabel} htmlFor={`payArr${item.id}`}>
                   <input
                     id={`payArr${item.id}`}
-                    css={commonCssObj.input(55.5, Boolean(errors.pay_arr))}
+                    css={commonCssObj.input(55.5, Boolean(errors.detail?.pay))}
                     placeholder="급여 정보를 기재해주세요 (최대 30자)"
                     maxLength={30}
                     disabled={isPayArrDisabled}
-                    {...register(`pay_arr.${index}.value`, {
+                    {...register(`detail.pay.${index}.value`, {
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                          setValue(`pay_arr.${index}.value`, "");
+                          setValue(`detail.pay.${index}.value`, "");
                         }
-                        setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+                        setFieldErrorIfEmpty(watch, jdForm, "detail.pay", "* 급여 정보를 입력해 주세요");
                       },
                       maxLength: { value: 30, message: "최대 길이는 30자입니다." },
                     })}
@@ -129,13 +127,13 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
                     <DeleteInputButton
                       onClickHandler={() => {
                         payArr.remove(index);
-                        setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+                        setFieldErrorIfEmpty(watch, jdForm, "detail.pay", "* 급여 정보를 입력해 주세요");
                       }}
                     />
                   )}
                 </label>
                 <p css={commonCssObj.errorMessage}>
-                  {errors.pay_arr?.[index] && errors.pay_arr?.[index]?.value?.message}
+                  {errors.detail?.pay?.[index] && errors.detail.pay?.[index]?.value?.message}
                 </p>
               </div>
             ))}
@@ -144,7 +142,7 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
                 <AddFieldButton
                   onClickHandler={() => {
                     payArr.append({ value: "" });
-                    setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
+                    setFieldErrorIfEmpty(watch, jdForm, "detail.pay", "* 급여 정보를 입력해 주세요");
                   }}
                   disabled={isPayArrDisabled}
                 />
@@ -155,20 +153,20 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
       </div>
       <div css={commonCssObj.container}>
         <p css={commonCssObj.inputTitle(false)}>교대 형태</p>
-        <div css={cssObj.rotationContainer}>
+        <div css={cssObj.shiftContainer}>
           <input
             css={cssObj.hiddenInput}
-            {...register(`rotation_arr`, {
+            {...register(`detail.shift`, {
               required: "* 교대 형태를 선택해 주세요",
             })}
           />
           <button
-            css={commonCssObj.select(30, Boolean(errors.rotation_arr))}
+            css={commonCssObj.select(30, Boolean(errors.detail?.shift))}
             type="button"
             onClick={() => {
               jdRotationClickEvent();
-              if (isRotationOpen && watch("rotation_arr").length === 0) {
-                setError(`rotation_arr`, {
+              if (isRotationOpen && watch("detail.shift").length === 0) {
+                setError(`detail.shift`, {
                   type: "required",
                   message: "* 교대 형태를 선택해 주세요",
                 });
@@ -176,32 +174,32 @@ export const ConditionPart: FunctionComponent<ConditionPartProps> = ({ jdForm, p
               setIsRotationOpen((prev) => !prev);
             }}
             onBlur={() => {
-              trigger(`rotation_arr`);
+              trigger(`detail.shift`);
               setIsRotationOpen(false);
             }}
           >
-            <p css={cssObj.rotationInnerText}>{rotationTextMaker(watch("rotation_arr"))}</p>
+            <p css={cssObj.shiftInnerText}>{shiftTextMaker(watch("detail.shift"))}</p>
             {isRotationOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
           <div css={commonCssObj.optionList(isRotationOpen, 12)}>
-            {ROTATION_ARR.map((rotation) => (
+            {SHIFT_ARR.map((shift) => (
               <button
                 type="button"
                 css={commonCssObj.option}
-                key={rotation.data}
-                value={rotation.data}
+                key={shift.data}
+                value={shift.data}
                 onMouseDown={(event) => {
                   event.preventDefault();
-                  rotationClickHandler(rotation.data);
+                  shiftClickHandler(shift.data);
                 }}
               >
-                <CheckBox isChecked={watch("rotation_arr")?.includes(rotation.data) || false} />
-                {rotation.name}
+                <CheckBox isChecked={watch("detail.shift")?.includes(shift.data) || false} />
+                {shift.name}
               </button>
             ))}
           </div>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.rotation_arr && `${errors.rotation_arr?.message}`}</p>
+        <p css={commonCssObj.errorMessage}>{errors.detail?.shift && `${errors.detail.shift.message}`}</p>
       </div>
     </div>
   );

@@ -27,16 +27,16 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
   } = jdForm;
 
   const mainTaskClickHandler = (task: string) => {
-    setValue(`task_main`, task);
-    setValue(`task_sub_arr`, []);
-    clearErrors(`task_main`);
+    setValue(`detail.task_main`, task);
+    setValue(`detail.task_sub`, []);
+    clearErrors(`detail.task_main`);
   };
 
   const subTaskClickHandler = (subTask: string) => {
-    const isInList = watch("task_sub_arr")?.includes(subTask);
+    const isInList = watch("detail.task_sub")?.includes(subTask);
     const isSubtaskNone = subTask === "없음";
-    let currentSubTasks = watch("task_sub_arr") || [];
-    clearErrors(`task_main`);
+    let currentSubTasks = watch("detail.task_sub") || [];
+    clearErrors(`detail.task_main`);
 
     if (isInList) {
       currentSubTasks = isSubtaskNone ? [] : currentSubTasks.filter((element) => element !== subTask);
@@ -44,7 +44,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
       currentSubTasks = isSubtaskNone ? [subTask] : [...currentSubTasks, subTask];
     }
 
-    setValue(`task_sub_arr`, currentSubTasks);
+    setValue(`detail.task_sub`, currentSubTasks);
   };
 
   const hireNumberStringConverter = (value: number) => {
@@ -55,8 +55,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
   };
 
   const hireNumberClickHandler = (value: number) => {
-    setValue(`hire_number`, value);
-    trigger(`hire_number`);
+    setValue(`detail.hire_number`, value);
+    trigger(`detail.hire_number`);
     setHireNumberLabel(hireNumberStringConverter(value));
   };
 
@@ -66,28 +66,30 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
   };
 
   const taskErrorHandler = () => {
-    if ((watch("task_main") === "" || watch("task_sub_arr")?.length === 0) && isTaskOpen) {
-      setError(`task_main`, { type: "required", message: "* 1차 직무와 2차 세부 직무를 선택해주세요" });
+    if ((watch("detail.task_main") === "" || watch("detail.task_sub")?.length === 0) && isTaskOpen) {
+      setError(`detail.task_main`, { type: "required", message: "* 1차 직무와 2차 세부 직무를 선택해주세요" });
     }
     setIsTaskOpen(false);
   };
 
   const conversionRateHandler = (event: ChangeEvent<HTMLInputElement>, isError: boolean) => {
     if (isError && Number(event.target.value) === 0) {
-      setError(`conversion_rate`, {
+      setError(`detail.conversion_rate`, {
         type: "required",
         message: "전환율은 필수 입력 값입니다",
       });
     }
   };
 
-  const isSubTaskNone = watch("task_sub_arr")?.includes("없음");
+  const isSubTaskNone = watch("detail.task_sub")?.includes("없음");
 
-  const isConversionActivated = watch("contract_type") === "인턴" || watch("contract_type") === "계약>정규";
-  const isYearActivated = watch("required_exp") === "경력" || watch("required_exp") === "신입/경력";
-  const selectedSubTaskObj = TASK_ARR.find((task) => watch("task_main") === task.mainTask);
+  const isConversionActivated =
+    watch("detail.contract_type") === "인턴" || watch("detail.contract_type") === "계약>정규";
+  const isYearActivated =
+    watch("qualification.required_experience") === "경력" || watch("qualification.required_experience") === "신입/경력";
+  const selectedSubTaskObj = TASK_ARR.find((task) => watch("detail.task_main") === task.mainTask);
 
-  useEffect(() => setHireNumberLabel(hireNumberStringConverter(watch("hire_number") || 0)), [watch]);
+  useEffect(() => setHireNumberLabel(hireNumberStringConverter(watch("detail.hire_number") || 0)), [watch]);
 
   return (
     <div css={commonCssObj.partContainer}>
@@ -96,13 +98,13 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
         <p css={commonCssObj.inputTitle(true)}>채용 직무</p>
         <input
           css={cssObj.hiddenInput}
-          {...register(`task_main`, {
+          {...register(`detail.task_main`, {
             required: "* 1차 직무와 2차 세부 직무를 선택해주세요",
           })}
         />
         <input
           css={cssObj.hiddenInput}
-          {...register(`task_sub_arr`, {
+          {...register(`detail.task_sub`, {
             required: "* 1차 직무와 2차 세부 직무를 선택해주세요",
           })}
         />
@@ -110,11 +112,14 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
           <div css={cssObj.taskSelectContainer}>
             <div css={cssObj.taskContainer}>
               <button
-                css={commonCssObj.select(17.5, Boolean(errors.task_main))}
+                css={commonCssObj.select(17.5, Boolean(errors.detail?.task_main))}
                 type="button"
                 onClick={() => {
-                  if (isTaskOpen && watch("task_main") === "") {
-                    setError(`task_main`, { type: "required", message: "* 1차 직무와 2차 세부 직무를 선택해주세요" });
+                  if (isTaskOpen && watch("detail.task_main") === "") {
+                    setError(`detail.task_main`, {
+                      type: "required",
+                      message: "* 1차 직무와 2차 세부 직무를 선택해주세요",
+                    });
                   }
                   setIsTaskOpen((prev) => !prev);
                 }}
@@ -127,7 +132,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                 {TASK_ARR.map((taskObj) => (
                   <button
                     type="button"
-                    css={cssObj.mainTaskOption(watch("task_main") === taskObj.mainTask)}
+                    css={cssObj.mainTaskOption(watch("detail.task_main") === taskObj.mainTask)}
                     key={`${taskObj.mainTask}`}
                     value={taskObj.mainTask}
                     onMouseDown={(mouseEvent) => {
@@ -142,17 +147,17 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
             </div>
             <div css={cssObj.taskContainer}>
               <button
-                css={commonCssObj.select(17.5, Boolean(errors.task_main))}
+                css={commonCssObj.select(17.5, Boolean(errors.detail?.task_main) || Boolean(errors.detail?.task_sub))}
                 type="button"
                 onClick={() => {
-                  if (isTaskOpen && watch("task_sub_arr")?.length === 0) {
-                    setError(`task_sub_arr`, { type: "required" });
+                  if (isTaskOpen && watch("detail.task_sub")?.length === 0) {
+                    setError(`detail.task_sub`, { type: "required" });
                   }
                   setIsTaskOpen((prev) => !prev);
                 }}
                 onBlur={taskErrorHandler}
               >
-                {subTaskTextMaker(watch("task_sub_arr") || [])}
+                {subTaskTextMaker(watch("detail.task_sub") || [])}
                 {isTaskOpen ? <FiChevronUp /> : <FiChevronDown />}
               </button>
               <div css={commonCssObj.optionList(isTaskOpen, 46)}>
@@ -168,15 +173,15 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                     }}
                     disabled={subTask !== "없음" && isSubTaskNone}
                   >
-                    <CheckBox isChecked={watch("task_sub_arr")?.includes(subTask) || false} />
+                    <CheckBox isChecked={watch("detail.task_sub")?.includes(subTask) || false} />
                     {subTask}
                   </button>
                 ))}
               </div>
             </div>
             <div css={cssObj.errorMessageContainer}>
-              <p css={commonCssObj.errorMessage}>{errors.task_main && errors.task_main?.message}</p>
-              <p css={commonCssObj.errorMessage}>{errors.task_detail_arr?.message}</p>
+              <p css={commonCssObj.errorMessage}>{errors.detail?.task_main && errors.detail.task_main.message}</p>
+              <p css={commonCssObj.errorMessage}>{errors.detail?.task_description?.message}</p>
             </div>
           </div>
           <div css={commonCssObj.arrayInputContainer}>
@@ -185,15 +190,20 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                 <label css={commonCssObj.inputLabel} htmlFor={`taskDetailArr${item.id}`}>
                   <input
                     id={`taskDetailArr${item.id}`}
-                    css={commonCssObj.input(55.5, Boolean(errors.task_detail_arr))}
+                    css={commonCssObj.input(55.5, Boolean(errors.detail?.task_description))}
                     placeholder="합격 시 구체적으로 어떤 일을 하게 되는지 세부 직무 내용을 기재해 주세요 (최대 50자)"
                     maxLength={50}
-                    {...register(`task_detail_arr.${index}.value`, {
+                    {...register(`detail.task_description.${index}.value`, {
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                          setValue(`task_detail_arr.${index}.value`, "");
+                          setValue(`detail.task_description.${index}.value`, "");
                         }
-                        setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+                        setFieldErrorIfEmpty(
+                          watch,
+                          jdForm,
+                          "detail.task_description",
+                          "* 세부 직무 내용을 입력해 주세요"
+                        );
                       },
                       maxLength: { value: 50, message: "최대 길이는 50자입니다." },
                     })}
@@ -202,7 +212,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                     <DeleteInputButton
                       onClickHandler={() => {
                         taskDetailArr.remove(index);
-                        setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+                        setFieldErrorIfEmpty(
+                          watch,
+                          jdForm,
+                          "detail.task_description",
+                          "* 세부 직무 내용을 입력해 주세요"
+                        );
                       }}
                     />
                   )}
@@ -214,7 +229,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                 <AddFieldButton
                   onClickHandler={() => {
                     taskDetailArr.append({ value: "" });
-                    setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
+                    setFieldErrorIfEmpty(watch, jdForm, "detail.task_description", "* 세부 직무 내용을 입력해 주세요");
                   }}
                 />
               )}
@@ -226,14 +241,14 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
         <p css={commonCssObj.inputTitle(true)}>채용 인원</p>
         <div>
           <div css={cssObj.hireNumberContainer}>
-            {(watch("hire_number") || 1) < 0 ? (
+            {(watch("detail.hire_number") || 1) < 0 ? (
               <>
                 <div css={cssObj.hireNumberCover}>{hireNumberLabel}</div>명
                 <button
                   css={cssObj.hireNumberResetButton}
                   type="button"
                   onClick={() => {
-                    setValue(`hire_number`, null);
+                    setValue(`detail.hire_number`, null);
                   }}
                 >
                   값 다시 입력하기
@@ -244,8 +259,8 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                 <input
                   type="number"
                   max="9999"
-                  css={commonCssObj.input(6.625, Boolean(errors.hire_number))}
-                  {...register(`hire_number`, {
+                  css={commonCssObj.input(6.625, Boolean(errors.detail?.hire_number))}
+                  {...register(`detail.hire_number`, {
                     valueAsNumber: true,
                     required: "* 채용 인원 수를 입력해 주세요",
                     max: { value: 9999, message: "* 최대값은 9999명입니다" },
@@ -255,7 +270,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                 명
               </>
             )}
-            <p css={commonCssObj.errorMessage}>{errors.hire_number && errors.hire_number?.message}</p>
+            <p css={commonCssObj.errorMessage}>{errors.detail?.hire_number && errors.detail.hire_number.message}</p>
           </div>
           <div css={cssObj.hireNumberContainer}>
             <button type="button" css={cssObj.hireNumberButton} onClick={() => hireNumberClickHandler(-1)}>
@@ -278,12 +293,12 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
               key={contractName}
               value={contractName}
               id={contractName}
-              registerObj={register(`contract_type`, {
+              registerObj={register(`detail.contract_type`, {
                 required: "* 계약 형태를 선택해주세요",
                 onChange: () => {
                   if (isConversionActivated) {
-                    clearErrors(`conversion_rate`);
-                    setValue(`conversion_rate`, null);
+                    clearErrors(`detail.conversion_rate`);
+                    setValue(`detail.conversion_rate`, null);
                   }
                 },
               })}
@@ -292,7 +307,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
             </SharedRadioButton>
           ))}
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.contract_type && errors.contract_type?.message}</p>
+        <p css={commonCssObj.errorMessage}>{errors.detail?.contract_type && errors.detail.contract_type.message}</p>
         {isConversionActivated && (
           <>
             <div css={cssObj.borderLine} />
@@ -304,7 +319,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                 min="0"
                 max="100"
                 step="1"
-                {...register(`conversion_rate`, {
+                {...register(`detail.conversion_rate`, {
                   required: { value: isConversionActivated, message: "* 전환율을 입력해 주세요" },
                   min: { value: 0, message: "* 최소값은 1입니다" },
                   max: { value: 100, message: "* 최대값은 100입니다" },
@@ -315,7 +330,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
               />
               %
             </div>
-            <p css={commonCssObj.errorMessage}>{errors.conversion_rate && errors.conversion_rate?.message}</p>
+            <p css={commonCssObj.errorMessage}>
+              {errors.detail?.conversion_rate && errors.detail.conversion_rate.message}
+            </p>
           </>
         )}
       </div>
@@ -327,7 +344,7 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
               key={expName}
               value={expName}
               id={expName}
-              registerObj={register(`required_exp`, {
+              registerObj={register(`qualification.required_experience`, {
                 required: "* 경력 조건을 선택해 주세요",
               })}
               onClick={() => jdCareerClickEvent()}
@@ -336,7 +353,9 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
             </SharedRadioButton>
           ))}
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.required_exp && errors.required_exp?.message}</p>
+        <p css={commonCssObj.errorMessage}>
+          {errors.qualification?.required_experience && errors.qualification.required_experience.message}
+        </p>
         {isYearActivated && (
           <>
             <div css={cssObj.borderLine} />
@@ -348,17 +367,19 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                   min="1"
                   max="50"
                   css={cssObj.optionalInput}
-                  {...register(`min_year`, {
+                  {...register(`qualification.required_min_year`, {
                     min: { value: 1, message: "* 최소 경력은 1년 이상이어야 합니다" },
                     max: { value: 50, message: "* 최소 경력은 50년 이하이어야 합니다" },
-                    onBlur: () => trigger(`max_year`),
+                    onBlur: () => trigger(`qualification.required_max_year`),
                     valueAsNumber: true,
                   })}
                 />
                 년
               </div>
               <div css={cssObj.errorMessageWrapper}>
-                <p css={commonCssObj.errorMessage}>{errors.min_year && errors.min_year?.message}</p>
+                <p css={commonCssObj.errorMessage}>
+                  {errors.qualification?.required_min_year && errors.qualification.required_min_year.message}
+                </p>
               </div>
             </div>
             <div css={cssObj.yearInputWrapper}>
@@ -369,17 +390,20 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ jdForm, taskDetai
                   min="1"
                   max="100"
                   css={cssObj.optionalInput}
-                  {...register(`max_year`, {
+                  {...register(`qualification.required_max_year`, {
                     max: { value: 50, message: "* 최대 경력은 50년 이하이어야 합니다" },
                     validate: (value) =>
-                      (value || 1) > (watch("min_year") || 0) || "* 최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
+                      (value || 1) > (watch("qualification.required_min_year") || 0) ||
+                      "* 최소 경력 조건이 최대보다 작거나 같을 수 없습니다.",
                     valueAsNumber: true,
                   })}
                 />
                 년
               </div>
               <div css={cssObj.errorMessageWrapper}>
-                <p css={commonCssObj.errorMessage}>{errors.max_year && errors.max_year?.message}</p>
+                <p css={commonCssObj.errorMessage}>
+                  {errors.qualification?.required_max_year && errors.qualification.required_max_year.message}
+                </p>
               </div>
             </div>
           </>

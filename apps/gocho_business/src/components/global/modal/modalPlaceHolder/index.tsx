@@ -2,8 +2,6 @@ import { FunctionComponent } from "react";
 
 import { useModal } from "@/globalStates";
 import { LoginModal } from "../loginModal";
-import { FactoryAddModal } from "../factoryAddModal";
-import { FactoryEditModal } from "../factoryEditModal";
 import { UsageTermModal } from "../usageTermModal";
 import { PrivacyTermModal } from "../privacyTermModal";
 import { CompanyAuthModal } from "../companyAuthModal";
@@ -14,14 +12,6 @@ export const ModalPlaceholder: FunctionComponent = () => {
 
   if (modal === "loginModal") {
     return <LoginModal />;
-  }
-
-  if (modal === "factoryAddModal") {
-    return <FactoryAddModal />;
-  }
-
-  if (modal === "factoryEditModal") {
-    return <FactoryEditModal />;
   }
 
   if (modal === "certiAddModal") {

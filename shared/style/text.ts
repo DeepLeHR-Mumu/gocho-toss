@@ -95,6 +95,12 @@ export const TEXT = {
     line-height: 1.25rem;
   `,
 
+  BODY4_R1624: `
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  `,
+
   UNDERLINE1_M1620: `
     text-decoration: underline;
     font-weight: 500;

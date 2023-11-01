@@ -7,6 +7,13 @@ export const cssObj = {
     border-radius: 0.5rem;
     ${TEXT.TITLE6_B1418};
 
+    ${size === "xsmall" &&
+    css`
+      border-radius: 0.5rem;
+      padding: 0.25rem 0.675rem;
+      ${TEXT.TITLE7_M1218}
+    `}
+
     ${size === "small" &&
     css`
       width: 8.75rem;

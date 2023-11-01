@@ -1,8 +1,7 @@
-import { Control, UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
-import { JdFormValues } from "../../../upload/type";
+import { UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
+import { AddJdFormValues } from "../../../upload/type";
 
 export interface ConditionPartProps {
-  jdForm: UseFormReturn<JdFormValues>;
-  control: Control<JdFormValues>;
-  payArr: UseFieldArrayReturn<JdFormValues, "pay_arr", "id">;
+  jdForm: UseFormReturn<AddJdFormValues>;
+  payArr: UseFieldArrayReturn<AddJdFormValues, "detail.pay", "id">;
 }

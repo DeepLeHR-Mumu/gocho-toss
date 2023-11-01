@@ -18,3 +18,4 @@ export { SearchBar };
 export { Switch } from "./Switch";
 export { Toast } from "./Toast";
 export { Textarea } from "./Textarea";
+export { ThreeDots } from "./ThreeDots";

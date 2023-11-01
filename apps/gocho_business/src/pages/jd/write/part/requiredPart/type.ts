@@ -1,9 +1,8 @@
-import { Control, UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
-import { JdFormValues } from "../../../upload/type";
+import { UseFieldArrayReturn, UseFormReturn } from "react-hook-form";
+import { AddJdFormValues } from "../../../upload/type";
 
 export interface RequiredPartProps {
-  jdForm: UseFormReturn<JdFormValues>;
-  control: Control<JdFormValues>;
-  requiredEtcArr: UseFieldArrayReturn<JdFormValues, "required_etc_arr", "id">;
-  preferredEtcArr: UseFieldArrayReturn<JdFormValues, "preferred_etc_arr", "id">;
+  jdForm: UseFormReturn<AddJdFormValues>;
+  requiredEtcArr: UseFieldArrayReturn<AddJdFormValues, "qualification.required_etc", "id">;
+  preferredEtcArr: UseFieldArrayReturn<AddJdFormValues, "qualification.preferred_etc", "id">;
 }
