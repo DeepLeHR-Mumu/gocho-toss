@@ -90,16 +90,20 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
     };
 
     if (educationType === "대학교(4년제)" && isPostUniversityDef(data)) {
+      const universityRequestObj = {
+        resumeId,
+        ...data,
+        start_date: YYMMToDate(data.start_date),
+        end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+      };
+
       if (currentEducation) {
         const { id } = currentEducation;
 
         putUniversity(
           {
-            resumeId,
             universityId: id,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+            ...universityRequestObj,
           },
           {
             onSuccess: onEducationSuccess,
@@ -108,10 +112,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
       } else {
         postUniversity(
           {
-            resumeId,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+            ...universityRequestObj,
           },
           {
             onSuccess: onEducationSuccess,
@@ -123,66 +124,57 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
     }
 
     if (educationType === "대학교(2,3년제)" && isPostCollegeDef(data)) {
+      const collegeRequestObj = {
+        resumeId,
+        ...data,
+        start_date: YYMMToDate(data.start_date),
+        end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+      };
+
       if (currentEducation) {
         const { id } = currentEducation;
 
         putCollege(
           {
-            resumeId,
             collegeId: id,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+            ...collegeRequestObj,
           },
           {
             onSuccess: onEducationSuccess,
           }
         );
       } else {
-        postCollege(
-          {
-            resumeId,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
-          },
-          {
-            onSuccess: onEducationSuccess,
-          }
-        );
+        postCollege(collegeRequestObj, {
+          onSuccess: onEducationSuccess,
+        });
       }
 
       return;
     }
 
     if (educationType === "기타" && isPostExtraDef(data)) {
+      const extraRequestObj = {
+        resumeId,
+        ...data,
+        start_date: YYMMToDate(data.start_date),
+        end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+      };
       if (currentEducation) {
         const { id } = currentEducation;
 
         putExtra(
           {
-            resumeId,
             extraId: id,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
+            ...extraRequestObj,
           },
           {
             onSuccess: onEducationSuccess,
           }
         );
       } else {
-        postExtra(
-          {
-            resumeId,
-            ...data,
-            start_date: YYMMToDate(data.start_date),
-            end_date: data.end_date ? YYMMToDate(data.end_date) : null,
-          },
-          {
-            onSuccess: onEducationSuccess,
-          }
-        );
+        postExtra(extraRequestObj, {
+          onSuccess: onEducationSuccess,
+        });
       }
 
       return;

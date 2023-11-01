@@ -38,16 +38,24 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
           firstAttendance,
           secondAttendance,
           thirdAttendance,
+          isAlternativeTest,
         } = education;
 
         const attendanceKeyArr = [firstAttendance, secondAttendance, thirdAttendance];
+
+        const isExistAttendanceForm =
+          educationType === "고등학교" &&
+          !isAlternativeTest &&
+          (firstAttendance || secondAttendance || thirdAttendance);
 
         return (
           <ListItem
             key={id}
             title={name}
             titleDes={`${educationType} ${graduateType}`}
-            date={!["재학", "중퇴"].includes(graduateType) ? [startDate, endDate || ""] : [startDate]}
+            date={
+              !isAlternativeTest && !["재학", "중퇴"].includes(graduateType) ? [startDate, endDate || ""] : [startDate]
+            }
             isUturn={education.educationType === "대학교(4년제)" || isUturn}
             editHandler={() => {
               selectEducation(education);
@@ -76,7 +84,7 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
               <p css={cssObj.describe}>{etc}</p>
             </div>
 
-            {educationType === "고등학교" && (firstAttendance || secondAttendance || thirdAttendance) && (
+            {isExistAttendanceForm && (
               <div css={cssObj.attendanceBox}>
                 <div css={cssObj.attendanceWrapper}>
                   <div css={cssObj.gradeHeader}>학년</div>

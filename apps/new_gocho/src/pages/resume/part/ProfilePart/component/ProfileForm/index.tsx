@@ -153,6 +153,8 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
     }
   };
 
+  const profileSrc = userProfilePreview ?? resumeProfile.image ?? basicProfile;
+
   return (
     <>
       {profileModal && <ProfileAlertModal setModal={setProfileModal} />}
@@ -240,7 +242,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
           </section>
 
           <section css={cssObj.profileWrapper}>
-            <Image src={userProfilePreview ?? resumeProfile.image ?? basicProfile} alt="" width={168} height={200} />
+            <Image src={profileSrc} alt="" css={cssObj.profile} width={168} height={200} />
 
             <input
               id="userProfile"

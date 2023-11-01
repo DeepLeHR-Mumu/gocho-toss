@@ -29,8 +29,7 @@ export const ListCard: FC<ListCardProps> = ({
           <FiEdit2 onClick={iconHandler} css={cssObj.icon} />
         </button>
       )}
-
-      {iconType === "none" && editMessage}
+      {iconType === "none" && <p css={cssObj.editMessage}> {editMessage}</p>}
     </div>
     {children}
   </div>

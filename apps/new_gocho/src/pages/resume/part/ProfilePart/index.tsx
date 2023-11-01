@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 
+import Link from "next/link";
 import { useUserResumeProfile } from "@/apis/users";
 
 import { ListCard } from "../../component";
@@ -23,7 +24,18 @@ export const ProfilePart: FC<ProfilePartProps> = ({ userId }) => {
       iconType={isEditMode ? "none" : "edit"}
       editMessage={
         <p css={cssObj.editMsg}>
-          이름, 생년월일, 연락처는 [마이페이지{">"} <b>계정 관리</b>]에서 수정할 수 있습니다
+          이름, 생년월일, 연락처는 [마이페이지{">"}{" "}
+          <Link
+            href={{
+              pathname: "/mypage",
+              query: {
+                type: "account",
+              },
+            }}
+          >
+            <b>계정 관리</b>
+          </Link>
+          ]에서 수정할 수 있습니다
         </p>
       }
       iconHandler={handleEditMode}

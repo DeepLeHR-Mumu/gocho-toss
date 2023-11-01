@@ -16,6 +16,14 @@ export const cssObj = {
     justify-content: space-between;
   `,
 
+  profile: css`
+    border-radius: 0.5rem;
+    border: 1px solid ${COLOR.GRAY200};
+    opacity: 0.84;
+    width: 10.5rem;
+    height: 12.5rem;
+  `,
+
   infoWrapper: css`
     display: flex;
     width: 33.125;

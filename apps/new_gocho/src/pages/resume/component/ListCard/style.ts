@@ -32,4 +32,8 @@ export const cssObj = {
     gap: 0.5rem;
     ${TEXT.TITLE2_B2428}
   `,
+
+  editMessage: css`
+    align-self: flex-end;
+  `,
 };
