@@ -15,5 +15,5 @@ export const useUserInfo = () =>
   useQuery({
     queryKey: userInfoKeyObj.userInfo,
     queryFn: getUserInfo,
-    select: ({ data }) => selector(data.data),
+    select: ({ data }) => selector(data),
   });
