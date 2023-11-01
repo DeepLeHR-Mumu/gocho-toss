@@ -10,7 +10,7 @@ export const postAddMainBanner: PostMainBannerDef = async (requestObj) => {
   formData.append("pcImage", requestObj.pcImage);
   formData.append("mobileImage", requestObj.mobileImage);
 
-  const { data } = await axiosInstance.post("/ads/main-banner", formData, {
+  const { data } = await axiosInstance.post("/banners/main-banner", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return data;

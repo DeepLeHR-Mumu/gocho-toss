@@ -8,7 +8,7 @@ import { GetBannerArrDef } from "./type";
 import { mainBannerSelector } from "./util";
 
 export const getMainBannerArr: GetBannerArrDef = async () => {
-  const { data } = await axiosInstance.get("/ads/main-banner");
+  const { data } = await axiosInstance.get("/banners/main-banner");
   return data;
 };
 

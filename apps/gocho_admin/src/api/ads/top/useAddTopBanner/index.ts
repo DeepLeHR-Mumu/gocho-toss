@@ -5,7 +5,7 @@ import { axiosInstance } from "@/api/useAxiosInterceptor";
 import { PostTopBannerDef, RequestObjDef, useAddTopBannerProps } from "./type";
 
 export const postAddTopBanner: PostTopBannerDef = async (requestObj) => {
-  const { data } = await axiosInstance.post("/ads/jd-top", requestObj);
+  const { data } = await axiosInstance.post("/banners/jd-top", requestObj);
   return data;
 };
 
