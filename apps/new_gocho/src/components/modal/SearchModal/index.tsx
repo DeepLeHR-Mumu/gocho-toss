@@ -73,7 +73,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
               }
             }}
           />
-          <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} />
+          <SearchDropDown recentWordArr={recentSearchWordArr} searchHandler={searchHandler} autoFocus />
           <div css={cssObj.etcWrapper}>
             {recentSearchWordArr.length > 0 && (
               <div>
