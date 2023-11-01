@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { dummyArrCreator } from "shared-util";
 
-import { useTopBannerArr } from "@/apis/ads";
+import { useTopBannerArr } from "@/apis/banners";
 import jobiChatting from "@/public/image/jobi/chatting.png";
 import { JdCard } from "@/components/common/JdCard";
 import { INTERNAL_URL } from "@/constants";

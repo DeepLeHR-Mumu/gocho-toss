@@ -7,7 +7,7 @@ import Link from "next/link";
 import { dummyArrCreator } from "shared-util";
 import defaultCompanyBg from "shared-image/global/common/default_company_bg.webp";
 
-import { useMainBannerArr } from "@/apis/ads";
+import { useMainBannerArr } from "@/apis/banners";
 import { SkeletonBox } from "@/components";
 
 import { cssObj } from "./style";

@@ -6,7 +6,7 @@ import { GetJdBannerArrDef } from "./type";
 import { selector } from "./util";
 
 export const getJdBannerArr: GetJdBannerArrDef = async () => {
-  const { data } = await axiosInstance.get("/ads/jd-banner");
+  const { data } = await axiosInstance.get("/banners/jd-banner");
   return data;
 };
 
