@@ -12,31 +12,21 @@ export const selector = (jdArr: JdObjDef[], page_result: PageResultDef) => {
     isLast: page_result.is_last,
   };
   const jdDataArr = jdArr.map((jd) => ({
-      id: jd.id,
-      company: {
-        id: jd.company.id,
-        name: jd.company.name,
-        logoUrl: jd.company.logo_url,
-      },
-      title: jd.title,
-      cut: jd.cut,
-      startTime: jd.start_time,
-      endTime: jd.end_time,
-      createdTime: jd.created_time,
-      updatedTime: jd.updated_time,
-      applyUrl: jd.apply_url,
-      bookmark: jd.bookmark,
-      isBookmark: jd.is_bookmark,
-      view: jd.view,
-      click: jd.click,
-      positionCount: jd.position_count,
-      high: jd.high,
-      college: jd.college,
-      requiredExpArr: jd.required_exp_arr,
-      placeArr: jd.place_arr,
-      rotationArr: jd.rotation_arr,
-      contractType: jd.contract_type,
-      task: jd.task,
-    }));
+    id: jd.id,
+    company: {
+      id: jd.company.id,
+      name: jd.company.name,
+      logoUrl: jd.company.logo_url,
+    },
+    title: jd.title,
+    cut: jd.cut,
+    startTime: jd.start_time,
+    endTime: jd.end_time,
+    isExpired: jd.is_expired,
+    isBookmark: jd.is_bookmark,
+    highschool: jd.highschool,
+    college: jd.college,
+    place: jd.place,
+  }));
   return { jdDataArr, pageResult };
 };

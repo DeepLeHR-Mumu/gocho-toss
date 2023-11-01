@@ -87,7 +87,12 @@ export const HotJd: FunctionComponent = () => {
         >
           {jdDataObj
             ? jdDataObj.bannerDataArr.map((banner) => (
-                <JdCard key={banner.id} jd={{ ...banner.jd, placeArr: [""] }} blockClick={isDragging} ad />
+                <JdCard
+                  key={banner.id}
+                  jd={{ ...banner.jd, highschool: banner.jd.high, place: [""] }}
+                  blockClick={isDragging}
+                  ad
+                />
               ))
             : dummyArrCreator(3).map((dummy) => <JdCard key={`hotJd${dummy}`} />)}
         </Slider>
