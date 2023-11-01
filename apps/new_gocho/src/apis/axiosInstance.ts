@@ -81,7 +81,7 @@ export const useAxiosInterceptor = () => {
   const requestConfigHandler = async (config: AxiosRequestConfig) => {
     const accessTokenData = localStorage.getItem("accessToken");
     const refreshTokenData = localStorage.getItem("refreshToken");
-    const matchingUrlReGex = /^(?!.*comments)(?!.*bookmark).*\b(companies|jds|keywords|ads)\b.*$/i;
+    const matchingUrlReGex = /^(?!.*comments)(?!.*bookmark).*\b(companies|jds|keywords|banners)\b.*$/i;
 
     // 0. token 없는 경우
     if (!accessTokenData || !refreshTokenData) {
