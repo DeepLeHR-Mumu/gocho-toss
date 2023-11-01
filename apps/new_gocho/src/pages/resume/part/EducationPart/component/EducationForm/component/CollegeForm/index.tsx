@@ -10,7 +10,7 @@ import { CollegeFormProps } from "./type";
 import { graduateTypeArr, gradeArr } from "../../constants";
 
 export const CollegeForm: FC<CollegeFormProps> = ({ errors, register, setValue, getValues, control }) => {
-  const [graduateType, setGraduateType] = useState<string>(getValues("graduate_type") || "");
+  const [graduateType, setGraduateType] = useState<string | null>(getValues("graduate_type"));
 
   const [maxGrade, setMaxGrade] = useState<number | null>(getValues("max_grade"));
 
@@ -106,7 +106,7 @@ export const CollegeForm: FC<CollegeFormProps> = ({ errors, register, setValue, 
             })}
           />
         </div>
-        {!["재학", "중퇴"].includes(graduateType) && (
+        {!!graduateType && !["재학", "중퇴"].includes(graduateType) && (
           <div css={cssObj.inputWrapper}>
             <p>
               졸업 연월 <strong css={cssObj.required}> *</strong>

@@ -186,7 +186,9 @@ export const HighSchoolForm: FC<HighSchoolFormProps> = ({ errors, control, regis
           </div>
           <div css={cssObj.inputFlexBox}>
             <div css={cssObj.inputWrapper}>
-              <p>전공/학과</p>
+              <p>
+                전공/학과<strong css={cssObj.required}> *</strong>
+              </p>
               <Input placeholder="전공 또는 학과 입력" maxLength={15} {...register("major")} />
             </div>
             <div css={cssObj.inputWrapper}>

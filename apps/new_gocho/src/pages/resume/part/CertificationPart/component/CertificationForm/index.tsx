@@ -24,7 +24,7 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
     handleSubmit,
     clearErrors,
     setValue,
-    formState: { errors },
+    formState: { isDirty, errors },
   } = useForm<PostCertificationDef>({
     mode: "onChange",
     defaultValues: currentCertification
@@ -128,6 +128,11 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
     }
   }, [focusedIndex]);
 
+  const onClickCancel = () => {
+    if (isDirty) setCancelModal(true);
+    if (!isDirty) handleEditMode();
+  };
+
   return (
     <>
       {cancelModal && <CancelModal setModal={setCancelModal} confirmHandler={handleEditMode} />}
@@ -215,10 +220,10 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
         </div>
 
         <div css={cssObj.buttonWrapper}>
-          <Button size="small" type="submit">
+          <Button size="small" type="submit" color={isDirty ? "active" : "disable"}>
             저장
           </Button>
-          <Button size="small" type="button" onClick={() => setCancelModal(false)} color="outlineGray">
+          <Button size="small" type="button" onClick={onClickCancel} color="outlineGray">
             취소
           </Button>
         </div>

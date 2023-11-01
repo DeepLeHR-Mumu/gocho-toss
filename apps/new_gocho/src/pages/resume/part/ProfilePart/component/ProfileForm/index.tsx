@@ -28,7 +28,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<PutResumeProfileDef>({
     mode: "onChange",
     defaultValues: {
@@ -45,6 +45,10 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
 
   const [profileFile, setProfileFile] = useState<File | null>(null);
   const [userProfilePreview, setUserProfilePreview] = useState<string>();
+  const [isProfileDirty, setIsProfileDirty] = useState<boolean>(false);
+
+  const isProfileFormDirty = isDirty || isProfileDirty;
+
   const [profileModal, setProfileModal] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
 
@@ -69,6 +73,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
 
         if (typeof result === "string") {
           setUserProfilePreview(result);
+          setIsProfileDirty(true);
         }
       } catch (error) {
         // setToastMessage(error.message)
@@ -77,6 +82,11 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
   };
 
   const openPostCodePopup = useDaumPostcodePopup();
+
+  const onClickCancel = () => {
+    if (isProfileFormDirty) setCancelModal(true);
+    if (!isProfileFormDirty) handleEditMode();
+  };
 
   const onClickAddress = () => {
     const mapScript = document.createElement("script");
@@ -258,10 +268,10 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
         </div>
 
         <div css={cssObj.buttonWrapper}>
-          <Button size="small" type="submit">
+          <Button size="small" type="submit" color={isProfileFormDirty ? "active" : "disable"}>
             저장
           </Button>
-          <Button size="small" type="button" onClick={() => setCancelModal(true)} color="outlineGray">
+          <Button size="small" type="button" onClick={onClickCancel} color="outlineGray">
             취소
           </Button>
         </div>

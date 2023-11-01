@@ -26,7 +26,7 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
     handleSubmit,
     setValue,
     control,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<PostFluencyDef>({
     mode: "onChange",
 
@@ -82,6 +82,11 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
         }
       );
     }
+  };
+
+  const onClickCancel = () => {
+    if (isDirty) setCancelModal(true);
+    if (!isDirty) handleEditMode();
   };
 
   return (
@@ -182,10 +187,10 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
         )}
 
         <div css={cssObj.buttonWrapper}>
-          <Button size="small" type="submit">
+          <Button size="small" type="submit" color={isDirty ? "active" : "disable"}>
             저장
           </Button>
-          <Button size="small" type="button" onClick={() => setCancelModal(false)} color="outlineGray">
+          <Button size="small" type="button" onClick={onClickCancel} color="outlineGray">
             취소
           </Button>
         </div>

@@ -57,7 +57,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
     control,
     setValue,
     getValues,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<EducationSubmitDef>({
     defaultValues: currentEducation ? educationOfDefaultValues(currentEducation) : typeOfDefaultValues(educationType),
     mode: "onSubmit",
@@ -240,6 +240,11 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
     }
   };
 
+  const onClickCancel = () => {
+    if (isDirty) setCancelModal(true);
+    if (!isDirty) handleEditMode();
+  };
+
   return (
     <>
       {cancelModal && <CancelModal setModal={setCancelModal} confirmHandler={handleEditMode} />}
@@ -294,10 +299,10 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
         )}
 
         <div css={cssObj.buttonWrapper}>
-          <Button size="small" type="submit">
+          <Button size="small" type="submit" color={isDirty ? "active" : "disable"}>
             저장
           </Button>
-          <Button size="small" type="button" onClick={() => setCancelModal(true)} color="outlineGray">
+          <Button size="small" type="button" onClick={onClickCancel} color="outlineGray">
             취소
           </Button>
         </div>

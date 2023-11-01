@@ -23,7 +23,7 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<PostActivityDef>({
     mode: "onChange",
 
@@ -77,6 +77,11 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
         }
       );
     }
+  };
+
+  const onClickCancel = () => {
+    if (isDirty) setCancelModal(true);
+    if (!isDirty) handleEditMode();
   };
 
   return (
@@ -194,12 +199,11 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
             })}
           />
         </div>
-
         <div css={cssObj.buttonWrapper}>
-          <Button size="small" type="submit">
+          <Button size="small" type="submit" color={isDirty ? "active" : "disable"}>
             저장
           </Button>
-          <Button size="small" type="button" onClick={() => setCancelModal(true)} color="outlineGray">
+          <Button size="small" type="button" onClick={onClickCancel} color="outlineGray">
             취소
           </Button>
         </div>
