@@ -38,7 +38,7 @@ export interface CompanyObjDef {
   name: string;
   catch_url: string | null;
   youtube_url: string | null;
-  industry: string;
+  industry: string[];
   size: "대기업" | "중소기업" | "중견기업" | "외국계" | "공기업" | "공공기관" | "기타";
   employee_number: number;
   found_date: string;
