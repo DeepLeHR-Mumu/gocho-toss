@@ -7,7 +7,7 @@ export interface RequestObjDef {
     name: string;
     business_number: number;
     youtube_url: string | null;
-    industry: string;
+    industry: string[];
     size: string;
     employee_number: number;
     found_date: string;
@@ -59,7 +59,7 @@ export interface axiosRequestObjDef {
     name: string;
     business_number: number;
     youtube_url: string | null;
-    industry: string;
+    industry: string[];
     size: string;
     employee_number: number;
     found_date: string;
