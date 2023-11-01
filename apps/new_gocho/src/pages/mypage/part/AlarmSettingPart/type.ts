@@ -1,6 +1,6 @@
-export type AlarmText = "bookmark_jd_end_time" | "bookmark_company_new_jd" | "community_new_comment" | "benefit_event";
+export type AlarmText = "bookmarkJdEndTime" | "bookmarkCompanyNewJd" | "communityNewComment" | "benefitEvent";
 
-export interface AlarmItem {
+export interface AlarmItemObj {
   alarmText: AlarmText;
   itemTitle: string;
   itemDesc: string;
