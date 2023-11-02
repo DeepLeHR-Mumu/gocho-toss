@@ -2,7 +2,7 @@ import { RequestObjDef } from "@/apis/company/useWriteCompanyComment/type";
 
 export interface ReviewPartProps {
   title: string;
-  company: { id: number; logoUrl: string; name: string };
+  company: { id: number; logoUrl: string | null; name: string };
   jdId: number;
 }
 

@@ -5,6 +5,6 @@ export interface RankItemProps {
     name: string;
     size: string;
     logoUrl: string;
-    industry: string;
+    industry: string[];
   };
 }

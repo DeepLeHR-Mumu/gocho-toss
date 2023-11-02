@@ -1,5 +1,5 @@
 export interface CommonInfoProps {
-  industry: string;
+  industry: string[];
   size: string;
   foundDate: string;
   employeeNumber: number;

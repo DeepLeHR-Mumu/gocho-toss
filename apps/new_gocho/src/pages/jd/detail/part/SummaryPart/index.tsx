@@ -54,9 +54,11 @@ export const SummaryPart = ({ jd }: SummaryPartProps) => {
             )}
           </div>
           <div css={cssObj.chipsWrapper}>
-            <Chip size="small" color="fillGray">
-              {jd.company.industry}
-            </Chip>
+            {jd.company.industry.map((eachIndusty) => (
+              <Chip size="small" color="fillGray" key={eachIndusty}>
+                {jd.company.industry}
+              </Chip>
+            ))}
             <Chip size="small" color="fillGray">
               {jd.company.size}
             </Chip>
