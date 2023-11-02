@@ -112,7 +112,7 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
                         <p>{gradeAttendance.totalClassDays}</p>
                       </div>
                       {attendanceArr.map((attendance) => (
-                        <div key={attendanceGrade + attendance} css={cssObj.dataInput}>
+                        <div key={attendanceGrade + attendance.toString()} css={cssObj.dataInput}>
                           <p css={cssObj.dayData(!!gradeAttendance[attendance])}>
                             {gradeAttendance[attendance] ? gradeAttendance[attendance] : "-"}
                           </p>

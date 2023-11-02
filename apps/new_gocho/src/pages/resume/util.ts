@@ -53,9 +53,9 @@ export const useDetectedPart = () => {
         });
       },
       {
-        root: rootRef ? rootRef.current : null,
-        rootMargin: "0px 30% 0px 40%",
-        threshold: 1,
+        root: rootRef.current,
+        rootMargin: "-18% 0px 20% 0%",
+        threshold: 0.75,
       }
     );
     const refs = [profileRef, educationRef, careerRef, certificationRef, fluencyRef, activityRef];
