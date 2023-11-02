@@ -34,7 +34,7 @@ export const SidePart: FC<{ resumeId: number; currentPart: string }> = ({ resume
       <div css={cssObj.contentsIndexWrapper}>
         <ul css={cssObj.contentsIndexList}>
           {["기본정보", "학력", "경력", "자격증", "어학", "대외활동"].map((content) => (
-            <li key={content} className={content === currentPart ? "current" : ""}>
+            <li key={content} className={content === currentPart ? "current" : "default"}>
               {content}
             </li>
           ))}

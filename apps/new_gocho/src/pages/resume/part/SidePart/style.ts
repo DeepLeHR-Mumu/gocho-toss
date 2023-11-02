@@ -41,6 +41,14 @@ export const cssObj = {
       }
     }
 
+    .default {
+      ::before {
+        background-color: ${COLOR.GRAY200};
+      }
+
+      color: ${COLOR.GRAY500};
+    }
+
     .current {
       ::before {
         background-color: ${COLOR.BLUE200};
