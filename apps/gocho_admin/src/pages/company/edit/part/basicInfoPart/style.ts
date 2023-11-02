@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { COLOR } from "shared-style/color";
+import { TEXT } from "shared-style/text";
 
 export const sectionContainer = css`
   margin-bottom: 2rem;
@@ -13,6 +14,7 @@ export const sectionTitle = css`
 `;
 
 export const inputContainer = css`
+  position: relative;
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
@@ -89,6 +91,50 @@ export const selectBox = css`
   border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;
   margin-right: 1rem;
+`;
+
+export const optionList = (isOpen: boolean) => css`
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  width: 15rem;
+  border: 1px solid ${COLOR.GRAY200};
+  border-radius: 0.5rem;
+  max-height: ${isOpen ? `10rem` : 0};
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 20;
+  background-color: ${COLOR.WHITE};
+  border: ${isOpen ? `1px solid ${COLOR.GRAY600}` : 0};
+
+  ::-webkit-scrollbar {
+    padding: 0.25rem 0;
+    width: 0.5rem;
+    background-color: ${COLOR.WHITE};
+    border-radius: 1rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: ${COLOR.GRAY400};
+  }
+`;
+
+export const option = css`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0 0.25rem;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0 1rem;
+  background-color: ${COLOR.WHITE};
+  transition: 0.1s;
+  ${TEXT.TITLE5_M1620};
+
+  :hover {
+    background-color: ${COLOR.GRAY100};
+  }
 `;
 
 export const inputLabel = css`

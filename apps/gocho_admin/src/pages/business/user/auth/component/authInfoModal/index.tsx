@@ -90,7 +90,9 @@ export const AuthInfoModal = ({ managerId, accept, reject, close }: AuthInfoModa
                     <span>업종</span>
                   </td>
                   <td>
-                    <span>{company.industry}</span>
+                    {company.industry.map((industryText) => (
+                      <span key={industryText}>{industryText}</span>
+                    ))}
                   </td>
                 </tr>
                 <tr>

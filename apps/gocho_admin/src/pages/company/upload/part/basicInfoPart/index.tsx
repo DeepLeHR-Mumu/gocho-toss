@@ -1,9 +1,11 @@
 import { ChangeEvent, Dispatch, FunctionComponent, SetStateAction, useState } from "react";
 import Image from "next/image";
 import { Address, useDaumPostcodePopup } from "react-daum-postcode";
-
 import dayjs from "dayjs";
+
 import { CheckBox } from "shared-ui/common/checkbox";
+import { Checkbox } from "shared-ui/deeple-ds";
+
 import {
   booleanInputBox,
   checkboxText,
@@ -19,6 +21,8 @@ import {
   sectionTitle,
   selectBox,
   addressButton,
+  option,
+  optionList,
 } from "./style";
 import { BasicInfoPartProps } from "./type";
 import { industryArr, sizeArr } from "./constant";
@@ -37,6 +41,7 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
   setLogo,
   setBgImage,
 }) => {
+  const [isIndustryOpen, setIsIndustryOpen] = useState<boolean>(false);
   const [logoPreview, setLogoPreview] = useState<string>();
   const [bgImagePreview, setBgImagePreview] = useState<string>();
 
@@ -136,14 +141,41 @@ export const BasicInfoPart: FunctionComponent<BasicInfoPartProps> = ({
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>업종 *</strong>
-        <select css={selectBox} {...register("industry", { required: true })}>
-          <option value="">업종 선택 ▼</option>
-          {industryArr.map((industry) => (
-            <option key={industry} value={industry}>
-              {industry}
-            </option>
+        <button
+          css={selectBox}
+          type="button"
+          onClick={() => {
+            setIsIndustryOpen((prev) => !prev);
+          }}
+        >
+          {watch("industry") && watch("industry").length !== 0 ? (
+            <span>{watch("industry").join(", ")}</span>
+          ) : (
+            <span>선택</span>
+          )}
+        </button>
+        <div css={optionList(isIndustryOpen)}>
+          {industryArr.map((industryText) => (
+            <div css={option} key={industryText}>
+              <Checkbox
+                checked={watch("industry")?.includes(industryText)}
+                onClick={(e) => {
+                  if (e.currentTarget.checked) {
+                    if (watch("industry").length === 2) {
+                      return;
+                    }
+                    const newIndustryArr = watch("industry").concat(industryText);
+                    setValue(`industry`, newIndustryArr);
+                    return;
+                  }
+                  const newIndustryArr = watch("industry").filter((industry) => industry !== industryText);
+                  setValue(`industry`, newIndustryArr);
+                }}
+              />
+              {industryText}
+            </div>
           ))}
-        </select>
+        </div>
       </div>
       <div css={inputContainer}>
         <strong css={inputTitle}>기업 형태 *</strong>

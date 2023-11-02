@@ -46,7 +46,11 @@ export const CompanyPart: FunctionComponent<CompanyPartProps> = ({ company }) =>
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>업종</strong>
-        <p css={cssObj.dataBox}>{company.industry}</p>
+        {company.industry.map((industryText) => (
+          <p css={cssObj.dataBox} key={industryText}>
+            {industryText}
+          </p>
+        ))}
       </div>
       <div css={cssObj.dataContainer}>
         <strong css={cssObj.dataTitle}>기업 형태</strong>
