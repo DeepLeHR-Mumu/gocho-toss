@@ -4,6 +4,8 @@ import { JobFormValues } from "../../type";
 export interface PositionBoxProps {
   jobForm: UseFormReturn<JobFormValues>;
   jobData: {
-    preferredCertiArr: string[];
+    qualification: {
+      preferredCertification: string[] | null;
+    };
   };
 }

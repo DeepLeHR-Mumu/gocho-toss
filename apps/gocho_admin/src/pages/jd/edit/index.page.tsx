@@ -40,45 +40,52 @@ const JdEdit: NextPageWithLayout = () => {
   usePreventRouting(Boolean(Object.keys(jobForm.formState.dirtyFields).length));
 
   useEffect(() => {
-    const newStartTime = dayjs(jobData?.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
-    const newEndTime = dayjs(jobData?.endTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
+    const newStartTime = dayjs(jobData?.apply.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
+    const newEndTime = dayjs(jobData?.apply.endTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
 
     reset({
       id: jobData?.id,
       company_id: jobData?.company.id,
       title: jobData?.title,
-      start_time: new Date(newStartTime).toISOString().substring(0, 19),
-      end_time: new Date(newEndTime).toISOString().substring(0, 19),
-      cut: jobData?.cut ? jobData.cut : false,
-      process_arr: jobData?.processArr.join("\n"),
-      apply_route_arr: jobData?.applyRouteArr.join("\n"),
-      apply_document_arr: jobData?.applyDocumentArr.join("\n"),
-      apply_url: jobData?.applyUrl,
-      etc_arr: jobData?.etcArr.join("\n"),
-      middle: jobData?.eduSummary.middle,
-      high: jobData?.eduSummary.high,
-      college: jobData?.eduSummary.college,
-      four: jobData?.eduSummary.four,
-      required_exp: jobData?.requiredExp.type,
-      min_year: jobData?.requiredExp.minYear,
-      max_year: jobData?.requiredExp.maxYear,
-      required_etc_arr: jobData?.requiredEtcArr?.join("\n"),
-      contract_type: jobData?.contractType.type,
-      conversion_rate: jobData?.contractType.conversionRate,
-      task_main: jobData?.task.mainTask,
-      task_sub_arr: jobData?.task.subTaskArr,
-      task_detail_arr: jobData?.taskDetailArr.join("\n"),
-      rotation_arr: jobData?.rotationArr,
-      place: {
-        type: jobData?.place.type,
-        address_arr: jobData?.place.addressArr || [],
-        etc: jobData?.place.etc || "",
-        factory_arr: jobData?.place.factoryArr?.map((factoryNumber) => factoryNumber.id) || [],
+      detail: {
+        task_main: jobData?.detail.taskMain,
+        task_sub: jobData?.detail.taskSubArr,
+        task_description: jobData?.detail.taskDescription.join("\n"),
+        contract_type: jobData?.detail.contractType,
+        conversion_rate: jobData?.detail.conversionRate,
+        hire_number: jobData?.detail.hireNumber,
+        pay: jobData?.detail.pay.join("\n"),
+        shift: jobData?.detail.shift,
+        place: {
+          is_undefined: jobData?.detail.place.is_undefined,
+          data: jobData?.detail.place.data.map((eachPlace) => ({
+            type: eachPlace.type,
+            factory_id: eachPlace.factory?.id,
+            location: eachPlace.location,
+          })),
+          etc: jobData?.detail.place.etc,
+        },
       },
-      hire_number: jobData?.hireCount,
-      pay_arr: jobData?.payArr?.join("\n"),
-      preferred_certi_arr: jobData?.preferredCertiArr,
-      preferred_etc_arr: jobData?.preferredEtcArr?.join("\n"),
+      qualification: {
+        highschool: jobData?.qualification.highschool,
+        college: jobData?.qualification.college,
+        university: jobData?.qualification.university,
+        required_etc: jobData?.qualification.requiredEtc.join("\n"),
+        required_experience: jobData?.qualification.requiredExperience,
+        min_year: jobData?.qualification.requiredMinYear || undefined,
+        max_year: jobData?.qualification.requiredMaxYear || undefined,
+        preferred_certification: jobData?.qualification.preferredCertification,
+        preferred_etc: jobData?.qualification.preferredEtc.join("\n"),
+      },
+      apply: {
+        start_time: new Date(newStartTime).toISOString().substring(0, 19),
+        end_time: new Date(newEndTime).toISOString().substring(0, 19),
+        document: jobData?.apply.document.join("\n"),
+        etc: jobData?.apply.etc.join("\n"),
+        process: jobData?.apply.process.join("\n"),
+        route: jobData?.apply.route,
+        cut: jobData?.apply.cut,
+      },
     });
   }, [jobData, reset]);
 
@@ -129,7 +136,6 @@ const JdEdit: NextPageWithLayout = () => {
             <PositionTaskDataPart jobForm={jobForm} />
             <PositionEtcDataPart jobForm={jobForm} jobData={jobData} />
             {checkMsg && <p css={cssObj.warning}>{checkMsg}</p>}
-            <p css={cssObj.warning}>asdf</p>
             <SharedButton buttonType="fillBlue" width={10} onClickHandler="submit" text="공고 수정하기" />
           </form>
         </section>

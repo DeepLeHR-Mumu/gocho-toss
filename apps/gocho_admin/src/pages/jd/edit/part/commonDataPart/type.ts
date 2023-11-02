@@ -4,14 +4,19 @@ import { JobFormValues } from "../../type";
 export interface CommonDataPartProps {
   jobData: {
     id: number;
-    startTime: number | string;
-    endTime: number | string;
-    processArr: string[];
-    applyRouteArr: string[];
-    applyUrl: string;
-    etcArr: string[];
     title: string;
-    cut: boolean;
+    apply: {
+      startTime: number | string;
+      endTime: number | string;
+      cut: boolean;
+      etc: string[];
+      process: string[];
+      route: {
+        isDirect: boolean;
+        email: string | null;
+        link: string | null;
+      };
+    };
     company: {
       id: number;
       name: string;

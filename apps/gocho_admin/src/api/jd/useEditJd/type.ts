@@ -9,38 +9,55 @@ export interface RequestObjDef {
     id: number;
     company_id: number;
     title: string;
-    start_time: string;
-    end_time: string;
-    cut: boolean;
-    process_arr: string;
-    apply_route_arr: string;
-    apply_document_arr: string | null;
-    apply_url: string;
-    etc_arr: string | null;
-    middle: boolean;
-    high: boolean;
-    college: boolean;
-    four: boolean;
-    required_exp: string;
-    min_year: number | null;
-    max_year: number | null;
-    required_etc_arr: string | null;
-    contract_type: string;
-    conversion_rate: number | null;
-    task_main: string;
-    task_sub_arr: string[];
-    task_detail_arr: string;
-    rotation_arr: string[] | null;
-    place: {
-      type: string;
-      address_arr: string[] | null;
-      factory_arr: number[] | null;
-      etc: string | null;
+    detail: {
+      task_main: string;
+      task_sub: string[] | null;
+      task_description: string;
+      contract_type: string;
+      conversion_rate: number | null;
+      hire_number: number | null;
+      pay: string;
+      shift: string[];
+      place: {
+        is_undefined: boolean;
+        data: (
+          | {
+              type: "일반";
+              location: {
+                address: string;
+                x: number;
+                y: number;
+              };
+            }
+          | { type: "공장"; factory_id: number }
+        )[];
+        etc: "순환" | "해외" | null;
+      };
     };
-    hire_number: number;
-    pay_arr: string;
-    preferred_certi_arr: string[] | null;
-    preferred_etc_arr: string | null;
+    qualification: {
+      highschool: boolean;
+      college: boolean;
+      university: boolean;
+      required_experience: string;
+      min_year: number;
+      max_year: number;
+      required_etc: string | null;
+      preferred_certification: string[] | null;
+      preferred_etc: string | null;
+    };
+    apply: {
+      start_time: string;
+      end_time: string;
+      cut: boolean;
+      document: string;
+      etc: string | null;
+      process: string;
+      route: {
+        email: string | null;
+        link: string | null;
+        is_direct: boolean;
+      };
+    };
   };
 }
 
@@ -50,38 +67,55 @@ interface axiosRequestObjDef {
     id: number;
     company_id: number;
     title: string;
-    start_time: string;
-    end_time: string;
-    cut: boolean;
-    process_arr: string[];
-    apply_route_arr: string[];
-    apply_document_arr: string[] | null;
-    apply_url: string;
-    etc_arr: string[] | null;
-    middle: boolean;
-    high: boolean;
-    college: boolean;
-    four: boolean;
-    required_exp: string;
-    min_year: number | null;
-    max_year: number | null;
-    required_etc_arr: string[] | null;
-    contract_type: string;
-    conversion_rate: number | null;
-    task_main: string;
-    task_sub_arr: string[];
-    task_detail_arr: string[];
-    rotation_arr: string[] | null;
-    place: {
-      type: string;
-      address_arr: string[] | null;
-      factory_arr: number[] | null;
-      etc: string | null;
+    detail: {
+      task_main: string;
+      task_sub: string[] | null;
+      task_description: string[];
+      contract_type: string;
+      conversion_rate: number | null;
+      hire_number: number | null;
+      pay: string[];
+      shift: string[];
+      place: {
+        is_undefined: boolean;
+        data: (
+          | {
+              type: "일반";
+              location: {
+                address: string;
+                x: number;
+                y: number;
+              };
+            }
+          | { type: "공장"; factory_id: number }
+        )[];
+        etc: "순환" | "해외" | null;
+      };
     };
-    hire_number: number;
-    pay_arr: string[];
-    preferred_certi_arr: string[] | null;
-    preferred_etc_arr: string[] | null;
+    qualification: {
+      highschool: boolean;
+      college: boolean;
+      university: boolean;
+      required_experience: string;
+      min_year: number;
+      max_year: number;
+      required_etc: string[] | null;
+      preferred_certification: string[] | null;
+      preferred_etc: string[] | null;
+    };
+    apply: {
+      start_time: string;
+      end_time: string;
+      cut: boolean;
+      document: string[] | null;
+      etc: string[] | null;
+      process: string[];
+      route: {
+        email: string | null;
+        link: string | null;
+        is_direct: boolean;
+      };
+    };
   };
 }
 

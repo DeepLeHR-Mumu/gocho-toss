@@ -21,8 +21,41 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
 
   const { data: factoryData } = useFindFactory({ companyId: watch("company_id") });
 
-  const isConversionDisabled = watch("contract_type") !== "인턴" && watch("contract_type") !== "계약>정규";
-  const mainTask = taskArr.find((task) => watch("task_main") === task.mainTask);
+  const onClickAddress = () => {
+    const mapScript = document.createElement("script");
+
+    mapScript.async = true;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=0687bed33c060c4758f582d26ff44e16&libraries=services&libraries=services&autoload=false`;
+    document.head.appendChild(mapScript);
+
+    openPostCodePopup({
+      onComplete: (addressObj: Address) => {
+        const newAddress = addressObj.address;
+        window.kakao.maps.load(() => {
+          const geocoder = new window.kakao.maps.services.Geocoder();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          geocoder.addressSearch(newAddress, (result: any, status: any) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+              const { x, y } = result[0];
+              const defaultCoordinate = { x: 126.5706148, y: 33.4506913 }; // 카카오 본사
+              setValue("detail.place.data", [
+                ...(watch("detail.place.data") || []),
+                {
+                  type: "일반",
+                  location: { address: addressObj.address, x: x || defaultCoordinate.x, y: y || defaultCoordinate.y },
+                },
+              ]);
+            }
+            document.head.removeChild(mapScript);
+          });
+        });
+      },
+    });
+  };
+
+  const isConversionDisabled =
+    watch("detail.contract_type") !== "인턴" && watch("detail.contract_type") !== "계약>정규";
+  const mainTask = taskArr.find((task) => watch("detail.task_main") === task.mainTask);
 
   return (
     <div css={cssObj.wrapper}>
@@ -30,12 +63,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.requiredTitle}>계약 형태</strong>
-            {errors && errors.contract_type?.message && <ErrorMessage msg={errors.contract_type.message} />}
+            {errors && errors.detail?.contract_type?.message && (
+              <ErrorMessage msg={errors.detail?.contract_type.message} />
+            )}
             <div css={cssObj.flexBox}>
               {contractTypeArr.map((contractName) => (
                 <SharedRadioButton
                   key={contractName}
-                  registerObj={jobForm.register("contract_type", {
+                  registerObj={jobForm.register("detail.contract_type", {
                     required: "계약 형태를 선택해주세요.",
                   })}
                   value={contractName}
@@ -54,7 +89,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
                   id="conversion_rate"
                   type="number"
                   css={isConversionDisabled ? cssObj.disabledConversionInput : cssObj.conversionInput}
-                  {...jobForm.register("conversion_rate")}
+                  {...jobForm.register("detail.conversion_rate")}
                   disabled={isConversionDisabled}
                 />
                 <p css={cssObj.conversionDesc}>%</p>
@@ -63,14 +98,14 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
           </li>
           <li>
             <strong css={cssObj.requiredTitle}>교대 형태</strong>
-            {errors?.rotation_arr?.message && <ErrorMessage msg={errors.rotation_arr.message} />}
+            {errors?.detail?.shift?.message && <ErrorMessage msg={errors.detail?.shift.message} />}
             <div css={cssObj.flexBox}>
               {rotationArr.map((rotation) => {
-                const isChecked = watch("rotation_arr")?.includes(rotation.name) || false;
+                const isChecked = watch("detail.shift")?.includes(rotation.name) || false;
                 return (
                   <CheckBoxWithDesc
                     registerObj={{
-                      ...jobForm.register("rotation_arr", {
+                      ...jobForm.register("detail.shift", {
                         required: "교대 형태를 선택해주세요.",
                       }),
                     }}
@@ -90,14 +125,13 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
             <div>
               <select
                 css={cssObj.selectCSS}
-                {...jobForm.register("place.type", {
-                  required: true,
-                })}
                 onChange={(onChangeEvent: ChangeEvent<HTMLSelectElement>) => {
-                  jobForm.register("place.type").onChange(onChangeEvent);
-                  setValue("place.etc", null);
-                  setValue("place.address_arr", null);
-                  setValue("place.factory_arr", null);
+                  if (onChangeEvent.target.value === "일반") {
+                    setValue("detail.place.etc", null);
+                  } else if (onChangeEvent.target.value === "순환" || onChangeEvent.target.value === "해외") {
+                    setValue("detail.place.etc", onChangeEvent.target.value);
+                    setValue("detail.place.data", []);
+                  }
                 }}
               >
                 <option value="" disabled>
@@ -111,7 +145,7 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
               </select>
             </div>
           </li>
-          {watch("place.type") === "일반" && (
+          {watch("detail.place.etc") === null && (
             <>
               <li>
                 <strong css={cssObj.requiredTitle}>공장 근무지</strong>
@@ -121,27 +155,31 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
                     <p css={cssObj.warningDesc}>등록된 공장이 없습니다.</p>
                   ) : (
                     factoryData?.map((factory) => {
-                      const isHaveFactory = watch("place.factory_arr")?.includes(factory.id);
+                      const isHaveFactory = watch("detail.place.data")?.some(
+                        (prevFactory) => prevFactory.type === "공장" && prevFactory.factory_id === factory.id
+                      );
                       return (
                         <button
                           type="button"
                           css={isHaveFactory ? cssObj.isHaveFactoryButton : cssObj.factoryButton}
                           onClick={() => {
-                            if (watch("place.factory_arr")?.includes(factory.id)) {
-                              const filterFactoryIdArr = watch("place.factory_arr")?.filter(
-                                (prevFactoryId) => prevFactoryId !== factory.id
-                              );
-                              setValue("place.factory_arr", filterFactoryIdArr || []);
-                              return;
-                            }
+                            const filterFactoryIdArr = watch("detail.place.data")?.filter(
+                              (prevFactory) => prevFactory.type === "공장" && prevFactory.factory_id !== factory.id
+                            );
 
-                            setValue("place.factory_arr", [...(watch("place.factory_arr") || []), factory.id]);
+                            if (isHaveFactory) {
+                              setValue("detail.place.data", filterFactoryIdArr || []);
+                            } else {
+                              setValue("detail.place.data", [
+                                ...(watch("detail.place.data") || []),
+                                { type: "공장", factory_id: factory.id },
+                              ]);
+                            }
                           }}
                           key={factory.id}
                         >
                           <div /> {factory.name}
-                          <br />
-                          {factory.address}
+                          <br />({factory.address})
                         </button>
                       );
                     })
@@ -154,45 +192,38 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
                   css={cssObj.addAddressButton}
                   type="button"
                   onClick={() => {
-                    openPostCodePopup({
-                      onComplete: (addressObj: Address) => {
-                        setValue("place.address_arr", [...(watch("place.address_arr") || []), addressObj.address]);
-                      },
-                    });
+                    onClickAddress();
                   }}
                 >
                   <RiAddFill />
                   일반 근무지 추가하기
                 </button>
                 <div css={cssObj.flexBox}>
-                  {watch("place.address_arr")?.map((address) => (
-                    <button
-                      css={cssObj.isHaveFactoryButton}
-                      type="button"
-                      key={address}
-                      aria-label={`${address} 제거하기`}
-                      onClick={() => {
-                        const filterAddressArr = watch("place.address_arr")?.filter(
-                          (prevAddress) => prevAddress !== address
-                        );
-                        setValue("place.address_arr", filterAddressArr || []);
-                      }}
-                    >
-                      <div /> {address}
-                    </button>
-                  ))}
+                  {watch("detail.place.data")?.map((address) => {
+                    if (address.type === "일반") {
+                      return (
+                        <button
+                          css={cssObj.isHaveFactoryButton}
+                          type="button"
+                          key={address.location.address}
+                          aria-label={`${address} 제거하기`}
+                          onClick={() => {
+                            const filterAddressArr = watch("detail.place.data")?.filter(
+                              (prevAddress) => prevAddress !== address
+                            );
+                            setValue("detail.place.data", filterAddressArr || []);
+                          }}
+                        >
+                          <div />
+                          {address.location.address}
+                        </button>
+                      );
+                    }
+                    return null;
+                  })}
                 </div>
               </li>
             </>
-          )}
-          {watch("place.type") !== "일반" && watch("place.type") && (
-            <li>
-              <strong css={cssObj.requiredTitle}>{watch("place.type")} 근무지</strong>
-              <div css={cssObj.placeBox}>
-                <p css={cssObj.textareaWarning}>{watch("place.type")}일 경우 입력해주세요.</p>
-                <input css={cssObj.inputCSS} {...jobForm.register("place.etc")} />
-              </div>
-            </li>
           )}
         </ul>
         <ul css={cssObj.formBox}>
@@ -200,13 +231,13 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
             <strong css={cssObj.requiredTitle}>채용 직무</strong>
             <div>
               <strong css={cssObj.subTitle}>1차직무 선택</strong>
-              {errors && errors.task_main?.message && <ErrorMessage msg={errors.task_main.message} />}
+              {errors && errors.detail?.task_main?.message && <ErrorMessage msg={errors.detail?.task_main.message} />}
               <div css={cssObj.flexBox}>
                 {taskArr.map((task) => (
                   <SharedRadioButton
                     key={task.mainTask}
                     registerObj={{
-                      ...jobForm.register("task_main", {
+                      ...jobForm.register("detail.task_main", {
                         required: "1차 직무를 선택해주세요.",
                       }),
                     }}
@@ -221,15 +252,15 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
             <div>
               <strong css={cssObj.subTitle}>2차직무 선택</strong>
               <p css={cssObj.textareaWarning}>중복선택이 가능합니다.</p>
-              {errors.task_sub_arr?.message && <ErrorMessage msg={errors.task_sub_arr.message} />}
+              {errors.detail?.task_sub?.message && <ErrorMessage msg={errors.detail?.task_sub.message} />}
               <div css={cssObj.flexBox}>
                 {mainTask?.subTaskArr.map((subTask) => {
-                  const isChecked = watch("task_sub_arr").includes(subTask) || false;
+                  const isChecked = watch("detail.task_sub")?.includes(subTask) || false;
                   return (
                     <CheckBoxWithDesc
                       key={subTask}
                       registerObj={{
-                        ...jobForm.register("task_sub_arr", {
+                        ...jobForm.register("detail.task_sub", {
                           required: "2차 직무를 선택해주세요.",
                         }),
                       }}
@@ -245,12 +276,12 @@ export const PositionTaskDataPart: FunctionComponent<PositionBoxProps> = ({ jobF
           </li>
           <li>
             <strong css={cssObj.requiredTitle}>세부 직무 내용</strong>
-            {errors.task_detail_arr?.message && <ErrorMessage msg={errors.task_detail_arr.message} />}
+            {errors.detail?.task_description?.message && <ErrorMessage msg={errors.detail?.task_description.message} />}
             <div css={cssObj.textareaBox}>
               <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
               <textarea
                 css={cssObj.textarea}
-                {...jobForm.register("task_detail_arr", {
+                {...jobForm.register("detail.task_description", {
                   required: "세부 직무 내용을 작성해주세요.",
                 })}
               />

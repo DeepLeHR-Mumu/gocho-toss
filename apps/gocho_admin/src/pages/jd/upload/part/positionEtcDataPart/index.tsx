@@ -19,7 +19,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobFo
   } = jobForm;
 
   useEffect(() => {
-    setValue("preferred_certi_arr", certiArr);
+    setValue("qualification.preferred_certification", certiArr);
   }, [certiArr, setValue]);
 
   return (
@@ -28,14 +28,14 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobFo
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.requiredTitle}>채용 인원</strong>
-            {errors?.hire_number?.message && <ErrorMessage msg={errors.hire_number.message} />}
+            {errors?.detail?.hire_number?.message && <ErrorMessage msg={errors.detail?.hire_number.message} />}
 
             <div css={cssObj.gridBox}>
               <SharedButton
                 buttonType="fillBlue"
                 width={8}
                 onClickHandler={() => {
-                  setValue("hire_number", -1);
+                  setValue("detail.hire_number", -1);
                 }}
                 text="0명 채용"
               />
@@ -43,7 +43,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobFo
                 buttonType="fillBlue"
                 width={8}
                 onClickHandler={() => {
-                  setValue("hire_number", -2);
+                  setValue("detail.hire_number", -2);
                 }}
                 text="00명 채용"
               />
@@ -51,14 +51,14 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobFo
                 buttonType="fillBlue"
                 width={8}
                 onClickHandler={() => {
-                  setValue("hire_number", -3);
+                  setValue("detail.hire_number", -3);
                 }}
                 text="000명 채용"
               />
               <input
                 css={cssObj.inputCSS}
                 type="number"
-                {...register("hire_number", {
+                {...register("detail.hire_number", {
                   valueAsNumber: true,
                   required: "채용 인원을 작성해주세요.",
                 })}
@@ -67,13 +67,13 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobFo
           </li>
           <li>
             <strong css={cssObj.requiredTitle}>급여</strong>
-            {errors?.pay_arr?.message && <ErrorMessage msg={errors.pay_arr.message} />}
+            {errors?.detail?.pay?.message && <ErrorMessage msg={errors.detail?.pay.message} />}
 
             <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
             <div css={cssObj.textareaBox}>
               <textarea
                 css={cssObj.textarea}
-                {...register("pay_arr", {
+                {...register("detail.pay", {
                   required: "급여 정보를 작성해주세요.",
                 })}
               />
@@ -83,7 +83,7 @@ export const PositionEtcDataPart: FunctionComponent<PositionBoxProps> = ({ jobFo
             <strong css={cssObj.noRequiredTitle}>기타 우대사항</strong>
             <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다.</p>
             <div css={cssObj.textareaBox}>
-              <textarea css={cssObj.textarea} {...register("preferred_etc_arr")} />
+              <textarea css={cssObj.textarea} {...register("qualification.preferred_etc")} />
             </div>
           </li>
         </ul>

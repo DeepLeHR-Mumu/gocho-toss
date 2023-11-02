@@ -14,7 +14,8 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
     formState: { errors },
   } = jobForm;
 
-  const isDisabled = watch("required_exp") !== "경력" && watch("required_exp") !== "신입/경력";
+  const isDisabled =
+    watch("qualification.required_experience") !== "경력" && watch("qualification.required_experience") !== "신입/경력";
 
   return (
     <div css={cssObj.wrapper}>
@@ -25,22 +26,22 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
             <strong css={cssObj.requiredTitle}>학력 조건</strong>
             <div css={cssObj.flexBox}>
               <CheckBoxWithDesc
-                registerObj={{ ...jobForm.register("high") }}
+                registerObj={{ ...jobForm.register("qualification.highschool") }}
                 id="high"
                 desc="고졸"
-                checked={jobForm.watch("high") || false}
+                checked={jobForm.watch("qualification.highschool") || false}
               />
               <CheckBoxWithDesc
-                registerObj={{ ...jobForm.register("college") }}
+                registerObj={{ ...jobForm.register("qualification.college") }}
                 id="college"
                 desc="초대졸"
-                checked={jobForm.watch("college") || false}
+                checked={jobForm.watch("qualification.college") || false}
               />
               <CheckBoxWithDesc
-                registerObj={{ ...jobForm.register("four") }}
+                registerObj={{ ...jobForm.register("qualification.university") }}
                 id="four"
                 desc="4년제"
-                checked={jobForm.watch("four") || false}
+                checked={jobForm.watch("qualification.university") || false}
               />
             </div>
           </li>
@@ -48,19 +49,21 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
             <strong css={cssObj.noRequiredTitle}>기타 조건</strong>
             <div css={cssObj.textareaBox}>
               <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
-              <textarea css={cssObj.textarea} {...jobForm.register("required_etc_arr")} />
+              <textarea css={cssObj.textarea} {...jobForm.register("qualification.required_etc")} />
             </div>
           </li>
         </ul>
         <ul css={cssObj.formBox}>
           <li>
             <strong css={cssObj.requiredTitle}>경력 조건</strong>
-            {errors?.required_exp?.message && <ErrorMessage msg={errors.required_exp.message} />}
+            {errors?.qualification?.required_experience?.message && (
+              <ErrorMessage msg={errors.qualification?.required_experience.message} />
+            )}
             <div css={cssObj.flexBox}>
               {requiredExpArr.map((expName) => (
                 <SharedRadioButton
                   key={`${expName}`}
-                  registerObj={jobForm.register("required_exp", {
+                  registerObj={jobForm.register("qualification.required_experience", {
                     required: "경력 조건을 선택해주세요.",
                   })}
                   value={expName}
@@ -79,7 +82,7 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
                   id="min_year"
                   type="number"
                   css={isDisabled ? cssObj.disabledMinMaxInput : cssObj.minMaxInput}
-                  {...jobForm.register("min_year", { valueAsNumber: true })}
+                  {...jobForm.register("qualification.min_year", { valueAsNumber: true })}
                   disabled={isDisabled}
                 />
                 <p css={cssObj.minMaxDesc}>년 이상</p>
@@ -90,7 +93,7 @@ export const PositionRequiredDataPart: FunctionComponent<PositionRequiredDataPar
                   id="max_year"
                   type="number"
                   css={isDisabled ? cssObj.disabledMinMaxInput : cssObj.minMaxInput}
-                  {...jobForm.register("max_year", { valueAsNumber: true })}
+                  {...jobForm.register("qualification.max_year", { valueAsNumber: true })}
                   disabled={isDisabled}
                 />
                 <p css={cssObj.minMaxDesc}>년 이하</p>

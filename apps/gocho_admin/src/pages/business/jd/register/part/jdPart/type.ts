@@ -2,50 +2,57 @@ export interface JdPartProps {
   jd: {
     id: number;
     title: string;
-    startTime: string;
-    endTime: string;
-    processArr: string[];
-    applyRouteArr: string[];
-    applyDocumentArr: string[];
-    applyUrl: string;
-    etcArr: string[] | null;
-    cut: boolean;
-    requiredExp: {
-      type: "신입" | "경력" | "무관" | "신입/경력";
-      maxYear: number | null;
-      minYear: number | null;
+    apply: {
+      startTime: string;
+      endTime: string;
+      cut: boolean;
+      document: string[];
+      etc: string[];
+      process: string[];
+      route: {
+        email: string | null;
+        link: string | null;
+        isDirect: boolean;
+      };
     };
-    requiredEtcArr: string[] | null;
-    contractType: {
-      type: "정규직" | "계약직" | "계약>정규" | "연수생" | "인턴";
+    detail: {
+      taskMain: string;
+      taskSubArr: string[] | null;
+      taskDescription: string[];
+      contractType: string;
       conversionRate: number | null;
-    };
-    taskDetailArr: string[];
-    rotationArr: string[];
-    place: {
-      addressArr: string[] | null;
-      factoryArr:
-        | {
+      hireNumber: number | null;
+      pay: string[];
+      shift: string[];
+      place: {
+        isUndefined: boolean;
+        data: {
+          id: number;
+          type: "일반" | "공장";
+          location?: {
             address: string;
-            factoryName: string;
-          }[]
-        | null;
-      etc: string | null;
-      type: "일반" | "전국" | "해외" | "기타";
+            x: number;
+            y: number;
+          };
+          factory?: {
+            id: number;
+            name: string;
+            address: string;
+          };
+        }[];
+        etc: "순환" | "해외" | null;
+      };
     };
-    hireCount: number;
-    payArr: string[] | null;
-    preferredCertiArr: string[];
-    preferredEtcArr: string[] | null;
-    eduSummary: {
-      middle: boolean;
-      high: boolean;
+    qualification: {
+      highschool: boolean;
       college: boolean;
-      four: boolean;
-    };
-    task: {
-      mainTask: string;
-      subTaskArr: string[];
+      university: boolean;
+      requiredExperience: string;
+      requiredMinYear: number | null;
+      requiredMaxYear: number | null;
+      requiredEtc: string[];
+      preferredCertification: string[] | null;
+      preferredEtc: string[];
     };
   };
 }

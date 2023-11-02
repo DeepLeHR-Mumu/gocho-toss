@@ -8,7 +8,7 @@ import { INTERNAL_URL } from "@/constant";
 import { JobCardProps } from "./type";
 import { cssObj } from "./style";
 
-const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
+const JobCard: FunctionComponent<JobCardProps> = ({ job, filter }) => {
   const { date: startDate } = dateConverter(job.startTime);
   const { date: endDate } = dateConverter(job.endTime);
 
@@ -30,7 +30,7 @@ const JobCard: FunctionComponent<JobCardProps> = ({ job }) => {
           passHref
           css={cssObj.activeButton}
           href={
-            job.status.name === "등록대기"
+            filter === "upload-waiting"
               ? `${INTERNAL_URL.BUSINESS_JD_REGISTER_URL(job.id)}`
               : `${INTERNAL_URL.BUSINESS_JD_EDIT_URL(job.id)}`
           }

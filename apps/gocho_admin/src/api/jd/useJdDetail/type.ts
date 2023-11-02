@@ -8,61 +8,62 @@ export interface ResponseObjDef {
   data: {
     id: number;
     title: string;
-    cut: boolean;
-    start_time: string;
-    end_time: string;
-    process_arr: string[];
-    apply_route_arr: string[];
-    apply_document_arr: string[];
-    apply_url: string;
-    etc_arr: string[];
-    edu_summary: {
-      middle: boolean;
-      high: boolean;
-      college: boolean;
-      four: boolean;
-    };
-    required_exp: {
-      type: "신입" | "경력" | "무관" | "신입/경력";
-      max_year: number | null;
-      min_year: number | null;
-    };
-    required_etc_arr: string[] | null;
-    contract_type: {
-      type: "정규직" | "계약직" | "계약>정규" | "연수생" | "인턴";
-      conversion_rate: number | null;
-    };
-    task: {
-      main_task: string;
-      sub_task_arr: string[];
-    };
-    task_detail_arr: string[];
-    rotation_arr: string[];
-    place: {
-      type: "일반" | "해외" | "기타";
-      address_arr: string[] | null;
-      factory_arr:
-        | {
-            id: number;
-            address: string;
-            name: string;
-          }[]
-        | null;
-      etc: string | null;
-    };
-    hire_number: number;
-    pay_arr: string[] | null;
-    preferred_certi_arr: string[];
-    preferred_etc_arr: string[] | null;
     company: {
       id: number;
       name: string;
       logo_url: string;
-      factories: {
-        id: number;
-        address: string;
-        name: string;
-      }[];
+    };
+    detail: {
+      task_main: string;
+      task_sub: string[] | null;
+      task_description: string[];
+      contract_type: string;
+      conversion_rate: number | null;
+      hire_number: number | null;
+      pay: string[];
+      shift: string[];
+      place: {
+        is_undefined: boolean;
+        data: {
+          id: number;
+          type: "일반" | "공장";
+          location?: {
+            address: string;
+            x: number;
+            y: number;
+          };
+          factory?: {
+            id: number;
+            name: string;
+            address: string;
+          };
+        }[];
+        etc: "순환" | "해외" | null;
+      };
+    };
+    qualification: {
+      highschool: boolean;
+      college: boolean;
+      university: boolean;
+      required_experience: string;
+      min_year: number;
+      max_year: number;
+      required_etc: string[];
+      preferred_certification: string[] | null;
+      preferred_etc: string[];
+    };
+    apply: {
+      start_time: string;
+      end_time: string;
+      cut: boolean;
+      document: string[];
+      etc: string[];
+      process: string[];
+      route: {
+        email: string | null;
+        link: string | null;
+        is_direct: boolean;
+      };
     };
   };
 }

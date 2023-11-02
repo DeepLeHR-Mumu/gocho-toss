@@ -55,8 +55,8 @@ export const UploadBannerPart: FunctionComponent = () => {
     setValue("color", changeEvent.target.value);
   };
 
-  const { date: jobStartDate } = dateConverter(jobData?.startTime || "0");
-  const { date: jobEndDate } = dateConverter(jobData?.endTime || "0");
+  const { date: jobStartDate } = dateConverter(jobData?.apply.startTime || "0");
+  const { date: jobEndDate } = dateConverter(jobData?.apply.endTime || "0");
 
   return (
     <>

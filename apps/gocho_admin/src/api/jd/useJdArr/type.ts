@@ -28,20 +28,16 @@ export interface ResponseObjDef {
   data: {
     id: number;
     company: { id: number; name: string; logo_url: string };
-    status: {
-      name: string;
-      reason: string | null;
-    };
     title: string;
-    cut: boolean;
-    view: number;
     start_time: string;
     end_time: string;
+    cut: boolean;
+    view: number;
     apply_url: string;
     edu_summary: string;
     required_exp: string;
     place_arr: string[];
-    rotation_arr: string[];
+    shift: string[];
     contract_type: string;
     task: string;
   }[];

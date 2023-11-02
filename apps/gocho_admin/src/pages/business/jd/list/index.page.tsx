@@ -52,7 +52,7 @@ const BusinessJdRegisterList: NextPageWithLayout = () => {
           </thead>
           <tbody>
             {jobDataObj.jdDataArr.map((job) => (
-              <JobCard key={`ManagerBizJobCard${job.id}`} job={job} />
+              <JobCard key={`ManagerBizJobCard${job.id}`} job={job} filter={filter} />
             ))}
           </tbody>
         </table>

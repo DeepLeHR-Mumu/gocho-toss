@@ -13,7 +13,6 @@ export const jdArrSelector = ({ data: jdArr, page_result }: ResponseObjDef) => {
   const jdDataArr = jdArr.map((jd) => ({
     id: jd.id,
     applyUrl: jd.apply_url,
-    status: jd.status,
     companyName: jd.company.name,
     companyId: jd.company.id,
     companyLogo: jd.company.logo_url,
@@ -25,7 +24,7 @@ export const jdArrSelector = ({ data: jdArr, page_result }: ResponseObjDef) => {
     task: jd.task,
     edu: jd.edu_summary,
     placeArr: jd.place_arr,
-    rotationArr: jd.rotation_arr,
+    rotationArr: jd.shift,
     contract: jd.contract_type,
     requiredExp: jd.required_exp,
   }));

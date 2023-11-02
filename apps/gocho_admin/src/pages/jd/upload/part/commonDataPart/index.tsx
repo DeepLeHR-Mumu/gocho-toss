@@ -27,18 +27,23 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
 
   const linkButtonClickHandler = (type: typeof linkType) => {
     setLinkType(type);
-    setValue(`apply_url`, "");
-    clearErrors("apply_url");
+    if (type === "email") {
+      setValue("apply.route.link", "");
+      clearErrors("apply.route.link");
+    } else {
+      setValue("apply.route.email", "");
+      clearErrors("apply.route.email");
+    }
   };
 
   useEffect(() => {
     if (isAlways) {
-      setValue("end_time", "9999-12-31T23:59");
-      setValue("cut", true);
+      setValue("apply.end_time", "9999-12-31T23:59");
+      setValue("apply.cut", true);
     }
     if (!isAlways) {
-      resetField("end_time");
-      setValue("cut", false);
+      resetField("apply.end_time");
+      setValue("apply.cut", false);
     }
   }, [isAlways, resetField, setValue]);
 
@@ -108,8 +113,8 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
         </li>
         <li>
           <strong css={cssObj.requiredTitle}>채용 기간 </strong>
-          {errors.start_time && <ErrorMessage msg="공고 시작 일자를 작성해주세요" />}
-          {errors.end_time && <ErrorMessage msg="공고 만료 일자를 작성해주세요" />}
+          {errors.apply?.start_time && <ErrorMessage msg="공고 시작 일자를 작성해주세요" />}
+          {errors.apply?.end_time && <ErrorMessage msg="공고 만료 일자를 작성해주세요" />}
 
           <div css={cssObj.dateBox}>
             <AutoEndTimeCheckBox
@@ -118,17 +123,17 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
               }}
               isChecked={isAlways}
             />
-            <CheckBoxWithDesc registerObj={{ ...jobForm.register("cut") }} desc="채용시 마감" id="cut" />
+            <CheckBoxWithDesc registerObj={{ ...jobForm.register("apply.cut") }} desc="채용시 마감" id="cut" />
             <input
               css={cssObj.dateInput}
               type="datetime-local"
-              {...jobForm.register("start_time", { required: true })}
+              {...jobForm.register("apply.start_time", { required: true })}
             />
             {!isAlways && (
               <input
                 css={cssObj.dateInput}
                 type="datetime-local"
-                {...jobForm.register("end_time", { required: true })}
+                {...jobForm.register("apply.end_time", { required: true })}
               />
             )}
           </div>
@@ -137,26 +142,13 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
           <ul>
             <li>
               <strong css={cssObj.requiredTitle}>채용 절차</strong>
-              {errors.process_arr?.message && <ErrorMessage msg={errors.process_arr.message} />}
+              {errors.apply?.process?.message && <ErrorMessage msg={errors.apply?.process?.message} />}
               <div css={cssObj.textareaBox}>
                 <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
                 <textarea
                   css={cssObj.textarea}
-                  {...jobForm.register("process_arr", {
+                  {...jobForm.register("apply.process", {
                     required: "채용절차를 작성해주세요.",
-                  })}
-                />
-              </div>
-            </li>
-            <li>
-              <strong css={cssObj.requiredTitle}>지원 방법</strong>
-              {errors.apply_route_arr?.message && <ErrorMessage msg={errors.apply_route_arr.message} />}
-              <div css={cssObj.textareaBox}>
-                <p css={cssObj.textareaWarning}>엔터로 구분해주세요.</p>
-                <textarea
-                  css={cssObj.textarea}
-                  {...jobForm.register("apply_route_arr", {
-                    required: "지원방법을 작성해주세요.",
                   })}
                 />
               </div>
@@ -165,7 +157,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
               <strong css={cssObj.noRequiredTitle}>제출 서류</strong>
               <div css={cssObj.textareaBox}>
                 <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다</p>
-                <textarea css={cssObj.textarea} {...jobForm.register("apply_document_arr", {})} />
+                <textarea css={cssObj.textarea} {...jobForm.register("apply.document", {})} />
               </div>
             </li>
           </ul>
@@ -203,35 +195,40 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
                   <p css={cssObj.labelTitle}>이메일 링크</p>
                 </label>
               </div>
-              {errors.apply_url?.message && <ErrorMessage msg={errors.apply_url.message} />}
               <div css={cssObj.flexFullBox}>
                 {linkType === "website" && (
-                  <input
-                    type="url"
-                    placeholder="https://"
-                    css={cssObj.inputCSS}
-                    {...jobForm.register("apply_url", {
-                      pattern: {
-                        value: URL_REGEXP,
-                        message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
-                      },
-                      required: "채용링크를 작성해주세요.",
-                    })}
-                  />
+                  <>
+                    <input
+                      type="url"
+                      placeholder="https://"
+                      css={cssObj.inputCSS}
+                      {...jobForm.register("apply.route.link", {
+                        pattern: {
+                          value: URL_REGEXP,
+                          message: "http 또는 https를 포함한 url 형식을 작성해주세요.",
+                        },
+                        required: "채용링크를 작성해주세요.",
+                      })}
+                    />
+                    {errors.apply?.route?.link?.message && <ErrorMessage msg={errors.apply?.route?.link.message} />}
+                  </>
                 )}
                 {linkType === "email" && (
-                  <input
-                    type="email"
-                    placeholder="@"
-                    css={cssObj.inputCSS}
-                    {...jobForm.register("apply_url", {
-                      pattern: {
-                        value: EMAIL_REGEXP,
-                        message: "EMAIL 형식에 맞게 작성해주세요.",
-                      },
-                      required: "이메일 채용링크를 작성해주세요.",
-                    })}
-                  />
+                  <>
+                    <input
+                      type="email"
+                      placeholder="@"
+                      css={cssObj.inputCSS}
+                      {...jobForm.register("apply.route.email", {
+                        pattern: {
+                          value: EMAIL_REGEXP,
+                          message: "EMAIL 형식에 맞게 작성해주세요.",
+                        },
+                        required: "이메일 채용링크를 작성해주세요.",
+                      })}
+                    />
+                    {errors.apply?.route?.email?.message && <ErrorMessage msg={errors.apply?.route?.email.message} />}
+                  </>
                 )}
               </div>
             </li>
@@ -239,7 +236,7 @@ export const CommonDataPart: FunctionComponent<CommonDataPartProps> = ({ jobForm
               <strong css={cssObj.noRequiredTitle}>기타 사항</strong>
               <div css={cssObj.textareaBox}>
                 <p css={cssObj.textareaWarning}>엔터로 구분해주세요, 필수가 아닙니다.</p>
-                <textarea css={cssObj.textarea} {...jobForm.register("etc_arr")} />
+                <textarea css={cssObj.textarea} {...jobForm.register("apply.etc")} />
               </div>
             </li>
           </ul>

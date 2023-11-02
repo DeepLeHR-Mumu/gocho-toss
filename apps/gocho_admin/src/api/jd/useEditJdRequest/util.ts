@@ -1,72 +1,53 @@
 import { ResponseObjDef } from "./type";
 
-export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => {
-  const jdFactoryArr =
-    jd.place.factory_arr === null
-      ? null
-      : jd.place.factory_arr?.map((factory) => ({
-          id: factory.id,
-          address: factory.address,
-          factoryName: factory.name,
-        }));
-
-  const companyFactoryArr =
-    jd.company.factories === null
-      ? null
-      : jd.company.factories?.map((factory) => ({
-          id: factory.id,
-          address: factory.address,
-          factoryName: factory.name,
-        }));
-
-  return {
-    id: jd.id,
-    startTime: jd.start_time,
-    endTime: jd.end_time,
-    processArr: jd.process_arr,
-    applyRouteArr: jd.apply_route_arr,
-    applyDocumentArr: jd.apply_document_arr,
-    applyUrl: jd.apply_url,
-    etcArr: jd.etc_arr,
-    title: jd.title,
-    cut: jd.cut,
-    requiredExp: {
-      type: jd.required_exp.type,
-      maxYear: jd.required_exp.max_year,
-      minYear: jd.required_exp.min_year,
-    },
-    requiredEtcArr: jd.required_etc_arr,
-    contractType: {
-      type: jd.contract_type.type,
-      conversionRate: jd.contract_type.conversion_rate,
-    },
-    taskDetailArr: jd.task_detail_arr,
-    rotationArr: jd.rotation_arr,
+export const jdDetailSelector = ({ data: jd }: ResponseObjDef) => ({
+  id: jd.id,
+  status: {
+    name: jd.status.name,
+    reason: jd.status.reason,
+  },
+  uploader: {
+    name: jd.uploader.name,
+    isMine: jd.uploader.is_mine,
+  },
+  title: jd.title,
+  detail: {
+    taskMain: jd.detail.task_main,
+    taskSubArr: jd.detail.task_sub_arr,
+    taskDescription: jd.detail.task_description,
+    contractType: jd.detail.contract_type,
+    conversionRate: jd.detail.conversion_rate,
+    hireNumber: jd.detail.hire_number,
+    pay: jd.detail.pay,
+    shift: jd.detail.shift,
     place: {
-      addressArr: jd.place.address_arr,
-      factoryArr: jdFactoryArr,
-      etc: jd.place.etc,
-      type: jd.place.type,
+      ...jd.detail.place,
+      isUndefined: jd.detail.place.is_undefined,
     },
-    hireCount: jd.hire_number,
-    payArr: jd.pay_arr,
-    preferredCertiArr: jd.preferred_certi_arr,
-    preferredEtcArr: jd.preferred_etc_arr,
-    eduSummary: {
-      middle: jd.edu_summary.middle,
-      high: jd.edu_summary.high,
-      college: jd.edu_summary.college,
-      four: jd.edu_summary.four,
+  },
+  qualification: {
+    highschool: jd.qualification.highschool,
+    college: jd.qualification.college,
+    university: jd.qualification.university,
+    requiredExperience: jd.qualification.required_experience,
+    requiredMinYear: jd.qualification.required_min_year,
+    requiredMaxYear: jd.qualification.required_max_year,
+    requiredEtc: jd.qualification.required_etc,
+    preferredCertification: jd.qualification.preferred_certification,
+    preferredEtc: jd.qualification.preferred_etc,
+  },
+  apply: {
+    startTime: jd.apply.start_time,
+    endTime: jd.apply.end_time,
+    cut: jd.apply.cut,
+    document: jd.apply.document,
+    etc: jd.apply.etc,
+    process: jd.apply.process,
+    route: {
+      isDirect: jd.apply.route.is_direct,
+      email: jd.apply.route.email,
+      link: jd.apply.route.link,
     },
-    task: {
-      mainTask: jd.task.main_task,
-      subTaskArr: jd.task.sub_task_arr,
-    },
-    company: {
-      id: jd.company.id,
-      name: jd.company.name,
-      logoUrl: jd.company.logo_url,
-      factories: companyFactoryArr,
-    },
-  };
-};
+  },
+  createdTime: jd.created_time,
+});

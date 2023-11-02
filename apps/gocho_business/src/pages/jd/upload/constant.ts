@@ -9,9 +9,8 @@ export const BLANK_JD = {
     pay: [{ value: "" }],
     shift: [],
     place: {
-      is_rotate: false,
-      is_abroad: false,
-      is_later: false,
+      is_undefined: false,
+      etc: null,
       data: [],
     },
   },
