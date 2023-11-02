@@ -47,7 +47,7 @@ export const FluencyForm: FC<FluencyFormProps> = ({ handleEditMode, resumeId, cu
     const { acquisition_date, grade } = data;
 
     const onFluencySuccess = () => {
-      setToastMessage("어학 항목 업로드가 완료되었습니다.");
+      setToastMessage("어학 저장이 완료되었습니다.");
 
       handleEditMode();
     };

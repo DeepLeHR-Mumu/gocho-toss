@@ -64,7 +64,13 @@ export const CollegeForm: FC<CollegeFormProps> = ({ errors, register, setValue, 
         <Controller
           name="graduate_type"
           control={control}
-          rules={{ required: "해당 항목을 선택해주세요" }}
+          defaultValue={null}
+          rules={{
+            required: {
+              value: true,
+              message: "해당 항목을 선택해주세요",
+            },
+          }}
           render={({ field, fieldState }) => (
             <ResumeDropDown
               menuArr={graduateTypeArr}

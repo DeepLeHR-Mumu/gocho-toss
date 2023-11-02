@@ -42,13 +42,15 @@ import {
 import { ExtraForm } from "./component/ExtraForm";
 import { isPerfectCalculator } from "./component/HighSchoolForm/util";
 
-export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode, currentEducation }) => {
+export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode, currentEducation, isFirstInput }) => {
   const { setToastMessage } = useToast();
   useDisabledKeydownSubmit();
 
   const [cancelModal, setCancelModal] = useState(false);
 
-  const [educationType, setEducationType] = useState<string>(currentEducation?.educationType || "");
+  const [educationType, setEducationType] = useState<string>(
+    isFirstInput ? "고등학교" : currentEducation?.educationType || ""
+  );
 
   const {
     register,
@@ -85,7 +87,7 @@ export const EducationForm: FC<EducationFormProps> = ({ resumeId, handleEditMode
 
   const onSubmitResumeEducation: SubmitHandler<EducationSubmitDef> = async (data) => {
     const onEducationSuccess = () => {
-      setToastMessage("학력 항목 업로드가 완료되었습니다.");
+      setToastMessage("학력 저장이 완료되었습니다.");
       handleEditMode();
     };
 

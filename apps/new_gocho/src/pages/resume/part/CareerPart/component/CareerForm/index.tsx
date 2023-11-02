@@ -43,7 +43,7 @@ export const CareerForm: FC<CareerFormProps> = ({ handleEditMode, resumeId, curr
     // TODO: length가 0 인경우 null 처리 하기 (부서, 회사)
 
     const onCareerSuccess = () => {
-      setToastMessage("경력 항목 업로드가 완료되었습니다.");
+      setToastMessage("경력 저장이 완료되었습니다");
 
       handleEditMode();
     };
@@ -230,9 +230,9 @@ export const CareerForm: FC<CareerFormProps> = ({ handleEditMode, resumeId, curr
                 state: errors.department ? "error" : "default",
                 message: errors.department ? errors.department.message : "",
               }}
-              maxLength={20}
+              maxLength={15}
               {...register("department", {
-                maxLength: 20,
+                maxLength: 15,
               })}
             />
           </div>
@@ -244,9 +244,9 @@ export const CareerForm: FC<CareerFormProps> = ({ handleEditMode, resumeId, curr
                 state: errors.position ? "error" : "default",
                 message: errors.position ? errors.position.message : "",
               }}
-              maxLength={20}
+              maxLength={15}
               {...register("position", {
-                maxLength: 20,
+                maxLength: 15,
               })}
             />
           </div>

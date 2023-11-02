@@ -1,14 +1,12 @@
 import { FC } from "react";
 
 import { useDeleteResumeFluency } from "@/apis/resume";
-import { useToast } from "@/globalStates";
 import { ListItem } from "@/pages/resume/component";
 
 import { FluencyListProps } from "./type";
 
 export const FluencyList: FC<FluencyListProps> = ({ resumeId, selectFluency, myFluencyList }) => {
   const { mutate: deleteFluency } = useDeleteResumeFluency(resumeId);
-  const { setToastMessage } = useToast();
 
   return (
     <>
@@ -25,17 +23,10 @@ export const FluencyList: FC<FluencyListProps> = ({ resumeId, selectFluency, myF
               selectFluency(fluency);
             }}
             deleteHandler={() => {
-              deleteFluency(
-                {
-                  resumeId,
-                  fluencyId: id,
-                },
-                {
-                  onSuccess: () => {
-                    setToastMessage("대외활동이 삭제되었습니다.");
-                  },
-                }
-              );
+              deleteFluency({
+                resumeId,
+                fluencyId: id,
+              });
             }}
           />
         );

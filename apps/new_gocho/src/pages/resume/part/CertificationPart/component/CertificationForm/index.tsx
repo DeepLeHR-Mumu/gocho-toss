@@ -58,9 +58,16 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
 
   const onSubmitResumeCertification: SubmitHandler<PostCertificationDef> = async (data) => {
     const onCertificationSuccess = () => {
-      setToastMessage("자격증 업로드가 완료되었습니다.");
+      setToastMessage("자격증 저장이 완료되었습니다.");
 
       handleEditMode();
+    };
+
+    const certificationRequestObj = {
+      resumeId,
+      acquisition_date: YYMMToDate(data.acquisition_date),
+      name: data.name,
+      issuing_authority: data.issuing_authority,
     };
 
     if (currentCertification) {
@@ -68,28 +75,17 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
 
       putCertification(
         {
-          resumeId,
           certificationId: id,
-          acquisition_date: YYMMToDate(data.acquisition_date),
-          name: data.name,
-          issuing_authority: data.issuing_authority,
+          ...certificationRequestObj,
         },
         {
           onSuccess: onCertificationSuccess,
         }
       );
     } else {
-      postCertification(
-        {
-          resumeId,
-          acquisition_date: YYMMToDate(data.acquisition_date),
-          name: data.name,
-          issuing_authority: data.issuing_authority,
-        },
-        {
-          onSuccess: onCertificationSuccess,
-        }
-      );
+      postCertification(certificationRequestObj, {
+        onSuccess: onCertificationSuccess,
+      });
     }
   };
 
@@ -147,6 +143,7 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
             placeholder="자격증 명을 입력해 주세요"
             onKeyDown={handleKeyPress}
             onFocus={() => setIsFocusing(true)}
+            autoComplete="off"
             value={keyword}
             state={{
               state: errors.name ? "error" : "default",
@@ -210,7 +207,9 @@ export const CertificationForm: FC<CertificationFormProps> = ({ resumeId, handle
         </div>
 
         <div css={cssObj.inputWrapper}>
-          <p>발급 기관</p>
+          <p>
+            발급 기관 <strong css={cssObj.required}> *</strong>
+          </p>
           <Input
             placeholder="자격증 발급 기관명을 입력해 주세요"
             maxLength={40}

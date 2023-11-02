@@ -5,6 +5,7 @@ export type EducationSubmitDef = PostHighSchoolDef | PostCollegeDef | PostUniver
 
 export interface EducationFormProps {
   resumeId: number;
+  isFirstInput: boolean;
   handleEditMode: () => void;
   currentEducation?: SelectorResumeEducation;
 }

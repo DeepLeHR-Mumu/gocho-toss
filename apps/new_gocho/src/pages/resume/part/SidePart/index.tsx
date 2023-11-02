@@ -51,7 +51,7 @@ export const SidePart: FC<{ resumeId: number; currentPart: string; handleClickSc
         </ul>
       </div>
       <Button size="small" color="outline" css={cssObj.previewButton} onClick={onResumeGenerate}>
-        {isLoading ? <h1>로딩중,,,,</h1> : <p css={cssObj.previewText}>이력서 미리보기</p>}
+        {isLoading ? <h1>로딩중,,,,</h1> : <p css={cssObj.previewText}>미리보기</p>}
       </Button>
     </section>
   );

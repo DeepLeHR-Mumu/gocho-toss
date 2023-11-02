@@ -1,6 +1,5 @@
 import { FC } from "react";
 
-import { useToast } from "@/globalStates";
 import { useDeleteResumeCertification } from "@/apis/resume/certification/useDeleteResumeCertification";
 
 import { ListItem } from "@/pages/resume/component";
@@ -12,12 +11,11 @@ export const CertificationList: FC<CertificationListProps> = ({
   resumeId,
 }) => {
   const { mutate: deleteCertification } = useDeleteResumeCertification(resumeId);
-  const { setToastMessage } = useToast();
 
   return (
     <>
-      {myCertificationList.map((certi) => {
-        const { id, name, issuingAuthority, acquisitionDate } = certi;
+      {myCertificationList.map((certification) => {
+        const { id, name, issuingAuthority, acquisitionDate } = certification;
 
         return (
           <ListItem
@@ -29,15 +27,10 @@ export const CertificationList: FC<CertificationListProps> = ({
               selectCertification({ id, name, issuingAuthority, acquisitionDate });
             }}
             deleteHandler={() => {
-              deleteCertification(
-                {
-                  resumeId,
-                  certificationId: id,
-                },
-                {
-                  onSuccess: () => setToastMessage("자격증이 삭제되었습니다."),
-                }
-              );
+              deleteCertification({
+                resumeId,
+                certificationId: id,
+              });
             }}
           />
         );

@@ -9,8 +9,21 @@ export const cssObj = {
 
   infoWrapper: css`
     display: flex;
-    gap: 0.75rem;
     margin-bottom: 0.75rem;
+    align-items: center;
+    gap: 0.75rem;
+  `,
+
+  infoBox: (isPay: boolean) => css`
+    display: flex;
+
+    align-items: center;
+    gap: 0.75rem;
+    padding-right: 0.75rem;
+
+    border-right: 1px solid ${COLOR.GRAY200};
+
+    border: ${!isPay && "none"};
 
     & > p {
       ${TEXT.TITLE5_M1620};
@@ -31,8 +44,6 @@ export const cssObj = {
   `,
 
   payWrapper: css`
-    margin-top: 0.75rem;
-
     display: flex;
     align-items: center;
     gap: 0.75rem;

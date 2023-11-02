@@ -19,6 +19,7 @@ export const cssObj = {
     flex-direction: column;
     width: 55.5rem;
     gap: 2rem;
+    padding-bottom: 12.5rem;
   `,
 
   rootViewPort: css`

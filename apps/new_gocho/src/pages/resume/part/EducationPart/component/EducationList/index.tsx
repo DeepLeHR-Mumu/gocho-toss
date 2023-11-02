@@ -3,7 +3,6 @@ import { FC } from "react";
 import { useDeleteResumeEducation } from "@/apis/resume/education/useDeleteResumeEducation";
 
 import { ListItem } from "@/pages/resume/component";
-import { useToast } from "@/globalStates";
 
 import { cssObj } from "./style";
 import { EducationListProps } from "./type";
@@ -12,13 +11,6 @@ import { attendanceArr } from "./constants";
 
 export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationList, selectEducation }) => {
   const { mutate: deleteEducation } = useDeleteResumeEducation(resumeId);
-  const { setToastMessage } = useToast();
-
-  const onDeleteSuccess = {
-    onSuccess: () => {
-      setToastMessage("학력 정보가 삭제되었습니다.");
-    },
-  };
 
   return (
     <>
@@ -61,13 +53,10 @@ export const EducationList: FC<EducationListProps> = ({ resumeId, myEducationLis
               selectEducation(education);
             }}
             deleteHandler={() => {
-              deleteEducation(
-                {
-                  resumeId,
-                  educationId: id,
-                },
-                onDeleteSuccess
-              );
+              deleteEducation({
+                resumeId,
+                educationId: id,
+              });
             }}
           >
             <div css={cssObj.wrapper}>

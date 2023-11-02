@@ -117,7 +117,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ userId, handleEditMode, resu
 
   const onSubmitResumeProfile: SubmitHandler<PutResumeProfileDef> = async (data) => {
     const onProfileSuccess = () => {
-      setToastMessage("기본정보가 업로드 완료되었습니다.");
+      setToastMessage("기본정보 저장이 완료되었습니다.");
 
       handleEditMode();
     };

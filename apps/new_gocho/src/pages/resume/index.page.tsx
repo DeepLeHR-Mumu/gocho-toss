@@ -14,7 +14,7 @@ const ResumePage: NextPage = () => {
   const { data: resumeArr } = useResumeArr(userData?.id);
   const {
     currentPart,
-    setCurrentPart,
+    handleClickScroll,
     profileRef,
     educationRef,
     careerRef,
@@ -28,52 +28,6 @@ const ResumePage: NextPage = () => {
   }
 
   const resumeId = resumeArr?.data[0].id;
-
-  const handleClickScroll = (part: string) => {
-    let myRef = null;
-
-    setCurrentPart(part);
-
-    switch (part) {
-      case "기본정보": {
-        myRef = profileRef;
-        break;
-      }
-      case "학력": {
-        myRef = educationRef;
-        break;
-      }
-      case "경력": {
-        myRef = careerRef;
-        break;
-      }
-      case "자격증": {
-        myRef = certificationRef;
-        break;
-      }
-      case "어학": {
-        myRef = fluencyRef;
-        break;
-      }
-      case "대외활동": {
-        myRef = activityRef;
-        break;
-      }
-      default:
-        myRef = profileRef;
-        break;
-    }
-    if (myRef.current) {
-      const headerHeight = 180; // 헤더의 높이를 적절한 값으로 설정
-      const element = myRef.current;
-      const topPos = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-      window.scrollTo({
-        top: topPos,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <main css={cssObj.background}>

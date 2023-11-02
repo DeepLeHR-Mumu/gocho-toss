@@ -25,7 +25,7 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
     control,
     formState: { errors, isDirty },
   } = useForm<PostActivityDef>({
-    mode: "onChange",
+    mode: "onSubmit",
 
     defaultValues:
       currentActivity !== null
@@ -46,7 +46,7 @@ export const ActivityForm: FC<ActivityFormProps> = ({ handleEditMode, resumeId, 
     const { activity_date } = data;
 
     const onActivitySuccess = () => {
-      setToastMessage("대외활동 업로드가 완료되었습니다.");
+      setToastMessage("대외활동 저장이 완료되었습니다");
 
       handleEditMode();
     };

@@ -23,7 +23,7 @@ export const cssObj = {
 
   contentsIndexList: css`
     > li {
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       ${TEXT.TITLE5_M1620}
 
       display: flex;
