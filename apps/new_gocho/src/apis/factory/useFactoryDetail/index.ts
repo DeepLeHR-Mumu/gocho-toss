@@ -11,9 +11,9 @@ export const getFactoryDetail: GetFactoryDetailDef = async (factoryId) => {
   return data;
 };
 
-export const useFactoryDetail = (factoryId?: number) =>
+export const useFactoryDetail = (factoryId: number) =>
   useQuery({
-    queryKey: factoryId ? factoryDetailKeyObj.detail(factoryId) : undefined,
+    queryKey: factoryDetailKeyObj.detail(factoryId),
     queryFn: ({ queryKey: [{ factoryId: queryKeyFactoryId }] }) => getFactoryDetail(queryKeyFactoryId),
     select: ({ data }) => selector(data),
   });
