@@ -21,6 +21,11 @@ export const cssObj = {
     gap: 2rem;
   `,
 
+  rootViewPort: css`
+    border: 1px solid black;
+    overflow: visible;
+  `,
+
   sideContentsWrapper: css`
     flex-basis: 10.5rem;
     flex-shrink: 0;
@@ -32,5 +37,13 @@ export const cssObj = {
     gap: 1.25rem;
     position: sticky;
     top: 11.25rem;
+  `,
+
+  scrollDetectBox: css`
+    position: fixed;
+    background-color: ${COLOR.RED50};
+    top: 30rem;
+    width: 50rem;
+    height: 2rem;
   `,
 };

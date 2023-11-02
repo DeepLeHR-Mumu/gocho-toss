@@ -6,7 +6,7 @@ import { getResumeGenerate } from "@/apis/resume/generator";
 
 import { cssObj } from "./style";
 
-export const SidePart: FC<{ resumeId: number }> = ({ resumeId }) => {
+export const SidePart: FC<{ resumeId: number; currentPart: string }> = ({ resumeId, currentPart }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onResumeGenerate = async () => {
@@ -33,12 +33,11 @@ export const SidePart: FC<{ resumeId: number }> = ({ resumeId }) => {
     <section css={cssObj.wrapper}>
       <div css={cssObj.contentsIndexWrapper}>
         <ul css={cssObj.contentsIndexList}>
-          <li>기본정보</li>
-          <li>학력</li>
-          <li>경력</li>
-          <li>자격증</li>
-          <li>어학</li>
-          <li>대외활동</li>
+          {["기본정보", "학력", "경력", "자격증", "어학", "대외활동"].map((content) => (
+            <li key={content} className={content === currentPart ? "current" : ""}>
+              {content}
+            </li>
+          ))}
         </ul>
       </div>
       <Button size="small" color="outline" css={cssObj.previewButton} onClick={onResumeGenerate}>

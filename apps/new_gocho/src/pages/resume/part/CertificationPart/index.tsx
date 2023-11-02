@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { forwardRef, useState } from "react";
 
 import { useResumeCertificationArr } from "@/apis/resume/certification/useResumeCertificationArr";
 import { SelectorResumeCertification } from "@/apis/resume/certification/useResumeCertification/type";
@@ -7,7 +7,7 @@ import { ListCard } from "../../component";
 import { CertificationForm, CertificationList } from "./component";
 import { CertificationPartProps } from "./type";
 
-export const CertificationPart: FC<CertificationPartProps> = ({ resumeId }) => {
+export const CertificationPart = forwardRef<HTMLDivElement, CertificationPartProps>(({ resumeId }, ref) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [currentCertification, setCurrentCertification] = useState<SelectorResumeCertification | null>(null);
 
@@ -24,7 +24,7 @@ export const CertificationPart: FC<CertificationPartProps> = ({ resumeId }) => {
   };
 
   return (
-    <ListCard title="자격증" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+    <ListCard ref={ref} title="자격증" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
       {editMode ? (
         <CertificationForm
           handleEditMode={handleEditMode}
@@ -42,4 +42,4 @@ export const CertificationPart: FC<CertificationPartProps> = ({ resumeId }) => {
       )}
     </ListCard>
   );
-};
+});

@@ -23,7 +23,6 @@ export const cssObj = {
 
   contentsIndexList: css`
     > li {
-      color: ${COLOR.GRAY600};
       margin-bottom: 1.25rem;
       ${TEXT.TITLE5_M1620}
 
@@ -40,6 +39,15 @@ export const cssObj = {
       :last-child {
         margin-bottom: 0;
       }
+    }
+
+    .current {
+      ::before {
+        background-color: ${COLOR.BLUE200};
+      }
+
+      color: ${COLOR.BLUE300};
+      ${TEXT.TITLE5_B1620};
     }
   `,
 

@@ -7,16 +7,18 @@ import { Layout } from "@/components";
 
 import { SidePart, ProfilePart, EducationPart, CareerPart, ActivityPart, CertificationPart, FluencyPart } from "./part";
 import { cssObj } from "./style";
+import { useDetectedPart } from "./util";
 
 const ResumePage: NextPage = () => {
   const { data: userData } = useUserInfo();
   const { data: resumeArr } = useResumeArr(userData?.id);
+  const { currentPart, profileRef, educationRef, careerRef, certificationRef, fluencyRef, activityRef } =
+    useDetectedPart();
 
   if (!userData || !resumeArr) {
     return <> </>;
   }
 
-  // TODO: resume 하나만 사용하는것으로 판단 추후 변경
   const resumeId = resumeArr?.data[0].id;
 
   return (
@@ -24,15 +26,15 @@ const ResumePage: NextPage = () => {
       <Layout>
         <div css={cssObj.contentsWrapper}>
           <div css={cssObj.mainContentsWrapper}>
-            <ProfilePart userId={userData.id} />
-            <EducationPart resumeId={resumeId} />
-            <CareerPart resumeId={resumeId} />
-            <CertificationPart resumeId={resumeId} />
-            <FluencyPart resumeId={resumeId} />
-            <ActivityPart resumeId={resumeId} />
+            <ProfilePart userId={userData.id} ref={profileRef} />
+            <EducationPart resumeId={resumeId} ref={educationRef} />
+            <CareerPart resumeId={resumeId} ref={careerRef} />
+            <CertificationPart resumeId={resumeId} ref={certificationRef} />
+            <FluencyPart resumeId={resumeId} ref={fluencyRef} />
+            <ActivityPart resumeId={resumeId} ref={activityRef} />
           </div>
           <div css={cssObj.sideContentsWrapper}>
-            <SidePart resumeId={resumeId} />
+            <SidePart resumeId={resumeId} currentPart={currentPart} />
           </div>
         </div>
       </Layout>

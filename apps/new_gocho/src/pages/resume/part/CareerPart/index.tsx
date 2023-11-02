@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { forwardRef, useState } from "react";
 import { useResumeCareerArr } from "@/apis/resume/career/useResumeCareerArr";
 import { SelectorResumeCareer } from "@/apis/resume/career/useResumeCareer/type";
 
@@ -6,7 +6,7 @@ import { ListCard } from "../../component";
 import { CareerForm, CareerList } from "./component";
 import { CareerPartProps } from "./type";
 
-export const CareerPart: FC<CareerPartProps> = ({ resumeId }) => {
+export const CareerPart = forwardRef<HTMLDivElement, CareerPartProps>(({ resumeId }, ref) => {
   const [editMode, setEditMode] = useState(false);
   const [currentCareer, setCurrentCareer] = useState<SelectorResumeCareer | null>(null);
 
@@ -23,7 +23,7 @@ export const CareerPart: FC<CareerPartProps> = ({ resumeId }) => {
   };
 
   return (
-    <ListCard title="경력" iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
+    <ListCard title="경력" ref={ref} iconHandler={handleEditMode} iconType={editMode ? "none" : "add"}>
       {editMode ? (
         <CareerForm currentCareer={currentCareer} handleEditMode={handleEditMode} resumeId={resumeId} />
       ) : (
@@ -31,4 +31,4 @@ export const CareerPart: FC<CareerPartProps> = ({ resumeId }) => {
       )}
     </ListCard>
   );
-};
+});

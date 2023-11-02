@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { forwardRef, useState } from "react";
 
 import Link from "next/link";
 import { useUserResumeProfile } from "@/apis/users";
@@ -8,7 +8,7 @@ import { ProfileForm, ResumeProfile } from "./component";
 import { cssObj } from "./style";
 import { ProfilePartProps } from "./type";
 
-export const ProfilePart: FC<ProfilePartProps> = ({ userId }) => {
+export const ProfilePart = forwardRef<HTMLDivElement, ProfilePartProps>(({ userId }, ref) => {
   const [isEditMode, setEditMode] = useState(false);
 
   const { data: resumeProfile } = useUserResumeProfile({ userId });
@@ -21,6 +21,7 @@ export const ProfilePart: FC<ProfilePartProps> = ({ userId }) => {
     <ListCard
       title="기본정보"
       isRequired
+      ref={ref}
       iconType={isEditMode ? "none" : "edit"}
       editMessage={
         <p css={cssObj.editMsg}>
@@ -47,4 +48,4 @@ export const ProfilePart: FC<ProfilePartProps> = ({ userId }) => {
       )}
     </ListCard>
   );
-};
+});

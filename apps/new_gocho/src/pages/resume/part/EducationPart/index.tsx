@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { forwardRef, useState } from "react";
 
 import { useResumeEducationArr } from "@/apis/resume";
 import { SelectorResumeEducation } from "@/apis/resume/education/useResumeEducationArr/type";
@@ -7,7 +7,7 @@ import { EducationPartProps } from "./type";
 import { ListCard } from "../../component";
 import { EducationForm, EducationList } from "./component";
 
-export const EducationPart: FC<EducationPartProps> = ({ resumeId }) => {
+export const EducationPart = forwardRef<HTMLDivElement, EducationPartProps>(({ resumeId }, ref) => {
   const { data: myEducationList } = useResumeEducationArr(resumeId);
 
   const [currentEducation, setCurrentEducation] = useState<SelectorResumeEducation>();
@@ -24,7 +24,7 @@ export const EducationPart: FC<EducationPartProps> = ({ resumeId }) => {
   };
 
   return (
-    <ListCard title="학력" iconHandler={handleEditMode} isRequired iconType={editMode ? "none" : "add"}>
+    <ListCard title="학력" iconHandler={handleEditMode} ref={ref} isRequired iconType={editMode ? "none" : "add"}>
       {editMode ? (
         <EducationForm resumeId={resumeId} handleEditMode={handleEditMode} currentEducation={currentEducation} />
       ) : (
@@ -34,4 +34,4 @@ export const EducationPart: FC<EducationPartProps> = ({ resumeId }) => {
       )}
     </ListCard>
   );
-};
+});
