@@ -24,6 +24,7 @@ const CompanyUpload: NextPageWithLayout = () => {
 
   const companyForm = useForm<CompanyFormValues>({
     defaultValues: {
+      industry: [],
       youtube_url: null,
       nozo: { exists: false, desc: null },
     },

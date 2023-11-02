@@ -5,8 +5,8 @@ import dayjs from "dayjs";
 
 import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 import { CheckBox } from "shared-ui/common/checkbox";
-
 import { Checkbox } from "shared-ui/deeple-ds";
+
 import {
   booleanInputBox,
   checkboxText,
