@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { FiX, FiMapPin } from "react-icons/fi";
 import { Modal } from "shared-ui/deeple-ds";
 
 import { useFactoryDetail } from "@/apis/factory";
+import { useToast } from "@/globalStates";
 
 import { Executives } from "./component/Executives";
 import { Bus } from "./component/Bus";
@@ -10,7 +12,14 @@ import { FactoryInfoModalProps } from "./type";
 import { cssObj } from "./style";
 
 export const FactoryInfoModal = ({ factoryId, close }: FactoryInfoModalProps) => {
-  const { data: factoryDetail } = useFactoryDetail(factoryId);
+  const { data: factoryDetail, isError } = useFactoryDetail(factoryId);
+  const { setToastMessage } = useToast();
+
+  useEffect(() => {
+    if (isError) {
+      setToastMessage("불러오기 실패. 다시 시도해 주세요.");
+    }
+  }, [isError, setToastMessage]);
 
   if (!factoryDetail) {
     return null;
