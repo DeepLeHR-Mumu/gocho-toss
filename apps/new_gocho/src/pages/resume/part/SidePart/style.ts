@@ -26,6 +26,9 @@ export const cssObj = {
       margin-bottom: 1.25rem;
       ${TEXT.TITLE5_M1620}
 
+      display: flex;
+      align-items: center;
+
       ::before {
         content: "";
         border-radius: 50%;

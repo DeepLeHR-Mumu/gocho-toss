@@ -53,8 +53,7 @@ export const useDetectedPart = () => {
         });
       },
       {
-        root: rootRef.current,
-        rootMargin: "-18% 0px 20% 0%",
+        rootMargin: "-15% 0px -20% 0%",
         threshold: 0.75,
       }
     );
@@ -75,5 +74,15 @@ export const useDetectedPart = () => {
     };
   }, [rootRef, profileRef, educationRef, careerRef, certificationRef, fluencyRef, activityRef]);
 
-  return { currentPart, rootRef, profileRef, educationRef, careerRef, certificationRef, fluencyRef, activityRef };
+  return {
+    currentPart,
+    setCurrentPart,
+    rootRef,
+    profileRef,
+    educationRef,
+    careerRef,
+    certificationRef,
+    fluencyRef,
+    activityRef,
+  };
 };

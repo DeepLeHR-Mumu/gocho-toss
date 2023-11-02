@@ -6,7 +6,11 @@ import { getResumeGenerate } from "@/apis/resume/generator";
 
 import { cssObj } from "./style";
 
-export const SidePart: FC<{ resumeId: number; currentPart: string }> = ({ resumeId, currentPart }) => {
+export const SidePart: FC<{ resumeId: number; currentPart: string; handleClickScroll: (part: string) => void }> = ({
+  resumeId,
+  currentPart,
+  handleClickScroll,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onResumeGenerate = async () => {
@@ -35,7 +39,13 @@ export const SidePart: FC<{ resumeId: number; currentPart: string }> = ({ resume
         <ul css={cssObj.contentsIndexList}>
           {["기본정보", "학력", "경력", "자격증", "어학", "대외활동"].map((content) => (
             <li key={content} className={content === currentPart ? "current" : "default"}>
-              {content}
+              <button
+                type="button"
+                onClick={() => handleClickScroll(content)}
+                className={content === currentPart ? "current" : "default"}
+              >
+                {content}
+              </button>
             </li>
           ))}
         </ul>
