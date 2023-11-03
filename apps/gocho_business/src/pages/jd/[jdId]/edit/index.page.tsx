@@ -30,8 +30,8 @@ import {
   PlacePart,
   ApplyPart,
 } from "../../write/part";
-import { getFieldArrayValue, getFieldArrayValueWithNull, setFieldErrorIfEmpty, setFieldArray } from "./util";
-import { JdFormValues } from "./type";
+import { getFieldArrayValue, setFieldErrorIfEmpty, setFieldArray } from "./util";
+import { EditJdFormValues } from "./type";
 import { BLANK_JD, JD_EDIT_MESSAGE_OBJ, ROTATION_ARR } from "./constant";
 
 const JdEditPage: NextPage = () => {
@@ -45,7 +45,7 @@ const JdEditPage: NextPage = () => {
   const { data: jdData } = useJdDetail(Boolean(userInfoData), { id: Number(router.query.jdId) });
   const { setToast } = useToast();
 
-  const jdForm = useForm<JdFormValues>({
+  const jdForm = useForm<EditJdFormValues>({
     mode: "onTouched",
     reValidateMode: "onChange",
     defaultValues: { ...BLANK_JD },
@@ -59,47 +59,42 @@ const JdEditPage: NextPage = () => {
     formState: { submitCount, dirtyFields, isSubmitSuccessful },
   } = jdForm;
 
-  const taskDetailArr = useFieldArray({
+  const taskDescriptionArr = useFieldArray({
     control,
-    name: "task_detail_arr",
+    name: "detail.task_description",
   });
 
   const requiredEtcArr = useFieldArray({
     control,
-    name: "required_etc_arr",
+    name: "qualification.required_etc",
   });
 
   const preferredEtcArr = useFieldArray({
     control,
-    name: "preferred_etc_arr",
+    name: "qualification.preferred_etc",
   });
 
   const payArr = useFieldArray({
     control,
-    name: "pay_arr",
+    name: "detail.pay",
   });
 
-  const processArr = useFieldArray({
+  const applyProcessArr = useFieldArray({
     control,
-    name: "process_arr",
-  });
-
-  const applyRouteArr = useFieldArray({
-    control,
-    name: "apply_route_arr",
+    name: "apply.process",
   });
 
   const applyDocumentArr = useFieldArray({
     control,
-    name: "apply_document_arr",
+    name: "apply.document",
   });
 
   const etcArr = useFieldArray({
     control,
-    name: "etc_arr",
+    name: "apply.etc",
   });
 
-  const jdEditHandler: SubmitHandler<JdFormValues> = (jdObj) => {
+  const jdEditHandler: SubmitHandler<EditJdFormValues> = (jdObj) => {
     if (isLoading.current) return;
     isLoading.current = true;
 
@@ -108,32 +103,47 @@ const JdEditPage: NextPage = () => {
       editJdMutate(
         {
           jdId: Number(router.query.jdId),
-          dto: {
-            ...jdObj,
-            middle: false,
-            start_time: dayjs(new Date(jdObj.start_time)).format("YYYY-MM-DDTHH:mm:ss"),
-            end_time: dayjs(new Date(jdObj.end_time)).format("YYYY-MM-DDTHH:mm:ss"),
-            apply_url: jdObj.apply_url.includes("@") ? `mailto: ${jdObj.apply_url}` : jdObj.apply_url,
-            process_arr: getFieldArrayValue(jdObj.process_arr),
-            apply_route_arr: getFieldArrayValue(jdObj.apply_route_arr),
-            apply_document_arr: getFieldArrayValueWithNull(jdObj.apply_document_arr),
-            etc_arr: getFieldArrayValueWithNull(jdObj.etc_arr),
-            conversion_rate: jdObj.conversion_rate ? jdObj.conversion_rate : null,
-            min_year: jdObj.min_year ? jdObj.min_year : null,
-            max_year: jdObj.max_year ? jdObj.max_year : null,
-            hire_number: jdObj.hire_number ? jdObj.hire_number : 0,
-            task_sub_arr: jdObj.task_sub_arr,
-            task_detail_arr: getFieldArrayValue(jdObj.task_detail_arr),
-            required_etc_arr: getFieldArrayValue(jdObj.required_etc_arr),
-            pay_arr: getFieldArrayValue(jdObj.pay_arr),
+          ...jdObj,
+          title: jdObj.title,
+          detail: {
+            task_main: jdObj.detail.task_main,
+            task_sub: jdObj.detail.task_sub,
+            task_description: getFieldArrayValue(jdObj.detail.task_description),
+            contract_type: jdObj.detail.contract_type,
+            conversion_rate: jdObj.detail.conversion_rate,
+            hire_number: jdObj.detail.hire_number,
+            pay: getFieldArrayValue(jdObj.detail.pay),
+            shift: jdObj.detail.shift,
             place: {
-              type: jdObj.place.type,
-              address_arr: jdObj.place.address_arr?.length === 0 ? null : jdObj.place.address_arr,
-              factory_arr: jdObj.place.factory_arr?.length === 0 ? null : jdObj.place.factory_arr,
-              etc: jdObj.place.etc?.length === 0 ? null : jdObj.place.etc,
+              is_undefined: jdObj.detail.place.is_undefined,
+              data: jdObj.detail.place.data.map((eachPlace) => {
+                if (eachPlace.type === "일반") {
+                  return {
+                    type: eachPlace.type,
+                    location: eachPlace.location,
+                  };
+                }
+
+                return {
+                  type: eachPlace.type,
+                  factory_id: eachPlace.factory.id,
+                };
+              }),
+              etc: jdObj.detail.place.etc,
             },
-            preferred_certi_arr: jdObj.preferred_certi_arr?.length === 0 ? null : jdObj.preferred_certi_arr,
-            preferred_etc_arr: getFieldArrayValueWithNull(jdObj.preferred_etc_arr),
+          },
+          qualification: {
+            ...jdObj.qualification,
+            required_etc: getFieldArrayValue(jdObj.qualification.required_etc),
+            preferred_etc: getFieldArrayValue(jdObj.qualification.preferred_etc),
+          },
+          apply: {
+            ...jdObj.apply,
+            start_time: dayjs(new Date(jdObj.apply.start_time)).format("YYYY-MM-DDTHH:mm:ss"),
+            end_time: dayjs(new Date(jdObj.apply.end_time)).format("YYYY-MM-DDTHH:mm:ss"),
+            document: getFieldArrayValue(jdObj.apply.document),
+            etc: getFieldArrayValue(jdObj.apply.etc),
+            process: getFieldArrayValue(jdObj.apply.process),
           },
         },
         {
@@ -159,56 +169,73 @@ const JdEditPage: NextPage = () => {
   };
 
   const jobErrorHandler = () => {
-    const ifEduNotSelected = !watch("high") && !watch("college") && !watch("four");
-    setFieldErrorIfEmpty(watch, jdForm, "task_detail_arr", "* 세부 직무 내용을 입력해 주세요");
-    setFieldErrorIfEmpty(watch, jdForm, "pay_arr", "* 급여 정보를 입력해 주세요");
-    setFieldErrorIfEmpty(watch, jdForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
-    setFieldErrorIfEmpty(watch, jdForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
+    const ifEduNotSelected =
+      !watch("qualification.highschool") && !watch("qualification.college") && !watch("qualification.university");
+
+    setFieldErrorIfEmpty(watch, jdForm, "detail.task_description", "* 세부 직무 내용을 입력해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "detail.pay", "* 급여 정보를 입력해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "apply.process", "* 채용절차는 최소 1개 이상 기재해 주세요");
+    setFieldErrorIfEmpty(watch, jdForm, "apply.route", "* 지원 경로는 최소 1개 이상 기재해 주세요");
+
+    if (!watch("detail.place.is_undefined") && watch("detail.place.data").length === 0 && watch("detail.place.etc")) {
+      jdForm.setError("detail.place", { message: "* 근무지를 추가해 주세요." });
+    }
+
     if (ifEduNotSelected) {
-      jdForm.setError("high", { message: "* 학력 조건을 하나 이상 선택해 주세요" });
+      jdForm.setError("qualification.highschool", { message: "* 학력 조건을 하나 이상 선택해 주세요" });
     }
   };
 
   useEffect(() => {
-    const newStartTime = dayjs(jdData?.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
-    const newEndTime = dayjs(jdData?.endTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
+    if (jdData) {
+      const newStartTime = dayjs(jdData.apply.startTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
+      const newEndTime = dayjs(jdData.apply.endTime, "YYYY-MM-DDTHH:mm:ss").add(9, "hour").toDate();
 
-    reset({
-      title: jdData?.title,
-      start_time: new Date(newStartTime).toISOString().substring(0, 19),
-      end_time: new Date(newEndTime).toISOString().substring(0, 19),
-      cut: jdData?.cut,
-      process_arr: setFieldArray(jdData?.processArr || []),
-      apply_document_arr: setFieldArray(jdData?.applyDocumentArr || []),
-      apply_route_arr: setFieldArray(jdData?.applyRouteArr || []),
-      apply_url: jdData?.applyUrl,
-      etc_arr: setFieldArray(jdData?.etcArr || []),
-      high: jdData?.eduSummary.high,
-      college: jdData?.eduSummary.college,
-      four: jdData?.eduSummary.four,
-      required_exp: jdData?.requiredExp.type,
-      min_year: jdData?.requiredExp.minYear,
-      max_year: jdData?.requiredExp.maxYear,
-      required_etc_arr: setFieldArray(jdData?.requiredEtcArr || []),
-      contract_type: jdData?.contractType.type,
-      conversion_rate: jdData?.contractType.conversionRate,
-      task_main: jdData?.task.mainTask,
-      task_sub_arr: jdData?.task.subTaskArr,
-      task_detail_arr: setFieldArray(jdData?.task.detailArr || []),
-      rotation_arr: jdData?.rotationArr.map(
-        (rotation) => ROTATION_ARR.find((rotationObj) => rotationObj.name === rotation)?.data
-      ),
-      place: {
-        type: jdData?.place.type,
-        address_arr: jdData?.place.addressArr || null,
-        factory_arr: jdData?.place.factoryArr?.map((factory) => factory.id) || null,
-        etc: jdData?.place.etc || "",
-      },
-      hire_number: jdData?.hireCount,
-      pay_arr: setFieldArray(jdData?.payArr || []),
-      preferred_certi_arr: jdData?.preferredCertiArr,
-      preferred_etc_arr: setFieldArray(jdData?.preferredEtcArr || []),
-    });
+      reset({
+        title: jdData.title,
+        detail: {
+          task_main: jdData.detail.taskMain,
+          task_sub: jdData.detail.taskSubArr,
+          task_description: setFieldArray(jdData.detail.taskDescription || []),
+          contract_type: jdData.detail.contractType,
+          conversion_rate: jdData.detail.conversionRate,
+          hire_number: jdData.detail.hireNumber,
+          pay: setFieldArray(jdData.detail.pay || []),
+          shift: jdData.detail.shift.map(
+            (eachShift) => ROTATION_ARR.find((rotationObj) => rotationObj.name === eachShift)?.data
+          ),
+          place: {
+            is_undefined: jdData.detail.place.is_undefined,
+            data: jdData.detail.place.data.map((eachPlace) => ({
+              type: eachPlace.type,
+              factory_id: eachPlace.factory?.id,
+              location: eachPlace.location,
+            })),
+            etc: jdData.detail.place.etc,
+          },
+        },
+        qualification: {
+          highschool: jdData.qualification.highschool,
+          college: jdData.qualification.college,
+          university: jdData.qualification.university,
+          required_etc: setFieldArray(jdData.qualification.requiredEtc),
+          required_experience: jdData.qualification.requiredExperience,
+          required_min_year: jdData.qualification.requiredMinYear || undefined,
+          required_max_year: jdData.qualification.requiredMaxYear || undefined,
+          preferred_certification: jdData.qualification.preferredCertification,
+          preferred_etc: setFieldArray(jdData.qualification.preferredEtc),
+        },
+        apply: {
+          start_time: new Date(newStartTime).toISOString().substring(0, 19),
+          end_time: new Date(newEndTime).toISOString().substring(0, 19),
+          document: setFieldArray(jdData.apply.document || []),
+          etc: setFieldArray(jdData.apply.etc || []),
+          process: setFieldArray(jdData.apply.process || []),
+          route: jdData.apply.route,
+          cut: jdData.apply.cut,
+        },
+      });
+    }
   }, [jdData, reset]);
 
   useDisabledKeydownSubmit();
@@ -224,8 +251,8 @@ const JdEditPage: NextPage = () => {
   }, [setModal, userInfoData]);
 
   useEffect(() => {
-    if (watch("high") || watch("college") || watch("four")) {
-      jdForm.clearErrors("high");
+    if (watch("qualification.highschool") || watch("qualification.college") || watch("qualification.university")) {
+      jdForm.clearErrors("qualification.highschool");
     }
   }, [jdForm, watch]);
 
@@ -244,22 +271,11 @@ const JdEditPage: NextPage = () => {
       <PageLayout>
         {jdData?.status.name.includes("반려") && <ReasonPart jdData={jdData} />}
         <TitlePart jdForm={jdForm} />
-        <BasicPart jdForm={jdForm} control={control} taskDetailArr={taskDetailArr} />
-        <RequiredPart
-          jdForm={jdForm}
-          control={control}
-          requiredEtcArr={requiredEtcArr}
-          preferredEtcArr={preferredEtcArr}
-        />
-        <ConditionPart jdForm={jdForm} control={control} payArr={payArr} />
+        <BasicPart jdForm={jdForm} taskDetailArr={taskDescriptionArr} />
+        <RequiredPart jdForm={jdForm} requiredEtcArr={requiredEtcArr} preferredEtcArr={preferredEtcArr} />
+        <ConditionPart jdForm={jdForm} payArr={payArr} />
         <PlacePart jdForm={jdForm} />
-        <ApplyPart
-          jdForm={jdForm}
-          processArr={processArr}
-          applyRouteArr={applyRouteArr}
-          applyDocumentArr={applyDocumentArr}
-          etcArr={etcArr}
-        />
+        <ApplyPart jdForm={jdForm} processArr={applyProcessArr} applyDocumentArr={applyDocumentArr} etcArr={etcArr} />
       </PageLayout>
     </form>
   );

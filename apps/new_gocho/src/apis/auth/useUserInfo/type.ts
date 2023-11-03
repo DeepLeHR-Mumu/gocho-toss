@@ -1,9 +1,8 @@
+import { AxiosResponse } from "axios";
 import { UserInfoObjDef } from "../type/userInfo";
 
-interface ResponseObjDef {
-  info: UserInfoObjDef;
-}
+type ResponseObjDef = UserInfoObjDef;
 
-export interface PostUserAuthDef {
-  (): Promise<ResponseObjDef>;
+export interface GetUserInfoDef {
+  (): Promise<AxiosResponse<ResponseObjDef>>;
 }

@@ -1,6 +1,8 @@
 export interface UserInfoObjDef {
   id: number;
+  type: string;
   email: string;
+  image: string;
   nickname: string;
   badge: "default" | "early_bird" | "admin";
   alarm_config: {
@@ -9,6 +11,5 @@ export interface UserInfoObjDef {
     community_new_comment: boolean;
     benefit_event: boolean;
   };
-  image: string;
   is_pass: boolean;
 }

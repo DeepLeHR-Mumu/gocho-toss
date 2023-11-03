@@ -5,4 +5,5 @@ export interface SearchDropDownProps {
   recentWordArr?: string[];
   searchHandler?: (searchText: string) => void;
   onClick?: MouseEventHandler<HTMLInputElement>;
+  autoFocus?: boolean;
 }

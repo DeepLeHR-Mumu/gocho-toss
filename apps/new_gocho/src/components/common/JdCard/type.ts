@@ -7,10 +7,10 @@ export interface JdCardProps {
     };
     startTime: string;
     endTime: string;
-    high: boolean;
+    highschool: boolean;
     college: boolean;
     title: string;
-    placeArr: string[];
+    place: string[];
     isBookmark: boolean;
   };
   ad?: boolean;

@@ -33,6 +33,14 @@ export const cssObj = {
     gap: 0 1rem;
   `,
 
+  selectPlaceholder: css`
+    color: ${COLOR.GRAY450};
+  `,
+
+  checkbox: css`
+    margin-right: 0.6875rem;
+  `,
+
   hiddenInput: css`
     display: none;
   `,

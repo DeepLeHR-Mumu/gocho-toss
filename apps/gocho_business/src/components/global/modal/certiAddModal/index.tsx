@@ -22,24 +22,29 @@ export const CertiAddModal: FunctionComponent = () => {
   const { setValue, watch } = jdForm;
 
   useEffect(() => {
-    setCurrentCerti(watch("preferred_certi_arr") || []);
+    setCurrentCerti(watch("qualification.preferred_certification") || []);
   }, [setCurrentCerti, watch]);
 
   const addCertiHandler = (certi: string) => {
-    const totalNumber = watch("preferred_certi_arr")?.length || 0;
-    const isInList = watch("preferred_certi_arr")?.includes(certi);
+    const totalNumber = watch("qualification.preferred_certification")?.length || 0;
+    const isInList = watch("qualification.preferred_certification")?.includes(certi);
 
     if (totalNumber < 10) {
       if (!isInList) {
-        setValue("preferred_certi_arr", [...(watch("preferred_certi_arr") || []), certi]);
-        setCurrentCerti(watch("preferred_certi_arr") || []);
+        setValue("qualification.preferred_certification", [
+          ...(watch("qualification.preferred_certification") || []),
+          certi,
+        ]);
+        setCurrentCerti(watch("qualification.preferred_certification") || []);
       }
     }
   };
 
   const deleteCertiHandler = (certi: string) => {
-    setValue("preferred_certi_arr", [...(watch("preferred_certi_arr")?.filter((element) => element !== certi) || [])]);
-    setCurrentCerti(watch("preferred_certi_arr") || []);
+    setValue("qualification.preferred_certification", [
+      ...(watch("qualification.preferred_certification")?.filter((element) => element !== certi) || []),
+    ]);
+    setCurrentCerti(watch("qualification.preferred_certification") || []);
   };
 
   useFocusTrap(modalRef);

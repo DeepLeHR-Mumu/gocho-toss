@@ -1,3 +1,4 @@
+// TODO 삭제 예정
 export const APPLY_EXTERNAL_LINK_ARR = [
   { text: "잡코리아", url: "https://www.jobkorea.co.kr/Corp/Index" },
   { text: "사람인", url: "https://www.saramin.co.kr/zf_user/auth?ut=c" },

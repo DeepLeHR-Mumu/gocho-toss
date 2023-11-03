@@ -15,7 +15,7 @@ export const cssObj = {
     margin-bottom: 1rem;
   `,
 
-  rotationContainer: css`
+  shiftContainer: css`
     position: relative;
     cursor: pointer;
     margin-right: 2rem;
@@ -25,7 +25,7 @@ export const cssObj = {
     display: none;
   `,
 
-  rotationInnerText: css`
+  shiftInnerText: css`
     white-space: nowrap;
     overflow: hidden;
   `,

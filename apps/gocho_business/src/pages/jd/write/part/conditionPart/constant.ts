@@ -1,4 +1,4 @@
-export const ROTATION_ARR = [
+export const SHIFT_ARR = [
   { data: "주간", name: "주간" },
   { data: "야간", name: "야간" },
   { data: "교대", name: "교대" },

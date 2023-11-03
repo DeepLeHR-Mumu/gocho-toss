@@ -3,8 +3,9 @@ import { Address, useDaumPostcodePopup } from "react-daum-postcode";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import { NUMBER_REGEXP } from "shared-constant";
-
+import { Checkbox } from "shared-ui/deeple-ds";
 import { SharedRadioButton } from "shared-ui/common/sharedRadioButton";
+
 import { commonCssObj } from "@/styles";
 
 import { MAX_LENGTH_ERROR_TEXT, ONLY_INT_ERROR_TEXT, INDUSTRY_ARR, SIZE_ARR } from "./constant";
@@ -49,6 +50,16 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
     });
   };
 
+  const addIndustry = (targetIndustry: string) => {
+    const newIndustryArr = watch("industry").concat(targetIndustry);
+    setValue(`industry`, newIndustryArr);
+  };
+
+  const removeIndustry = (targetIndustry: string) => {
+    const newIndustryArr = watch("industry").filter((industry) => industry !== targetIndustry);
+    setValue(`industry`, newIndustryArr);
+  };
+
   return (
     <section css={commonCssObj.partContainer} data-testid="company/edit/BasicPart">
       <h3 css={commonCssObj.partTitle}>일반 정보</h3>
@@ -68,23 +79,32 @@ export const BasicPart: FunctionComponent<BasicPartProps> = ({ companyForm }) =>
               setIsIndustryOpen((prev) => !prev);
             }}
           >
-            {watch("industry")}
+            {watch("industry") && watch("industry").length !== 0 ? (
+              <span>{watch("industry").join(", ")}</span>
+            ) : (
+              <span css={cssObj.selectPlaceholder}>선택</span>
+            )}
             {isIndustryOpen ? <FiChevronUp /> : <FiChevronDown />}
           </button>
           <div css={commonCssObj.optionList(isIndustryOpen, 26)}>
             {INDUSTRY_ARR.map((industry) => (
-              <button
-                type="button"
-                css={commonCssObj.option}
-                key={industry}
-                value={industry}
-                onMouseDown={() => {
-                  setValue(`industry`, industry);
-                  setIsIndustryOpen((prev) => !prev);
-                }}
-              >
+              <div css={commonCssObj.option} key={industry}>
+                <Checkbox
+                  css={cssObj.checkbox}
+                  checked={watch("industry")?.includes(industry)}
+                  onClick={(e) => {
+                    if (e.currentTarget.checked) {
+                      if (watch("industry").length === 2) {
+                        return;
+                      }
+                      addIndustry(industry);
+                      return;
+                    }
+                    removeIndustry(industry);
+                  }}
+                />
                 {industry}
-              </button>
+              </div>
             ))}
           </div>
         </div>

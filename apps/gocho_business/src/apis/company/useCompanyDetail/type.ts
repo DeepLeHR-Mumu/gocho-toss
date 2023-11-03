@@ -19,7 +19,7 @@ export interface ResponseObjDef {
     };
     logo_url: string;
     background_image_url: string;
-    industry: string;
+    industry: string[];
     business_number: string;
     name: string;
     size: string;

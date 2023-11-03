@@ -21,7 +21,8 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
     formState: { errors },
   } = jdForm;
 
-  const isSchoolAllSelected = watch("high") && watch("college") && watch("four");
+  const isSchoolAllSelected =
+    watch("qualification.highschool") && watch("qualification.college") && watch("qualification.university");
 
   return (
     <div css={commonCssObj.partContainer}>
@@ -30,23 +31,38 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
         <p css={commonCssObj.inputTitle(false)}>학력</p>
         <div css={commonCssObj.labelContainer}>
           <button type="button" onClick={() => jdAcademicClickEvent()} onKeyDown={() => jdAcademicClickEvent()}>
-            <label css={commonCssObj.label} htmlFor="high">
-              <input type="checkbox" id="high" {...register(`high`)} onClick={() => clearErrors("high")} />
-              <CheckBox isChecked={watch("high")} />
+            <label css={commonCssObj.label} htmlFor="highschool">
+              <input
+                type="checkbox"
+                id="highschool"
+                {...register(`qualification.highschool`)}
+                onClick={() => clearErrors("qualification.highschool")}
+              />
+              <CheckBox isChecked={watch("qualification.highschool")} />
               고졸
             </label>
           </button>
           <button type="button" onClick={() => jdAcademicClickEvent()} onKeyDown={() => jdAcademicClickEvent()}>
             <label css={commonCssObj.label} htmlFor="college">
-              <input type="checkbox" id="college" {...register(`college`)} onClick={() => clearErrors("high")} />
-              <CheckBox isChecked={watch("college")} />
+              <input
+                type="checkbox"
+                id="college"
+                {...register(`qualification.college`)}
+                onClick={() => clearErrors("qualification.college")}
+              />
+              <CheckBox isChecked={watch("qualification.college")} />
               초대졸
             </label>
           </button>
           <button type="button" onClick={() => jdAcademicClickEvent()} onKeyDown={() => jdAcademicClickEvent()}>
-            <label css={commonCssObj.label} htmlFor="four">
-              <input type="checkbox" id="four" {...register(`four`)} onClick={() => clearErrors("high")} />
-              <CheckBox isChecked={watch("four")} />
+            <label css={commonCssObj.label} htmlFor="university">
+              <input
+                type="checkbox"
+                id="university"
+                {...register(`qualification.university`)}
+                onClick={() => clearErrors("qualification.university")}
+              />
+              <CheckBox isChecked={watch("qualification.university")} />
               4년제
             </label>
           </button>
@@ -57,15 +73,15 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
                 id="all"
                 onClick={() => {
                   if (isSchoolAllSelected) {
-                    setValue("high", false);
-                    setValue("college", false);
-                    setValue("four", false);
+                    setValue("qualification.highschool", false);
+                    setValue("qualification.college", false);
+                    setValue("qualification.university", false);
                   } else {
-                    setValue("high", true);
-                    setValue("college", true);
-                    setValue("four", true);
+                    setValue("qualification.highschool", true);
+                    setValue("qualification.college", true);
+                    setValue("qualification.university", true);
                   }
-                  clearErrors("high");
+                  clearErrors("qualification.highschool");
                 }}
               />
               <CheckBox isChecked={isSchoolAllSelected} />
@@ -73,7 +89,7 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
             </label>
           </button>
         </div>
-        <p css={commonCssObj.errorMessage}>{errors.high?.message}</p>
+        <p css={commonCssObj.errorMessage}>{errors.qualification?.highschool?.message}</p>
       </div>
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.optionalInputTitle(true)}>기타 조건</p>
@@ -83,13 +99,13 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
               <label css={commonCssObj.inputLabel} htmlFor={`requiredEtcArr${item.id}`}>
                 <input
                   id={`requiredEtcArr${item.id}`}
-                  css={commonCssObj.input(55.5, Boolean(errors.required_etc_arr))}
+                  css={commonCssObj.input(55.5, Boolean(errors.qualification?.required_etc))}
                   placeholder="예) 군필자, 전공 무관, 운전 가능자 등 (최대 30자)"
                   maxLength={30}
-                  {...register(`required_etc_arr.${index}.value`, {
+                  {...register(`qualification.required_etc.${index}.value`, {
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                        setValue(`required_etc_arr.${index}.value`, "");
+                        setValue(`qualification.required_etc.${index}.value`, "");
                       }
                     },
                     maxLength: { value: 30, message: "최대 길이는 30자입니다." },
@@ -104,7 +120,8 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
                 )}
               </label>
               <p css={commonCssObj.errorMessage}>
-                {errors.required_etc_arr?.[index] && errors.required_etc_arr?.[index]?.value?.message}
+                {errors.qualification?.required_etc?.[index] &&
+                  errors.qualification.required_etc?.[index]?.value?.message}
               </p>
             </div>
           ))}
@@ -127,13 +144,13 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
               <label css={commonCssObj.inputLabel} htmlFor={`preferredEtcArr${item.id}`}>
                 <input
                   id={`preferredEtcArr${item.id}`}
-                  css={commonCssObj.input(55.5, Boolean(errors.preferred_etc_arr))}
+                  css={commonCssObj.input(55.5, Boolean(errors.qualification?.preferred_etc))}
                   placeholder="예) 인근거주자, 차량소지자 (최대 20자)"
                   maxLength={20}
-                  {...register(`preferred_etc_arr.${index}.value`, {
+                  {...register(`qualification.preferred_etc.${index}.value`, {
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                        setValue(`preferred_etc_arr.${index}.value`, "");
+                        setValue(`qualification.preferred_etc.${index}.value`, "");
                       }
                     },
                     maxLength: { value: 20, message: "최대 길이는 20자입니다." },
@@ -148,7 +165,8 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
                 )}
               </label>
               <p css={commonCssObj.errorMessage}>
-                {errors.preferred_etc_arr?.[index] && errors.preferred_etc_arr?.[index]?.value?.message}
+                {errors.qualification?.preferred_etc?.[index] &&
+                  errors.qualification.preferred_etc?.[index]?.value?.message}
               </p>
             </div>
           ))}
@@ -166,15 +184,16 @@ export const RequiredPart: FunctionComponent<RequiredPartProps> = ({ jdForm, req
       <div css={commonCssObj.longContainer}>
         <p css={commonCssObj.optionalInputTitle(true)}>우대 자격증</p>
         <div css={cssObj.selectedCertiContainer}>
-          {watch("preferred_certi_arr")?.map((certi) => (
+          {watch("qualification.preferred_certification")?.map((certi) => (
             <div key={certi} css={cssObj.certiLabel}>
               {certi}
               <button
                 type="button"
                 css={cssObj.smallDeleteButton}
                 onClick={() => {
-                  setValue(`preferred_certi_arr`, [
-                    ...(jdForm.watch("preferred_certi_arr")?.filter((element) => element !== certi) || []),
+                  setValue(`qualification.preferred_certification`, [
+                    ...(jdForm.watch("qualification.preferred_certification")?.filter((element) => element !== certi) ||
+                      []),
                   ]);
                 }}
               >

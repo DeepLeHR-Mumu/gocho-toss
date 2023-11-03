@@ -76,7 +76,7 @@ export default function Document() {
           }}
         />
 
-        <div id="modalPortal" />
+        <div id="portal" />
         <div id="toastPortal" />
         <Main />
         <NextScript />

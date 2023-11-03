@@ -27,7 +27,7 @@ const JdListPage: NextPage = () => {
   const [searchWord, setSearchWord] = useState<string | null>(null);
 
   const { data: userInfoData } = useManagerProfile();
-  const { data: jdDataObj } = useJdArr(Boolean(userInfoData), {
+  const { data: jdDataObj } = useJdArr(Boolean(userInfoData) && !Number.isNaN(Number(router.query.page)), {
     order: router.query.order as OrderDef,
     filter: selectedFilter,
     size: 10,
@@ -75,7 +75,7 @@ const JdListPage: NextPage = () => {
   return (
     <PageLayout>
       <div css={cssObj.contentContainer}>
-        <h2 css={cssObj.title}>공고관리</h2>
+        <h2 css={cssObj.title}>공고·지원자 관리</h2>
         <div css={cssObj.filterBox}>
           {JD_FILTER_BUTTON_ARR.map((filterObj) => (
             <button

@@ -1,5 +1,4 @@
 import { FunctionComponent, useState } from "react";
-import { FiExternalLink } from "react-icons/fi";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
 import { CheckBox } from "shared-ui/common/checkbox";
@@ -9,18 +8,13 @@ import { jdMailClickEvent } from "@/ga";
 import { AddFieldButton, DeleteInputButton } from "../../component";
 import { setFieldErrorIfEmpty } from "../../../upload/util";
 import { ApplyPartProps } from "./type";
-import { APPLY_EXTERNAL_LINK_ARR } from "./constant";
 import { cssObj } from "./style";
 
-export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
-  jdForm,
-  processArr,
-  applyRouteArr,
-  applyDocumentArr,
-  etcArr,
-}) => {
+export const ApplyPart: FunctionComponent<ApplyPartProps> = ({ jdForm, processArr, applyDocumentArr, etcArr }) => {
   const [isAlways, setIsAlways] = useState<boolean>(false);
-  const [linkType, setLinkType] = useState<"website" | "email">("website");
+  const [linkType, setLinkType] = useState<"고초대졸닷컴으로 지원받기" | "외부 링크" | "이메일 지원">(
+    "고초대졸닷컴으로 지원받기"
+  );
 
   const {
     watch,
@@ -32,15 +26,21 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
   } = jdForm;
 
   const alwaysButtonClickHandler = () => {
-    setValue(`end_time`, isAlways ? "" : "9999-12-31T14:59:00");
-    setValue(`cut`, !isAlways);
+    setValue(`apply.end_time`, isAlways ? "" : "9999-12-31T14:59:00");
+    setValue(`apply.cut`, !isAlways);
     setIsAlways((prev) => !prev);
   };
 
   const linkButtonClickHandler = (type: typeof linkType) => {
+    const newRoute: { is_direct: boolean; email: string | null; link: string | null } = {
+      is_direct: type === "고초대졸닷컴으로 지원받기",
+      email: null,
+      link: null,
+    };
+
     setLinkType(type);
-    setValue(`apply_url`, "");
-    clearErrors("apply_url");
+    setValue(`apply.route`, newRoute);
+    clearErrors("apply.route");
   };
 
   return (
@@ -51,18 +51,18 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
         <div css={cssObj.dateInputContainer}>
           <div css={cssObj.dateWrapper}>
             <input
-              css={commonCssObj.input(17.5, Boolean(errors.start_time))}
+              css={commonCssObj.input(17.5, Boolean(errors.apply?.start_time))}
               type="datetime-local"
               onFocus={() => {
-                clearErrors("start_time");
+                clearErrors("apply.start_time");
               }}
-              {...register("start_time", {
+              {...register("apply.start_time", {
                 required: "* 공고 시작 날짜를 선택해 주세요",
-                onBlur: () => trigger("end_time"),
+                onBlur: () => trigger("apply.end_time"),
               })}
             />
             <div css={cssObj.errorMessageWrapper}>
-              <p css={commonCssObj.errorMessage}>{errors.start_time && errors.start_time.message}</p>
+              <p css={commonCssObj.errorMessage}>{errors.apply?.start_time && errors.apply.start_time.message}</p>
             </div>
           </div>
           <p>~</p>
@@ -72,17 +72,17 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
             ) : (
               <>
                 <input
-                  css={commonCssObj.input(17.5, Boolean(errors.end_time))}
+                  css={commonCssObj.input(17.5, Boolean(errors.apply?.end_time))}
                   type="datetime-local"
                   onFocus={() => {
-                    clearErrors("end_time");
+                    clearErrors("apply.end_time");
                   }}
-                  {...register("end_time", {
+                  {...register("apply.end_time", {
                     required: "* 공고 마감 날짜를 선택해 주세요",
                     validate: {
                       isFasterThanStart: (value) =>
-                        !new Date(watch("start_time")).getTime() ||
-                        new Date(watch("start_time")).getTime() < new Date(value).getTime() ||
+                        !new Date(watch("apply.start_time")).getTime() ||
+                        new Date(watch("apply.start_time")).getTime() < new Date(value).getTime() ||
                         "시작 일시가 마감 일시보다 느릴 수 없습니다.",
                       isFasterThanNow: (value) =>
                         new Date(value).getTime() > new Date().getTime() ||
@@ -91,7 +91,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                   })}
                 />
                 <div css={cssObj.errorMessageWrapper}>
-                  <p css={commonCssObj.errorMessage}>{errors.end_time && errors.end_time.message}</p>
+                  <p css={commonCssObj.errorMessage}>{errors.apply?.end_time && errors.apply.end_time.message}</p>
                 </div>
               </>
             )}
@@ -108,8 +108,8 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
             상시공고
           </label>
           <label css={commonCssObj.label} htmlFor="cut">
-            <input type="checkbox" id="cut" {...register("cut")} disabled={isAlways} />
-            <CheckBox isChecked={watch("cut")} />
+            <input type="checkbox" id="cut" {...register("apply.cut")} disabled={isAlways} />
+            <CheckBox isChecked={watch("apply.cut")} />
             채용시 마감
           </label>
         </div>
@@ -124,18 +124,18 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                   <label css={commonCssObj.inputLabel} htmlFor={`processArr${item.id}`}>
                     <input
                       id={`processArr${item.id}`}
-                      css={commonCssObj.input(11.5, Boolean(errors.process_arr))}
+                      css={commonCssObj.input(11.5, Boolean(errors.apply?.process))}
                       placeholder={`${index + 1}차 (최대 10자)`}
                       maxLength={10}
-                      {...register(`process_arr.${index}.value`, {
+                      {...register(`apply.process.${index}.value`, {
                         onBlur: (blurEvent) => {
                           if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                            setValue(`process_arr.${index}.value`, "");
+                            setValue(`apply.process.${index}.value`, "");
                           }
                           setFieldErrorIfEmpty(
                             watch,
                             jdForm,
-                            "process_arr",
+                            "apply.process",
                             "* 채용절차는 최소 1개 이상 기재해 주세요"
                           );
                         },
@@ -149,7 +149,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                           setFieldErrorIfEmpty(
                             watch,
                             jdForm,
-                            "process_arr",
+                            "apply.process",
                             "* 채용절차는 최소 1개 이상 기재해 주세요"
                           );
                         }}
@@ -157,7 +157,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                     )}
                   </label>
                   <p css={commonCssObj.errorMessage}>
-                    {errors.process_arr?.[index] && errors.process_arr?.[index]?.value?.message}
+                    {errors.apply?.process?.[index] && errors.apply.process?.[index]?.value?.message}
                   </p>
                 </div>
                 {index + 1 !== processArr.fields.length && (
@@ -172,163 +172,110 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 <AddFieldButton
                   onClickHandler={() => {
                     processArr.append({ value: "" });
-                    setFieldErrorIfEmpty(watch, jdForm, "process_arr", "* 채용절차는 최소 1개 이상 기재해 주세요");
+                    setFieldErrorIfEmpty(watch, jdForm, "apply.process", "* 채용절차는 최소 1개 이상 기재해 주세요");
                   }}
                 />
               )}
             </div>
           </div>
           <div css={cssObj.errorMessageWrapper}>
-            <p css={commonCssObj.errorMessage}>{errors.process_arr?.message}</p>
+            <p css={commonCssObj.errorMessage}>{errors.apply?.process?.message}</p>
           </div>
         </div>
       </div>
       <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(true)}>지원 방법</p>
-        <div>
-          <div css={commonCssObj.arrayInputContainer}>
-            {applyRouteArr.fields.map((item, index) => (
-              <div key={`applyRouteArr${item.id}`}>
-                <label css={commonCssObj.inputLabel} htmlFor={`applyRouteArr${item.id}`}>
-                  <input
-                    id={`applyRouteArr${item.id}`}
-                    css={commonCssObj.input(15, Boolean(errors.apply_route_arr))}
-                    placeholder="지원 방법 (최대 20자)"
-                    maxLength={20}
-                    {...register(`apply_route_arr.${index}.value`, {
-                      onBlur: (blurEvent) => {
-                        if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                          setValue(`apply_route_arr.${index}.value`, "");
-                        }
-                        setFieldErrorIfEmpty(
-                          watch,
-                          jdForm,
-                          "apply_route_arr",
-                          "* 지원 경로는 최소 1개 이상 기재해 주세요"
-                        );
-                      },
-                      maxLength: { value: 20, message: "최대 길이는 20자입니다." },
-                    })}
-                  />
-                  {index !== 0 && (
-                    <DeleteInputButton
-                      onClickHandler={() => {
-                        applyRouteArr.remove(index);
-                        setFieldErrorIfEmpty(
-                          watch,
-                          jdForm,
-                          "apply_route_arr",
-                          "* 지원 경로는 최소 1개 이상 기재해 주세요"
-                        );
-                      }}
-                    />
-                  )}
-                </label>
-                <p css={commonCssObj.errorMessage}>
-                  {errors.apply_route_arr?.[index] && errors.apply_route_arr?.[index]?.value?.message}
-                </p>
-              </div>
-            ))}
-            <div css={commonCssObj.addButtonWrapper}>
-              {applyRouteArr.fields.length < 15 && (
-                <AddFieldButton
-                  onClickHandler={() => {
-                    applyRouteArr.append({ value: "" });
-                    setFieldErrorIfEmpty(watch, jdForm, "apply_route_arr", "* 지원 경로는 최소 1개 이상 기재해 주세요");
-                  }}
-                />
-              )}
-            </div>
-          </div>
-          <div css={cssObj.errorMessageWrapper}>
-            <p css={commonCssObj.errorMessage}>{errors.apply_route_arr?.message}</p>
-          </div>
-        </div>
-      </div>
-      <div css={commonCssObj.longContainer}>
-        <p css={commonCssObj.inputTitle(false)}>접수링크</p>
+        <p css={commonCssObj.inputTitle(false)}>지원 방법</p>
         <div>
           <div css={cssObj.linkLabelContainer}>
-            <label css={commonCssObj.label} htmlFor="website">
+            <label css={commonCssObj.label} htmlFor="gocho">
               <input
-                defaultChecked={linkType === "website"}
+                checked={linkType === "고초대졸닷컴으로 지원받기"}
                 type="radio"
-                name="link"
-                id="website"
+                // name="link"
+                id="gocho"
                 css={commonCssObj.radio}
+                // {...register(`apply.route.${index}.type`)}
                 onClick={() => {
-                  linkButtonClickHandler("website");
+                  linkButtonClickHandler("고초대졸닷컴으로 지원받기");
                 }}
               />
               <div css={commonCssObj.radioBox} />
-              <p>채용 링크</p>
+              <p>고초대졸닷컴으로 지원받기</p>
             </label>
             <label css={commonCssObj.label} htmlFor="email">
               <input
-                defaultChecked={linkType === "email"}
+                checked={linkType === "이메일 지원"}
                 type="radio"
-                name="link"
+                // name="link"
                 id="email"
                 css={commonCssObj.radio}
+                // {...register(`apply.route.${index}.type`)}
                 onClick={() => {
-                  linkButtonClickHandler("email");
+                  linkButtonClickHandler("이메일 지원");
                 }}
               />
               <div css={commonCssObj.radioBox} />
               <p>이메일</p>
             </label>
-            <p css={commonCssObj.errorMessage}>{errors.apply_url && errors.apply_url.message}</p>
+            <label css={commonCssObj.label} htmlFor="website">
+              <input
+                checked={linkType === "외부 링크"}
+                type="radio"
+                // name="link"
+                id="website"
+                css={commonCssObj.radio}
+                // {...register(`apply.route.${index}.type`)}
+                onClick={() => {
+                  linkButtonClickHandler("외부 링크");
+                }}
+              />
+              <div css={commonCssObj.radioBox} />
+              <p>외부링크</p>
+            </label>
+            {errors.apply?.route?.link && <p css={commonCssObj.errorMessage}>{errors.apply.route.link.message}</p>}
+            {errors.apply?.route?.email && <p css={commonCssObj.errorMessage}>{errors.apply.route.email.message}</p>}
           </div>
           <div>
-            {linkType === "website" ? (
+            {linkType === "외부 링크" && (
               <div>
                 <label css={commonCssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
-                    css={commonCssObj.input(47, Boolean(errors.apply_url))}
+                    css={commonCssObj.input(47, Boolean(errors.apply?.route?.link))}
                     onClick={() => jdMailClickEvent()}
                     placeholder="https://"
-                    {...register("apply_url", {
+                    maxLength={20}
+                    {...register(`apply.route.link`, {
                       required: "* 채용 사이트 링크 또는 이메일을 기입해 주세요",
                       validate: () => true,
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                          setValue("apply_url", "");
+                          setValue(`apply.route.link`, "");
                         }
                       },
+                      maxLength: { value: 20, message: "최대 길이는 20자입니다." },
                     })}
                   />
                 </label>
-                <div css={cssObj.linkButtonContainer}>
-                  {APPLY_EXTERNAL_LINK_ARR.map((linkObj) => (
-                    <a
-                      key={linkObj.url}
-                      href={linkObj.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      css={cssObj.externalLinkButton}
-                    >
-                      {linkObj.text}
-                      <FiExternalLink />
-                    </a>
-                  ))}
-                </div>
               </div>
-            ) : (
+            )}
+            {linkType === "이메일 지원" && (
               <div>
                 <label css={commonCssObj.inputLabel} key="applyUrlWebsite" htmlFor="applyUrlWebsite">
                   <input
-                    css={commonCssObj.input(47, Boolean(errors.apply_url))}
+                    css={commonCssObj.input(47, Boolean(errors.apply?.route?.email))}
                     onClick={() => jdMailClickEvent()}
-                    placeholder="@"
-                    {...register("apply_url", {
+                    placeholder="gocho@gocho.com"
+                    maxLength={20}
+                    {...register(`apply.route.email`, {
                       required: "* 채용 사이트 링크 또는 이메일을 기입해 주세요",
                       validate: (value) =>
-                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) || "이메일 형식이 올바르지 않습니다",
+                        (value ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) : false) || "이메일 형식이 올바르지 않습니다",
                       onBlur: (blurEvent) => {
                         if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                          setValue("apply_url", "");
+                          setValue(`apply.route.email`, "");
                         }
                       },
+                      maxLength: { value: 20, message: "최대 길이는 20자입니다." },
                     })}
                   />
                 </label>
@@ -345,13 +292,13 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
               <label css={commonCssObj.inputLabel} htmlFor={`applyDocumentArr${item.id}`}>
                 <input
                   id={`applyDocumentArr${item.id}`}
-                  css={commonCssObj.input(15, Boolean(errors.apply_document_arr))}
+                  css={commonCssObj.input(15, Boolean(errors.apply?.document))}
                   placeholder="예) 이력서 (최대 20자)"
                   maxLength={20}
-                  {...register(`apply_document_arr.${index}.value`, {
+                  {...register(`apply.document.${index}.value`, {
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                        setValue(`apply_document_arr.${index}.value`, "");
+                        setValue(`apply.document.${index}.value`, "");
                       }
                     },
                     maxLength: { value: 20, message: "최대 길이는 20자입니다." },
@@ -366,7 +313,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 )}
               </label>
               <p css={commonCssObj.errorMessage}>
-                {errors.apply_document_arr?.[index] && errors.apply_document_arr?.[index]?.value?.message}
+                {errors.apply?.document?.[index] && errors.apply?.document?.[index]?.value?.message}
               </p>
             </div>
           ))}
@@ -389,13 +336,13 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
               <label css={commonCssObj.inputLabel} htmlFor={`etcArr${item.id}`}>
                 <input
                   id={`etcArr${item.id}`}
-                  css={commonCssObj.input(55.5, Boolean(errors.etc_arr))}
+                  css={commonCssObj.input(55.5, Boolean(errors.apply?.etc))}
                   placeholder="기타 사항이 있는 경우 기재해 주세요 (최대 30자)"
                   maxLength={30}
-                  {...register(`etc_arr.${index}.value`, {
+                  {...register(`apply.etc.${index}.value`, {
                     onBlur: (blurEvent) => {
                       if (blurEvent.target.value.trim().length === 0 && blurEvent.target.value.length > 0) {
-                        setValue(`etc_arr.${index}.value`, "");
+                        setValue(`apply.etc.${index}.value`, "");
                       }
                     },
                     maxLength: { value: 30, message: "최대 길이는 30자입니다." },
@@ -410,7 +357,7 @@ export const ApplyPart: FunctionComponent<ApplyPartProps> = ({
                 )}
               </label>
               <p css={commonCssObj.errorMessage}>
-                {errors.etc_arr?.[index] && errors.etc_arr?.[index]?.value?.message}
+                {errors.apply?.etc?.[index] && errors.apply.etc[index]?.value?.message}
               </p>
             </div>
           ))}
