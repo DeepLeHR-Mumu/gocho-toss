@@ -54,7 +54,6 @@ const JdDetail: NextPage = () => {
     return null;
   }
 
-  // NOTE SEO 에 맞게 수정필요
   const getPlace = () => {
     const { data, etc } = jdDetailData.detail.place;
 
@@ -69,7 +68,6 @@ const JdDetail: NextPage = () => {
     return "채용 후 결정";
   };
 
-  // NOTE SEO 에 맞게 수정필요
   const getPossibleEdu = () => {
     const { highschool, university, college } = jdDetailData.qualification;
 
@@ -101,7 +99,7 @@ const JdDetail: NextPage = () => {
           pay: jdDetailData.detail.pay && jdDetailData.detail.pay[0],
           place: getPlace(),
           possibleEdu: getPossibleEdu(),
-          taskDetail: jdDetailData.detail.taskDescription[0],
+          taskDetail: jdDetailData.detail.taskMain,
         }}
       />
       <HiddenH1 title={`[${jdDetailData.company.name}] ${jdDetailData.title} - 고초대졸닷컴`} />
