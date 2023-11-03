@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import { BACKEND_URL } from "shared-constant";
+
 import {
   userBookmarkKeyObj,
   UserBookmarkArrRequestDef,
@@ -13,14 +15,19 @@ export const getInfiniteUserCompanyBookmarkArr: GetInfiniteJdArrDef = async ({
   queryKey: [{ requestObj }],
   pageParam,
 }) => {
-  const { data } = await axiosInstance.get(`/users/${requestObj.userId}/company-bookmarks`, {
-    params: { ...requestObj, page: pageParam },
-  });
+  const [BACKEND_URL_WITHOUT_VERSION] = BACKEND_URL.split("/v1");
+  const { data } = await axiosInstance.get(
+    `${BACKEND_URL_WITHOUT_VERSION}/v2/users/${requestObj.userId}/company-bookmarks`,
+    {
+      params: { ...requestObj, page: pageParam },
+    }
+  );
   const nextPage = pageParam === undefined ? 1 : pageParam + 1;
   return { ...data, nextPage };
 };
 
-export const useInfiniteUserCompanyBookmarkArr = (requestObj: UserBookmarkArrRequestDef) => useInfiniteQuery({
+export const useInfiniteUserCompanyBookmarkArr = (requestObj: UserBookmarkArrRequestDef) =>
+  useInfiniteQuery({
     queryKey: userBookmarkKeyObj.infinite(requestObj),
     queryFn: getInfiniteUserCompanyBookmarkArr,
     getNextPageParam: (responseObj) => {
@@ -31,7 +38,7 @@ export const useInfiniteUserCompanyBookmarkArr = (requestObj: UserBookmarkArrReq
     },
     enabled: Boolean(requestObj.userId),
     select: (data) => ({
-        pages: data.pages.map((page) => selector(page.data, page.page_result)),
-        pageParams: [...data.pageParams],
-      }),
+      pages: data.pages.map((page) => selector(page.data, page.page_result)),
+      pageParams: [...data.pageParams],
+    }),
   });

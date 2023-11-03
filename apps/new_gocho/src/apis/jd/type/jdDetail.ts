@@ -33,51 +33,88 @@ export interface JdCompanyObjDef {
 
 export interface JdDetailObjDef {
   id: number;
-  company: JdCompanyObjDef;
   title: string;
-  cut: boolean;
-  start_time: string;
-  end_time: string;
-  process_arr: string[];
-  apply_route_arr: string[];
-  apply_document_arr: string[];
-  apply_url: string;
-  etc_arr: string[];
+  is_expired: boolean;
+  view: number;
   bookmark: number;
   is_bookmark: boolean;
-  view: number;
-  click: number;
-  possible_edu: {
-    summary: string;
-    college: boolean;
-    high: boolean;
-    middle: boolean;
-    four: boolean;
+  company: {
+    id: number;
+    logo_url: string | null;
+    name: string;
+    size: string;
+    industry: string[];
+    employee_number: number;
+    found_date: string;
+    is_bookmark: boolean;
+    welfare: {
+      money: string[];
+      health: string[];
+      life: string[];
+      holiday: string[];
+      facility: string[];
+      vacation: string[];
+      growth: string[];
+      etc: string[];
+    };
   };
-  required_exp: {
-    type: "신입" | "경력" | "무관" | "신입/경력";
-    min_year: number | null;
-    max_year: number | null;
-  };
-  required_etc_arr: string[];
-  contract_type: {
-    type: "정규직" | "계약직" | "계약>정규" | "연수생" | "인턴";
+  detail: {
+    task_main: string;
+    task_sub: string[];
+    task_description: string[];
+    contract_type: string;
     conversion_rate: number | null;
+    hire_number: string;
+    pay: string[];
+    shift: string[];
+    place: {
+      is_undefined: boolean;
+      data: (
+        | {
+            id: number;
+            type: "일반";
+            location: {
+              address: string;
+              x: number;
+              y: number;
+            };
+          }
+        | {
+            id: number;
+            type: "공장";
+            factory: {
+              id: number;
+              name: string;
+              address: string;
+            };
+          }
+      )[];
+      etc: "순환" | "해외" | null;
+    };
   };
-  task: {
-    main_task: string;
-    sub_task_arr: string[];
+  qualification: {
+    highschool: boolean;
+    college: boolean;
+    university: boolean;
+    required_experience: string;
+    required_min_year: number | null;
+    required_max_year: number | null;
+    required_etc: string[];
+    preferred_certification: string[];
+    preferred_etc: string[];
   };
-  task_detail_arr: string[];
-  rotation_arr: string[];
-  place: {
-    type: "일반" | "해외" | "기타";
-    address_arr: string[];
-    factory_arr: FactoryObjDef[];
-    etc: string | null;
+  apply: {
+    start_time: string;
+    end_time: string;
+    cut: boolean;
+    process: string[];
+    document: string[];
+    route: {
+      is_direct: boolean;
+      link: string | null;
+      email: string | null;
+    };
+    is_already_apply: boolean;
+    etc: string[];
   };
-  hire_number: string;
-  pay_arr: string[];
-  preferred_certi_arr: string[];
-  preferred_etc_arr: string[];
 }

@@ -20,7 +20,7 @@ export const CompanyCard = ({ company, replace = false, callback, blockClick }: 
       return 72;
     }
 
-    return isButtonExist ? 120 : 100;
+    return 100;
   };
 
   if (!company) {
@@ -64,7 +64,15 @@ export const CompanyCard = ({ company, replace = false, callback, blockClick }: 
           <h3 css={cssObj.name(isButtonExist)}>{company.name}</h3>
         </div>
       </Link>
-      {!isMobile && <p css={cssObj.hashTags}>{company.hashTagArr?.map((hashTag) => `#${hashTag}`).join(" ")}</p>}
+      {!isMobile && (
+        <div css={cssObj.hashTagWrapper(isButtonExist)}>
+          {company.hashTagArr?.map((hashTag) => (
+            <p key={hashTag} css={cssObj.hashTags}>
+              #{hashTag}
+            </p>
+          ))}
+        </div>
+      )}
       {isButtonExist && <CompanyBookmark companyId={company.id} isBookmark={!!company.bookmark?.state} />}
     </div>
   );

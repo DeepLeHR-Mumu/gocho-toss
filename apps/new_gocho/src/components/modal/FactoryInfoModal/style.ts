@@ -40,9 +40,11 @@ export const cssObj = {
   mapIcon: css`
     width: 1.5rem;
     height: 1.5rem;
+    flex-shrink: 0;
   `,
 
   infoTitle: css`
+    flex-shrink: 0;
     ${TEXT.TITLE2_B2428}
   `,
 

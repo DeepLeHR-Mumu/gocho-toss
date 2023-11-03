@@ -23,7 +23,7 @@ export const RecommendPart = () => {
           {companyDataObj?.companyDataArr.map(({ id, logoUrl, name, industry, isBookmark }) => (
             <CompanyCard
               key={id}
-              company={{ id, name, logoSrc: logoUrl || "", hashTagArr: [industry], bookmark: { state: isBookmark } }}
+              company={{ id, name, logoSrc: logoUrl || "", hashTagArr: industry, bookmark: { state: isBookmark } }}
             />
           ))}
         </div>
