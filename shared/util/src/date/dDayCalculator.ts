@@ -1,18 +1,11 @@
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
 
 interface setDdayValueCreatorDef {
   (endTime: string): string;
 }
 
 export const dDayCalculator: setDdayValueCreatorDef = (endTime) => {
-  dayjs.extend(utc); // timezone이 utc 플러그인에 의존성 가짐
-  dayjs.extend(timezone);
-  dayjs.tz.setDefault("Asia/Seoul");
-  dayjs.locale("ko");
-
   const endDate = dayjs(endTime);
   const endTimeNoHours = new Date(endTime).setHours(0, 0, 0, 0);
   dayjs.extend(isToday);
