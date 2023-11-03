@@ -141,7 +141,7 @@ export const SearchModal = ({ close }: SearchModalProps) => {
                     company={{
                       ...company,
                       logoSrc: company.logoUrl || "",
-                      hashTagArr: [company.industry],
+                      hashTagArr: company.industry,
                       bookmark: { state: company.isBookmark },
                     }}
                     replace

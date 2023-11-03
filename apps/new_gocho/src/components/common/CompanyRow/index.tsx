@@ -40,7 +40,7 @@ export const CompanyRow = ({ company, border = true }: CompanyRowProps) => {
             {company.name}
           </Link>
           <span css={cssObj.companyCategory}>
-            {company.size} · {company.industry}
+            {company.size} · {company.industry.join(", ")}
           </span>
         </div>
         {company.bookmark && <CompanyBookmark companyId={company.id} isBookmark={company.bookmark.state} />}

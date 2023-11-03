@@ -30,8 +30,8 @@ const JdDetail: NextPage = () => {
     size: 3,
     filter: "valid",
     page: 1,
-    task: jdDetailData?.task.main_task,
-    contractType: jdDetailData?.contract_type.type,
+    task: jdDetailData?.detail.taskMain,
+    contractType: jdDetailData?.detail.contractType,
   });
   const { mutate: addJdViewCount } = useAddJdViewCount();
 
@@ -54,6 +54,40 @@ const JdDetail: NextPage = () => {
     return null;
   }
 
+  const getPlace = () => {
+    const { data, etc } = jdDetailData.detail.place;
+
+    if (data.length !== 0) {
+      return data[0].type === "일반" ? data[0].location.address : data[0].factory.address;
+    }
+
+    if (etc) {
+      return etc;
+    }
+
+    return "채용 후 결정";
+  };
+
+  const getPossibleEdu = () => {
+    const { highschool, university, college } = jdDetailData.qualification;
+
+    const possibleEdu: string[] = [];
+
+    if (highschool) {
+      possibleEdu.push("고졸");
+    }
+
+    if (college) {
+      possibleEdu.push("초대졸");
+    }
+
+    if (university) {
+      possibleEdu.push("4년제");
+    }
+
+    return possibleEdu.join(", ");
+  };
+
   return (
     <main>
       <PageHead
@@ -61,48 +95,40 @@ const JdDetail: NextPage = () => {
           id: jdDetailData.id,
           title: jdDetailData.title,
           companyName: jdDetailData.company.name,
-          rotation: jdDetailData.rotation_arr[0],
-          pay: jdDetailData.pay_arr && jdDetailData.pay_arr[0],
-          place: jdDetailData.place.address_arr && jdDetailData.place.address_arr[0],
-          possibleEdu: jdDetailData.possible_edu.summary,
-          taskDetail: jdDetailData.task_detail_arr[0],
+          rotation: jdDetailData.detail.shift[0],
+          pay: jdDetailData.detail.pay && jdDetailData.detail.pay[0],
+          place: getPlace(),
+          possibleEdu: getPossibleEdu(),
+          taskDetail: jdDetailData.detail.taskMain,
         }}
       />
       <HiddenH1 title={`[${jdDetailData.company.name}] ${jdDetailData.title} - 고초대졸닷컴`} />
 
       <TitlePart
-        jd={
-          jdDetailData
-            ? {
-                jdId: jdDetailData.id,
-                companyName: jdDetailData.company.name,
-                title: jdDetailData.title,
-                isBookmark: jdDetailData.is_bookmark,
-                bookmarkCount: jdDetailData.bookmark,
-                applyUrl: jdDetailData.apply_url,
-                endTime: jdDetailData.end_time,
-              }
-            : undefined
-        }
+        jd={{
+          jdId: jdDetailData.id,
+          companyName: jdDetailData.company.name,
+          title: jdDetailData.title,
+          isBookmark: jdDetailData.isBookmark,
+          bookmarkCount: jdDetailData.bookmark,
+          applyUrl: jdDetailData.apply.route.link || "",
+          endTime: jdDetailData.apply.endTime,
+        }}
       />
       <SummaryPart
-        jd={
-          jdDetailData
-            ? {
-                company: {
-                  id: jdDetailData.company.id,
-                  logoUrl: jdDetailData.company.logo_url,
-                  name: jdDetailData.company.name,
-                  industry: jdDetailData.company.industry,
-                  size: jdDetailData.company.size,
-                },
-                title: jdDetailData.title,
-                endTime: jdDetailData.end_time,
-                view: jdDetailData.view,
-                cut: jdDetailData.cut,
-              }
-            : undefined
-        }
+        jd={{
+          company: {
+            id: jdDetailData.company.id,
+            logoUrl: jdDetailData.company.logoUrl,
+            name: jdDetailData.company.name,
+            industry: jdDetailData.company.industry,
+            size: jdDetailData.company.size,
+          },
+          title: jdDetailData.title,
+          endTime: jdDetailData.apply.endTime,
+          view: jdDetailData.view,
+          cut: jdDetailData.apply.cut,
+        }}
       />
       <div css={cssObj.background}>
         <Layout>
@@ -113,7 +139,7 @@ const JdDetail: NextPage = () => {
                 <ReviewPart
                   company={{
                     id: jdDetailData.company.id,
-                    logoUrl: jdDetailData.company.logo_url,
+                    logoUrl: jdDetailData.company.logoUrl,
                     name: jdDetailData.company.name,
                   }}
                   title={jdDetailData.title}

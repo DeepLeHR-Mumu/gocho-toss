@@ -23,7 +23,7 @@ export const CommonInfo = ({ industry, size, foundDate, employeeNumber, nozoExis
       <div css={cssObj.contentsWrapper}>
         <div css={cssObj.rowWrapper}>
           <span>업종</span>
-          <span css={cssObj.content}>{industry}</span>
+          <span css={cssObj.content}>{industry.join(", ")}</span>
         </div>
         <div css={cssObj.rowWrapper}>
           <span>기업형태</span>

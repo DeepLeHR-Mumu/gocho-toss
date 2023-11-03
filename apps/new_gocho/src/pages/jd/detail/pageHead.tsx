@@ -7,7 +7,7 @@ import { PageHeadProps } from "./type";
 
 export const PageHead: FunctionComponent<PageHeadProps> = ({ option }) => {
   const title = option.title.replace(/\[|]/g, "");
-  const desc = `${option.companyName}, ${title} , (중졸)/(고졸)/(초대졸)/(4년제) 지원가능, ${option.rotation}, 직무 : ${
+  const desc = `${option.companyName}, ${title} , ${option.possibleEdu} 지원가능, ${option.rotation}, 직무 : ${
     option.taskDetail
   }${option.pay !== null && `, 급여 : ${option.pay}`}`;
 

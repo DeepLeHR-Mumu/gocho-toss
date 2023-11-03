@@ -35,6 +35,10 @@ export const cssObj = {
     gap: 1.25rem;
   `,
 
+  normalPlace: css`
+    ${TEXT.BODY1_R1826}
+  `,
+
   factoryWrapper: css`
     display: flex;
     flex-direction: column;

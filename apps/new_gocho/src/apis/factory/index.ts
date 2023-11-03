@@ -1,0 +1,1 @@
+export { useFactoryDetail } from "./useFactoryDetail";

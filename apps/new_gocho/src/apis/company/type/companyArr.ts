@@ -4,7 +4,7 @@ export interface CompanyDef {
   name: string;
   business_number: string;
   youtube_url: null;
-  industry: string;
+  industry: string[];
   size: string;
   employee_number: number;
   found_date: string;

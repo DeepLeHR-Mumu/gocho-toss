@@ -7,10 +7,9 @@ export interface ResponseObjDef {
       id: number;
       name: string;
       logo_url: string | null;
-      industry: string;
+      industry: string[];
       is_bookmark: boolean;
     }[];
-    business_number: string;
   }[];
 }
 

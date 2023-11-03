@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { BACKEND_URL } from "shared-constant";
+
 import {
   UserCompanyHistoryArrRequestDef,
   userCompanyHistoryArrKeyObj,
@@ -11,7 +13,11 @@ import { GetUserCompanyHistoryDef } from "./type";
 import { selector } from "./util";
 
 export const getUserCompanyHistoryArr: GetUserCompanyHistoryDef = async ({ queryKey: [{ requestObj }] }) => {
-  const { data } = await axiosInstance.get(`/users/${requestObj?.userId}/company-histories`, { params: requestObj });
+  const [BACKEND_URL_WITHOUT_VERSION] = BACKEND_URL.split("/v1");
+  const { data } = await axiosInstance.get(
+    `${BACKEND_URL_WITHOUT_VERSION}/v2/users/${requestObj?.userId}/company-histories`,
+    { params: requestObj }
+  );
   return data;
 };
 

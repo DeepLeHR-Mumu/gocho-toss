@@ -35,36 +35,49 @@ export const DetailPart = () => {
   const getPlaceContents = (): DetailContents => {
     const placeContents: DetailContents = {};
 
-    if (jdData && jdData.place) {
-      const { address_arr, factory_arr, type, etc } = jdData.place;
+    if (jdData && jdData.detail.place) {
+      const { isUndefined, data, etc } = jdData.detail.place;
 
-      switch (type) {
-        case "기타":
-        case "해외":
-          placeContents["근무지"] = <span>{etc}</span>;
-          break;
-        case "일반":
-        default:
-          placeContents["근무지"] = (
-            <div css={cssObj.placeWrapper}>
-              {address_arr.length !== 0 && <p>{address_arr.join(" / ")}</p>}
-              {factory_arr.length !== 0 &&
-                factory_arr.map((factory) => (
-                  <div css={cssObj.factoryWrapper} key={factory.id}>
+      if (isUndefined) {
+        placeContents["근무지"] = <span>채용 후 결정</span>;
+      }
+
+      if (etc) {
+        placeContents["근무지"] = <span>{etc} 근무지</span>;
+      }
+
+      if (data.length > 0) {
+        const normalPlace = data.filter(
+          (placeData): placeData is typeof placeData & { type: "일반" } => placeData.type === "일반"
+        );
+        const factoryPlace = data.filter(
+          (placeData): placeData is typeof placeData & { type: "공장" } => placeData.type === "공장"
+        );
+
+        placeContents["근무지"] = (
+          <div css={cssObj.placeWrapper}>
+            {normalPlace
+              .map((normalPlaceData) => (
+                <p key={normalPlaceData.id} css={cssObj.normalPlace}>
+                  {normalPlaceData.location.address}
+                </p>
+              ))
+              .concat(
+                factoryPlace.map((factoryPlaceData) => (
+                  <div css={cssObj.factoryWrapper} key={factoryPlaceData.id}>
                     <button
                       type="button"
                       css={cssObj.factoryName}
-                      onClick={() => {
-                        setFactoryInfoModal({ ...factory });
-                      }}
+                      onClick={() => setFactoryInfoModal({ factoryId: factoryPlaceData.factory.id })}
                     >
-                      {factory.name} <FiChevronRight css={cssObj.rightIcon} />
+                      {factoryPlaceData.factory.name} <FiChevronRight css={cssObj.rightIcon} />
                     </button>
-                    <p css={cssObj.factoryAddress}>{factory.address}</p>
+                    <p css={cssObj.factoryAddress}>{factoryPlaceData.factory.address}</p>
                   </div>
-                ))}
-            </div>
-          );
+                ))
+              )}
+          </div>
+        );
       }
     }
 
@@ -83,51 +96,33 @@ export const DetailPart = () => {
     <>
       <section css={cssObj.wrapper}>
         <div css={cssObj.container}>
-          <DetailSubContainer
-            title="주요업무"
-            contents={getTaskContents({ task_detail_arr: jdData.task_detail_arr, ...jdData.task })}
-          />
+          <DetailSubContainer title="주요업무" contents={getTaskContents(jdData.detail)} />
           <DetailSubContainer
             title="자격요건"
             contents={{
-              ...getJobQualificationContents({
-                possibleEdu: jdData.possible_edu,
-                requiredEtcArr: jdData.required_etc_arr,
-                requiredExp: jdData.required_exp,
-              }),
+              ...getJobQualificationContents(jdData.qualification),
             }}
           />
           <DetailSubContainer
             title="채용상세"
             contents={{
-              ...getRecruitDetailContents({
-                contractType: jdData.contract_type,
-                payArr: jdData.pay_arr,
-                hireNumber: jdData.hire_number,
-                rotationArr: jdData.rotation_arr,
-              }),
+              ...getRecruitDetailContents(jdData.detail),
               ...getPlaceContents(),
             }}
           />
         </div>
         <div css={cssObj.container}>
           <DetailSubContainer title="복리후생" contents={getWelfareContents(jdData.company.welfare)} />
-          <DetailSubContainer
-            title="우대사항"
-            contents={getPreferentialTreatmentContents({
-              preferredCertiArr: jdData.preferred_certi_arr,
-              preferredEtcArr: jdData.preferred_etc_arr,
-            })}
-          />
+          <DetailSubContainer title="우대사항" contents={getPreferentialTreatmentContents(jdData.qualification)} />
         </div>
         <div css={cssObj.container}>
           <ReceptionGuide
             title="접수안내"
-            contents={getReceptionGuideContents({ applyRouteArr: jdData.apply_route_arr, etcArr: jdData.etc_arr })}
-            processArr={jdData.process_arr}
-            startTime={jdData.start_time}
-            endTime={jdData.end_time}
-            cut={jdData.cut}
+            contents={getReceptionGuideContents(jdData.apply)}
+            processArr={jdData.apply.process}
+            startTime={jdData.apply.startTime}
+            endTime={jdData.apply.endTime}
+            cut={jdData.apply.cut}
           />
         </div>
         <div
@@ -139,10 +134,10 @@ export const DetailPart = () => {
           <CompanyInfo
             company={{
               ...jdData.company,
-              logo: jdData.company.logo_url,
+              logo: jdData.company.logoUrl,
               size: jdData.company.size,
               industry: jdData.company.industry,
-              bookmark: { state: jdData.company.is_bookmark },
+              bookmark: { state: jdData.company.isBookmark },
             }}
             contents={getCompanyInfoContents({ ...jdData.company })}
           />

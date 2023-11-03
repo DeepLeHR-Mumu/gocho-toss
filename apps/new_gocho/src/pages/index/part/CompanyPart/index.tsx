@@ -131,7 +131,7 @@ export const CompanyPart: FunctionComponent = () => {
               company={{
                 ...company,
                 logoSrc: company.logoUrl || defaultCompanyLogo,
-                hashTagArr: [company.industry],
+                hashTagArr: company.industry,
                 bookmark: { state: company.isBookmark },
               }}
               blockClick={isDragging}
