@@ -9,7 +9,7 @@ export interface CompanyHistoryArr {
   name: string;
   logo_url: string;
   size: string;
-  industry: string;
+  industry: string[];
   is_bookmark: boolean;
 }
 

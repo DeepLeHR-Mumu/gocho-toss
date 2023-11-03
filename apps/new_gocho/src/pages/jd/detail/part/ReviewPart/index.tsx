@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { FiAlertCircle, FiSend } from "react-icons/fi";
 
 import { Profile, Chip, Textarea } from "shared-ui/deeple-ds";
+import defaultCompanyLogo from "shared-image/global/common/default_company_logo.svg";
 
 import { useToast } from "@/globalStates";
 import { useWriteCompanyComment, useCompanyCommentArr } from "@/apis/company";
@@ -82,7 +83,7 @@ export const ReviewPart = ({ company, title, jdId }: ReviewPartProps) => {
       <aside css={cssObj.wrapper}>
         <div css={cssObj.headerWrapper}>
           <div css={cssObj.companyWrapper}>
-            <Profile src={company?.logoUrl || ""} size={24} altText={`${company?.name} 회사 로고`} />
+            <Profile src={company?.logoUrl || defaultCompanyLogo} size={24} altText={`${company?.name} 회사 로고`} />
             <span>{company?.name}</span>
           </div>
           <h3 css={cssObj.title}>{title}</h3>

@@ -3,131 +3,119 @@ import { Fragment, createElement } from "react";
 import { COLOR } from "shared-style/color";
 import { dateConverter } from "shared-util";
 
-import { JdDetailObjDef } from "@/apis/jd/type/jdDetail";
+import { SelectorJdDetailObj } from "@/apis/jd/useJdDetail/type";
+
 import { DetailContents } from "./component/DetailSubContainer/type";
-import { TaskContensType } from "./type";
 
 const createSpanTag = (children: string) => createElement("span", {}, children);
 
-export const getTaskContents = (task: TaskContensType): DetailContents => {
+export const getTaskContents = (detail: SelectorJdDetailObj["detail"]): DetailContents => {
   const taskContents: DetailContents = {};
-  const { main_task, sub_task_arr, task_detail_arr } = task;
+  const { taskMain, taskSub, taskDescription } = detail;
 
-  if (main_task) {
-    taskContents["채용 직무"] = createSpanTag(`${main_task} > ${sub_task_arr.join(", ")}`);
+  if (taskMain.length !== 0) {
+    taskContents["채용 직무"] = createSpanTag(`${taskMain} > ${taskSub.join(", ")}`);
   }
-  if (task_detail_arr.length !== 0) {
-    taskContents["세부 직무"] = createSpanTag(task_detail_arr.join(", "));
+  if (taskDescription.length !== 0) {
+    taskContents["세부 직무"] = createSpanTag(taskDescription.join(", "));
   }
 
   return taskContents;
 };
 
-const getTextFromPossibleEdu = (possibleEdu: JdDetailObjDef["possible_edu"]) => {
+const getEducationFromQualication = (qualification: SelectorJdDetailObj["qualification"]) => {
   const educationText: string[] = [];
 
-  const { college, high, middle, four } = possibleEdu;
+  const { college, highschool, university } = qualification;
 
-  if (four) educationText.push("4년제");
+  if (university) educationText.push("4년제");
   if (college) educationText.push("초대졸");
-  if (high) educationText.push("고졸");
-  if (middle) educationText.push("중졸");
+  if (highschool) educationText.push("고졸");
 
   return educationText.join(", ");
 };
 
-const getTextFromRequiredExp = (requiredExp: JdDetailObjDef["required_exp"]) => {
+const getRequiredExpFromQualification = (qualification: SelectorJdDetailObj["qualification"]) => {
   let requiredExpText = "";
 
-  const { type, min_year, max_year } = requiredExp;
-  requiredExpText += type;
+  const { requiredExperience, requiredMinYear, requiredMaxYear } = qualification;
+  requiredExpText += requiredExperience;
 
-  if (min_year && max_year) {
-    return `(${min_year}년 이상 ${max_year}년 이하)`;
+  if (requiredMinYear && requiredMaxYear) {
+    return `(${requiredMinYear}년 이상 ${requiredMaxYear}년 이하)`;
   }
 
-  if (min_year) {
-    requiredExpText += `(${min_year}년 이상)`;
+  if (requiredMinYear) {
+    requiredExpText += `(${requiredMinYear}년 이상)`;
   }
 
-  if (max_year) {
-    requiredExpText += `(${max_year}년 이하)`;
+  if (requiredMaxYear) {
+    requiredExpText += `(${requiredMaxYear}년 이하)`;
   }
 
   return requiredExpText;
 };
 
-export const getJobQualificationContents = (jobQualification: {
-  possibleEdu: JdDetailObjDef["possible_edu"];
-  requiredExp: JdDetailObjDef["required_exp"];
-  requiredEtcArr: JdDetailObjDef["required_etc_arr"];
-}): DetailContents => {
+export const getJobQualificationContents = (qualification: SelectorJdDetailObj["qualification"]): DetailContents => {
   const jobQualificationContents: DetailContents = {};
-  const { possibleEdu, requiredExp, requiredEtcArr } = jobQualification;
+  const { requiredExperience, requiredEtc } = qualification;
 
-  if (possibleEdu) {
-    const educationText = getTextFromPossibleEdu(possibleEdu);
-    jobQualificationContents["학력"] = createSpanTag(educationText);
-  }
+  const educationText = getEducationFromQualication(qualification);
+  jobQualificationContents["학력"] = createSpanTag(educationText);
 
-  if (requiredExp) {
-    const requiredExpText = getTextFromRequiredExp(requiredExp);
+  if (requiredExperience && requiredExperience.length !== 0) {
+    const requiredExpText = getRequiredExpFromQualification(qualification);
     jobQualificationContents["경력"] = createSpanTag(requiredExpText);
   }
 
-  if (requiredEtcArr.length !== 0) {
+  if (requiredEtc.length !== 0) {
     jobQualificationContents["기타"] = createElement(
       "ul",
       {},
-      requiredEtcArr.map((etc) => createElement("li", { key: `RequiredEtc${etc}` }, etc))
+      requiredEtc.map((etc) => createElement("li", { key: `RequiredEtc${etc}` }, etc))
     );
   }
 
   return jobQualificationContents;
 };
 
-export const getRecruitDetailContents = (recruitDetail: {
-  contractType: JdDetailObjDef["contract_type"];
-  payArr: JdDetailObjDef["pay_arr"];
-  hireNumber: JdDetailObjDef["hire_number"];
-  rotationArr: JdDetailObjDef["rotation_arr"];
-}): DetailContents => {
+export const getRecruitDetailContents = (detail: SelectorJdDetailObj["detail"]): DetailContents => {
   const recruitDetailContents: DetailContents = {};
-  const { contractType, payArr, hireNumber, rotationArr } = recruitDetail;
+  const { contractType, pay, hireNumber, shift, conversionRate } = detail;
 
   if (contractType) {
-    recruitDetailContents["계약형태"] = createSpanTag(contractType.type);
+    recruitDetailContents["계약형태"] = createSpanTag(contractType);
 
-    if (contractType.type === "계약>정규" || contractType.type === "인턴") {
+    if (contractType === "계약>정규" || contractType === "인턴") {
       recruitDetailContents["계약형태"] = createElement(Fragment, {}, [
-        createElement("span", {}, contractType.type),
+        createElement("span", {}, contractType),
         createElement(
           "span",
           {
             style: { marginLeft: "0.75rem", color: COLOR.GRAY600 },
           },
-          contractType.conversion_rate ? `(전환율 ${contractType.conversion_rate}%)` : ""
+          conversionRate ? `(전환율 ${conversionRate}%)` : ""
         ),
       ]);
     }
   }
 
-  if (payArr.length !== 0) {
-    recruitDetailContents["급여"] = createSpanTag(payArr.join(" "));
+  if (pay.length !== 0) {
+    recruitDetailContents["급여"] = createSpanTag(pay.join(" "));
   }
 
   if (hireNumber.length !== 0) {
     recruitDetailContents["채용인원"] = createSpanTag(`${hireNumber}명`);
   }
 
-  if (rotationArr.length !== 0) {
-    recruitDetailContents["교대형태"] = createSpanTag(rotationArr.join(", "));
+  if (shift.length !== 0) {
+    recruitDetailContents["교대형태"] = createSpanTag(shift.join(", "));
   }
 
   return recruitDetailContents;
 };
 
-export const getWelfareContents = (welfare: JdDetailObjDef["company"]["welfare"]): DetailContents => {
+export const getWelfareContents = (welfare: SelectorJdDetailObj["company"]["welfare"]): DetailContents => {
   const welfareContents: DetailContents = {};
   const { money, health, life, holiday, facility, vacation, growth, etc } = welfare;
 
@@ -166,54 +154,58 @@ export const getWelfareContents = (welfare: JdDetailObjDef["company"]["welfare"]
   return welfareContents;
 };
 
-export const getPreferentialTreatmentContents = (preferentialTreatment: {
-  preferredCertiArr: JdDetailObjDef["preferred_certi_arr"];
-  preferredEtcArr: JdDetailObjDef["preferred_etc_arr"];
-}): DetailContents => {
+export const getPreferentialTreatmentContents = (
+  qualification: SelectorJdDetailObj["qualification"]
+): DetailContents => {
   const preferentialTreatmentContents: DetailContents = {};
-  const { preferredCertiArr, preferredEtcArr } = preferentialTreatment;
+  const { preferredCertification, preferredEtc } = qualification;
 
-  if (preferredCertiArr.length !== 0) {
-    preferentialTreatmentContents["자격증"] = createSpanTag(preferredCertiArr.join(", "));
+  if (preferredCertification.length !== 0) {
+    preferentialTreatmentContents["자격증"] = createSpanTag(preferredCertification.join(", "));
   }
 
-  if (preferredEtcArr.length !== 0) {
-    preferentialTreatmentContents["기타"] = createSpanTag(preferredEtcArr.join(", "));
+  if (preferredEtc.length !== 0) {
+    preferentialTreatmentContents["기타"] = createSpanTag(preferredEtc.join(", "));
   }
 
   return preferentialTreatmentContents;
 };
 
-export const getReceptionGuideContents = (receptionGuide: {
-  applyRouteArr: JdDetailObjDef["apply_route_arr"];
-  etcArr: JdDetailObjDef["etc_arr"];
-}): DetailContents => {
+export const getReceptionGuideContents = (apply: SelectorJdDetailObj["apply"]): DetailContents => {
   const receptionGuideContents: DetailContents = {};
-  const { applyRouteArr, etcArr } = receptionGuide;
+  const { route, etc } = apply;
 
-  if (applyRouteArr.length !== 0) {
-    receptionGuideContents["지원방법"] = createSpanTag(applyRouteArr.join(", "));
+  if (route.isDirect) {
+    receptionGuideContents["지원방법"] = createSpanTag("고초대졸닷컴으로 지원");
   }
 
-  if (etcArr.length !== 0) {
+  if (route.email) {
+    receptionGuideContents["지원방법"] = createSpanTag("이메일");
+  }
+
+  if (route.link) {
+    receptionGuideContents["지원방법"] = createSpanTag("외부링크");
+  }
+
+  if (etc.length !== 0) {
     receptionGuideContents["기타사항"] = createElement(
       "div",
       { style: { display: "flex", flexDirection: "column", gap: "1rem" } },
-      etcArr.map((etc) => createElement("p", { key: `ReceptionGuide${etc}` }, etc))
+      etc.map((eachEtc) => createElement("p", { key: `ReceptionGuide${eachEtc}` }, eachEtc))
     );
   }
 
   return receptionGuideContents;
 };
 
-export const getCompanyInfoContents = (company: JdDetailObjDef["company"]): DetailContents => {
+export const getCompanyInfoContents = (company: SelectorJdDetailObj["company"]): DetailContents => {
   const companyInfoContents: DetailContents = {};
-  const { name, industry, employee_number, found_date } = company;
+  const { name, industry, employeeNumber, foundData } = company;
 
   companyInfoContents["기업명"] = createSpanTag(name);
-  companyInfoContents["업종"] = createSpanTag(industry);
-  companyInfoContents["사원수"] = createSpanTag(employee_number.toString());
-  companyInfoContents["설립일"] = createSpanTag(dateConverter(found_date).date);
+  companyInfoContents["업종"] = createSpanTag(industry.join(", "));
+  companyInfoContents["사원수"] = createSpanTag(employeeNumber.toString());
+  companyInfoContents["설립일"] = createSpanTag(dateConverter(foundData).date);
 
   return companyInfoContents;
 };

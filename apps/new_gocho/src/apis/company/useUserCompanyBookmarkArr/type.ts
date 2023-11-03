@@ -8,7 +8,7 @@ export interface CompanyBookmarkObjDef {
   id: number;
   name: string;
   logo_url: string;
-  industry: string;
+  industry: string[];
   size: string;
 }
 
